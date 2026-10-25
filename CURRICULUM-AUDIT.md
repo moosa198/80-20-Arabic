@@ -2,7 +2,7 @@
 
 ## Outcome and method
 
-The course has been reshaped around **whole → map → whole → retrieve → transfer**: begin with a real Qur’anic phrase, notice the structure, study only the relevant rule, return to the same phrase, then locate the pattern again later. This applies the high-level 80/20 / early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf), without copying its wording or treating its stated outcomes as guarantees.
+The course has been reshaped around **whole → map → whole → retrieve → transfer**: begin with a real Qur’anic phrase, notice the structure, study only the relevant rule, return to the same phrase, then locate the pattern again later. This applies the high-level 80/20 / early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf), without copying its wording or treating its stated outcomes as guarantees. The exact `ArabicAccelerationReport2.0.pdf` URL supplied for this build could not be retrieved in this session. This is therefore a principled adaptation of the accessible publisher report, not a claim to have followed that revision line by line.
 
 Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come first. The wudhu reminder remains as adab guidance for a physical Mushaf, not a software gate. Each lesson has a real-page recognition task, paired English/Arabic role labels, a required explanation, local attempt history, and teacher-verification guidance. The app records evidence but does not auto-grade nuanced Arabic syntax.
 
