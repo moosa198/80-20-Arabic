@@ -164,7 +164,20 @@
     paint(n);
     if(!observer&&root.MutationObserver&&root.document.documentElement){
       observer=new root.MutationObserver(function(records){
-        if(!records.some(function(record){return record.addedNodes&&record.addedNodes.length;}))return;
+        /* Observe dynamic Mushaf rendering only. Changes to the selection and
+           history UI must not trigger another paint cycle. */
+        var mushafChanged=records.some(function(record){
+          var target=record.target;
+          if(target&&target.nodeType!==1)target=target.parentElement;
+          if(target&&target.closest&&target.closest('quran-madina-html[data-recognition-page]'))return true;
+          return Array.prototype.some.call(record.addedNodes||[],function(node){
+            return node&&node.nodeType===1&&(
+              (node.matches&&node.matches('quran-madina-html[data-recognition-page]'))||
+              (node.querySelector&&node.querySelector('quran-madina-html[data-recognition-page] .quran-madina-html-word[data-qmh-w]'))
+            );
+          });
+        });
+        if(!mushafChanged)return;
         decorateWords();
         if(activeWeek!==null)paint(activeWeek);
       });
