@@ -62,6 +62,122 @@ main{padding:32px clamp(18px,4vw,54px) 20px;min-width:0;max-width:1250px;width:1
 .optional-media p{margin:6px 0}
 @media(max-width:650px){.weekly-guide{padding:14px}.fstu-focus-grid{grid-template-columns:1fr}.guide-actions{align-items:flex-start;flex-direction:column}}
 @media print{.mushaf-task[hidden]{display:block!important}.guide-reveal{display:none!important}.weekly-guide{break-inside:avoid}}
+
+/* Layered source-page lesson */
+.weekly-sequence{display:grid;gap:16px;margin:18px 0}
+.sequence-overview{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#edf2ec;border:1px solid var(--line);border-radius:14px}
+.sequence-node{display:flex;align-items:center;gap:7px;min-width:0;color:var(--muted);font-size:10px;font-weight:700}
+.sequence-node span{display:grid;place-items:center;flex:0 0 27px;height:27px;border:1px solid #c9d6cc;border-radius:50%;background:#fff;color:var(--green2);font-size:10px}
+.sequence-node.active span{background:var(--green);color:#fff;border-color:var(--green)}
+.sequence-node.active b{color:var(--green)}
+.sequence-line{height:1px;background:#ccd8ce;flex:1;min-width:8px}
+.weekly-step{min-width:0;padding:clamp(15px,2.5vw,23px);background:var(--paper);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow,0 6px 20px #172b2909)}
+.step-topline{display:flex;gap:12px;align-items:center;margin-bottom:9px}
+.step-number{display:grid;place-items:center;flex:0 0 39px;height:39px;background:var(--green);color:#fff;border-radius:12px;font-size:13px;font-weight:800}
+.step-topline h2,.weekly-guide h2{font-size:clamp(18px,2.1vw,22px);line-height:1.22;letter-spacing:-.45px;margin:5px 0}
+.step-intro{font-size:13px;line-height:1.7;color:var(--muted);margin:8px 0 15px}
+.wudhu-confirm{margin:13px 0}
+.mushaf-task[hidden]{display:none!important}
+.mushaf-reference{background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:13px;margin:14px 0}
+.mushaf-reference h3{font-size:18px;line-height:1.35;margin:6px 0}
+.mushaf-reference-meta{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}
+.page-pill,.book-page-count{font-size:10px;font-weight:700;color:var(--green2);background:#e7efe8;border-radius:20px;padding:5px 9px}
+.mushaf-application{font-weight:700;color:var(--ink)!important;line-height:1.65;margin:15px 0 9px!important}
+.mushaf-transfer-note{background:#f0f5ef;border-left:4px solid var(--green2);border-radius:8px;padding:10px 13px;margin:12px 0}
+.mushaf-transfer-note b{font-size:11px}.mushaf-transfer-note p{font-size:12px;margin:4px 0;color:var(--muted)}
+.book-page-frame{width:100%;min-width:0;margin:9px 0 13px;background:#f1f3ee;border:1px solid #d7dfd8;border-radius:11px;overflow:hidden;text-align:center}
+.book-page-placeholder{min-height:120px;display:grid;place-items:center;padding:18px;color:var(--muted);font-size:11px}
+.book-page-figure{margin:0;padding:10px}
+.source-page-image{display:block;width:100%;max-width:1000px;height:auto;max-height:none;margin:0 auto;background:#fff;border:1px solid #d8ded7;border-radius:5px;box-shadow:0 4px 18px #172b2910;cursor:zoom-in}
+.book-page-figure figcaption{display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap;color:var(--muted);font-size:10px;padding:8px 0 2px}
+.page-zoom-text{border:0;background:none;text-decoration:underline;text-underline-offset:3px;color:var(--green2);font-size:10px;font-weight:700;padding:2px}
+.book-page-missing{min-height:180px;padding:20px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:8px}
+.book-page-missing b{font-size:13px}
+.book-page-missing p{max-width:520px;margin:0;color:var(--muted);font-size:11px;line-height:1.6}
+.book-missing-mark{display:grid;place-items:center;border-radius:50%;width:38px;height:38px;color:var(--green);background:#dfeae1;font-size:22px}
+.book-upload-button{position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;gap:7px;border:1px solid #b9c9bd;background:#fffdf8;color:var(--green);border-radius:9px;padding:9px 13px;font-size:11px;font-weight:800;cursor:pointer}
+.book-upload-button:hover{background:#edf4ed}
+.book-upload-button input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.book-upload-button input[type=file]:disabled{cursor:progress}
+.book-upload-button.is-busy{opacity:.6;cursor:progress}
+.book-library-setup{border:1px solid #d4dfd5;background:#fffdf8}
+.book-library-setup h2{font-size:19px}
+.book-library-setup>p{font-size:12px;line-height:1.7;color:var(--muted)}
+.book-upload-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+.book-upload-card{display:flex;gap:10px;align-items:flex-start;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;background:#f7f8f3}
+.book-upload-mark{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:10px;background:#e4eee5;color:var(--green);font:700 21px var(--ar,serif);direction:rtl}
+.book-upload-copy{min-width:0;flex:1}
+.book-upload-copy h3{font-size:12px;margin:0 0 5px;line-height:1.4}
+.book-upload-copy p{font-size:10px;line-height:1.5;color:var(--muted);margin:4px 0 9px}
+.book-upload-copy .book-status{font-weight:600;overflow-wrap:anywhere}
+.textbook-focus-note{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.textbook-focus-item{border:1px solid #d7e2d8;border-radius:11px;background:#eff5ef;padding:12px}
+.textbook-focus-item.nahw-focus{background:#fbf4e7;border-color:#eadebf}
+.textbook-focus-item b{font-size:12px;color:var(--green)}
+.textbook-focus-item p{font-size:11px;line-height:1.6;color:var(--muted);margin:5px 0 0}
+.textbook-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.textbook-panel{min-width:0;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fbfcf8}
+.textbook-panel.sarf-panel{background:#fffaf0;border-color:#eadfbe}
+.textbook-panel-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}
+.textbook-panel-head h3{font-size:15px;margin:4px 0}
+.textbook-panel>p{font-size:11px;line-height:1.65;color:var(--muted);margin:7px 0 10px}
+.textbook-pages{display:grid;gap:12px}
+.textbook-page{min-width:0}
+.textbook-page-caption{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+.textbook-page-caption b{color:var(--green);font-size:11px}
+.listening-resources{padding:0;overflow:hidden;background:#f4f7f0;border:2px solid #c8d9cb}
+.listen-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#163c36;color:#fff;padding:19px 21px}
+.listen-heading .guide-eyebrow{color:#e6c982}
+.listen-heading h2{font-size:clamp(20px,2.6vw,26px);margin:5px 0 8px;color:#fff}
+.listen-heading p{max-width:800px;color:#dce8df;font-size:12px;line-height:1.65;margin:0}
+.listen-number{flex:0 0 45px;height:45px;border-radius:50%;display:grid;place-items:center;background:#ffffff16;color:#e6c982;font-size:29px}
+.playlist-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:12px;padding:13px}
+.playlist-card{min-width:0;border:1px solid #d6e0d5;border-radius:12px;background:#fff;padding:14px}
+.playlist-card.primary-playlist{border:2px solid #b9cdbd}
+.playlist-label{font-size:9px;letter-spacing:.13em;font-weight:800;color:var(--green2)}
+.playlist-card h3{font-size:16px;line-height:1.35;margin:6px 0}
+.playlist-card p{font-size:11px;line-height:1.65;color:var(--muted);margin:6px 0 10px}
+.playlist-player{position:relative;width:100%;aspect-ratio:16/9;background:#172b29;border-radius:9px;overflow:hidden;margin:10px 0}
+.playlist-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.playlist-link{display:inline-flex;align-items:center;justify-content:center;margin-top:8px;border:1px solid #bbccbf;border-radius:9px;background:#f0f5ef;color:var(--green);padding:10px 12px;font-size:11px;font-weight:800;text-decoration:none}
+.playlist-link:hover{background:#e3eee4}
+.primary-link{background:#163c36;color:#fff;border-color:#163c36}
+.primary-link:hover{background:#245a4d;color:#fff}
+.bonus-icon{height:88px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(135deg,#f8ecd1,#f8f3e9);color:#91733a;font-size:48px;margin:12px 0}
+.assessment-layer{border:2px solid #d5dce8;background:#fff}
+.test-step-label{display:inline-flex;border-radius:20px;background:#e9eff6;color:#334e6a;font-size:9px;letter-spacing:.12em;font-weight:800;padding:6px 10px}
+.assessment-layer h2{font-size:23px;margin:10px 0}
+.test-intro{font-size:12px;line-height:1.7;color:var(--muted);margin:7px 0 15px}
+.quiz-question{border:1px solid #dce4eb;border-radius:12px;background:#f7f9fc;padding:14px}
+.quiz-fieldset{border:0;padding:0;margin:0;min-width:0}
+.quiz-fieldset legend{font-size:14px;line-height:1.6;font-weight:800;margin:0 0 12px}
+.quiz-option{display:flex;align-items:flex-start;gap:9px;border:1px solid #d8e1e9;border-radius:9px;padding:10px 11px;margin:7px 0;background:#fff;font-size:12px;line-height:1.55;cursor:pointer}
+.quiz-option:has(input:checked){border-color:#759481;background:#edf5ee}
+.quiz-option input{margin-top:4px;accent-color:var(--green);flex-shrink:0}
+.quiz-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 0}
+.quiz-feedback,.evidence-feedback{padding:12px 13px;border-radius:10px;background:#edf5ee;border:1px solid #c9ddcc;margin-top:12px;color:#274d37;font-size:12px;line-height:1.65}
+.quiz-feedback p,.evidence-feedback p{margin:4px 0 0}
+.quiz-feedback.quiz-review,.quiz-feedback.needs-answer{background:#fff5e5;border-color:#ead8ad;color:#765a24}
+.quiz-application{margin-top:15px;border-top:1px solid var(--line);padding-top:16px}
+.quiz-application h3{font-size:15px;margin:5px 0}
+.quiz-application>p{font-size:12px;line-height:1.65;color:var(--muted)}
+.evidence-label{display:grid;gap:6px;font-size:11px;font-weight:800;margin:11px 0}
+.evidence-label input,.evidence-label textarea{width:100%;min-width:0;background:#fff;border:1px solid #cfd9d2;border-radius:9px;padding:10px 11px;color:var(--ink);font:inherit;font-size:12px}
+.evidence-label textarea{resize:vertical;line-height:1.5}
+.test-checklist{display:grid;gap:8px;padding:12px;border-radius:10px;background:#f8f7f0;border:1px solid #e2dfcf;margin-top:15px}
+.test-checklist b{font-size:11px}
+.test-checklist label{display:flex;align-items:flex-start;gap:8px;font-size:11px;line-height:1.5}
+.test-checklist input{accent-color:var(--green);margin-top:3px}
+.book-page-zoom{position:fixed;inset:0;z-index:1000;background:#101c1aeF;display:flex;flex-direction:column;padding:12px}
+.book-page-zoom[hidden]{display:none!important}
+.book-page-zoom-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#fff;padding:4px 2px 12px}
+.book-page-zoom-toolbar span{font-size:12px;font-weight:700}
+.book-page-zoom-toolbar button{border:1px solid #ffffff55;border-radius:8px;background:#ffffff16;color:#fff;padding:8px 12px;font-size:11px}
+.book-page-zoom-stage{flex:1;min-height:0;display:grid;place-items:center;overflow:auto}
+.book-page-zoom-stage img{display:block;max-width:96vw;max-height:calc(100vh - 65px);width:auto;height:auto;object-fit:contain;background:#fff;border-radius:5px}
+@media(max-width:900px){.book-upload-grid{grid-template-columns:1fr}.textbook-stack{grid-template-columns:1fr}.playlist-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.sequence-overview{gap:5px;padding:10px 8px}.sequence-node{gap:4px;font-size:9px}.sequence-node span{flex-basis:24px;height:24px}.sequence-line{min-width:3px}.weekly-step{padding:13px}.textbook-focus-note{grid-template-columns:1fr}.listen-heading{padding:15px}.playlist-grid{padding:9px}.playlist-card{padding:11px}.book-page-figure{padding:5px}}
+@media print{.book-library-setup,.book-upload-button,.guide-reveal,.quiz-actions,.page-zoom-text{display:none!important}.mushaf-task[hidden]{display:block!important}.weekly-step,.textbook-panel,.playlist-card,.assessment-layer{break-inside:avoid}.source-page-image{max-width:100%!important;box-shadow:none}.playlist-player{display:none}.weekly-step{margin:0 0 12px}}
 </style>
 </head>
 <body>
@@ -69,7 +185,9 @@ main{padding:32px clamp(18px,4vw,54px) 20px;min-width:0;max-width:1250px;width:1
 <header class="top"><a class="brand" href="./" aria-label="80/20 Arabic home"><span class="brandmark" lang="ar" dir="rtl">ع</span><span class="brandtext"><strong>80/20 Arabic</strong><small>Qur’an-first learning</small></span></a><div class="topright"><span class="privacy"><span class="dot"></span>Progress stays on this device</span><button id="installBtn" class="btn btntop hidden" type="button">Install app</button><button id="menuBtn" class="iconbtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button></div></header>
 <div class="shell"><aside id="side" class="side" aria-label="Main navigation"><div class="sideLabel">YOUR LEARNING</div><nav class="nav"><button class="active" data-view="today"><span class="navIcon">◷</span>Today<span id="dueBadge" class="badge">0</span></button><button data-view="course"><span class="navIcon">▦</span>31-week course</button><button data-view="review"><span class="navIcon">↻</span>Word review</button><button data-view="progress"><span class="navIcon">↗</span>My progress</button><button data-view="reference"><span class="navIcon">⌘</span>Language map</button></nav><div class="sideTrack"><div class="sideLabel">YOUR PATH</div><div class="track"><i id="sideBar"></i></div><div class="sideStats"><span id="sideDone">0 of 31 weeks</span><span id="sidePct">0%</span></div></div><div class="sideBottom"><div class="tiny">THE METHOD</div><p>Recall it. Spot it. Explain the clue. Find it again.</p><a target="_blank" rel="noreferrer" href="https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa">Core lesson playlist ↗</a><br><a target="_blank" rel="noreferrer" href="https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7">Bonus listening playlist ↗</a></div></aside>
 <main id="main" tabindex="-1"><div id="app" aria-live="polite"></div><footer class="footer"><b>80/20 Arabic</b><span>Recognise before you translate.</span><button id="exportBtn" class="txtbtn">Export progress</button><label class="txtbtn" for="importFile">Import progress</label><input id="importFile" type="file" accept="application/json" hidden><button id="printAllBtn" class="txtbtn">Print full course workbook</button></footer></main></div><div id="printRoot"></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="./weekly-guide.js"></script>
+<script src="./book-pages.js"></script>
 <script>
 (function(){
 "use strict";
@@ -156,11 +274,11 @@ function bindWeeks(){document.querySelectorAll("[data-week]").forEach(function(b
 function setView(v){view=v;document.querySelectorAll(".nav button").forEach(function(b){b.classList.toggle("active",b.dataset.view===v)});$("#side").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false");render()}
 function render(){chrome();if(view==="today")todayView();else if(view==="course")courseView();else if(view==="review")reviewView();else if(view==="progress")progressView();else if(view==="reference")referenceView();else lessonView(selected)}
 function todayView(){var w=next(),s=state(),words=allWords(),known=words.filter(function(x){return (s.cards[x.key]||{}).reps>=4}).length;
-app.innerHTML='<section class="hero"><div><div class="kicker">THE 80/20 METHOD</div><h1>See the Qur’an.<br>Understand the structure.</h1><p>Build fast, durable recognition of high-value Arabic words and structures through short lessons, active recall and repeated practice on the Qur’an you already memorise.</p><div class="actions"><button class="btn" id="continue">Continue week '+w.n+' →</button><button class="btn btnlight" id="startReview">Start a 5-minute review</button></div></div><div class="heroMark"><div class="heroGlyph" lang="ar" dir="rtl">ع</div><div class="heroCaption">Recognise · Connect · Retrieve</div></div></section>'+WeeklyGuide.renderPriority()+
+app.innerHTML='<section class="hero"><div><div class="kicker">THE 80/20 METHOD</div><h1>See the Qur’an.<br>Understand the structure.</h1><p>Build fast, durable recognition of high-value Arabic words and structures through short lessons, active recall and repeated practice on the Qur’an you already memorise.</p><div class="actions"><button class="btn" id="continue">Continue week '+w.n+' →</button><button class="btn btnlight" id="startReview">Start a 5-minute review</button></div></div><div class="heroMark"><div class="heroGlyph" lang="ar" dir="rtl">ع</div><div class="heroCaption">Recognise · Connect · Retrieve</div></div></section>'+WeeklyGuide.renderPriority()+WeeklyGuide.renderLibrarySetup()+
 '<div class="metrics"><div class="metric"><div class="metricLabel">Course progress</div><div class="metricNum">'+percent()+'%</div><div class="metricNote">'+done()+' of 31 weeks completed</div></div><div class="metric"><div class="metricLabel">Words retained</div><div class="metricNum">'+known+'</div><div class="metricNote">Recalled successfully 4+ times</div></div><div class="metric"><div class="metricLabel">Reviews due</div><div class="metricNum">'+dueTotal()+'</div><div class="metricNote">'+(dueTotal()?"Reviews are due in one or more sets":"A short set is ready")+'</div></div><div class="metric"><div class="metricLabel">Review answers recorded</div><div class="metricNum">'+Object.keys(s.cards).reduce(function(a,k){return a+(s.cards[k].reps||0)},0)+'</div><div class="metricNote">Stored on this device</div></div></div>'+
 '<div class="cols"><section class="panel continue"><div class="panelHead"><span class="weekchip">'+(w.checkpoint?"MILESTONE":"YOUR NEXT LESSON")+'</span><span class="tag">'+(s.doneWeeks[w.n]?"COMPLETED":"READY TO LEARN")+'</span></div><div class="continueTitle">Week '+w.n+'</div><div class="meta">'+esc(summary(w))+' · 45-minute class</div><div class="focus"><div class="eyebrow">THIS WEEK’S TARGET</div>'+focusHtml(w)+'<p>'+esc(w.objective)+'</p></div><button class="btn" id="openNext">Open lesson →</button></section><section class="panel"><div class="panelHead"><h2>Fast mastery routine</h2><span class="eyebrow">15–25 MIN</span></div><div class="routine"><div class="routineItem"><span class="routineNo">01</span><div><strong>Retrieve before rereading</strong><small>Try to remember the word or pattern before revealing it.</small></div></div><div class="routineItem"><span class="routineNo">02</span><div><strong>Find visible evidence</strong><small>Point to the exact word, ending or connection in your Mushaf.</small></div></div><div class="routineItem"><span class="routineNo">03</span><div><strong>Return after a gap</strong><small>Short reviews on later days beat one long cram session.</small></div></div></div></section></div>'+
 '<div class="sectionHead"><div><h2>Pick up where you left off</h2><p>Small steps, frequent retrieval and cumulative learning.</p></div><button class="link" id="allWeeks">View all weeks →</button></div><div class="weeklist">'+C.filter(function(x){return [w.n,Math.min(w.n+1,31),Math.min(w.n+2,31)].indexOf(x.n)>=0}).map(weekRow).join("")+'</div>';
-$("#continue").onclick=function(){openLesson(w.n)};$("#openNext").onclick=function(){openLesson(w.n)};$("#startReview").onclick=startReview;$("#allWeeks").onclick=function(){setView("course")};bindWeeks()}
+$("#continue").onclick=function(){openLesson(w.n)};$("#openNext").onclick=function(){openLesson(w.n)};$("#startReview").onclick=startReview;$("#allWeeks").onclick=function(){setView("course")};bindWeeks();BookPages.refreshLibraryStatus()}
 function courseView(){var groups=[["PHASE 1 · FOUNDATIONS",C.slice(0,7)],["CHECKPOINT 1",C.slice(7,8)],["PHASE 2 · RELATIONSHIPS",C.slice(8,15)],["CHECKPOINT 2",C.slice(15,16)],["PHASE 3 · CONNECTED MEANING",C.slice(16,23)],["CHECKPOINT 3",C.slice(23,24)],["PHASE 4 · INDEPENDENT READING",C.slice(24,31)]];
 app.innerHTML=head("YOUR COURSE","A path to independent reading","Every teaching week introduces a small number of high-value ideas. The same ideas return later so that recognition becomes faster and more reliable.")+'<section class="panel" style="margin:21px 0"><div class="panelHead"><h2>How the course builds</h2><span class="tag">31 WEEKS</span></div><div class="plan"><div class="planStep"><strong>01 · Recognise</strong><span>Classify words and see the main pattern.</span></div><div class="planStep"><strong>02 · Connect</strong><span>Explain the link between words and clauses.</span></div><div class="planStep"><strong>03 · Transfer</strong><span>Use the clue on a page you have not practised.</span></div></div></section>'+groups.map(function(g){return '<div class="phase">'+g[0]+'</div><div class="weeklist">'+g[1].map(weekRow).join("")+'</div>'}).join("");bindWeeks()}
 function openLesson(n){selected=n;view="lesson";renderLesson(n);window.scrollTo(0,0)}
@@ -168,7 +286,7 @@ function render(){chrome();if(view==="today")todayView();else if(view==="course"
 function renderLesson(n){var w=C.find(function(x){return x.n===n});if(!w){setView("course");return}var s=state();document.querySelectorAll(".nav button").forEach(function(b){b.classList.remove("active")});
 var main='<div class="sectionHead" style="margin-top:0"><div><button class="link" id="backCourse">← Course map</button><div class="kicker">WEEK '+String(n).padStart(2,"0")+(w.checkpoint?" · RETRIEVAL CHECKPOINT":" · 45-MINUTE CLASS")+'</div><h1>Week '+String(n).padStart(2,"0")+' · '+esc(lessonTitle(w))+'</h1><p class="lede">'+esc(summary(w))+'</p></div><span class="tag">'+(s.doneWeeks[n]?"COMPLETED":"IN PROGRESS")+'</span></div>'+
 '<section class="panel"><div class="panelHead"><h2>This week’s target</h2><span class="eyebrow">LEARNING GOAL</span></div><p class="explain">'+esc(w.objective)+'</p><div class="focus"><div class="eyebrow">KEY TERMS · ENGLISH + ARABIC</div>'+termrow(w.focus)+'<p>Say both labels aloud. Connect the English name to the Arabic term before applying the idea.</p></div></section>';
-main+=WeeklyGuide.renderPriority();if(w.checkpoint){main+=checkpointHTML(w)+WeeklyGuide.renderMushafTask(n,{passage:w.passage,apply:"Read Al-Fātiḥah from your own Mushaf. Retrieve the relevant structures without notes and point to one Arabic clue.",esc:esc})+WeeklyGuide.renderStudySupport(n,{esc:esc})}else{main+=teachingHTML(w)}
+main+=WeeklyGuide.renderPriority();if(w.checkpoint){main+=checkpointHTML(w)+WeeklyGuide.renderSequence(n,{passage:w.passage,esc:esc})}else{main+=teachingHTML(w)}
 main+='<section class="panel" style="margin-top:16px"><div class="panelHead"><h2>Finish this session</h2><span class="eyebrow">RETRIEVAL</span></div><p class="explain">'+esc(w.retrieval||"Explain the main idea without notes, then show where it appears in your Mushaf.")+'</p><label class="checkrow" style="margin-top:10px"><input type="checkbox" id="complete" '+(s.doneWeeks[n]?"checked":"")+'> I can identify this pattern and explain at least one clue without notes.</label><div class="actions" style="margin-top:14px"><button class="btn" id="saveWeek">'+(s.doneWeeks[n]?"Update completion":"Mark week complete")+'</button><button class="btn btnlight" id="nextWeek">Next week →</button><button class="btn btnlight" id="printCurrent">Print this lesson</button></div></section>'+
 '<div class="sectionHead"><div><h2>Continue the learning loop</h2><p>Bring this idea back later, then find it on another memorised page.</p></div></div><div class="plan"><div class="planStep"><strong>5 minutes</strong><span>Recall the seven words without notes.</span></div><div class="planStep"><strong>10–15 minutes</strong><span>Do a short FSTU exercise.</span></div><div class="planStep"><strong>5–10 minutes</strong><span>Find the same feature on another page.</span></div></div>';
 app.innerHTML=main;WeeklyGuide.bind(n);$("#backCourse").onclick=function(){setView("course")};$("#saveWeek").onclick=function(){var st=state();st.doneWeeks[n]=$("#complete").checked;save(st);toast(st.doneWeeks[n]?"Week recorded as complete":"Completion removed");renderLesson(n)};$("#nextWeek").onclick=function(){openLesson(Math.min(31,n+1))};$("#printCurrent").onclick=function(){printWorkbook(n)}}
@@ -184,10 +302,10 @@ function teachingHTML(w){
  return '<section class="panel" style="margin-top:15px"><div class="panelHead"><h2>'+(w.capstone?"Seven words from your chosen page":"Seven new Qur’an words")+'</h2><span class="tag">'+(w.capstone?"INDEPENDENT CHOICE":"ACTIVE RECALL")+'</span></div><p class="explain">'+(w.capstone?"Choose seven useful words from the full page you selected. Prioritise words that help you understand the passage. These are your own choices, not a preset list.":"Try to recall the meaning before you reveal it. Say the Arabic aloud, then add your own memory cue.")+'</p><div class="words">'+wh+'</div></section>'+
  '<section class="high"><div class="panelHead"><h2>High-frequency Qur’an words</h2><span class="eyebrow">RECOGNISE, DON’T RECOUNT</span></div><p class="explain" style="margin-bottom:12px">These recur so often that they have a separate review area. They do not use up the seven lexical-word slots.</p><div class="highGrid">'+w.hf.map(function(x){return '<div class="highWord">'+arabic(x.ar)+'<span class="meaning">'+esc(x.en)+'</span></div>'}).join("")+'</div></section>'+
  '<div class="micro"><section class="microCard"><div class="eyebrow">NAḤW · نحو</div>'+termrow(nahwKeys.length?nahwKeys:w.focus,true)+'<p>'+esc(w.nawh)+'</p></section><section class="microCard sarf"><div class="eyebrow">ṢARF · صرف</div>'+termrow(sarfKeys.length?sarfKeys:["conjugation","pattern"],true)+'<p>'+esc(w.sarf)+'</p></section></div>'+
- WeeklyGuide.renderMushafTask(w.n,{passage:w.passage,apply:w.apply,esc:esc})+WeeklyGuide.renderStudySupport(w.n,{nahw:w.nawh,sarf:w.sarf,fstu:w.fstu,esc:esc})
+ WeeklyGuide.renderSequence(w.n,{passage:w.passage,apply:w.apply,nahw:w.nawh,sarf:w.sarf,esc:esc})
 }
 
-function checkpointHTML(w){return '<section class="panel" style="margin-top:15px"><div class="panelHead"><h2>'+esc(w.title)+' · Retrieval test</h2><span class="tag">NO NOTES FIRST</span></div><p class="explain">Read the whole sūrah from your own Mushaf. Attempt each item from memory, then check with your teacher. Record evidence, not just a translation.</p><div class="checklist">'+w.checks.map(function(c){return '<label class="checkrow"><input type="checkbox"><span>'+esc(c)+'</span></label>'}).join("")+'</div><div class="practice"><div class="eyebrow">TERM RECALL · ENGLISH + ARABIC</div>'+termrow(w.focus)+'<p>Cover the Arabic column and recall the Arabic term; then cover the English column and explain the term in your own words.</p></div></section>'}
+function checkpointHTML(w){return '<section class="panel" style="margin-top:15px"><div class="panelHead"><h2>'+esc(w.title)+' · Retrieval checkpoint</h2><span class="tag">RETRIEVE THEN APPLY</span></div><p class="explain">This week reviews the previous phase rather than adding a new concept. Follow the same three layers as every teaching week: actual Mushaf page, matching FSTU pages, then the recognition test.</p><div class="practice"><div class="eyebrow">TERM RECALL · ENGLISH + ARABIC</div>'+termrow(w.focus)+'<p>Try to recall each Arabic label before checking it. You will test your application after studying the source pages below.</p></div></section>'}
 document.addEventListener("click",function(e){var b=e.target.closest("[data-reveal]");if(!b)return;var id=b.dataset.reveal,el=$("#mean-"+id);if(el){el.classList.toggle("hidden");b.setAttribute("aria-expanded",String(!el.classList.contains("hidden")));b.textContent=el.classList.contains("hidden")?"Reveal meaning":"Hide meaning";b.closest(".word").classList.toggle("shown",!el.classList.contains("hidden"))}});
 function dueQueue(){
  var pool=reviewItems(),d=dueFor(reviewMode);
