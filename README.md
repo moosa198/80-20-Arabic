@@ -20,17 +20,19 @@ The GitHub Pages deployment workflow completed successfully for the Hifz-first i
 - See technical terms in paired form every time they are taught or retrieved, for example **Pronoun — ضمير**, **Nominal sentence — جملة اسمية**, **Preposition phrase — جار ومجرور**, and **Emphasis — توكيد**.
 - Start each lesson with the explicit priority: complete Sabaq, Sabaq Sipara/Sabqi and Dhor/Dawr before optional Arabic; defer Arabic whenever Hifz needs attention.
 - Work through a Wudhu reminder before revealing the physical-Mushaf task, then use the week's passage/page to find one Arabic clue and reflect on what was newly noticed.
-- Follow the weekly Naḥw (نحو)/Ṣarf (صرف) topic guidance and use the official FSTU resource pages linked in the lesson.
-- Open the two YouTube playlists as optional reinforcement only. No video is required to finish a lesson.
-- Apply each idea to the indicated Madani 15-line Mushaf page and practise guided tarkīb (تركيب).
+- Start with the actual scanned 15-line Mushaf page, read the assigned scans from FSTU Ṣarf (صرف) and FSTU Naḥw (نحو), then complete the recognition test and explain an Arabic clue.
+- Use the prominent embedded core YouTube playlist as a regular listening lesson; the bonus playlist is available for repeated practice. Both sit immediately before the test.
+- Complete an interactive multiple-choice check with feedback and a saved free-text Qur’anic evidence task, training recognition on the real page rather than recall of translations alone.
 - Build an independent habit by revisiting concepts on another page, with progressively less scaffolding.
 - Track learning locally, export a progress backup, and import it on the same or another browser.
 
 ## Hifz-first weekly workflow
 
-The main app and Student Studio use the shared `weekly-guide.js` file for the same week-by-week passage focus, Hifz-first reminder, Wudhu gate, FSTU topic prompts and optional playlist links. The Mushaf activity starts hidden; the student confirms readiness after making wudhu before revealing the task. This is a preparation reminder and self-check, not an enforcement mechanism.
+The main app and Student Studio use the shared source-page components. Each week follows the same order: **(1) actual 15-line Mushaf page → (2) actual FSTU Ṣarf and Naḥw textbook pages → (3) prominent listening resources → (4) test and evidence task**. Students confirm readiness after making wudhu before revealing the Mushaf scan.
 
-**FSTU page-mapping status:** The repository does not contain a verified page-by-page map for the edition each student will use. Lessons therefore identify the relevant Naḥw/Ṣarf topic and link to Al-Qalam Institute's current resource pages, but do not invent exact page numbers. The saved Week 1 guide contains broad legacy ranges (Naḥw Unit 1, pp. 8–28; Ṣarf Unit 1, pp. 16–41); teachers must confirm the edition and select a short relevant example rather than assign those entire ranges. Exact page and exercise references should be entered only after checking the actual student books. Qur'an page numbering likewise assumes the stated Madani 15-line edition and should be checked against each student's Mushaf.
+**Source editions and page mapping:** The weekly map was built against the supplied 15 Line Qur’an PDF, FSTU Sarf (First Edition, March 2022), and FSTU Nahw (First Edition, August 2026). The Mushaf PDF has a cover, so printed Mushaf page N maps to physical PDF page N+1. FSTU printed page numbers map directly to PDF page numbers. Each lesson assigns a narrow page/topic rather than a whole unit. Page references should be checked if a student loads a different edition.
+
+**Why source PDFs are loaded locally:** Each student selects their own copies of the three PDFs once in the app. The browser renders only the assigned pages and saves those page images in local IndexedDB. The original PDF files are not uploaded to the website or stored on the server. This lets students see real source pages without publicly republishing the copyrighted FSTU Sarf scan. The prepared pages do not move to another device or browser; repeat the source setup there.
 
 ## Learning rhythm
 
@@ -56,8 +58,7 @@ The “well-established” word count means a card has been answered successfull
 ## Course and source materials
 
 Use the app alongside:
-- The student's **own Madani 15-line Mushaf**. Page references assume the edition used to design the curriculum; page numbers differ across editions.
-- **FSTU Naḥw (نحو)** and **FSTU Ṣarf (صرف)** for deeper explanation and written/oral exercises.
+- The source PDFs selected in **Load your actual Mushaf and FSTU pages**: the 15-line Mushaf, FSTU Ṣarf (صرف), and the FSTU Naḥw (نحو) August 2026 edition. Use the edition for which the weekly page labels were mapped.
 - [Core Arabic lesson playlist](https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa)
 - [Bonus listening playlist](https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7)
 
@@ -65,7 +66,7 @@ Playlist references are supplied without invented video names or timestamps.
 
 ## Privacy and offline use
 
-The app is a static progressive web app. Course completion and review progress remain in the current browser's local storage; no account or server-side student profile is created. Use **Export progress** before changing devices. The service worker caches the app shell after the first online visit. Google Fonts may need an initial internet connection to load.
+The app is a static progressive web app. Course completion and review cards use the current browser's local storage; page images rendered from the three source PDFs are saved in local IndexedDB. Neither a student profile nor the original PDFs are uploaded to a server. Use **Export progress** before changing devices; page-source setup is separate and must be repeated in a new browser/device. The service worker caches the app and page-viewer code after the first online visit. PDF.js, YouTube, and Google Fonts need an internet connection.
 
 ## Printable workbook and automated quality checks
 
