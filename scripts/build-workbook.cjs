@@ -132,6 +132,14 @@ const assert = require("node:assert/strict");
     await page.emulateMedia({ media: "print" });
     await page.locator("#printRoot .printPage").first().screenshot({ path: path.join(out, "qa-print-cover.png") });
     await page.locator("#printRoot .printPage").nth(2).screenshot({ path: path.join(out, "qa-print-week-01-vocabulary.png") });
+    const printLayout = await page.locator("#printRoot .printPage").evaluateAll(nodes => nodes.map((node, index) => {
+      const rect = node.getBoundingClientRect();
+      const title = node.querySelector(".printTitle")?.textContent || node.querySelector("h2")?.textContent || "";
+      return { page: index + 1, title: title.trim().slice(0, 90), height: Math.round(rect.height), scrollHeight: node.scrollHeight, childCount: node.children.length };
+    }));
+    const oversizedPrintPages = printLayout.filter(x => x.height > 1038 || x.scrollHeight > 1038);
+    audit.printLayoutDiagnostics = { plannedPages: printLayout.length, oversizedPages: oversizedPrintPages };
+    console.log("PRINT_LAYOUT_DIAGNOSTICS " + JSON.stringify(audit.printLayoutDiagnostics));
     await page.pdf({ path: path.join(out, "Student_Workbook.pdf"), format: "A4", printBackground: true, preferCSSPageSize: true, displayHeaderFooter: false });
     let pdfInfo = "";
     try { pdfInfo = execFileSync("pdfinfo", [path.join(out, "Student_Workbook.pdf")], { encoding: "utf8" }); } catch (err) { audit.warnings.push("pdfinfo unavailable; DOM page count was checked instead"); }
