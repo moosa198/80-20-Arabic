@@ -284,15 +284,13 @@
   }
   function renderSequence(week, options) {
     options=options||{};
-    var n=Number(week),d=get(n),page=Number(d.page||604);
-    var passage=options.passage||d.passage;
-    var apply=options.apply||(d.capstone?"Use this reference page as a model. Then repeat the same analysis on a full page from your own memorised Qur’an, selected with your teacher.":"Find one example of this week’s target, point to the Arabic evidence and explain it in your own words.");
-    var pageNote=d.capstone
-      ?"Reference page 604 is provided for practice. For the capstone, repeat the task on a full page from your own memorised Qur’an."
-      :"This is the actual scanned page from the supplied Madani 15-line Mushaf. Its PDF cover is accounted for in the page mapping.";
-    return '<div class="weekly-sequence" data-week-sequence="'+n+'"><div class="sequence-overview"><div class="sequence-node active"><span>01</span><b>Mushaf page</b></div><div class="sequence-line"></div><div class="sequence-node"><span>02</span><b>Sarf + Nahw</b></div><div class="sequence-line"></div><div class="sequence-node"><span>03</span><b>Test</b></div></div>'+
-      '<section class="weekly-step mushaf-step" aria-labelledby="mushafTitle-'+n+'"><div class="step-topline"><span class="step-number">01</span><div><div class="guide-eyebrow">FIRST · READ THE REAL PAGE</div><h2 id="mushafTitle-'+n+'">The actual 15-line Mushaf page</h2></div></div><p class="step-intro">Make wudhu before handling your physical Mushaf. Start with the Qur’anic page itself; look at the Arabic before trying to translate it.</p><label class="guide-check wudhu-confirm"><input type="checkbox" id="wudhuReady-'+n+'"> <span>I have made wudhu and am ready to handle my Mushaf.</span></label><div class="guide-actions"><button type="button" class="btn guide-reveal" id="revealMushaf-'+n+'" disabled>Reveal the actual Mushaf page</button><span class="guide-small">The scanned page is shown after you confirm readiness.</span></div><div id="mushafTask-'+n+'" class="mushaf-task" hidden><div class="mushaf-reference"><div class="mushaf-reference-meta"><span class="guide-eyebrow">TARGET PASSAGE</span><span class="page-pill">Printed Mushaf p. '+page+'</span></div><h3>'+esc(passage)+'</h3><p class="guide-small">'+esc(pageNote)+'</p></div>'+pageFrame("quran",page)+'<p class="mushaf-application">'+esc(apply)+'</p><div class="mushaf-transfer-note"><b>Your first task</b><p>Before opening the textbook pages, point to one place on this actual page that you think shows the week’s target. Keep your finger/eyes on the Arabic evidence.</p></div></div></section>'+
-      '<section class="weekly-step textbook-step" aria-labelledby="textbookTitle-'+n+'"><div class="step-topline"><span class="step-number">02</span><div><div class="guide-eyebrow">SECOND · STUDY THE ACTUAL SOURCE PAGES</div><h2 id="textbookTitle-'+n+'">Read the FSTU pages, then return to the Mushaf</h2></div></div><p class="step-intro">These are scans rendered from the exact PDFs you load on this device. Read the assigned page(s) rather than relying on a summary alone. The note explains what to look for on each source page.</p><div class="textbook-focus-note"><div class="textbook-focus-item"><b>Ṣarf · صرف</b><p>'+esc(options.sarf||d.sarf)+'</p></div><div class="textbook-focus-item nahw-focus"><b>Naḥw · نحو</b><p>'+esc(options.nahw||d.nahw)+'</p></div></div><div class="textbook-stack">'+renderBookGroup("sarf",d.sarfPages,options.sarf||d.sarf)+renderBookGroup("nahw",d.nahwPages,options.nahw||d.nahw)+'</div></section>'+
+    var n=Number(week),d=get(n),page=Number(d.page||604),passage=options.passage||d.passage;
+    var apply=options.apply||(d.capstone?"Use page 604 as a reference, then repeat the same analysis on a full page from your own memorised Qur’an.":"Find one example of this week’s target, point to the Arabic evidence and explain it in your own words.");
+    var note=d.capstone?"Reference page 604 is shown initially. For the capstone, choose any printed Mushaf page (1–604), then repeat the task on a page you have memorised.":"This is the assigned 15-line digital Madina page in the 1441H New Madina layout. Check your printed Mushaf if your edition paginates or lays out the text differently.";
+    var picker=d.capstone?'<div class="capstone-page-picker"><label for="capstonePage-'+n+'">Choose a printed Mushaf page (1–604)<input id="capstonePage-'+n+'" data-capstone-page-input="'+n+'" type="number" min="1" max="604" step="1" value="'+page+'"></label><button type="button" class="btn" data-capstone-page-go="'+n+'">Show selected page</button><span class="guide-small" data-capstone-page-status="'+n+'" role="status">Reference page 604 is showing.</span></div>':"";
+    return '<div class="weekly-sequence" data-week-sequence="'+n+'"><div class="sequence-overview"><div class="sequence-node active"><span>01</span><b>Qur’an page</b></div><div class="sequence-line"></div><div class="sequence-node active"><span>02</span><b>Ṣarf + Naḥw</b></div><div class="sequence-line"></div><div class="sequence-node active"><span>03</span><b>Listen</b></div><div class="sequence-line"></div><div class="sequence-node active"><span>04</span><b>Apply</b></div></div>'+
+      '<section class="weekly-step mushaf-step" aria-labelledby="mushafTitle-'+n+'"><div class="step-topline"><span class="step-number">01</span><div><div class="guide-eyebrow">FIRST · LOOK AT THE REAL PAGE</div><h2 id="mushafTitle-'+n+'">The 15-line Madina Qur’an page</h2></div></div><p class="step-intro">Adab reminder: make wudhu before handling a physical Mushaf. The on-screen page is available immediately so you can study the Arabic first.</p><div class="mushaf-task" id="mushafTask-'+n+'"><div class="mushaf-reference"><div class="mushaf-reference-meta"><span class="guide-eyebrow">TARGET PASSAGE</span><span class="page-pill">Printed Mushaf p. <span data-quran-page-label="'+n+'">'+page+'</span></span></div><h3>'+esc(passage)+'</h3><p class="guide-small">'+esc(note)+'</p></div>'+pageFrame("quran",page)+picker+'<p class="mushaf-application">'+esc(apply)+'</p><div class="mushaf-transfer-note"><b>Your first task</b><p>Before opening the textbook pages, find one phrase on the page that you think relates to this week’s target. Then check your reasoning in the source pages below.</p></div></div></section>'+
+      '<section class="weekly-step textbook-step" aria-labelledby="textbookTitle-'+n+'"><div class="step-topline"><span class="step-number">02</span><div><div class="guide-eyebrow">SECOND · CHECK THE SOURCE TEXT</div><h2 id="textbookTitle-'+n+'">Assigned FSTU Ṣarf and Naḥw pages</h2></div></div><p class="step-intro">Open the printed page assigned for this lesson using the page tabs. Read the source itself, then return to the Qur’anic example. Page numbers refer to the editions named in the course notes.</p><div class="textbook-focus-note"><div class="textbook-focus-item"><b>Ṣarf · صرف</b><p>'+esc(options.sarf||d.sarf)+'</p></div><div class="textbook-focus-item nahw-focus"><b>Naḥw · نحو</b><p>'+esc(options.nahw||d.nahw)+'</p></div></div><div class="textbook-stack">'+renderBookGroup("sarf",d.sarfPages,options.sarf||d.sarf)+renderBookGroup("nahw",d.nahwPages,options.nahw||d.nahw)+'</div></section>'+
       renderPlaylists(n)+renderAssessment(n)+'</div>';
   }
   function bindAssessment(week) {
@@ -339,27 +337,47 @@
       evidenceFeedback.innerHTML="<b>Saved on this device.</b><p>"+(evidence&&explanation?"Now compare your example and explanation with the FSTU page and your teacher's feedback. The app checks the recall question, but it does not automatically grade a student's free-text Qur'anic analysis.":"Add both the Arabic example and the clue/explanation to make this a complete evidence record.")+"</p>";
     });
   }
-  function bind(week) {
-    var n=Number(week);
-    var ready=root.document&&root.document.getElementById("wudhuReady-"+n);
-    var reveal=root.document&&root.document.getElementById("revealMushaf-"+n);
-    var task=root.document&&root.document.getElementById("mushafTask-"+n);
-    if(ready&&reveal&&task) {
-      ready.addEventListener("change",function(){reveal.disabled=!ready.checked;});
-      reveal.addEventListener("click",function(){
-        if(!ready.checked)return;
-        task.hidden=false;
-        reveal.textContent="Mushaf page revealed";
-        reveal.disabled=true;
-        task.scrollIntoView({behavior:"smooth",block:"nearest"});
-      });
+  function bindSpotTask(week) {
+    var n=Number(week),spot=SPOT_TASKS[n],task=root.document&&root.document.querySelector('[data-spot-task="'+n+'"]');
+    if(!task)return;
+    var buttons=Array.prototype.slice.call(task.querySelectorAll("[data-spot-index]")),feedback=task.querySelector('[data-spot-feedback="'+n+'"]'),key="8020-spot-recognition-v1",saved={};
+    try{saved=JSON.parse(root.localStorage.getItem(key)||"{}")[n]||{};}catch(e){}
+    function showChoice(index,persist){
+      var correct=!!spot&&Number(index)===spot.answer;
+      buttons.forEach(function(btn){var chosen=Number(btn.getAttribute("data-spot-index"))===Number(index);btn.classList.toggle("selected",chosen);btn.setAttribute("aria-pressed",chosen?"true":"false");});
+      if(!feedback||!spot)return;
+      feedback.hidden=false;feedback.className="spot-feedback "+(correct?"spot-correct":"spot-review");
+      feedback.innerHTML="<b>"+(correct?"Correct — you found the target.":"Not quite — look closely at the Arabic above and try again.")+"</b><p>"+esc(spot.why)+"</p>";
+      if(persist){try{var all=JSON.parse(root.localStorage.getItem(key)||"{}");all[n]={choice:Number(index),correct:correct,answeredAt:new Date().toISOString()};root.localStorage.setItem(key,JSON.stringify(all));}catch(e){}}
     }
-    bindAssessment(n);
-    if(root.BookPages&&root.document)root.BookPages.hydrate(root.document);
+    buttons.forEach(function(btn){btn.addEventListener("click",function(){showChoice(Number(btn.getAttribute("data-spot-index")),true);});});
+    if(spot&&saved.choice!==undefined)showChoice(Number(saved.choice),false);
   }
-
+  function bind(week) {
+    var n=Number(week),sequence=root.document&&root.document.querySelector('[data-week-sequence="'+n+'"]');
+    if(sequence)sequence.addEventListener("click",function(event){
+      var tab=event.target.closest&&event.target.closest("[data-fstu-kind][data-fstu-page]");
+      if(tab){
+        var kind=tab.getAttribute("data-fstu-kind"),page=Number(tab.getAttribute("data-fstu-page")),frame=sequence.querySelector('[data-fstu-frame="'+kind+'"]'),viewer=sequence.querySelector('[data-fstu-viewer="'+kind+'"]'),caption=sequence.querySelector('[data-fstu-caption="'+kind+'"]'),fileId=kind==="sarf"?"1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr":"1BdY0tAvoaKvJVUhmMQn09bxLh0fAXO03",titles=kind==="sarf"?SARF_PAGE_TITLES:NAHW_PAGE_TITLES;
+        if(frame){frame.src="https://drive.google.com/file/d/"+fileId+"/preview?rm=minimal#page="+page;frame.title=(kind==="sarf"?"FSTU Ṣarf":"FSTU Naḥw")+" printed page "+page;}
+        if(viewer)viewer.setAttribute("data-book-page",kind+":"+page);
+        sequence.querySelectorAll('[data-fstu-kind="'+kind+'"][data-fstu-page]').forEach(function(btn){var active=btn===tab;btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",active?"true":"false");});
+        if(caption)caption.innerHTML="Showing printed p. "+page+" · "+esc(titles[page]||"source page")+' · <a href="https://drive.google.com/file/d/'+fileId+'/view?usp=sharing#page='+page+'" target="_blank" rel="noreferrer">Open page in a new tab ↗</a>';
+      }
+      var go=event.target.closest&&event.target.closest("[data-capstone-page-go]");
+      if(go){
+        var input=sequence.querySelector('[data-capstone-page-input="'+n+'"]'),value=input?Number(input.value):NaN,status=sequence.querySelector('[data-capstone-page-status="'+n+'"]'),holder=sequence.querySelector(".quran-page-frame"),label=sequence.querySelector('[data-quran-page-label="'+n+'"]');
+        if(!Number.isInteger(value)||value<1||value>604){if(status)status.textContent="Enter a whole printed page number from 1 to 604.";return;}
+        var el=root.document.createElement("quran-madina-html");el.setAttribute("page",String(value));el.setAttribute("data-quran-renderer","1441H");
+        if(holder){holder.setAttribute("data-book-page","quran:"+value);holder.setAttribute("aria-label","Digital 15-line Madina Mushaf page "+value);var old=holder.querySelector("quran-madina-html");if(old)old.replaceWith(el);}
+        if(label)label.textContent=String(value);if(status)status.textContent="Printed page "+value+" is showing. Compare the passage with your memorised page.";
+        var title=sequence.querySelector("#mushafTitle-"+n);if(title)title.textContent="The 15-line Madina Qur’an page · p. "+value;
+      }
+    });
+    bindAssessment(n);bindSpotTask(n);
+  }
   root.WeeklyGuide={
-    get:get, getPageSourceMap:getPageSourceMap,
+    get:get, getPageSourceMap:getPageSourceMap, getSpotTask:function(week){return SPOT_TASKS[Number(week)]||null;},
     renderPriority:renderPriority, renderLibrarySetup:renderLibrarySetup,
     renderMushafTask:renderSequence, renderStudySupport:function(){return "";},
     renderSequence:renderSequence, bind:bind,
