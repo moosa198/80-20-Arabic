@@ -27,7 +27,7 @@ A Qur’an-first, 31-week learning product for students who are memorising the Q
 
 ## Pedagogical approach: whole → map → whole → retrieve → transfer
 
-The course adapts the high-level 80/20 and early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf). It does not reproduce the report’s wording or assume its performance estimates apply to this classroom.
+The course adapts the high-level 80/20 and early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf). It does not reproduce the report’s wording or assume its performance estimates apply to this classroom. The exact `ArabicAccelerationReport2.0.pdf` URL supplied for this build could not be retrieved in this session. This is therefore a principled adaptation of the accessible publisher report, not a claim to have followed that revision line by line.
 
 1. **Whole:** Start with a real Qur’anic phrase before presenting a grammar rule. Students ask what the statement is doing and notice a clue.
 2. **Map:** Teach the smallest useful structural map: word type, complete form, phrase relationship or sentence role. Avoid an exhaustive grammar catalogue.
