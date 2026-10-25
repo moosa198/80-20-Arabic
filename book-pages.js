@@ -5,7 +5,7 @@
   "use strict";
   var DB_NAME="8020-source-pages-v1", DB_VERSION=1, DB=null, DB_PROMISE=null;
   var PDFJS_WORKER="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-  var urls={}, jobs={};
+  var urls={}, jobs={}, zoomBound=false;
   var LABELS={quran:"15-line Madani Mushaf",sarf:"FSTU Ṣarf",nahw:"FSTU Naḥw"};
   var ACCEPTS={quran:"application/pdf",sarf:"application/pdf",nahw:"application/pdf"};
   var WIDTHS={quran:1000,sarf:1000,nahw:1000};
@@ -198,8 +198,8 @@
   }
   function bindPageZoom(container) {
     container=container||root.document;
-    if(!container||container.dataset.zoomBound==="true")return;
-    container.dataset.zoomBound="true";
+    if(!root.document||zoomBound)return;
+    zoomBound=true;
     container.addEventListener("click",function(event){
       var img=event.target.closest(".source-page-image"),button=event.target.closest(".page-zoom-text");
       if(button){img=button.closest(".book-page-figure")&&button.closest(".book-page-figure").querySelector(".source-page-image");}
