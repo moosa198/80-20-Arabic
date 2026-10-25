@@ -13,7 +13,7 @@
 
   var NAHW_PAGE_TITLES = {
     8:"Introduction: Words",12:"Characteristic 3: Number",17:"Part 2: Verbs",20:"Affirmative and Negative Verbs",21:"Summary of Negative Particles",27:"Part 3: Particles",34:"Introduction: Sentences",
-    36:"Part 2: Prefixes",37:"ما المشبهة بليس",38:"Supplement: Pronouns",41:"The اسم of كان and ليس as a Pronoun",48:"Part 2: Object",49:"Part 3: Deputy Subject",50:"Adverbs of Place and Time",51:"Adverbs of Degree",
+    36:"Part 2: Prefixes",37:"ما المشبهة بليس",38:"Supplement: Pronouns",41:"The اسم of كان and ليس as a Pronoun",47:"Part 1: Subject (فاعل)",48:"Part 2: Object",49:"Part 3: Deputy Subject",50:"Adverbs of Place and Time",51:"Adverbs of Degree",
     52:"Adverbs of Frequency and مفعول مطلق للعدد",53:"Adverbs of Reason (مفعول لأجله)",54:"State",56:"Exclusion",57:"Supplement: Pronouns",
     65:"Descriptive Phrases",69:"Conjunction Phrases",72:"Possessive Phrases",
     76:"Emphatic Phrases",80:"Numeric Phrases",84:"Prepositional Phrase",
@@ -44,8 +44,8 @@
       sarf:"FSTU Ṣarf, p. 19: keep an eye on the complete past/perfect verb form (فعل ماضٍ) when one appears in the passage. This is supporting recognition; the main target is sentence structure.",
       media:"nominal sentences, mubtada and khabar",
       quiz:{question:"A nominal sentence (جملة اسمية) commonly starts with its topic (مبتدأ), followed by the...",options:["predicate / information (خبر)","object (مفعول به)","prepositional phrase (جار ومجرور)"],answer:0,why:"The مبتدأ is the topic, and the خبر supplies information about it. Find the relationship in the Qur'anic line rather than relying on the first word alone."}},
-    3:{passage:"An-Naba 1–29",page:582,nahwPages:[17,48],sarfPages:[19,24],
-      nahw:"FSTU Naḥw, p. 17: verbs (فعل). Use p. 48 to review the object (مفعول به) when the verb takes one.",
+    3:{passage:"An-Naba 1–29",page:582,nahwPages:[47,48],sarfPages:[19,24],
+      nahw:"FSTU Naḥw, p. 47 teaches the doer/subject (فاعل); p. 48 teaches the object (مفعول به). Identify the doer first and only label an object where the whole verb phrase supports it.",
       sarf:"FSTU Ṣarf, pp. 19 and 24: compare the whole past/perfect and imperfect forms (فعل ماضٍ / فعل مضارع).",
       media:"verbal sentences, subject and object",
       quiz:{question:"In a verbal sentence (جملة فعلية), which term identifies the doer of the action?",options:["فاعل — doer/subject","مبتدأ — topic of a nominal sentence","مجرور — noun in the genitive"],answer:0,why:"فاعل identifies the doer of the verb. A مفعول به, where present, is the object affected by the action. Use the whole sentence as evidence."}},
