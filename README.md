@@ -25,9 +25,19 @@ The hosting workflow has not been able to enable Pages through the connected Git
 - Learn seven lexical words in each teaching week. High-frequency grammatical/function words have their **own recurring box and review set**, rather than displacing the seven new lexical slots.
 - Review in three separate modes: **Qur’an vocabulary**, **high-frequency Qur’an words**, and **grammar terms English ↔ Arabic**.
 - See technical terms in paired form every time they are taught or retrieved, for example **Pronoun — ضمير**, **Nominal sentence — جملة اسمية**, **Preposition phrase — جار ومجرور**, and **Emphasis — توكيد**.
-- Apply each idea to the indicated Madani 15-line Mushaf page, practise guided tarkīb (تركيب), and use FSTU Naḥw (نحو) and Ṣarf (صرف) for targeted follow-up.
+- Start each lesson with the explicit priority: complete Sabaq, Sabaq Sipara/Sabqi and Dhor/Dawr before optional Arabic; defer Arabic whenever Hifz needs attention.
+- Work through a Wudhu reminder before revealing the physical-Mushaf task, then use the week's passage/page to find one Arabic clue and reflect on what was newly noticed.
+- Follow the weekly Naḥw (نحو)/Ṣarf (صرف) topic guidance and use the official FSTU resource pages linked in the lesson.
+- Open the two YouTube playlists as optional reinforcement only. No video is required to finish a lesson.
+- Apply each idea to the indicated Madani 15-line Mushaf page and practise guided tarkīb (تركيب).
 - Build an independent habit by revisiting concepts on another page, with progressively less scaffolding.
 - Track learning locally, export a progress backup, and import it on the same or another browser.
+
+## Hifz-first weekly workflow
+
+The main app and Student Studio use the shared `weekly-guide.js` file for the same week-by-week passage focus, Hifz-first reminder, Wudhu gate, FSTU topic prompts and optional playlist links. The Mushaf activity starts hidden; the student confirms readiness after making wudhu before revealing the task. This is a preparation reminder and self-check, not an enforcement mechanism.
+
+**FSTU page-mapping status:** The repository does not contain a verified page-by-page map for the edition each student will use. Lessons therefore identify the relevant Naḥw/Ṣarf topic and link to Al-Qalam Institute's current resource pages, but do not invent exact page numbers. The saved Week 1 guide contains broad legacy ranges (Naḥw Unit 1, pp. 8–28; Ṣarf Unit 1, pp. 16–41); teachers must confirm the edition and select a short relevant example rather than assign those entire ranges. Exact page and exercise references should be entered only after checking the actual student books. Qur'an page numbering likewise assumes the stated Madani 15-line edition and should be checked against each student's Mushaf.
 
 ## Learning rhythm
 
