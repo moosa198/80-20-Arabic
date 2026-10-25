@@ -41,6 +41,17 @@ const assert = require("node:assert/strict");
       assert.equal(await page.locator(".playlist-link").count(), 2, "Core and bonus playlist links missing on week " + n);
       assert.equal(await page.locator(".playlist-player iframe").count(), 1, "Embedded core playlist missing on week " + n);
       assert.equal(await page.locator("#weeklyTest-" + n).count(), 1, "Weekly recognition test missing on week " + n);
+      const sequenceOrder = await page.locator(".weekly-sequence").evaluate(root => {
+        const y = selector => root.querySelector(selector).getBoundingClientRect().top;
+        return [y(".mushaf-step"), y(".textbook-step"), y(".listening-resources"), y(".assessment-layer")];
+      });
+      assert(sequenceOrder[0] < sequenceOrder[1] && sequenceOrder[1] < sequenceOrder[2] && sequenceOrder[2] < sequenceOrder[3],
+        "Weekly layers must be ordered Mushaf → textbook → listening → test on week " + n);
+      const sourcePages = await page.locator(".book-page-frame").evaluateAll(nodes => nodes.map(el => el.getAttribute("data-book-page")));
+      const mappedQuranPage = await page.evaluate(n => WeeklyGuide.get(n).page || 604, n);
+      assert(sourcePages.includes("quran:" + mappedQuranPage), "Actual assigned Mushaf page reference missing on week " + n);
+      assert(sourcePages.some(x => x.startsWith("sarf:")), "Assigned FSTU Sarf page reference missing on week " + n);
+      assert(sourcePages.some(x => x.startsWith("nahw:")), "Assigned FSTU Naḥw page reference missing on week " + n);
       const chips = await page.locator(".focus .term").evaluateAll(nodes => nodes.map(node => ({
         en: (node.querySelector(".ten") || {}).textContent || "",
         ar: (node.querySelector(".tar") || {}).textContent || "",
@@ -82,6 +93,7 @@ const assert = require("node:assert/strict");
       if (n === 31) await page.screenshot({ path: path.join(out, "qa-capstone.png"), fullPage: true });
     }
     audit.passed.push("All 31 lessons render; all English focus labels are paired with Arabic");
+    audit.passed.push("Every week has mapped Mushaf, FSTU Sarf and Naḥw page references, visible listening resources, and the test in the expected order");
     audit.passed.push("Each teaching week has seven word cards; three Fātiḥah checkpoints are retrieval-led");
     audit.passed.push("Desktop lesson views have no horizontal overflow");
 
