@@ -61,6 +61,17 @@ const assert = require("node:assert/strict");
       assert.equal(await page.locator("#revealMushaf-" + n).isEnabled(), true, "Mushaf task button did not unlock after Wudhu confirmation on week " + n);
       await page.locator("#revealMushaf-" + n).click();
       assert.equal(await page.locator("#mushafTask-" + n).isVisible(), true, "Mushaf task did not reveal after Wudhu confirmation on week " + n);
+      const answerIndex = await page.evaluate(n => WeeklyGuide.get(n).quiz.answer, n);
+      await page.locator('input[name="weekly-choice-' + n + '"][value="' + answerIndex + '"]').check();
+      await page.locator('[data-check-quiz="' + n + '"]').click();
+      assert.equal(await page.locator("#quizFeedback-" + n).isVisible(), true, "Weekly recall answer was not checked on week " + n);
+      assert((await page.locator("#quizFeedback-" + n).innerText()).includes("Correct"), "Correct recognition answer was not accepted on week " + n);
+      if (n === 1) {
+        await page.locator('[data-test-evidence="1"]').fill("رسول");
+        await page.locator('[data-test-explanation="1"]').fill("I identified this word on the page and can explain the feature using an Arabic clue.");
+        await page.locator('[data-save-evidence="1"]').click();
+        assert.equal(await page.locator("#evidenceFeedback-1").isVisible(), true, "Page-evidence task did not save on week 1");
+      }
       const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
       assert.equal(horizontalOverflow, false, "Horizontal overflow on week " + n);
       if (n === 1) await page.screenshot({ path: path.join(out, "qa-week-01.png"), fullPage: true });
