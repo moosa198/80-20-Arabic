@@ -32,7 +32,7 @@ The sequence progresses from guided recognition (weeks 1–7), through retrieval
 
 ## Source editions and page mapping
 
-The integrated Qur’an page uses the publicly published quran-madina-html browser renderer, which displays a text-rendered 15-line Madina layout rather than the scanned PDF originally used to build the page map. Renderer reference: https://github.com/tarekeldeeb/quran-madina-html. Its default dataset is identified by that project as Madina05. Different Mushaf editions can have different typography or line breaks, so teachers and learners should confirm the passage against the printed Mushaf they use. Week 31 lets the student choose a printed page number from 1 to 604.
+The integrated Qur’an page uses quran-madina-html v2 with its 1441H 15-line Madina layout, which follows the King Fahd Complex page-line data. It renders real selectable text rather than the scanned PDF originally used to build the weekly map. Renderer and source details: https://github.com/tarekeldeeb/quran-madina-html. The digital renderer is intended to match the page layout, but it is not a pixel scan of the supplied PDF; teachers should confirm passages against the physical Mushaf the class uses. Week 31 lets the student choose a printed page number from 1 to 604.
 
 FSTU source pages are opened from Al-Qalam Institute’s official hosted PDFs:
 
@@ -43,7 +43,7 @@ The original content audit used the supplied 15 Line Qur’an PDF, FSTU Ṣarf (
 
 ### Attribution and use
 
-FSTU textbook material belongs to Al-Qalam Institute. This site links to the official hosted sources and does not rehost the full PDFs. Follow the Institute’s current educational/non-commercial use and attribution requirements; obtain written permission before commercial reuse. Check the renderer repository for its current licence and terms, and do not assume the text-rendered digital layout is identical to the scan supplied by a student.
+FSTU textbook material belongs to Al-Qalam Institute. This site links to the official hosted sources and does not rehost the full PDFs. Follow the Institute’s current educational/non-commercial use and attribution requirements; obtain written permission before commercial reuse. The renderer repository identifies the library and assets as licensed under the Waqf General Public License 2.0 and credits Tanzil text plus King Fahd Complex page data. Review the current licence and terms at the source before changing how the renderer is distributed.
 
 ## Learning design and assessment
 

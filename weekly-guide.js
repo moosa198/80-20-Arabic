@@ -255,7 +255,7 @@
   }
   function pageFrame(kind,page) {
     page=Number(page)||1;
-    if(kind==="quran") return '<div class="book-page-frame quran-page-frame" data-book-page="quran:'+page+'" aria-label="Digital 15-line Madina Mushaf page '+page+'"><quran-madina-html page="'+page+'" data-quran-renderer="Madina05"></quran-madina-html><p class="quran-page-caption">Printed Madina page '+page+' · text-rendered 15-line Madina layout</p></div>';
+    if(kind==="quran") return '<div class="book-page-frame quran-page-frame" data-book-page="quran:'+page+'" aria-label="Digital 15-line Madina Mushaf page '+page+'"><quran-madina-html page="'+page+'" data-quran-renderer="1441H"></quran-madina-html><p class="quran-page-caption">Printed Madina page '+page+' · text-rendered 1441H 15-line Madina layout</p></div>';
     return '<div class="book-page-frame" data-book-page="'+kind+':'+page+'"></div>';
   }
   function renderBookGroup(kind,pages,focus) {
@@ -368,7 +368,7 @@
       if(go){
         var input=sequence.querySelector('[data-capstone-page-input="'+n+'"]'),value=input?Number(input.value):NaN,status=sequence.querySelector('[data-capstone-page-status="'+n+'"]'),holder=sequence.querySelector(".quran-page-frame"),label=sequence.querySelector('[data-quran-page-label="'+n+'"]');
         if(!Number.isInteger(value)||value<1||value>604){if(status)status.textContent="Enter a whole printed page number from 1 to 604.";return;}
-        var el=root.document.createElement("quran-madina-html");el.setAttribute("page",String(value));el.setAttribute("data-quran-renderer","Madina05");
+        var el=root.document.createElement("quran-madina-html");el.setAttribute("page",String(value));el.setAttribute("data-quran-renderer","1441H");
         if(holder){holder.setAttribute("data-book-page","quran:"+value);holder.setAttribute("aria-label","Digital 15-line Madina Mushaf page "+value);var old=holder.querySelector("quran-madina-html");if(old)old.replaceWith(el);}
         if(label)label.textContent=String(value);if(status)status.textContent="Printed page "+value+" is showing. Compare the passage with your memorised page.";
         var title=sequence.querySelector("#mushafTitle-"+n);if(title)title.textContent="The 15-line Madina Qur’an page · p. "+value;
