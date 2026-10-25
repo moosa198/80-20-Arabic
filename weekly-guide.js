@@ -12,9 +12,9 @@
   var SARF_RESOURCES = "https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources";
 
   var NAHW_PAGE_TITLES = {
-    8:"Introduction: Words",12:"Noun Number: the Dual",17:"Part 2: Verbs",20:"Negation: Affirmative and Negative",21:"Negative Particles",27:"Part 3: Particles",34:"Introduction: Sentences",
-    36:"Prefixes: kāna / inna and their sisters",37:"ما المشبهة بليس",38:"Supplement: Pronouns",41:"The اسم of كان and ليس as a Pronoun",48:"Object",49:"Deputy Subject",50:"Adverbs of Place and Time",51:"Adverbs of Degree and Frequency",
-    53:"Adverbs of Reason (مفعول لأجله)",54:"State",56:"Exclusion",57:"Supplement: Pronouns",
+    8:"Introduction: Words",12:"Characteristic 3: Number",17:"Part 2: Verbs",20:"Affirmative and Negative Verbs",21:"Summary of Negative Particles",27:"Part 3: Particles",34:"Introduction: Sentences",
+    36:"Part 2: Prefixes",37:"ما المشبهة بليس",38:"Supplement: Pronouns",41:"The اسم of كان and ليس as a Pronoun",48:"Part 2: Object",49:"Part 3: Deputy Subject",50:"Adverbs of Place and Time",51:"Adverbs of Degree",
+    52:"Adverbs of Frequency and مفعول مطلق للعدد",53:"Adverbs of Reason (مفعول لأجله)",54:"State",56:"Exclusion",57:"Supplement: Pronouns",
     65:"Descriptive Phrases",69:"Conjunction Phrases",72:"Possessive Phrases",
     76:"Emphatic Phrases",80:"Numeric Phrases",84:"Prepositional Phrase",
     93:"The خبر as a small sentence",95:"The حال as a small sentence",
@@ -164,11 +164,11 @@
       sarf:"FSTU Ṣarf, p. 58: use the surrounding negation examples to notice how particles change the force of a statement; confirm from context.",
       media:"negation with كان and sentence structure",
       quiz:{question:"In لَمْ يَكُنِ الَّذِينَ كَفَرُوا, what is the best first step?",options:["Identify لم, then examine كان and the role of the words that follow","Treat لم and يكن as unrelated vocabulary","Call الذين كفروا a possessive construction (إضافة)"],answer:0,why:"The negative marker affects the verb form, while كان participates in the sentence structure. Read the phrase as a whole and justify each role from the text."}},
-    27:{passage:"Al-Fajr 21–30",page:593,nahwPages:[51],sarfPages:[70,72],
-      nahw:"FSTU Naḥw p. 51 (Adverbs of Degree and Frequency) includes the absolute object (مفعول مطلق). In كَلَّا إِذَا دُكَّتِ الْأَرْضُ دَكًّا دَكًّا, identify the verb and its reinforcing verbal noun phrase.",
-      sarf:"FSTU Ṣarf, pp. 70 and 72: review the short conjugation material and summary when recognising a verbal noun (مصدر) or a word sharing the verb's root.",
+    27:{passage:"Al-Fajr 21–30 — دكًّا دكًّا",page:593,nahwPages:[52],sarfPages:[70,72],
+      nahw:"FSTU Naḥw p. 52, Adverbs of Frequency, gives the absolute object for number (مفعول مطلق للعدد). In كَلَّا إِذَا دُكَّتِ الْأَرْضُ دَكًّا دَكًّا, identify the passive verb (فعل مبني للمجهول) and repeating verbal-noun expression (مصدر).",
+      sarf:"FSTU Ṣarf pp. 70 and 72: use the short conjugation table and summary to connect a verbal noun (مصدر) to its root/action; this is supporting recognition, not a full new Sarf unit.",
       media:"repetition and the absolute object",
-      quiz:{question:"In دُكَّتِ الْأَرْضُ دَكًّا دَكًّا, what does دكًّا دكًّا illustrate?",options:["An absolute object (مفعول مطلق) related to the action","The second noun of a possessive construction (مضاف إليه)","A relative clause (صلة الموصول)"],answer:0,why:"The verbal noun repeats the action's root and reinforces/describes it. FSTU p. 51 is the relevant Naḥw reference; p. 48 is about the ordinary object (مفعول به)."}},
+      quiz:{question:"In دُكَّتِ الْأَرْضُ دَكًّا دَكًّا, what does دكًّا دكًّا illustrate?",options:["An absolute object (مفعول مطلق) related to the action","The second noun of a possessive construction (مضاف إليه)","A relative clause (صلة الموصول)"],answer:0,why:"This is an absolute object for number (مفعول مطلق للعدد). FSTU Naḥw p. 52 is the precise reference; p. 48 covers the ordinary object (مفعول به)."}},
     28:{passage:"Al-Kahf 1–4",page:293,nahwPages:[117],sarfPages:[16],
       nahw:"FSTU Naḥw, p. 117: locate the relative pronoun (اسم موصول) and its completing clause (صلة الموصول).",
       sarf:"FSTU Ṣarf, p. 16: keep pronouns (ضمير) and complete word forms in view as you track reference across the clause.",
@@ -224,7 +224,7 @@
   function pageFrame(kind,page) {
     var p=Number(page);
     if(kind==="quran"){
-      return '<div class="book-page-frame digital-mushaf-frame" data-book-page="quran:'+p+'" aria-label="Digital 15-line Madina Qur’an page '+p+'"><quran-madina-html page="'+p+'" headless="true" highlight="1" data-name="Madina05" data-font-size="24" data-recognition-page="true" aria-label="Qur’an page '+p+'"><p class="digital-reader-fallback">The digital page viewer is loading. If it does not load, check your connection and use your own Mushaf with the same page number.</p></quran-madina-html><p class="page-caption">Digital 15-line Madina layout · page '+p+' · tap an Arabic word to select it</p></div>';
+      return '<div class="book-page-frame digital-mushaf-frame" data-book-page="quran:'+p+'" aria-label="Digital 15-line Madina Qur’an page '+p+'"><quran-madina-html page="'+p+'" headless="true" highlight="1" data-font-size="24" data-recognition-page="true" aria-label="Qur’an page '+p+'"><p class="digital-reader-fallback">The digital page viewer is loading. If it does not load, check your connection and use your own Mushaf with the same page number.</p></quran-madina-html><p class="page-caption">Digital 15-line Madina layout · page '+p+' · tap an Arabic word to select it</p></div>';
     }
     var id=kind==="sarf"?"1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr":"1BdY0tAvoaKvJVUhmMQn09bxLh0fAXO03";
     var label=kind==="sarf"?"Official FSTU Ṣarf resource (2023 October edition)":"Official FSTU Naḥw resource (August 2026 edition)";
@@ -306,46 +306,27 @@
       renderPlaylists(n)+renderAssessment(n)+'</div>';
   }  function bindAssessment(week) {
     var n=Number(week),d=get(n),q=d.quiz;
-    var check=root.document.getElementById("weeklyTest-"+n);
-    if(!check)return;
-    var answerButton=check.querySelector('[data-check-quiz="'+n+'"]');
-    var feedback=check.querySelector("#quizFeedback-"+n);
-    var evidenceButton=check.querySelector('[data-save-evidence="'+n+'"]');
-    var evidenceFeedback=check.querySelector("#evidenceFeedback-"+n);
-    var evidenceField=check.querySelector('[data-test-evidence="'+n+'"]');
-    var explanationField=check.querySelector('[data-test-explanation="'+n+'"]');
-    var storageKey="8020-weekly-assessment-v1";
-    function loadSaved() {
-      try { var all=JSON.parse(root.localStorage.getItem(storageKey)||"{}");return all[n]||{}; } catch(e) { return {}; }
-    }
-    function writeSaved(patch) {
-      var all={};try {all=JSON.parse(root.localStorage.getItem(storageKey)||"{}");}catch(e){}
-      all[n]=Object.assign(all[n]||{},patch);
-      try {root.localStorage.setItem(storageKey,JSON.stringify(all));}catch(e){}
-    }
-    var previous=loadSaved();
-    if(previous.evidence&&evidenceField)evidenceField.value=previous.evidence;
-    if(previous.explanation&&explanationField)explanationField.value=previous.explanation;
-    if(previous.choice!==undefined) {
-      var old=check.querySelector('input[name="weekly-choice-'+n+'"][value="'+previous.choice+'"]');
+    var panel=root.document.getElementById("weeklyTest-"+n);
+    if(!panel)return;
+    var answerButton=panel.querySelector('[data-check-quiz="'+n+'"]');
+    var feedback=panel.querySelector("#quizFeedback-"+n);
+    var key="8020-weekly-recall-v2";
+    var previous={};
+    try{previous=JSON.parse(root.localStorage.getItem(key)||"{}")[n]||{};}catch(e){}
+    if(previous.choice!==undefined){
+      var old=panel.querySelector('input[name="weekly-choice-'+n+'"][value="'+previous.choice+'"]');
       if(old)old.checked=true;
     }
     if(answerButton)answerButton.addEventListener("click",function(){
-      var chosen=check.querySelector('input[name="weekly-choice-'+n+'"]:checked');
-      if(!chosen){feedback.hidden=false;feedback.className="quiz-feedback needs-answer";feedback.innerHTML="<b>Choose an answer first.</b><p>Try from memory; then check your reasoning.</p>";return;}
-      var isRight=Number(chosen.value)===q.answer;
-      writeSaved({choice:Number(chosen.value),correct:isRight,answeredAt:new Date().toISOString()});
+      var chosen=panel.querySelector('input[name="weekly-choice-'+n+'"]:checked');
+      if(!chosen){feedback.hidden=false;feedback.textContent="Choose an answer, then check your reasoning.";return;}
+      var correct=Number(chosen.value)===q.answer;
+      var record={};try{record=JSON.parse(root.localStorage.getItem(key)||"{}");}catch(e){}
+      record[n]={week:n,choice:Number(chosen.value),correct:correct,answeredAt:new Date().toISOString()};
+      var saved=true;try{root.localStorage.setItem(key,JSON.stringify(record));}catch(e){saved=false;}
       feedback.hidden=false;
-      feedback.className="quiz-feedback "+(isRight?"quiz-correct":"quiz-review");
-      feedback.innerHTML="<b>"+(isRight?"Correct — good recognition.":"Not yet — review the source page, then try again.")+"</b><p><b>Answer:</b> "+esc(q.options[q.answer])+"</p><p>"+esc(q.why)+"</p><p>Now complete Part B using the actual Mushaf scan above.</p>";
-    });
-    if(evidenceButton)evidenceButton.addEventListener("click",function(){
-      var evidence=evidenceField?evidenceField.value.trim():"";
-      var explanation=explanationField?explanationField.value.trim():"";
-      writeSaved({evidence:evidence,explanation:explanation,evidenceSavedAt:new Date().toISOString()});
-      evidenceFeedback.hidden=false;
-      evidenceFeedback.className="evidence-feedback";
-      evidenceFeedback.innerHTML="<b>Saved on this device.</b><p>"+(evidence&&explanation?"Now compare your example and explanation with the FSTU page and your teacher's feedback. The app checks the recall question, but it does not automatically grade a student's free-text Qur'anic analysis.":"Add both the Arabic example and the clue/explanation to make this a complete evidence record.")+"</p>";
+      feedback.className="quiz-feedback "+(correct?"quiz-correct":"quiz-review");
+      feedback.innerHTML="<b>"+(correct?"Correct — good recognition.":"Not yet — inspect the source and try again.")+"</b><p><b>Answer:</b> "+esc(q.options[q.answer])+"</p><p>"+esc(q.why)+"</p><p>Now complete the real-page word-recognition task below.</p>"+(saved?"":"<p>Your browser did not save this quiz result.</p>");
     });
   }
   function bind(week) {
