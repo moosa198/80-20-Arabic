@@ -8,8 +8,8 @@ on:
       - ".github/workflows/build-workbook.yml"
   workflow_dispatch:
 permissions:
-  contents: write
-jobs:
+  contents: write\n      - "student.html"\n      - "weekly-guide.js"\n      - "recognition.js"\n      - "CURRICULUM-AUDIT.md"
+    jobs:
   build:
     runs-on: ubuntu-latest
     steps:
