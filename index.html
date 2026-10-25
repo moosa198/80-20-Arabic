@@ -75,7 +75,7 @@ var STORE="8020arabic-progress-v1",view="today",selected=1,queue=[],pos=0,reveal
 function blank(){return {cards:{},doneWeeks:{},lastSession:null,streak:0,seconds:0}}
 function state(){try{return Object.assign(blank(),JSON.parse(localStorage.getItem(STORE)||"{}"))}catch(e){return blank()}}
 function save(s){localStorage.setItem(STORE,JSON.stringify(s));chrome()}
-function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}[c]})}
+function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function arabic(x,cl){return '<span class="'+(cl||"tar")+'" lang="ar" dir="rtl">'+esc(x)+'</span>'}
 function term(k,small){var x=TERMS[k]||[k,""];return '<span class="term '+(small?"small":"")+'"><span class="ten">'+esc(x[0])+'</span>'+arabic(x[1])+'</span>'}
 function termrow(keys,small){return '<div class="termrow">'+keys.map(function(k){return term(k,small)}).join("")+'</div>'}
