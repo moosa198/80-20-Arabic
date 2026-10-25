@@ -31,6 +31,12 @@ const assert = require("node:assert/strict");
       await page.locator('[data-week="' + n + '"]').click();
       const title = await page.locator("#main h1").first().innerText();
       assert(title.includes("Week " + String(n).padStart(2, "0")), "Lesson title missing for week " + n);
+      assert.equal(await page.locator("#hifzPriority").count(), 1, "Hifz-first priority missing on week " + n);
+      assert.equal(await page.locator("#wudhuReady-" + n).count(), 1, "Wudhu confirmation missing on week " + n);
+      assert.equal(await page.locator("#revealMushaf-" + n).isDisabled(), true, "Mushaf task must stay gated before Wudhu confirmation on week " + n);
+      assert.equal(await page.locator("#mushafTask-" + n).isVisible(), false, "Mushaf task was visible before Wudhu confirmation on week " + n);
+      assert.equal(await page.locator("#fstuTitle-" + n).count(), 1, "Weekly FSTU guidance missing on week " + n);
+      assert.equal(await page.locator(".optional-media a").count(), 2, "Optional reinforcement playlists missing on week " + n);
       const chips = await page.locator(".focus .term").evaluateAll(nodes => nodes.map(node => ({
         en: (node.querySelector(".ten") || {}).textContent || "",
         ar: (node.querySelector(".tar") || {}).textContent || "",
@@ -47,6 +53,10 @@ const assert = require("node:assert/strict");
       } else {
         assert.equal(count, 7, "Week " + n + " should expose seven lexical/learner-selected word slots");
       }
+      await page.locator("#wudhuReady-" + n).check();
+      assert.equal(await page.locator("#revealMushaf-" + n).isEnabled(), true, "Mushaf task button did not unlock after Wudhu confirmation on week " + n);
+      await page.locator("#revealMushaf-" + n).click();
+      assert.equal(await page.locator("#mushafTask-" + n).isVisible(), true, "Mushaf task did not reveal after Wudhu confirmation on week " + n);
       const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
       assert.equal(horizontalOverflow, false, "Horizontal overflow on week " + n);
       if (n === 1) await page.screenshot({ path: path.join(out, "qa-week-01.png"), fullPage: true });
@@ -88,6 +98,22 @@ const assert = require("node:assert/strict");
     assert.equal(mobileOverflow, false, "Mobile layout has horizontal overflow");
     await mobile.screenshot({ path: path.join(out, "qa-week-01-mobile.png"), fullPage: true });
     audit.passed.push("Mobile navigation and lesson fit a 390px viewport");
+
+    // Smoke-test the separate Student Studio against the same weekly guide.
+    const student = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 });
+    await student.goto("file://" + path.join(root, "student.html"), { waitUntil: "domcontentloaded" });
+    await student.locator(".hero").waitFor();
+    assert.equal(await student.locator("#hifzPriority").count(), 1, "Student Studio home must state Hifz priority");
+    await student.locator('[data-view="course"]').click();
+    await student.locator('[data-week="1"]').click();
+    assert.equal(await student.locator("#fstuTitle-1").count(), 1, "Student Studio weekly FSTU section missing");
+    assert.equal(await student.locator("#mushafTask-1").isVisible(), false, "Student Studio revealed Mushaf task before Wudhu confirmation");
+    await student.locator("#wudhuReady-1").check();
+    await student.locator("#revealMushaf-1").click();
+    assert.equal(await student.locator("#mushafTask-1").isVisible(), true, "Student Studio Wudhu gate did not reveal the task");
+    const studentOverflow = await student.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    assert.equal(studentOverflow, false, "Student Studio weekly guidance causes horizontal overflow");
+    audit.passed.push("Student Studio shares the Hifz-first banner, Wudhu gate, FSTU guidance and optional resources");
 
     // Render the complete printable workbook and check all Arabic spans before PDF creation.
     await page.locator("#printAllBtn").click();
