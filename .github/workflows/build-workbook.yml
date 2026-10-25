@@ -1,7 +1,7 @@
 name: Build and audit student workbook
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "build/structure-first-recognition"]
     paths:
       - "index.html"
       - "student.html"
