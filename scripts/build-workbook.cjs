@@ -35,8 +35,12 @@ const assert = require("node:assert/strict");
       assert.equal(await page.locator("#wudhuReady-" + n).count(), 1, "Wudhu confirmation missing on week " + n);
       assert.equal(await page.locator("#revealMushaf-" + n).isDisabled(), true, "Mushaf task must stay gated before Wudhu confirmation on week " + n);
       assert.equal(await page.locator("#mushafTask-" + n).isVisible(), false, "Mushaf task was visible before Wudhu confirmation on week " + n);
-      assert.equal(await page.locator("#fstuTitle-" + n).count(), 1, "Weekly FSTU guidance missing on week " + n);
-      assert.equal(await page.locator(".optional-media a").count(), 2, "Optional reinforcement playlists missing on week " + n);
+      assert.equal(await page.locator("#textbookTitle-" + n).count(), 1, "Textbook source-page layer missing on week " + n);
+      assert.equal(await page.locator(".textbook-panel.sarf-panel").count(), 1, "FSTU Sarf source panel missing on week " + n);
+      assert.equal(await page.locator(".textbook-panel.nahw-panel").count(), 1, "FSTU Nahw source panel missing on week " + n);
+      assert.equal(await page.locator(".playlist-link").count(), 2, "Core and bonus playlist links missing on week " + n);
+      assert.equal(await page.locator(".playlist-player iframe").count(), 1, "Embedded core playlist missing on week " + n);
+      assert.equal(await page.locator("#weeklyTest-" + n).count(), 1, "Weekly recognition test missing on week " + n);
       const chips = await page.locator(".focus .term").evaluateAll(nodes => nodes.map(node => ({
         en: (node.querySelector(".ten") || {}).textContent || "",
         ar: (node.querySelector(".tar") || {}).textContent || "",
