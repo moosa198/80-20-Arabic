@@ -251,25 +251,22 @@
       '<p class="guide-small">Your Hifz teacher’s priorities always take precedence over this optional Arabic supplement.</p></section>';
   }
   function renderLibrarySetup() {
-    function book(kind,title,desc,accept) {
-      return '<article class="book-upload-card"><div class="book-upload-mark" aria-hidden="true">'+(kind==="quran"?"ق":kind==="sarf"?"ص":"ن")+'</div><div class="book-upload-copy"><h3>'+title+'</h3><p>'+desc+'</p><label class="book-upload-button">Choose PDF<input type="file" accept="'+accept+'" data-book-upload="'+kind+'"></label><p class="book-status" data-book-status="'+kind+'" role="status">Not loaded on this device yet.</p></div></article>';
-    }
-    return '<section class="weekly-guide book-library-setup" aria-labelledby="bookLibraryTitle"><div class="guide-eyebrow">ONE-TIME SETUP · SAVED ON THIS DEVICE</div><h2 id="bookLibraryTitle">Load your actual Mushaf and FSTU pages</h2><p>Choose each PDF once. The app renders only the pages used in this 31-week course and saves those page images in this browser, so the correct page appears inside each lesson. The original PDF files are <b>not uploaded to a server</b>.</p><div class="book-upload-grid">'+
-      book("quran","15-line Madani Mushaf","Required for the real Qur’anic page at the start of each week.","application/pdf")+
-      book("sarf","FSTU Ṣarf (صرف)","Required for the actual printed Sarf study page(s) each week.","application/pdf")+
-      book("nahw","FSTU Naḥw (نحو) · August 2026 edition","Required for the actual printed Nahw study page(s) each week.","application/pdf")+
-      '</div><p class="guide-small">Page mapping uses the supplied edition: the Mushaf PDF has a cover, so the viewer maps printed Mushaf page N to PDF page N+1. FSTU printed page numbers map directly to PDF page numbers. On a different edition, check the page labels before relying on the assignment.</p></section>';
+    return '<section class="weekly-guide book-library-setup" aria-labelledby="bookLibraryTitle"><div class="guide-eyebrow">SOURCE PAGES · READY TO OPEN</div><h2 id="bookLibraryTitle">No PDF upload or setup needed</h2><p>The assigned 15-line Madina Qur’an page appears in each lesson. FSTU Ṣarf (صرف) and Naḥw (نحو) pages open inside the lesson from Al-Qalam Institute’s official hosted PDFs; select the exact printed page using the tabs.</p><div class="source-credit-grid"><article><b>15-line Madina Qur’an</b><p>Text-rendered 1441H New Madina layout. Compare with your printed Mushaf if the edition or line breaks differ.</p><a href="https://github.com/tarekeldeeb/quran-madina-html" target="_blank" rel="noreferrer">Renderer and project details ↗</a></article><article><b>FSTU Ṣarf (صرف)</b><p>The assigned source page opens inside each weekly lesson.</p><a href="'+SARF_RESOURCES+'" target="_blank" rel="noreferrer">Official Al-Qalam Institute resources ↗</a></article><article><b>FSTU Naḥw (نحو)</b><p>Page references target the August 2026 edition.</p><a href="'+NAHW_RESOURCES+'" target="_blank" rel="noreferrer">Official Al-Qalam Institute resources ↗</a></article></div><p class="guide-small">An internet connection is needed for the digital Qur’an renderer, official textbook viewers and listening links. FSTU materials remain the property of Al-Qalam Institute and are used in accordance with its educational/non-commercial terms.</p></section>';
   }
   function pageFrame(kind,page) {
-    return '<div class="book-page-frame" data-book-page="'+kind+':'+Number(page)+'" aria-label="'+(kind==="quran"?"Mushaf":kind==="sarf"?"FSTU Sarf":"FSTU Nahw")+' page '+Number(page)+'"><div class="book-page-placeholder">Checking the locally saved source page…</div></div>';
+    page=Number(page)||1;
+    if(kind==="quran") return '<div class="book-page-frame quran-page-frame" data-book-page="quran:'+page+'" aria-label="Digital 15-line Madina Mushaf page '+page+'"><quran-madina-html page="'+page+'" data-quran-renderer="1441H"></quran-madina-html><p class="quran-page-caption">Printed Madina page '+page+' · 1441H New Madina digital layout</p></div>';
+    return '<div class="book-page-frame" data-book-page="'+kind+':'+page+'"></div>';
   }
   function renderBookGroup(kind,pages,focus) {
-    var title=kind==="sarf"?"FSTU Ṣarf (صرف)":"FSTU Naḥw (نحو)";
-    var sourcePages=pages||[];
-    return '<article class="textbook-panel '+kind+'-panel"><div class="textbook-panel-head"><div><div class="guide-eyebrow">'+(kind==="sarf"?"SOURCE BOOK · MORPHOLOGY":"SOURCE BOOK · GRAMMAR")+'</div><h3>'+title+'</h3></div><span class="book-page-count">'+sourcePages.length+' page'+(sourcePages.length===1?"":"s")+'</span></div><p>'+esc(focus)+'</p><div class="textbook-pages">'+sourcePages.map(function (p) {
-      var pageTitle=(kind==="sarf"?SARF_PAGE_TITLES:NAHW_PAGE_TITLES)[p]||"Source page";
-      return '<section class="textbook-page"><div class="textbook-page-caption"><b>Printed p. '+p+'</b><span>'+esc(pageTitle)+'</span></div>'+pageFrame(kind,p)+'</section>';
-    }).join("")+'</div></article>';
+    var title=kind==="sarf"?"FSTU Ṣarf (صرف)":"FSTU Naḥw (نحو)",sourcePages=pages||[];
+    var titles=kind==="sarf"?SARF_PAGE_TITLES:NAHW_PAGE_TITLES;
+    var fileId=kind==="sarf"?"1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr":"1BdY0tAvoaKvJVUhmMQn09bxLh0fAXO03";
+    var sourceUrl=kind==="sarf"?SARF_RESOURCES:NAHW_RESOURCES;
+    var tabs=sourcePages.map(function(p,i){return '<button type="button" class="fstu-page-tab'+(i===0?" active":"") + '" data-fstu-kind="'+kind+'" data-fstu-page="'+p+'" aria-pressed="'+(i===0?"true":"false")+'">p. '+p+'</button>';}).join("");
+    var first=sourcePages.length?sourcePages[0]:1,pageTitle=titles[first]||"Source page";
+    var src="https://drive.google.com/file/d/"+fileId+"/preview?rm=minimal#page="+first;
+    return '<article class="textbook-panel '+kind+'-panel"><div class="textbook-panel-head"><div><div class="guide-eyebrow">'+(kind==="sarf"?"SOURCE BOOK · MORPHOLOGY":"SOURCE BOOK · GRAMMAR")+'</div><h3>'+title+'</h3></div><span class="book-page-count">'+sourcePages.length+' assigned page'+(sourcePages.length===1?"":"s")+'</span></div><p>'+esc(focus)+'</p><div class="fstu-page-tabs" role="group" aria-label="Choose printed page from '+title+'">'+tabs+'</div><div class="book-page-frame fstu-page-viewer" data-fstu-viewer="'+kind+'" data-book-page="'+kind+':'+first+'"><iframe loading="lazy" title="'+title+' printed page '+first+'" data-fstu-frame="'+kind+'" src="'+src+'" allow="clipboard-read; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="fstu-print-note"><b>'+title+'</b><p>Assigned printed pages: '+sourcePages.map(function(p){return p+' — '+(titles[p]||"source page");}).join("; ")+'</p><a href="'+sourceUrl+'" target="_blank" rel="noreferrer">Open official resources and full text ↗</a></div></div><div class="textbook-page-caption" data-fstu-caption="'+kind+'">Showing printed p. '+first+' · '+esc(pageTitle)+' · <a href="https://drive.google.com/file/d/'+fileId+'/view?usp=sharing#page='+first+'" target="_blank" rel="noreferrer">Open page in a new tab ↗</a></div></article>';
   }
   function renderPlaylists(week) {
     var d=get(week);
