@@ -147,7 +147,7 @@ const assert = require("node:assert/strict");
     assert((await student.locator("#quizFeedback-1").innerText()).includes("Correct"), "Student Studio weekly quiz did not accept the correct answer");
     const studentOverflow = await student.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     assert.equal(studentOverflow, false, "Student Studio weekly guidance causes horizontal overflow");
-    audit.passed.push("Student Studio shares the Hifz-first banner, Wudhu gate, FSTU guidance and optional resources");
+    audit.passed.push("Student Studio shares local source-PDF setup, Hifz-first priority, Mushaf → textbook → listening → test, and the working weekly quiz");
 
     // Render the complete printable workbook and check all Arabic spans before PDF creation.
     await page.locator("#printAllBtn").click();
