@@ -6,9 +6,13 @@ on:
       - "index.html"
       - "scripts/build-workbook.cjs"
       - ".github/workflows/build-workbook.yml"
-  workflow_dispatch:
-permissions:
-  contents: write\n      - "student.html"\n      - "weekly-guide.js"\n      - "recognition.js"\n      - "CURRICULUM-AUDIT.md"
+      workflow_dispatch:
+      permissions:
+      contents: write\n      - "student.html"\n      - "weekly-guide.js"\n      - "recognition.js"\n      - "CURRICULUM-AUDIT.md"
+      - "student.html"
+      - "weekly-guide.js"
+      - "recognition.js"
+      - "CURRICULUM-AUDIT.md"
     jobs:
   build:
     runs-on: ubuntu-latest
