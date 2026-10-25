@@ -1,0 +1,49 @@
+name: Build and audit student workbook
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "index.html"
+      - "scripts/build-workbook.cjs"
+      - ".github/workflows/build-workbook.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the course
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Chromium and PDF inspection tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Render lessons, audit Arabic and build workbook
+        run: node scripts/build-workbook.cjs
+      - name: Upload workbook and QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: student-workbook-and-qa
+          path: dist/
+          if-no-files-found: warn
+          retention-days: 21
+      - name: Commit printable workbook
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/Student_Workbook.pdf
+          if git diff --cached --quiet; then
+            echo "Printable workbook is unchanged."
+          else
+            git commit -m "Update printable student workbook"
+            git push
+          fi
