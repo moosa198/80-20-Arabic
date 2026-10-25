@@ -276,7 +276,7 @@
     var n=Number(week),spot=SPOT_TASKS[n];
     if(!spot) return '<section class="spot-task capstone-spot-task" data-spot-task="'+n+'"><div class="spot-kicker">CAPSTONE · INDEPENDENT TRANSFER</div><h3>Analyse your own memorised page</h3><p>Use the page selector above to open any printed page from 1–604. Choose a passage you have memorised, then identify three structures and explain each with a visible Arabic clue.</p><div class="capstone-checklist"><label><input type="checkbox"> I identified a verb (فعل) or noun (اسم) using evidence.</label><label><input type="checkbox"> I identified one linked phrase, such as a preposition phrase (جار ومجرور) or possessive construction (إضافة).</label><label><input type="checkbox"> I explained three decisions with the paired English and Arabic labels.</label></div></section>';
     var level=n<=7?"STEP 1 · GUIDED RECOGNITION":([8,16,24].indexOf(n)>=0?"RETRIEVAL CHECKPOINT":(n<=15?"STEP 2 · FIND THE FEATURE":(n<=23?"STEP 3 · STRUCTURE IN CONTEXT":"STEP 4 · TRANSFER WITH LESS HELP")));
-    return '<section class="spot-task" data-spot-task="'+n+'"><div class="spot-kicker">'+level+'</div><h3>Spot it on the Qur’anic page</h3><p class="spot-prompt">'+esc(spot.prompt)+'</p><p class="spot-instruction">First find the exact word or phrase on the page above. Then choose it here. Use the Arabic evidence, not just the English gloss.</p><div class="spot-choices">'+spot.options.map(function(option,i){return '<button type="button" class="spot-choice" data-spot-index="'+i+'" aria-pressed="false"><span class="spot-option-index">'+String(i+1).padStart(2,"0")+'</span><span class="spot-arabic" lang="ar" dir="rtl">'+esc(option)+'</span></button>';}).join("")+'</div><div class="spot-feedback" data-spot-feedback="'+n+'" role="status" aria-live="polite" hidden></div></section>';
+    return '<section class="spot-task" data-spot-task="'+n+'"><div class="spot-kicker">'+level+'</div><h3>Spot it on the Qur’anic page</h3><p class="spot-prompt">'+esc(spot.prompt)+'</p><p class="spot-instruction">Tap the target word directly on the Qur’anic page above, or choose the matching Arabic option here. Use the Arabic evidence, not just the English gloss.</p><div class="spot-choices">'+spot.options.map(function(option,i){return '<button type="button" class="spot-choice" data-spot-index="'+i+'" aria-pressed="false"><span class="spot-option-index">'+String(i+1).padStart(2,"0")+'</span><span class="spot-arabic" lang="ar" dir="rtl">'+esc(option)+'</span></button>';}).join("")+'</div><div class="spot-feedback" data-spot-feedback="'+n+'" role="status" aria-live="polite" hidden></div></section>';
   }
   function renderAssessment(week) {
     var n=Number(week),d=get(n),q=d.quiz;
@@ -339,21 +339,23 @@
   }
   function bindSpotTask(week) {
     var n=Number(week),spot=SPOT_TASKS[n],task=root.document&&root.document.querySelector('[data-spot-task="'+n+'"]');
-    if(!task)return;
+    if(!task||!spot)return;
     var buttons=Array.prototype.slice.call(task.querySelectorAll("[data-spot-index]")),feedback=task.querySelector('[data-spot-feedback="'+n+'"]'),key="8020-spot-recognition-v1",saved={};
+    var mushaf=root.document.querySelector('[data-week-sequence="'+n+'"] .quran-page-frame quran-madina-html');
+    function normaliseWord(value){return String(value||"").replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u200B-\u200F\u034F]/g,"").replace(/[أإآٱ]/g,"ا").replace(/ى/g,"ي").replace(/[^\u0621-\u06FF]/g,"");}
+    function clearPageMarks(){if(mushaf)mushaf.querySelectorAll(".spot-page-word-selected,.spot-page-word-correct,.spot-page-word-review").forEach(function(el){el.classList.remove("spot-page-word-selected","spot-page-word-correct","spot-page-word-review");});}
     try{saved=JSON.parse(root.localStorage.getItem(key)||"{}")[n]||{};}catch(e){}
-    function showChoice(index,persist){
-      var correct=!!spot&&Number(index)===spot.answer;
-      buttons.forEach(function(btn){var chosen=Number(btn.getAttribute("data-spot-index"))===Number(index);btn.classList.toggle("selected",chosen);btn.setAttribute("aria-pressed",chosen?"true":"false");});
-      if(!feedback||!spot)return;
-      feedback.hidden=false;feedback.className="spot-feedback "+(correct?"spot-correct":"spot-review");
-      feedback.innerHTML="<b>"+(correct?"Correct — you found the target.":"Not quite — look closely at the Arabic above and try again.")+"</b><p>"+esc(spot.why)+"</p>";
-      if(persist){try{var all=JSON.parse(root.localStorage.getItem(key)||"{}");all[n]={choice:Number(index),correct:correct,answeredAt:new Date().toISOString()};root.localStorage.setItem(key,JSON.stringify(all));}catch(e){}}
+    function showResult(correct,mode,index,word,persist){
+      buttons.forEach(function(btn){var chosen=mode==="choice"&&Number(btn.getAttribute("data-spot-index"))===Number(index);btn.classList.toggle("selected",chosen);btn.setAttribute("aria-pressed",chosen?"true":"false");});
+      if(mode==="page"&&word){clearPageMarks();word.classList.add("spot-page-word-selected",correct?"spot-page-word-correct":"spot-page-word-review");}
+      if(feedback){feedback.hidden=false;feedback.className="spot-feedback "+(correct?"spot-correct":"spot-review");feedback.innerHTML="<b>"+(correct?(mode==="page"?"Correct — that word on the Qur’an page matches the target.":"Correct — you found the target."):"Not quite — look closely at the Arabic above and try again.")+"</b><p>"+esc(spot.why)+"</p>";}
+      if(persist){try{var all=JSON.parse(root.localStorage.getItem(key)||"{}");all[n]={used:mode,choice:mode==="choice"?Number(index):null,clicked:mode==="page"&&word?word.textContent.trim():null,correct:correct,answeredAt:new Date().toISOString()};root.localStorage.setItem(key,JSON.stringify(all));}catch(e){}}
     }
-    buttons.forEach(function(btn){btn.addEventListener("click",function(){showChoice(Number(btn.getAttribute("data-spot-index")),true);});});
-    if(spot&&saved.choice!==undefined)showChoice(Number(saved.choice),false);
-  }
-  function bind(week) {
+    buttons.forEach(function(btn){btn.addEventListener("click",function(){showResult(Number(btn.getAttribute("data-spot-index"))===spot.answer,"choice",Number(btn.getAttribute("data-spot-index")),null,true);});});
+    if(mushaf){mushaf.addEventListener("click",function(event){var word=event.target.closest&&event.target.closest(".quran-madina-html-word");if(!word||!mushaf.contains(word))return;event.preventDefault();event.stopPropagation();var clicked=normaliseWord(word.textContent),targets=(spot.tapWords||[]).map(normaliseWord);var correct=targets.indexOf(clicked)>=0;showResult(correct,"page",null,word,true);});}
+    if(saved.used==="page"&&saved.clicked&&mushaf){var target=normaliseWord(saved.clicked);Array.prototype.slice.call(mushaf.querySelectorAll(".quran-madina-html-word")).some(function(word){if(normaliseWord(word.textContent)===target){showResult(!!saved.correct,"page",null,word,false);return true;}return false;});}
+    else if(saved.choice!==undefined)showResult(Number(saved.choice)===spot.answer,"choice",Number(saved.choice),null,false);
+  }  function bind(week) {
     var n=Number(week),sequence=root.document&&root.document.querySelector('[data-week-sequence="'+n+'"]');
     if(sequence)sequence.addEventListener("click",function(event){
       var tab=event.target.closest&&event.target.closest("[data-fstu-kind][data-fstu-page]");
