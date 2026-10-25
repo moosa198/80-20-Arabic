@@ -143,7 +143,7 @@
       if(pdf.numPages<maxPage){
         throw new Error("This PDF has "+pdf.numPages+" pages, but the weekly mapping needs PDF page "+maxPage+". Choose the correct edition.");
       }
-      var total=pages.length,bytes=0;
+      var total=pages.length,bytes=0,sourcePageCount=pdf.numPages;
       for(var i=0;i<total;i++){
         var printedPage=pages[i];
         setStatus(kind,"Rendering "+LABELS[kind]+" pages "+(i+1)+" of "+total+"…",true);
@@ -152,7 +152,7 @@
       }
       try{await pdf.destroy();}catch(e){}
       buffer=null;
-      await storePut("meta",{id:kind,fileName:file.name,pdfPageCount:pdf.numPages,pagesSaved:total,renderedBytes:bytes,importedAt:new Date().toISOString()});
+      await storePut("meta",{id:kind,fileName:file.name,pdfPageCount:sourcePageCount,pagesSaved:total,renderedBytes:bytes,importedAt:new Date().toISOString()});
       setStatus(kind,"Ready: "+file.name+" · "+total+" assigned pages saved on this device.",false);
       await refreshLibraryStatus();
       await hydrate(root.document);
