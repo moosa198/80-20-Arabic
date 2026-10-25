@@ -1,0 +1,12 @@
+{
+  "name":"80/20 Arabic — Qur'an-first learning",
+  "short_name":"80/20 Arabic",
+  "description":"A 31-week Qur'an-first course using retrieval, spaced review and application.",
+  "lang":"en-GB",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f5f5ef",
+  "theme_color":"#163c36",
+  "icons":[{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
