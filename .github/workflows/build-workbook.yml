@@ -4,16 +4,16 @@ on:
     branches: ["main"]
     paths:
       - "index.html"
-      - "scripts/build-workbook.cjs"
-      - ".github/workflows/build-workbook.yml"
-      workflow_dispatch:
-      permissions:
-      contents: write\n      - "student.html"\n      - "weekly-guide.js"\n      - "recognition.js"\n      - "CURRICULUM-AUDIT.md"
       - "student.html"
       - "weekly-guide.js"
       - "recognition.js"
+      - "scripts/build-workbook.cjs"
       - "CURRICULUM-AUDIT.md"
-    jobs:
+      - ".github/workflows/build-workbook.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
