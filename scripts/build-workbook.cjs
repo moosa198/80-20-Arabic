@@ -71,15 +71,26 @@ const assert = require("node:assert/strict");
       } else {
         assert.equal(count, 7, "Week " + n + " should expose seven lexical/learner-selected word slots");
       }
-      await page.locator("#wudhuReady-" + n).check();
-      assert.equal(await page.locator("#revealMushaf-" + n).isEnabled(), true, "Mushaf task button did not unlock after Wudhu confirmation on week " + n);
-      await page.locator("#revealMushaf-" + n).click();
-      assert.equal(await page.locator("#mushafTask-" + n).isVisible(), true, "Mushaf task did not reveal after Wudhu confirmation on week " + n);
-      const spotIndex = await page.evaluate(n => { const task = WeeklyGuide.getSpotTask(n); return task ? task.answer : null; }, n);
+      assert.equal(await page.locator("#mushafTask-" + n).isVisible(), true, "Mushaf task should be immediately visible without a software gate on week " + n);
+      const spotTask = await page.evaluate(n => WeeklyGuide.getSpotTask(n), n);
       assert.equal(await page.locator('[data-spot-task="' + n + '"]').count(), 1, "Spot-recognition/capstone task missing on week " + n);
-      if (spotIndex !== null) {
-        await page.locator('[data-spot-task="' + n + '"] [data-spot-index="' + spotIndex + '"]').click();
-        assert((await page.locator('[data-spot-feedback="' + n + '"]').innerText()).includes("Correct"), "Correct page-recognition choice was not accepted on week " + n);
+      if (spotTask) {
+        if (n === 1) {
+          const quranWords = page.locator('[data-week-sequence="1"] quran-madina-html .quran-madina-html-word');
+          await quranWords.first().waitFor({ state: "visible", timeout: 20000 });
+          const target = spotTask.tapWords[0];
+          const targetIndex = await quranWords.evaluateAll((els, wanted) => {
+            const norm = value => String(value || "").replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u200B-\u200F\u034F]/g, "").replace(/[أإآٱ]/g, "ا").replace(/ى/g, "ي").replace(/[^\u0621-\u064A\u0671-\u06D3]/g, "");
+            const expected = norm(wanted);
+            return els.findIndex(el => norm(el.textContent) === expected);
+          }, target);
+          assert(targetIndex >= 0, "Week 1 target word was not found in the rendered Qur’an page");
+          await quranWords.nth(targetIndex).click();
+          assert((await page.locator('[data-spot-feedback="1"]').innerText()).includes("Correct"), "Direct tap on the Qur’anic word did not pass");
+        } else {
+          await page.locator('[data-spot-task="' + n + '"] [data-spot-index="' + spotTask.answer + '"]').click();
+          assert((await page.locator('[data-spot-feedback="' + n + '"]').innerText()).includes("Correct"), "Correct page-recognition choice was not accepted on week " + n);
+        }
       } else {
         assert((await page.locator('[data-spot-task="31"]').innerText()).includes("Analyse your own memorised page"), "Capstone independent analysis prompt missing");
         assert.equal(await page.locator('[data-capstone-page-input="31"]').count(), 1, "Capstone Mushaf page selector missing");
