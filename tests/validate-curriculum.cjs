@@ -22,6 +22,26 @@ assert.deepEqual(Array.from(curriculum.lessons.filter(week => week.checkpoint), 
 assert.ok(curriculum.lessons.some(week => week.n === 31 && week.capstone), "week 31 must remain an independent capstone");
 for (const [key, term] of Object.entries(curriculum.terms)) { assert.ok(term[2] && term[3] && term[4], "term " + key + " needs vocalised Arabic, transliteration and a gloss"); }
 
+const transferContext = { window: {} };
+vm.runInNewContext(fs.readFileSync("progress-transfer.js", "utf8"), transferContext, { filename: "progress-transfer.js" });
+const transfer = transferContext.window.ProgressTransfer;
+const studentBackup = transfer.toCanonical({
+  cards: {
+    "w3-1": { reps: 2, interval: 4 },
+    "h-الله": { reps: 3, interval: 6 },
+    "t-noun": { reps: 1, interval: 2 }
+  },
+  done: { "1": true, "3": false }
+});
+assert.ok(studentBackup.doneWeeks["1"], "student backup completion must map to doneWeeks");
+assert.ok(studentBackup.cards["w3:1"], "student word-card key must convert to canonical form");
+assert.ok(studentBackup.cards["hf:الله"], "student high-frequency card must convert to canonical form");
+assert.ok(studentBackup.cards["term:noun"], "student term card must convert to canonical form");
+const roundTrip = transfer.toStudent(studentBackup);
+assert.ok(roundTrip.done["1"], "canonical completion must map back to student done");
+assert.ok(roundTrip.cards["w3-1"] && roundTrip.cards["h-الله"] && roundTrip.cards["t-noun"], "canonical card keys must round-trip to Student Studio");
+assert.throws(() => transfer.toCanonical({ cards: {} }), /weekly completion record/, "malformed backups must be rejected cleanly");
+
 const guideContext = { window: {} };
 vm.runInNewContext(fs.readFileSync("weekly-guide.js", "utf8"), guideContext, { filename: "weekly-guide.js" });
 const pageMap = guideContext.window.WeeklyGuide.getPageSourceMap();
@@ -50,6 +70,7 @@ for (const file of ["index.html", "student.html"]) {
   const html = fs.readFileSync(file, "utf8");
   assert.ok(html.includes('src="./curriculum.js"'), file + " must use canonical curriculum data");
   assert.ok(html.includes('src="./book-pages.js"'), file + " must use the assigned-page renderer");
+  assert.ok(html.includes('src="./progress-transfer.js"'), file + " must use shared progress backup format");
   assert.ok(html.includes("pdf.min.js"), file + " must load PDF.js for local page rendering");
   assert.ok(html.includes("term-transliteration"), file + " must implement the gradual terminology scaffold");
 }
