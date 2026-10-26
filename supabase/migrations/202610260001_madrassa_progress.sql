@@ -438,9 +438,7 @@ create policy classes_update_managers
   using ((select public.can_manage_class(id)))
   with check ((select public.can_manage_class(id)));
 
-create policy classes_delete_managers
-  on public.classes for delete to authenticated
-  using ((select public.can_manage_class(id)));
+-- Classes are deactivated through is_active; authenticated users cannot cascade-delete learning records.
 
 create policy memberships_select_self_or_staff
   on public.class_memberships for select to authenticated
@@ -672,7 +670,7 @@ from anon, authenticated;
 grant select on public.profiles to authenticated;
 grant update (display_name) on public.profiles to authenticated;
 
-grant select, insert, delete on public.classes to authenticated;
+grant select, insert on public.classes to authenticated;
 grant update (name, year_group, is_active) on public.classes to authenticated;
 grant select, insert, delete on public.class_memberships to authenticated;
 grant update (role) on public.class_memberships to authenticated;
