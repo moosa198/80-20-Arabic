@@ -19,11 +19,11 @@ A Qur’an-first, 31-week learning product for students who are memorising the Q
 - See technical terms paired every time they are taught or retrieved: **Pronoun — ضمير**, **Nominal sentence — جملة اسمية**, **Prepositional phrase — جار ومجرور**, **Emphasis — توكيد**.
 - Complete Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr before optional Arabic work; defer Arabic whenever Hifz needs attention.
 - See a digital 15-line Madina Qur’an page without uploading PDFs, and tap individual Arabic words to record recognition evidence.
-- Open the official Al-Qalam Institute FSTU Ṣarf (صرف) and Naḥw (نحو) source pages in the lesson.
+- Load a student-supplied FSTU Ṣarf (صرف) / Naḥw (نحو) PDF locally; the lesson renders only the exact mapped pages for the current concept. The source PDF is not uploaded. Official resource links are provided with attribution.
 - Use the core Arabic listening playlist as part of the weekly lesson, with the bonus playlist available for repeated practice.
-- Complete a short retrieval quiz, select the relevant word(s) and role, explain the Arabic clue, and save multiple attempts locally. The app does **not** automatically grade complex grammatical analysis; a teacher checks uncertain or disputed parses.
+- Complete a short retrieval quiz, select the relevant word(s) and role, explain the Arabic clue, and save multiple attempts locally. When a Supabase class is configured, students can explicitly merge/sync those records to the selected class for teacher review. The app does **not** automatically grade complex grammatical analysis; a teacher checks uncertain or disputed parses.
 - Build transfer through progressively less scaffolding and an independent week-31 page analysis.
-- Track learning locally, export a progress backup, and import it in another browser.
+- Track learning locally and export/import a progress backup. With Supabase configured, a signed-in student can merge local and class progress, then sync further progress to the selected class.
 
 ## Pedagogical approach: whole → map → whole → retrieve → transfer
 
@@ -51,7 +51,7 @@ The digital 15-line renderer uses a 604-page Madina layout, but calligraphy and 
 - [Core Arabic lesson playlist](https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa)
 - [Bonus listening playlist](https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7)
 
-The FSTU previews link to Al-Qalam Institute’s official materials and include attribution. The institute’s published usage policy allows educational/non-commercial use with attribution; obtain written permission for commercial use and check current terms before redistributing copies.
+The live course links to the publisher’s official FSTU resources and does not store full textbook scans in the repository. A student can supply a PDF to render only mapped pages locally. Attribution and educational/non-commercial use are indicated; obtain written permission for commercial use.
 
 ## Learning rhythm
 
@@ -66,9 +66,9 @@ The “well-established” word count means a card has been answered successfull
 
 ## Privacy and offline use
 
-The app stores course progress, quiz results and word-recognition attempts in the current browser’s local storage. It does not upload a student profile, source PDFs or written answers to its own server. Export progress before changing devices.
+By default, course progress, quizzes and word-recognition evidence remain in the current browser. When a configured Supabase project is used, students explicitly sign in, select a class and sync; the database stores progress snapshots and teacher reviews under row-level security. The source FSTU PDFs are not uploaded. The teacher dashboard can inspect only the classes allowed by the signed-in account’s database memberships.
 
-The Qur’an renderer, Google Drive FSTU previews, YouTube and Google Fonts load from third-party services and require an internet connection; those services may receive normal network metadata. The service worker caches the app’s own files, but the source-page and listening experience is not fully offline.
+The Qur’an renderer, PDF.js, Supabase JS, YouTube and Google Fonts load from third-party services and require an internet connection; those services may receive normal network metadata. The service worker caches the app’s own files, but the source-page and listening experience is not fully offline.
 
 ## Printable workbook and automated quality checks
 
@@ -76,8 +76,15 @@ The in-app **Print full course workbook** creates a student copy with writing sp
 
 ## Maintain the bilingual terminology
 
-The app’s terminology map lives in `TERMS` in `index.html`. Store every technical label as an English/Arabic pair; render Arabic in a separate element with `lang="ar"` and `dir="rtl"`. Do not concatenate English and Arabic into one mixed-direction heading.
+The app’s English/Arabic terminology map lives in `TERMS` in the student apps, while `term-support.js` supplies vowelled forms and one-time transliteration at a term’s first teaching encounter. Keep every technical label as an English/Arabic pair; render Arabic in a separate element with `lang="ar"` and `dir="rtl"`. Do not concatenate English and Arabic into one mixed-direction heading.
 
 ## Scope
 
 This is a practical teaching aid, not a replacement for a qualified teacher, reliable tafsīr, dictionary work or careful tarkīb. Vocabulary glosses are short recall cues rather than exhaustive lexical definitions. In the capstone, students choose words from a memorised page, justify their analysis and check any uncertainty with a teacher.
+
+
+## Multi-class progress and teacher review
+
+The optional Supabase backend adds Madrassas, classes, roles, one-use invitation codes, student snapshots, normalised week progress and append-only teacher reviews. Start with [SUPABASE-SETUP.md](./SUPABASE-SETUP.md), configure the public project URL and publishable/anon key in `supabase-config.js`, and apply the migration under `supabase/migrations/`. The [Teacher Dashboard](https://moosa198.github.io/80-20-Arabic/teacher.html) requires that setup. Cloud features are deliberately inert until the project URL/key are configured; local-only learning remains available.
+
+A publishable/anon key is public by design. Never put a `service_role` or secret key in browser code. RLS is a database security boundary, not a UI convention. Run the Supabase RLS tests in a development project and verify class isolation before using real student data. See the [official RLS documentation](https://supabase.com/docs/guides/database/postgres/row-level-security) and [API-key guidance](https://supabase.com/docs/guides/getting-started/api-keys).
