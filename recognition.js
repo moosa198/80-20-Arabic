@@ -136,6 +136,7 @@
       if(saveAll(all)){
         showFeedback(n,"Attempt "+item.attempts.length+" saved on this device. Compare your reasoning with the source and ask your teacher to confirm the grammatical role.",true);
         updateHistory(n);
+        if(root.ClassroomSync)root.ClassroomSync.queueSync("recognition-attempt");
       }else{
         showFeedback(n,"The browser could not store this attempt. Check the local storage settings and try again.",false);
       }
