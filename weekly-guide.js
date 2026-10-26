@@ -298,7 +298,7 @@
     "اسم الفاعل":"activeParticiple","اسم المفعول":"passiveParticiple","ظرف زمان":"zarf","ظرف مكان":"zarf",
     "لام التعليل":"purposeLam","تعبير عن الغرض":"purpose","حال":"haal","مثنّى":"dual","مجزوم":"jussive",
     "منصوب":"subjunctive","شرط":"condition","جواب الشرط":"result","استفهام":"question","نداء":"vocative",
-    "نفي":"negation","قصر":"restriction","مفعول مطلق":"absolute","تركيب":"expression","جذر":"root","وزن":"pattern","تَرْكِيبٌ":"tarkib","مفعول لأجله":"mafoolAjlihi","مصدر":"verbalNoun"
+    "نفي":"negation","قصر":"restriction","مفعول مطلق":"absolute","تركيب":"tarkib","جذر":"root","وزن":"pattern","تَرْكِيبٌ":"tarkib","مفعول لأجله":"mafoolAjlihi","مصدر":"verbalNoun"
   };
   function savedSourceState(week) {
     var all = {};
