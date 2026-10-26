@@ -297,7 +297,7 @@
     "اسم الفاعل":"activeParticiple","اسم المفعول":"passiveParticiple","ظرف زمان":"zarf","ظرف مكان":"zarf",
     "لام التعليل":"purposeLam","تعبير عن الغرض":"purpose","حال":"haal","مثنّى":"dual","مجزوم":"jussive",
     "منصوب":"subjunctive","شرط":"condition","جواب الشرط":"result","استفهام":"question","نداء":"vocative",
-    "نفي":"negation","قصر":"restriction","مفعول مطلق":"absolute","تركيب":"expression","جذر":"root","وزن":"pattern"
+    "نفي":"negation","قصر":"restriction","مفعول مطلق":"absolute","تركيب":"expression","جذر":"root","وزن":"pattern","تَرْكِيبٌ":"tarkib","مفعول لأجله":"mafoolAjlihi","مصدر":"verbalNoun"
   };
   function savedSourceState(week) {
     var all = {};
@@ -413,7 +413,8 @@
         sourceRead:!!(read && read.checked),
         sourceExample:!!(example && example.checked),
         sourceExplanation:explanation ? explanation.value : (prior.sourceExplanation || ""),
-        sourceReady:false
+        sourceReady:false,
+        sourceCompletedAt:wasReady ? null : prior.sourceCompletedAt
       });
       if (!saveState(next)) {
         if (feedback) { feedback.hidden = false; feedback.className = "recognition-feedback needs-work"; feedback.textContent = "Your browser could not save this source check. Check storage settings and try again."; }
@@ -442,7 +443,7 @@
       var correct = Number(chosen.value) === q.answer;
       var next = Object.assign({}, state.record, {
         week:n, choice:Number(chosen.value), correct:correct,
-        answeredAt:new Date().toISOString(), why:q.why, sourceReady:false
+        answeredAt:new Date().toISOString(), why:q.why, sourceReady:false, sourceCompletedAt:null
       });
       if (!saveState(next)) {
         quizFeedback.hidden = false; quizFeedback.className = "quiz-feedback quiz-review";
