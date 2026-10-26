@@ -96,7 +96,7 @@ function normaliseRecord(record,filename){
   const cards=raw.cards||{};
   const reps=Object.values(cards).reduce((sum,c)=>sum+Number((c&&c.reps)||0),0);
   const reviewed=Object.keys(cards).length;
-  const known=Object.values(cards).filter(c=>Number((c&&c.reps)||0)>=4).length;
+  const known=Object.entries(cards).filter(([key,c])=>/^w\\d+[-:]/.test(key)&&Number((c&&c.reps)||0)>=4).length;
   const recognition=(wrapper&&wrapper.recognition)||{};
   const weeklyRecall=(wrapper&&wrapper.weeklyRecall)||{};
   const attempts=[];
@@ -264,9 +264,9 @@ async function importProgressFiles(files){
     try{
       const parsed=JSON.parse(await file.text());
       const record=normaliseRecord(parsed,file.name);
-      const existing=state.records.findIndex(r=>r.recordId===record.recordId);
-      // Generate a stable, per-file snapshot ID for duplicate imports in this browser session.
-      record.recordId=file.name+"|"+record.exportedAt+"|"+keyOf(record);
+      // Generate a stable snapshot ID so importing the same file twice does not inflate the submission count.
+      record.recordId=[file.name,record.exportedAt||"",keyOf(record),record.doneCount,record.cardsReviewed,record.evidenceCount,record.quizCount].join("|");
+      if(state.records.some(r=>r.recordId===record.recordId)){errors.push(file.name+": this snapshot has already been imported.");continue;}
       state.records.push(record);success++;
     }catch(error){errors.push(file.name+": "+error.message);}
   }
