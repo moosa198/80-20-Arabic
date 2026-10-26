@@ -8,7 +8,7 @@ create table public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   display_name text not null check (char_length(btrim(display_name)) between 1 and 100),
   role text not null default 'student'
-    check (role in ('student', 'teacher', 'class_admin', 'madrassa_admin')),
+    check (role in ('student', 'teacher', 'madrassa_admin')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -221,14 +221,53 @@ language sql
 stable
 security definer
 set search_path = ''
-as $$
+as $
   select exists (
     select 1
     from public.profiles p
     where p.id = (select auth.uid())
-      and p.role in ('class_admin', 'madrassa_admin')
+      and p.role = 'madrassa_admin'
   );
-$$;
+$;
+
+
+-- A teacher may create a class; the trigger grants only class-scoped admin
+-- membership to its creator. It does not give them power over other classes.
+create or replace function public.can_create_class()
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $fn$
+  select exists (
+    select 1
+    from public.profiles p
+    where p.id = (select auth.uid())
+      and p.role in ('teacher', 'madrassa_admin')
+  );
+$fn$;
+
+create or replace function public.bootstrap_class_creator_membership()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $fn$
+begin
+  insert into public.class_memberships (class_id, user_id, role, added_by)
+  select new.id, new.created_by, 'class_admin', new.created_by
+  from public.profiles p
+  where p.id = new.created_by
+    and p.role = 'teacher'
+  on conflict (class_id, user_id) do nothing;
+  return new;
+end;
+$fn$;
+
+create trigger class_creator_membership_created
+  after insert on public.classes
+  for each row execute procedure public.bootstrap_class_creator_membership();
 
 create or replace function public.is_madrassa_admin()
 returns boolean
@@ -336,6 +375,8 @@ $fn$;
 revoke all on function public.set_updated_at() from public, anon, authenticated;
 revoke all on function public.handle_new_auth_user() from public, anon, authenticated;
 revoke all on function public.is_global_class_admin() from public, anon;
+revoke all on function public.can_create_class() from public, anon;
+revoke all on function public.bootstrap_class_creator_membership() from public, anon, authenticated;
 revoke all on function public.is_madrassa_admin() from public, anon;
 revoke all on function public.is_class_staff(uuid) from public, anon;
 revoke all on function public.can_manage_class(uuid) from public, anon;
@@ -344,6 +385,7 @@ revoke all on function public.is_student_in_class(uuid, uuid) from public, anon;
 revoke all on function public.is_published_lesson(uuid, smallint) from public, anon;
 
 grant execute on function public.is_global_class_admin() to authenticated;
+grant execute on function public.can_create_class() to authenticated;
 grant execute on function public.is_madrassa_admin() to authenticated;
 grant execute on function public.is_class_staff(uuid) to authenticated;
 grant execute on function public.can_manage_class(uuid) to authenticated;
@@ -385,10 +427,10 @@ create policy classes_select_members
   on public.classes for select to authenticated
   using ((select public.is_class_member(id)));
 
-create policy classes_insert_global_admin
+create policy classes_insert_authorised_creator
   on public.classes for insert to authenticated
   with check (
-    (select public.is_global_class_admin())
+    (select public.can_create_class())
     and created_by = (select auth.uid())
   );
 
