@@ -26,7 +26,7 @@
     mudaf:{ar:"مُضَافٌ",latin:"muḍāfun",week:6},
     mudafIlayh:{ar:"مُضَافٌ إِلَيْهِ",latin:"muḍāfun ilayhi",week:6},
     pronoun:{ar:"ضَمِيرٌ",latin:"ḍamīrun",week:7},
-    attachedPronoun:{ar:"ضَمِيرٌ مُتَّصِلٌ",latin:"ḍamīrun muttaṣilun",week:7},
+    attachedPronoun:{ar:"ضَمِيرٌ مُتَّصِلٌ",latin:"ḍamīrun muttaṣilun",week:3},
     adjective:{ar:"نَعْتٌ",latin:"naʿtun",week:9},
     described:{ar:"مَنْعُوتٌ",latin:"manʿūtun",week:9},
     relativePronoun:{ar:"اِسْمٌ مَوْصُولٌ",latin:"ismun mawṣūlun",week:10},
@@ -53,15 +53,15 @@
     tarkib:{ar:"تَرْكِيبٌ",latin:"tarkībun",week:28},
     sentenceClause:{ar:"جُمْلَةٌ",latin:"jumlatun",week:28},
     relativeClause:{ar:"صِلَةُ الْمَوْصُولِ",latin:"ṣilatu al-mawṣūli",week:10},
-    root:{ar:"جَذْرٌ",latin:"jadh run".replace(" ",""),week:15},
+    root:{ar:"جَذْرٌ",latin:"jadhrun",week:15},
     pattern:{ar:"وَزْنٌ",latin:"waznun",week:15},
     activeParticiple:{ar:"اِسْمُ الْفَاعِلِ",latin:"ismu al-fāʿili",week:15},
     passiveParticiple:{ar:"اِسْمُ الْمَفْعُولِ",latin:"ismu al-mafʿūli",week:15},
     derived:{ar:"صِيَغٌ مَزِيدَةٌ",latin:"ṣiyaghun mazīdatun",week:15},
-    inna:{ar:"إِنَّ وَأَخَوَاتُهَا",latin:"inna wa-akhawātuhā",week:12},
-    emphasis:{ar:"تَوْكِيدٌ",latin:"tawkīdun",week:11},
-    kana:{ar:"كَانَ وَأَخَوَاتُهَا",latin:"kāna wa-akhawātuhā",week:26},
-    laysa:{ar:"لَيْسَ",latin:"laysa",week:26},
+    inna:{ar:"إِنَّ وَأَخَوَاتُهَا",latin:"inna wa-akhawātuhā",week:16},
+    emphasis:{ar:"تَوْكِيدٌ",latin:"tawkīdun",week:16},
+    kana:{ar:"كَانَ وَأَخَوَاتُهَا",latin:"kāna wa-akhawātuhā",week:16},
+    laysa:{ar:"لَيْسَ",latin:"laysa",week:16},
     subjunctive:{ar:"مَنْصُوبٌ",latin:"manṣūbun",week:13},
     genitive:{ar:"مَجْرُورٌ",latin:"majrūrun",week:4},
     agreement:{ar:"مُطَابَقَةٌ",latin:"muṭābaqatun",week:9},
@@ -86,8 +86,8 @@
     var arabic=useIntro?meta.ar:(originalArabic||(meta&&meta.ar)||"");
     var cls="tar"+(className?" "+className:"");
     return '<span class="term '+(className==="small"?"small":"")+'"><span class="ten">'+e((root.TERMS&&root.TERMS[key]&&root.TERMS[key][0])||key)+'</span>'+
-      '<span class="'+cls+'" lang="ar" dir="rtl">'+e(arabic)+'</span>'+
-      (useIntro?'<small class="term-pronunciation" lang="en" dir="ltr">'+e(meta.latin)+'</small>':"")+'</span>';
+      '<span class="term-ar-stack"><span class="'+cls+'" lang="ar" dir="rtl">'+e(arabic)+'</span>'+
+      (useIntro?'<small class="term-pronunciation" lang="en" dir="ltr">'+e(meta.latin)+'</small>':"")+'</span></span>';
   }
   root.TermSupport={render:render,terms:TERMS};
 }(window));
