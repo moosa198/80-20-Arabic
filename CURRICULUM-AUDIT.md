@@ -53,10 +53,11 @@ Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come firs
 ## Next QA gates
 
 1. Parse and render all 31 lessons in Chromium.
-2. Verify page selection and saved recognition attempts, including multiple saved attempts per week.
-3. Verify Fātiḥah checkpoints and custom page loading.
-4. Check desktop/mobile width, RTL rendering, printed workbook pagination and the Hifz-first language.
-5. Confirm GitHub Actions build, workbook generation and Pages deployment are successful before considering the rollout complete.
+2. Verify that every week is locked before source understanding, unlocks only after a correct concept answer and valid teach-back, and saves evidence for teacher review.
+3. Verify page selection and saved recognition attempts, including multiple saved attempts per week.
+4. Verify Fātiḥah checkpoints and custom page loading.
+5. Check desktop/mobile width, RTL rendering, printed workbook pagination and the Hifz-first language.
+6. Confirm GitHub Actions build, workbook generation and Pages deployment are successful before considering the rollout complete.
 
 
 ## Multi-class platform and lesson-page delivery update — 26 October 2026
