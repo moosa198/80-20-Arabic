@@ -68,7 +68,7 @@ The “well-established” word count means a card has been answered successfull
 
 The app stores course progress, quiz results and word-recognition attempts in the current browser’s local storage. It does not upload a student profile, source PDFs or written answers to its own server. Export progress before changing devices.
 
-The Qur’an renderer, Google Drive FSTU previews, YouTube and Google Fonts load from third-party services and require an internet connection; those services may receive normal network metadata. The service worker caches the app’s own files, but the source-page and listening experience is not fully offline.
+The digital Qur’an renderer, PDF.js library, YouTube and Google Fonts load from third-party services and may receive normal network metadata. FSTU source PDFs are selected locally; only mapped page images are rendered and cached in that browser. The service worker caches the app’s own files, but the full source-preparation and listening experience is not fully offline.
 
 ## Printable workbook and automated quality checks
 
