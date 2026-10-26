@@ -2,7 +2,7 @@
 
 ## Outcome and method
 
-The course has been reshaped around **whole → map → whole → retrieve → transfer**: begin with a real Qur’anic phrase, notice the structure, study only the relevant rule, return to the same phrase, then locate the pattern again later. This applies the high-level 80/20 / early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf), without copying its wording or treating its stated outcomes as guarantees.
+The course now follows **source → Qur’an → retrieve → transfer**: teach and check the concept from the assigned FSTU page first, then apply it to the matching 15-line Qur’an page, name the role in English and Arabic (with a subtle transliteration cue), and explain the evidence. This applies the high-level 80/20 / early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf), without copying its wording or treating its stated outcomes as guarantees.
 
 Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come first. The wudhu reminder remains as adab guidance for a physical Mushaf, not a software gate. Each lesson has a real-page recognition task, paired English/Arabic role labels, a required explanation, local attempt history, and teacher-verification guidance. The app records evidence but does not auto-grade nuanced Arabic syntax.
 
@@ -44,10 +44,12 @@ Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come firs
 
 ## Source and accuracy caveats
 
-- The integrated reader uses a digital 15-line Madina layout. It may not reproduce the exact calligraphy or line breaks of the supplied King Fahd Complex PDF. The student must confirm the passage with the teacher and the physical Mushaf.
-- FSTU Naḥw references use the official August 2026 resource. The embedded FSTU Ṣarf resource is October 2023; earlier mapping was made against a March 2022 copy. If pagination differs, use the printed section heading and check with a teacher. The weekly notes explain this where the reference is shown.
-- The live course embeds/links the publisher’s official FSTU resources rather than storing scans in this repository. Attribution and educational/non-commercial use are indicated; obtain written permission for commercial use.
-- The renderer is an upstream dependency. Its published licence should be checked before redistributing a bundled copy of the code.
+- The digital Qur’an reader uses a 604-page 15-line Madina layout. It may not reproduce the exact calligraphy or line breaks of each student’s printed Mushaf; confirm the passage with the teacher and physical Mushaf.
+- FSTU Naḥw extracts use the official August 2026 resource. FSTU Ṣarf extracts use the official October 2023 resource; the initial mapping was made against a March 2022 copy. If pagination differs, use the printed section heading and check with a teacher.
+- Arabic target labels are displayed with vocalisation and a subtle Latin transliteration beneath them. Selected phrases in lesson notes are also presented in a vowelled form with a quiet reading cue; this supports decoding but should not replace instruction in Arabic script or correct pronunciation.
+- The build generates page-only extracts of the official FSTU Naḥw and Ṣarf resources: 29 unique Naḥw pages and 13 unique Ṣarf pages are used across the 31 weeks. The original page artwork and wording are not modified; each weekly lesson shows only its mapped pages. Al-Qalam Institute’s published usage policy permits educational/non-commercial use with attribution; obtain written permission before commercial use.
+- The renderer and PDF.js are upstream dependencies. Their published licences and use terms should be checked before redistributing their code.
+- The teacher dashboard is a local file-based workflow. Each learner exports a labelled JSON snapshot; a teacher imports one or more snapshots, optionally loads a roster CSV and exports a class-summary CSV. It does not provide live sync, authentication or shared multi-teacher accounts. Imported records remain in the current dashboard session only.
 - These are instructional mappings, not claims that every disputed Qur’anic parse has one uncontested answer. The app deliberately saves explanations for teacher review rather than pretending an automated test can grade all syntax.
 
 ## Next QA gates
