@@ -218,22 +218,75 @@
 @media(max-width:760px){.method-rhythm{grid-template-columns:1fr 1fr}.recognition-labels{grid-template-columns:1fr 1fr}.fstu-page-frame iframe{height:360px}.digital-mushaf-frame{padding:6px}.digital-mushaf-frame quran-madina-html{overflow:auto}}
 @media(max-width:430px){.recognition-labels{grid-template-columns:1fr}.recognition-label{padding:8px 10px}.recognition-label b{font-size:19px}}
 
+
+/* Classroom sync and subtle beginner transliteration */
+.term-translit{display:block;font-size:9px;line-height:1.25;color:#77867e;font-style:italic;font-weight:500;letter-spacing:.015em;margin-top:2px;direction:ltr;text-align:inherit}
+.term .tar{display:block}
+.fstu-assigned-page{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;margin:8px 0}
+.fstu-assigned-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.fstu-assigned-page h4{font-size:13px;color:var(--green);margin:7px 0}
+.fstu-assigned-page p{font-size:11px;line-height:1.6;color:var(--muted);margin:6px 0 10px}
+.fstu-open-link{display:inline-flex;padding:8px 10px!important;margin:0!important;border:1px solid #cfdbcf;border-radius:8px;background:#f7faf5;font-size:11px;font-weight:750;text-decoration:none}
+.source-check-items{display:grid;gap:10px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px;margin:12px 0}
+.source-check-items label{display:flex;gap:9px;align-items:flex-start;font-size:12px}
+.source-check-items input{margin-top:4px;accent-color:var(--green2)}
+.application-flow[hidden]{display:none!important}
+.source-mastery-step{margin-top:14px}
+.recognition-ar-wrap{display:grid;justify-items:end;gap:1px}
+.classroom-modal[hidden]{display:none!important}
+.classroom-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:14px;font:14px/1.5 system-ui,sans-serif;color:#20322b}
+.classroom-backdrop{position:absolute;inset:0;background:#0c211bc9;backdrop-filter:blur(3px)}
+.classroom-dialog{position:relative;max-height:92vh;overflow:auto;width:min(660px,100%);background:#fffdf8;border:1px solid #dce3d9;border-radius:17px;padding:20px;box-shadow:0 24px 80px #0c211b35}
+.classroom-dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.classroom-kicker{margin:0;font-size:10px;font-weight:800;letter-spacing:.12em;color:#a88742}
+.classroom-dialog h2{font-size:22px;color:#183f34;margin:5px 0 8px}
+.classroom-close{width:35px;height:35px;border:1px solid #dce3d9;background:#fff;border-radius:10px;font-size:22px;color:#183f34}
+.classroom-intro,.classroom-privacy-note{font-size:12px;color:#66766d}
+.classroom-dialog form{display:grid;gap:10px}
+.classroom-dialog label{display:grid;gap:5px;font-size:11px;font-weight:750}
+.classroom-dialog input{width:100%;min-width:0;padding:9px 10px;border:1px solid #cdd8cd;border-radius:9px;background:white;color:#20322b}
+.classroom-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.classroom-help{font-size:10px;color:#6a776f;margin:0}
+.classroom-dialog-actions{display:flex;gap:8px;flex-wrap:wrap}
+.classroom-primary,.classroom-secondary{padding:9px 12px;border-radius:9px;border:1px solid #183f34;font-size:11px;font-weight:750}
+.classroom-primary{background:#183f34;color:white}.classroom-secondary{background:white;color:#183f34}
+.classroom-status{padding:10px 11px;background:#f3f6ef;border:1px solid #dce3d9;border-radius:9px;font-size:11px;white-space:pre-wrap}
+.classroom-status.error{background:#fff4f4;border-color:#edcaca;color:#802e2e}.classroom-status.success{background:#f1f8f0;border-color:#c6dec9;color:#2d6040}
+@media(max-width:520px){.classroom-fields{grid-template-columns:1fr}.classroom-dialog{padding:15px}.classroom-dialog h2{font-size:19px}}
+
 </style>
 </head>
 <body>
-<header class="top"><a class="brand" href="./student.html"><span class="mark ar">ع</span><span><b>80/20 Arabic</b><small>Student Studio</small></span></a><div class="topBtns"><button class="topBtn" id="print">Print lesson</button><button class="topBtn" id="export">Export progress</button></div></header>
+<header class="top"><a class="brand" href="./student.html"><span class="mark ar">ع</span><span><b>80/20 Arabic</b><small>Student Studio</small></span></a><div class="topBtns"><button class="topBtn" id="classroomOpen" type="button">Class tracking</button><button class="topBtn" id="print">Print lesson</button><button class="topBtn" id="export">Export progress</button></div></header>
 <div class="layout"><aside><div class="navTitle">LEARN</div><nav class="nav"><button class="active" data-view="home">⌂ Home</button><button data-view="course">▦ 31-week course</button><button data-view="review">↻ 5-minute review</button><button data-view="terms">ع Grammar terms</button><button data-view="progress">↗ My progress</button></nav><div class="progressBox"><div class="navTitle" style="padding-left:0">YOUR PATH</div><div class="bar"><i id="sideBar"></i></div><div class="sideStats"><span id="sideDone">0/31</span><span id="sidePct">0%</span></div></div><div class="method"><b>THE LOOP</b><br>Retrieve → recognise → explain → find it again.</div></aside>
 <main id="main"></main></div><div id="toast" class="toast"></div>
 <script data-font-size="24" src="https://unpkg.com/quran-madina-html@2"></script>
 <script src="./weekly-guide.js"></script>
 <script src="./recognition.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./classroom-sync.js"></script>
 <script>
 'use strict';
 const TERMS={
 noun:['Noun','اسم'],verb:['Verb','فعل'],particle:['Particle','حرف'],past:['Past/perfect form','فعل ماضٍ'],imperfect:['Imperfect form','فعل مضارع'],imperative:['Imperative form','فعل أمر'],nominal:['Nominal sentence','جملة اسمية'],verbal:['Verbal sentence','جملة فعلية'],mubtada:['Topic','مبتدأ'],khabar:['Predicate','خبر'],faail:['Doer/subject','فاعل'],mafool:['Object','مفعول به'],preposition:['Preposition','حرف جر'],genitive:['Genitive form','مجرور'],jarMajrur:['Preposition phrase','جار ومجرور'],conjunction:['Conjunction','عطف'],idafah:['Possessive construction','إضافة'],mudaf:['First noun of an iḍāfah','مضاف'],mudafIlayh:['Second noun of an iḍāfah','مضاف إليه'],pronoun:['Pronoun','ضمير'],attachedPronoun:['Attached pronoun','ضمير متصل'],adjective:['Adjective','نعت'],described:['Described noun','منعوت'],agreement:['Agreement','مطابقة'],relativePronoun:['Relative pronoun','اسم موصول'],relativeClause:['Relative clause','صلة الموصول'],inna:['Inna and its sisters','إنّ وأخواتها'],emphasis:['Emphasis','توكيد'],kana:['Kāna and its sisters','كان وأخواتها'],laysa:['Laysa','ليس'],negation:['Negation','نفي'],jussive:['Jussive form','مجزوم'],subjunctive:['Subjunctive form','منصوب'],passive:['Passive voice','مبني للمجهول'],naib:['Passive subject','نائب الفاعل'],derived:['Derived word forms','الأوزان المزيدة'],activeParticiple:['Active participle','اسم الفاعل'],passiveParticiple:['Passive participle','اسم المفعول'],pattern:['Word pattern','وزن'],root:['Root','جذر'],conjugation:['Conjugation','تصريف'],condition:['Condition','شرط'],result:['Result of the condition','جواب الشرط'],exception:['Exception','استثناء'],question:['Question','استفهام'],vocative:['Vocative','نداء'],oath:['Oath','قسم'],zarf:['Adverb of time/place','ظرف'],subordinate:['Subordinate clause','جملة تابعة'],purpose:['Purpose expression','تعبير عن الغرض'],purposeLam:['Purpose lām','لام التعليل'],haal:['Circumstantial qualifier','حال'],dual:['Dual','مثنّى'],number:['Number','عدد'],restriction:['Restriction','قصر'],absolute:['Absolute object','مفعول مطلق'],particleChoice:['Particle function','وظيفة الحرف'],tarkib:['Word-by-word analysis','تركيب'],clause:['Clause','جملة'],weak:['Weak verb','فعل معتل'],manMa:['Context-sensitive من / ما','من / ما بحسب السياق']};
-const t=k=>`<span class="term"><span class="en">${TERMS[k][0]}</span><span class="ar" lang="ar" dir="rtl">${TERMS[k][1]}</span></span>`;
+const t=k=>{const h=TERM_HELP[k]||[TERMS[k][1], ''];return `<span class="term"><span class="en">${TERMS[k][0]}</span><span class="ar" lang="ar" dir="rtl">${h[0]}</span>${h[1]?`<small class="term-translit" lang="en" dir="ltr">${h[1]}</small>`:''}</span>`};
 const tr=ks=>`<div class="terms">${ks.map(t).join('')}</div>`;
 const w=(n,title,page,focus,objective,words,hf,nahw,sarf,apply)=>({n,title,page,focus,objective,words,hf,nahw,sarf,apply});
+var TERM_HELP={
+noun:["اِسْمٌ","ism"],verb:["فِعْلٌ","fiʿl"],particle:["حَرْفٌ","ḥarf"],past:["فِعْلٌ مَاضٍ","fiʿl māḍin"],imperfect:["فِعْلٌ مُضَارِعٌ","fiʿl muḍāriʿ"],imperative:["فِعْلُ أَمْرٍ","fiʿlu amr"],
+nominal:["جُمْلَةٌ اِسْمِيَّةٌ","jumlatun ismiyyah"],verbal:["جُمْلَةٌ فِعْلِيَّةٌ","jumlatun fiʿliyyah"],mubtada:["مُبْتَدَأٌ","mubtadaʾ"],khabar:["خَبَرٌ","khabar"],faail:["فَاعِلٌ","fāʿil"],mafool:["مَفْعُولٌ بِهِ","mafʿūl bihi"],
+preposition:["حَرْفُ جَرٍّ","ḥarfu jarr"],genitive:["مَجْرُورٌ","majrūr"],jarMajrur:["جَارٌّ وَمَجْرُورٌ","jārr wa-majrūr"],conjunction:["عَطْفٌ","ʿaṭf"],conjunctionParticle:["حَرْفُ عَطْفٍ","ḥarfu ʿaṭf"],
+idafah:["إِضَافَةٌ","iḍāfah"],mudaf:["مُضَافٌ","muḍāf"],mudafIlayh:["مُضَافٌ إِلَيْهِ","muḍāfun ilayhi"],pronoun:["ضَمِيرٌ","ḍamīr"],attachedPronoun:["ضَمِيرٌ مُتَّصِلٌ","ḍamīrun muttaṣil"],
+adjective:["نَعْتٌ","naʿt"],described:["مَنْعُوتٌ","manʿūt"],relativePronoun:["اِسْمٌ مَوْصُولٌ","ism mawṣūl"],relativeClause:["صِلَةُ الْمَوْصُولِ","ṣilatu l-mawṣūl"],
+inna:["إِنَّ وَأَخَوَاتُهَا","inna wa-akhawātuhā"],emphasis:["تَوْكِيدٌ","tawkīd"],kana:["كَانَ وَأَخَوَاتُهَا","kāna wa-akhawātuhā"],laysa:["لَيْسَ","laysa"],negation:["نَفْيٌ","nafy"],
+jussive:["مَجْزُومٌ","majzūm"],subjunctive:["مَنْصُوبٌ","manṣūb"],passive:["مَبْنِيٌّ لِلْمَجْهُولِ","mabniyy li-l-majhūl"],naib:["نَائِبُ الْفَاعِلِ","nāʾibu l-fāʿil"],
+derived:["أَوْزَانٌ مَزِيدَةٌ","awzān mazīdah"],activeParticiple:["اِسْمُ الْفَاعِلِ","ismu l-fāʿil"],passiveParticiple:["اِسْمُ الْمَفْعُولِ","ismu l-mafʿūl"],
+conjugation:["تَصْرِيفٌ","taṣrīf"],condition:["شَرْطٌ","sharṭ"],result:["جَوَابُ الشَّرْطِ","jawābu sh-sharṭ"],exception:["اِسْتِثْنَاءٌ","istithnāʾ"],question:["اِسْتِفْهَامٌ","istifhām"],vocative:["نِدَاءٌ","nidāʾ"],oath:["قَسَمٌ","qasam"],
+zarf:["ظَرْفٌ","ẓarf"],subordinate:["جُمْلَةٌ تَابِعَةٌ","jumlatun tābiʿah"],purpose:["تَعْبِيرٌ عَنِ الْغَرَضِ","taʿbīrun ʿani l-gharaḍ"],purposeLam:["لَامُ التَّعْلِيلِ","lāmu t-taʿlīl"],mafoolAjlihi:["مَفْعُولٌ لِأَجْلِهِ","mafʿūlun li-ajlihi"],
+haal:["حَالٌ","ḥāl"],dual:["مُثَنَّى","muthannā"],number:["عَدَدٌ","ʿadad"],restriction:["قَصْرٌ","qaṣr"],absolute:["مَفْعُولٌ مُطْلَقٌ","mafʿūlun muṭlaq"],
+particleChoice:["وَظِيفَةُ الْحَرْفِ","waẓīfatu l-ḥarf"],tarkib:["تَرْكِيبٌ","tarkīb"],agreement:["مُطَابَقَةٌ","muṭābaqah"],definiteness:["تَعْرِيفٌ","taʿrīf"],gender:["جِنْسٌ نَحْوِيٌّ","jinsun naḥwiyy"],case:["عَلَامَةُ الْإِعْرَابِ","ʿalāmatu l-iʿrāb"],weak:["فِعْلٌ مُعْتَلٌّ","fiʿlun muʿtall"],
+manMa:["مِنْ / مَا بِحَسَبِ السِّيَاقِ","min / mā biḥasabi s-siyāq"],lamu:["لَامُ التَّوْكِيدِ","lāmu t-tawkīd"],expression:["تَرْكِيبٌ","tarkīb"],sentenceClause:["جُمْلَةٌ","jumlah"],root:["جَذْرٌ","jذر"],pattern:["وَزْنٌ","wazn"],verbalNoun:["مَصْدَرٌ","maṣdar"]
+};
 const C=[
 w(1,'Sort before you translate',440,['noun','verb','particle','past','imperfect'],'Classify the visible form before trying to translate it.',[['قَوْم','people'],['رَسُول','messenger'],['قُرْآن','Qur’an / recitation'],['حَكِيم','wise'],['عَزِيز','mighty'],['تَنْزِيل','revelation / sending down'],['غَافِلُون','heedless']],[['مِنْ','from / of'],['فِي','in'],['عَلَى','on / upon'],['إِنَّ','indeed'],['لَا','not'],['مَا','what / not by context']],'Sort each word into اسم, فعل or حرف before translating.','Compare a completed-action form with an ongoing, future or habitual form. Notice the full shape.','Find five examples on page 440. Label each using the three paired word-type labels.'),
 w(2,'Find the main statement',562,['nominal','mubtada','khabar'],'Find a statement built around a topic and information about that topic.',[['مُلْك','kingdom / dominion'],['سَمَاء','sky / heaven'],['زَيَّنَ','adorned'],['مَصَابِيح','lamps'],['شُهُب','flaming projectiles'],['غَفُور','ever-forgiving'],['قَدِير','all-powerful']],[['الَّذِي','who / which'],['كُلّ','every / all'],['شَيْء','thing'],['مَا','what / whatever / not by context'],['هُوَ','he / it'],['هُمْ','they']],'A statement can begin with the thing being discussed; the rest gives information about it.','Keep recognising the forms already met. Ask who is represented inside the whole word.','Choose one short statement on page 562. Mark the two main parts and give the Arabic evidence.'),
@@ -268,7 +321,7 @@ w(30,'Read connected phrases in short sūrahs',604,['idafah','mudaf','mudafIlayh
 {n:31,title:'Analyse a fresh Qur’an passage',page:null,capstone:true,focus:['tarkib','noun','verb','particle','nominal','verbal','jarMajrur','idafah','relativeClause','conjunction'],objective:'Begin an independent word-by-word analysis and justify every important choice.',hf:[['مِنْ','from'],['فِي','in'],['عَلَى','on'],['إِنَّ','indeed'],['لَا','not'],['وَ','and']],nahw:'Work from visible evidence. Classify words, identify the main structure, mark relationships, then combine the parts.',sarf:'Use word shape, root, ending and attached pieces as clues. Leave a label uncertain rather than forcing it.',apply:'Choose a full page from your own memorised Qur’an. Select seven useful words and analyse one short passage independently.'}
 ];
 const STORE='8020-student-v2';let state=load(),view='home',selected=1,reviewMode='words',queue=[],pos=0,revealed=false;
-function blank(){return{done:{},cards:{}}}function load(){try{return Object.assign(blank(),JSON.parse(localStorage.getItem(STORE)||'{}'))}catch(e){return blank()}}function save(){localStorage.setItem(STORE,JSON.stringify(state));updateSide()}
+function blank(){return{done:{},cards:{}}}function load(){try{return Object.assign(blank(),JSON.parse(localStorage.getItem(STORE)||'{}'))}catch(e){return blank()}}function save(){localStorage.setItem(STORE,JSON.stringify(state));updateSide();if(window.ClassroomSync)window.ClassroomSync.queueSync('student-studio-progress')}
 function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(x){let e=document.getElementById('toast');e.textContent=x;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200)}
 function done(){return Object.values(state.done).filter(Boolean).length}function pct(){return Math.round(done()/31*100)}function updateSide(){document.getElementById('sideBar').style.width=pct()+'%';document.getElementById('sideDone').textContent=done()+'/31';document.getElementById('sidePct').textContent=pct()+'%'}
