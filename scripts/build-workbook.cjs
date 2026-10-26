@@ -32,7 +32,8 @@ const assert = require("node:assert/strict");
       const title = await page.locator("#main h1").first().innerText();
       assert(title.includes("Week " + String(n).padStart(2, "0")), "Lesson title missing for week " + n);
       assert.equal(await page.locator("#hifzPriority").count(), 1, "Hifz-first priority missing on week " + n);
-      assert.equal(await page.locator("#mushafTask-" + n).isVisible(), true, "Integrated Qur’an page should be visible on week " + n);
+       assert.equal(await page.locator("#applicationFlow-" + n).isVisible(), false, "Qur’an application must remain locked before the source check on week " + n);
+       assert.equal(await page.locator("#mushafTask-" + n).isVisible(), false, "Qur’an page should not be visible before source understanding on week " + n);
       const mappedPage = await page.evaluate(n => WeeklyGuide.get(n).page || 604, n);
       assert.equal(await page.locator('quran-madina-html[data-recognition-page][page="' + mappedPage + '"]').count(), 1, "Digital 15-line Mushaf missing on week " + n);
       assert((await page.locator(".mushaf-step .step-intro").innerText()).toLowerCase().includes("wudhu"), "Physical Mushaf adab reminder missing on week " + n);
@@ -42,17 +43,19 @@ const assert = require("node:assert/strict");
       assert.equal(await page.locator(".playlist-link").count(), 2, "Core and bonus playlist links missing on week " + n);
       assert.equal(await page.locator(".playlist-player iframe").count(), 1, "Embedded core playlist missing on week " + n);
       assert.equal(await page.locator("#weeklyTest-" + n).count(), 1, "Weekly recognition test missing on week " + n);
-      const sequenceOrder = await page.locator(".weekly-sequence").evaluate(root => {
-        const y = selector => root.querySelector(selector).getBoundingClientRect().top;
-        return [y(".mushaf-step"), y(".textbook-step"), y(".listening-resources"), y(".assessment-layer")];
-      });
-      assert(sequenceOrder[0] < sequenceOrder[1] && sequenceOrder[1] < sequenceOrder[2] && sequenceOrder[2] < sequenceOrder[3],
-        "Weekly layers must be ordered Qur’an → FSTU map → listening → apply on week " + n);
-      const sourcePages = await page.locator(".book-page-frame").evaluateAll(nodes => nodes.map(el => el.getAttribute("data-book-page")));
-      const mappedQuranPage = await page.evaluate(n => WeeklyGuide.get(n).page || 604, n);
-      assert(sourcePages.includes("quran:" + mappedQuranPage), "Actual assigned Mushaf page reference missing on week " + n);
-      assert(sourcePages.some(x => x.startsWith("sarf:")), "Assigned FSTU Sarf page reference missing on week " + n);
-      assert(sourcePages.some(x => x.startsWith("nahw:")), "Assigned FSTU Naḥw page reference missing on week " + n);
+       const sequenceOrder = await page.locator(".weekly-sequence").evaluate(root => {
+         const nodes = [".textbook-step", ".source-mastery-step", ".mushaf-step", ".assessment-layer"].map(selector => root.querySelector(selector));
+         return nodes.every((node, i) => !!node && (i === nodes.length - 1 || !!(node.compareDocumentPosition(nodes[i + 1]) & Node.DOCUMENT_POSITION_FOLLOWING)));
+       });
+       assert.equal(sequenceOrder, true, "Lesson must order FSTU source → guided understanding → Qur’anic application → retrieval on week " + n);
+       const sourcePages = await page.locator(".book-page-frame").evaluateAll(nodes => nodes.map(el => el.getAttribute("data-book-page")));
+       const mappedQuranPage = await page.evaluate(n => WeeklyGuide.get(n).page || 604, n);
+       assert(sourcePages.includes("quran:" + mappedQuranPage), "Actual assigned Mushaf page reference missing on week " + n);
+       assert(sourcePages.some(x => x.startsWith("sarf:")), "Assigned FSTU Sarf page reference missing on week " + n);
+       assert(sourcePages.some(x => x.startsWith("nahw:")), "Assigned FSTU Naḥw page reference missing on week " + n);
+       const assignedFstuPages = await page.locator(".textbook-stack .book-page-frame").evaluateAll(nodes => nodes.map(el => el.getAttribute("data-book-page")));
+       const expectedFstuPages = await page.evaluate(n => WeeklyGuide.get(n).sarfPages.map(p => "sarf:" + p).concat(WeeklyGuide.get(n).nahwPages.map(p => "nahw:" + p)), n);
+       assert.deepEqual(assignedFstuPages, expectedFstuPages, "Only the week's specifically mapped FSTU pages should be shown on week " + n);
       const chips = await page.locator(".focus .term").evaluateAll(nodes => nodes.map(node => ({
         en: (node.querySelector(".ten") || {}).textContent || "",
         ar: (node.querySelector(".tar") || {}).textContent || "",
@@ -69,8 +72,20 @@ const assert = require("node:assert/strict");
       } else {
         assert.equal(count, 7, "Week " + n + " should expose seven lexical/learner-selected word slots");
       }
-      const quranPageComponent = page.locator('quran-madina-html[data-recognition-page]').first();
-      await quranPageComponent.waitFor({ state: "attached" });
+       if (n === 1) assert(await page.locator(".source-key-term .term-pronunciation").count() >= 1, "First-encounter terms should show subtle pronunciation support on week 1");
+       await page.locator('[data-source-read="' + n + '"]').check();
+       await page.locator('[data-source-example="' + n + '"]').check();
+       await page.locator('[data-source-explanation="' + n + '"]').fill("The source example shows the rule and the relationship between these Arabic words.");
+       const answerIndex = await page.evaluate(n => WeeklyGuide.get(n).quiz.answer, n);
+       await page.locator('input[name="source-choice-' + n + '"][value="' + answerIndex + '"]').check();
+       await page.locator('[data-check-source-quiz="' + n + '"]').click();
+       assert((await page.locator('[data-source-quiz-feedback="' + n + '"]').innerText()).includes("Correct"), "Source concept answer was not accepted on week " + n);
+       await page.locator('[data-source-continue="' + n + '"]').click();
+       assert.equal(await page.locator("#applicationFlow-" + n).isVisible(), true, "A correct source check should unlock application on week " + n);
+       assert.equal(await page.locator("#mushafTask-" + n).isVisible(), true, "Qur’an page should be visible after the source check on week " + n);
+       assert((await page.locator(".mushaf-step .step-intro").innerText()).toLowerCase().includes("wudhu"), "Physical Mushaf adab reminder missing on week " + n);
+       const quranPageComponent = page.locator('quran-madina-html[data-recognition-page]').first();
+       await quranPageComponent.waitFor({ state: "attached" });
       await page.locator('[data-recognition-label]').first().click();
       await page.locator('[data-recognition-explanation="' + n + '"]').fill("The word form and its relationship in the phrase support this label; a teacher verifies this analysis.");
       await page.evaluate(() => {
@@ -86,11 +101,8 @@ const assert = require("node:assert/strict");
       await page.locator('quran-madina-html[data-recognition-page] .quran-madina-html-word[data-qmh-w="1"]').first().click();
       await page.locator('[data-save-recognition="' + n + '"]').click();
       assert((await page.locator('[data-recognition-feedback="' + n + '"]').innerText()).includes("saved on this device"), "Word-recognition attempt did not save on week " + n);
-      const answerIndex = await page.evaluate(n => WeeklyGuide.get(n).quiz.answer, n);
-      await page.locator('input[name="weekly-choice-' + n + '"][value="' + answerIndex + '"]').check();
-      await page.locator('[data-check-quiz="' + n + '"]').click();
-      assert.equal(await page.locator("#quizFeedback-" + n).isVisible(), true, "Weekly recall answer was not checked on week " + n);
-      assert((await page.locator("#quizFeedback-" + n).innerText()).includes("Correct"), "Correct recognition answer was not accepted on week " + n);
+       const savedSource = await page.evaluate(n => JSON.parse(localStorage.getItem("8020-weekly-recall-v2") || "{}")[n], n);
+       assert(savedSource && savedSource.sourceReady && savedSource.sourceRead && savedSource.sourceExample && savedSource.correct, "Source check was not saved as complete on week " + n);
       const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
       assert.equal(horizontalOverflow, false, "Horizontal overflow on week " + n);
       if (n === 1) await page.screenshot({ path: path.join(out, "qa-week-01.png"), fullPage: true });
@@ -101,7 +113,7 @@ const assert = require("node:assert/strict");
       if (n === 31) await page.screenshot({ path: path.join(out, "qa-capstone.png"), fullPage: true });
     }
     audit.passed.push("All 31 lessons render; all English focus labels are paired with Arabic");
-    audit.passed.push("Every week has mapped Mushaf, FSTU Sarf and Naḥw page references, visible listening resources, and the test in the expected order");
+    audit.passed.push("All 31 weeks show only assigned FSTU pages, require a correct source check before revealing the Mushaf, and preserve the source-first lesson order");
     audit.passed.push("Each teaching week has seven word cards; three Fātiḥah checkpoints are retrieval-led");
     audit.passed.push("Desktop lesson views have no horizontal overflow");
 
@@ -139,22 +151,28 @@ const assert = require("node:assert/strict");
     await student.goto("file://" + path.join(root, "student.html"), { waitUntil: "domcontentloaded" });
     await student.locator(".hero").waitFor();
     assert.equal(await student.locator("#hifzPriority").count(), 1, "Student Studio home must state Hifz priority");
-      assert.equal(await student.locator(".source-method-card").count(), 1, "Student Studio should explain the whole–map–whole method");
+      assert.equal(await student.locator(".source-method-card").count(), 1, "Student Studio should explain the source-first lesson method");
       assert.equal(await student.locator(".book-library-setup").count(), 0, "Student Studio should no longer require PDF uploads");
     await student.locator('[data-view="course"]').click();
     await student.locator('[data-week="1"]').click();
     assert.equal(await student.locator("#textbookTitle-1").count(), 1, "Student Studio weekly source-page layer missing");
     assert.equal(await student.locator(".playlist-player iframe").count(), 1, "Student Studio weekly embedded playlist missing");
     assert.equal(await student.locator("#weeklyTest-1").count(), 1, "Student Studio weekly quiz missing");
-      assert.equal(await student.locator("#mushafTask-1").isVisible(), true, "Student Studio should show the integrated Qur’an page immediately");
+      assert.equal(await student.locator("#applicationFlow-1").isVisible(), false, "Student Studio must keep Qur’an application locked before the source check");
+      assert.equal(await student.locator("#mushafTask-1").isVisible(), false, "Student Studio must not show the Qur’an page before source understanding");
       assert.equal(await student.locator('[data-recognition-task="1"]').count(), 1, "Student Studio word-recognition task missing");
+    await student.locator('[data-source-read="1"]').check();
+    await student.locator('[data-source-example="1"]').check();
+    await student.locator('[data-source-explanation="1"]').fill("The source example shows how this Arabic structure works and how to identify it.");
     const studentAnswer = await student.evaluate(() => WeeklyGuide.get(1).quiz.answer);
-    await student.locator('input[name="weekly-choice-1"][value="' + studentAnswer + '"]').check();
-    await student.locator('[data-check-quiz="1"]').click();
-    assert((await student.locator("#quizFeedback-1").innerText()).includes("Correct"), "Student Studio weekly quiz did not accept the correct answer");
+    await student.locator('input[name="source-choice-1"][value="' + studentAnswer + '"]').check();
+    await student.locator('[data-check-source-quiz="1"]').click();
+    assert((await student.locator('[data-source-quiz-feedback="1"]').innerText()).includes("Correct"), "Student Studio source concept quiz did not accept the correct answer");
+    await student.locator('[data-source-continue="1"]').click();
+    assert.equal(await student.locator("#mushafTask-1").isVisible(), true, "Student Studio should unlock the Qur’an page after the source check");
     const studentOverflow = await student.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     assert.equal(studentOverflow, false, "Student Studio weekly guidance causes horizontal overflow");
-    audit.passed.push("Student Studio shares local integrated source references, Hifz-first priority, Qur’an → FSTU map → listening → apply, and the working weekly quiz");
+    audit.passed.push("Student Studio enforces the same FSTU-first sequence, source teach-back gate and Qur’anic recognition task");
 
     // Render the complete printable workbook and check all Arabic spans before PDF creation.
     await page.locator("#printAllBtn").click();
