@@ -255,7 +255,7 @@ function allHighWords(){
  return C.flatMap(function(w){return (w.hf||[]).map(function(x){return {ar:x.ar,en:x.en,key:"hf:"+x.ar,week:"CORE",passage:"High-frequency Qur’an words",kind:"high"}})}).filter(function(x){if(seen[x.key])return false;seen[x.key]=true;return true});
 }
 function allTerms(){
- return Object.keys(TERMS).filter(function(k){return TERMS[k][1]}).map(function(k){return {ar:TERMS[k][1],en:TERMS[k][0],key:"term:"+k,week:"TERMS",passage:"English ↔ Arabic grammar term",kind:"term"}});
+ return Object.keys(TERMS).filter(function(k){return TERMS[k][1]}).map(function(k){var x=TERMS[k],reps=(state().cards["term:"+k]||{}).reps||0,first=reps<3&&x[2];return {ar:first?x[2]:x[1],transliteration:first?x[3]:"",en:x[0],key:"term:"+k,week:"TERMS",passage:"English ↔ Arabic grammar term",kind:"term"}});
 }
 function reviewItems(mode){var m=mode||reviewMode;return m==="terms"?allTerms():m==="high"?allHighWords():allWords();}
 function blank(){return {cards:{},doneWeeks:{},lastSession:null,streak:0,seconds:0}}
@@ -263,7 +263,13 @@ function state(){try{return Object.assign(blank(),JSON.parse(localStorage.getIte
 function save(s){localStorage.setItem(STORE,JSON.stringify(s));chrome()}
 function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function arabic(x,cl){return '<span class="'+(cl||"tar")+'" lang="ar" dir="rtl">'+esc(x)+'</span>'}
-function term(k,small){var x=TERMS[k]||[k,""];return '<span class="term '+(small?"small":"")+'"><span class="ten">'+esc(x[0])+'</span>'+arabic(x[1])+'</span>'}
+function term(k,small){
+ var x=TERMS[k]||[k,""];
+ var reps=(state().cards["term:"+k]||{}).reps||0;
+ var first=reps<3&&x[2],shown=first?x[2]:x[1];
+ var trans=first&&x[3]?'<small class="term-transliteration" style="display:block;opacity:.62;font-size:.72em;direction:ltr">'+esc(x[3])+'</small>':"";
+ return '<span class="term '+(small?"small":"")+'" data-term-key="'+esc(k)+'"><span class="ten">'+esc(x[0])+'</span>'+arabic(shown)+trans+'</span>';
+}
 function termrow(keys,small){return '<div class="termrow">'+keys.map(function(k){return term(k,small)}).join("")+'</div>'}
 function focusHtml(w){return termrow(w.focus,true)}
 function weekLabel(w){return lessonTitle(w)}
@@ -357,7 +363,7 @@ function reviewView(){
    return;
  }
  var isTerm=current.kind==="term";
- out+='<div class="reviewTop"><span class="eyebrow">CARD '+(pos+1)+' OF '+queue.length+'</span><span class="tag">'+(isTerm?"ENGLISH ↔ ARABIC":current.kind==="high"?"HIGH-FREQUENCY":"WEEK "+current.week)+'</span></div><div class="reviewBar"><i style="width:'+(pos/queue.length*100)+'%"></i></div><article class="flash"><span class="flashLabel">'+(isTerm?"GRAMMAR TERM · RECALL ITS ARABIC":esc(current.passage))+'</span>'+(isTerm?'<div class="termFront">'+esc(current.en)+'</div>':arabic(current.ar,"flashAr"))+'<div class="flashAnswer">'+(revealed?(isTerm?arabic(current.ar,"flashAnswerAr"):esc(current.en)):(isTerm?"Recall the Arabic term":"Try to recall the meaning"))+'</div><div class="flashHint">'+(revealed?"How well did you remember?":isTerm?"Say the Arabic term before revealing it.":"Say it aloud before you turn it over.")+'</div><button class="flashReveal" id="revealFlash">'+(revealed?"Answer revealed":"Reveal answer")+'</button></article>';
+ out+='<div class="reviewTop"><span class="eyebrow">CARD '+(pos+1)+' OF '+queue.length+'</span><span class="tag">'+(isTerm?"ENGLISH ↔ ARABIC":current.kind==="high"?"HIGH-FREQUENCY":"WEEK "+current.week)+'</span></div><div class="reviewBar"><i style="width:'+(pos/queue.length*100)+'%"></i></div><article class="flash"><span class="flashLabel">'+(isTerm?"GRAMMAR TERM · RECALL ITS ARABIC":esc(current.passage))+'</span>'+(isTerm?'<div class="termFront">'+esc(current.en)+'</div>':arabic(current.ar,"flashAr"))+'<div class="flashAnswer">'+(revealed?(isTerm?arabic(current.ar,"flashAnswerAr")+(current.transliteration?'<small class="term-transliteration" style="display:block;opacity:.62;font-size:.72em;direction:ltr">'+esc(current.transliteration)+'</small>':""):esc(current.en)):(isTerm?"Recall the Arabic term":"Try to recall the meaning"))+'</div><div class="flashHint">'+(revealed?"How well did you remember?":isTerm?"Say the Arabic term before revealing it.":"Say it aloud before you turn it over.")+'</div><button class="flashReveal" id="revealFlash">'+(revealed?"Answer revealed":"Reveal answer")+'</button></article>';
  if(revealed){
    out+='<div class="ratings"><button class="rate" data-rate="again">Again<span>Not recalled</span></button><button class="rate" data-rate="hard">Hard<span>Needed effort</span></button><button class="rate" data-rate="good">Good<span>Recalled it</span></button><button class="rate" data-rate="easy">Easy<span>Instant recall</span></button></div>';
  }else{
