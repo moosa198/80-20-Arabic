@@ -20,6 +20,11 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+# Source extracts and the workbook are generated from the same commit. Serialize
+# each ref so concurrent browser-audit runs cannot race while pushing artifacts.
+concurrency:
+  group: fstu-extracts-workbook-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
