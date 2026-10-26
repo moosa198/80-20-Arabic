@@ -28,8 +28,10 @@ jobs:
         with:
           version: latest
 
-      - name: Start isolated local Supabase stack
-        run: supabase start
+      - name: Start isolated Postgres only
+        # Migration smoke tests need Postgres, not the rest of the Supabase services.
+        # This reduces image pulls and makes CI less sensitive to container-registry rate limits.
+        run: supabase start --exclude gotrue,realtime,storage-api,imgproxy,kong,mailpit,postgrest,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
 
       - name: Apply migrations to a clean database
         run: supabase db reset
