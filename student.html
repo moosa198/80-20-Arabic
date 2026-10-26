@@ -238,7 +238,8 @@ const x=TERMS[k]||[k,""];
 const reps=(state.cards["term:"+k]||state.cards["t-"+k]||{}).reps||0;
 const first=reps<3&&x[2],shown=first?x[2]:x[1];
 const trans=first&&x[3]?'<small class="term-transliteration" style="display:block;opacity:.62;font-size:.72em;direction:ltr">'+esc(x[3])+'</small>':"";
-return '<span class="term" data-term-key="'+esc(k)+'"><span class="en">'+esc(x[0])+'</span><span class="ar" lang="ar" dir="rtl">'+esc(shown||"")+'</span>'+trans+'</span>';
+const gloss=first&&x[4]?'<small class="term-gloss" style="display:block;opacity:.76;font-size:.75em;line-height:1.3">'+esc(x[4])+'</small>':"";
+return '<span class="term" data-term-key="'+esc(k)+'"><span class="en">'+esc(x[0])+'</span><span class="ar" lang="ar" dir="rtl">'+esc(shown||"")+'</span>'+trans+gloss+'</span>';
 };
 const tr=ks=>`<div class="terms">${ks.map(t).join('')}</div>`;
 const C=window.Curriculum.studentLessons;
@@ -249,7 +250,7 @@ function toast(x){let e=document.getElementById('toast');e.textContent=x;e.class
 function done(){return Object.values(state.done).filter(Boolean).length}function pct(){return Math.round(done()/31*100)}function updateSide(){document.getElementById('sideBar').style.width=pct()+'%';document.getElementById('sideDone').textContent=done()+'/31';document.getElementById('sidePct').textContent=pct()+'%'}
 function wordCards(){return C.flatMap(x=>(x.words||[]).map((w,i)=>({key:`w${x.n}-${i}`,ar:w[0],en:w[1],week:x.n,kind:'word'})))}
 function highCards(){let a=[],seen=new Set();C.forEach(x=>(x.hf||[]).forEach(w=>{if(!seen.has(w[0])){seen.add(w[0]);a.push({key:'h-'+w[0],ar:w[0],en:w[1],kind:'high'})}}));return a}
-function termCards(){return Object.entries(TERMS).map(([k,v])=>{let first=(state.cards['term:'+k]?.reps||state.cards['t-'+k]?.reps||0)<3&&v[2];return {key:'t-'+k,termKey:k,en:v[0],ar:first?v[2]:v[1],transliteration:first?v[3]:'',kind:'term'}})}
+function termCards(){return Object.entries(TERMS).map(([k,v])=>{let first=(state.cards['term:'+k]?.reps||state.cards['t-'+k]?.reps||0)<3&&v[2];return {key:'t-'+k,termKey:k,en:v[0],ar:first?v[2]:v[1],transliteration:first?v[3]:'',gloss:first?v[4]:'',kind:'term'}})}
 function cards(){return reviewMode==='terms'?termCards():reviewMode==='high'?highCards():wordCards()}
 function nextWeek(){return C.find(x=>!state.done[x.n])||C[30]}
 function summary(x){return x.checkpoint?'Al-Fātiḥah retrieval checkpoint':x.capstone?'Choose your own memorised page':`Madani 15-line Mushaf · p. ${x.page} · ${x.title}`}
