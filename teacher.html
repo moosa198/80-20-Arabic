@@ -107,7 +107,7 @@ footer{max-width:1180px;padding:0 18px 28px;margin:0 auto;color:var(--muted);fon
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const CONFIG_KEY="8020-classroom-config-v1";
-let sb=null,user=null,classes=[],selectedClass=null,selectedRowData=[],latestCodes=[],currentClassStudents=[];
+let sb=null,user=null,classes=[],selectedClass=null,selectedRowData=[],latestCodes=[],latestClassCode="",currentClassStudents=[];
 function cfg(){try{return JSON.parse(localStorage.getItem(CONFIG_KEY)||"{}")}catch(e){return{}}}
 function setStatus(id,msg,kind){const el=$(id);if(!el)return;el.textContent=msg;el.className="notice"+(kind?" "+kind:"");}
 function saveSettings(){
@@ -120,6 +120,7 @@ function saveSettings(){
 function getClient(){if(!sb){const c=cfg();if(!c.url||!c.anonKey)return null;sb=window.supabase.createClient(c.url,c.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"8020-teacher-auth-"+url.replace("https://","").replace("http://","").replace(/[^a-zA-Z0-9]/g,"-").slice(0,55)}})}return sb}
 function download(name,text,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:type||"text/plain;charset=utf-8"}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return rows.map(row=>row.map(v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"').join(",")).join("\r\n")}
+function progressRecord(row){const value=row&&row.student_progress;return Array.isArray(value)?(value[0]||{}):(value||{});}
 function progressMetrics(snapshot){
  const course=snapshot&&snapshot.course||{},studio=snapshot&&snapshot.studio||{},doneA=course.doneWeeks||{},doneB=studio.done||{};
  const doneWeeks=new Set();
@@ -132,7 +133,7 @@ function progressMetrics(snapshot){
  const quizzes=Object.values(snapshot&&snapshot.quizzes||{});
  const good=quizzes.filter(x=>x&&x.correct).length;
  const recognition=Object.values(snapshot&&snapshot.recognition||{}).reduce((sum,item)=>sum+(Array.isArray(item&&item.attempts)?item.attempts.length:(item&&item.words?1:0)),0);
- const ready=Object.keys(snapshot&&snapshot.sourceFirst||{}).filter(k=>snapshot.sourceFirst[k]&&snapshot.sourceFirst[k].ready).length;
+ const ready=Object.keys(snapshot&&snapshot.sourceFirst||{}).filter(k=>snapshot.sourceFirst[k]&&snapshot.sourceFirst[k].ready&&snapshot.sourceFirst[k].quizCorrect).length;
  return {done:doneWeeks.size,known:known.size,quizzes:quizzes.length,quizGood:good,recognition,ready};
 }
 function resetUI(){
@@ -155,12 +156,12 @@ async function loadClasses(){
  if(error)throw error;classes=data||[];rosterHTML(classes);
 }
 function outputClassMetrics(students){
- const stats=students.map(s=>progressMetrics((s.student_progress||[])[0]?.snapshot||{}));
+ const stats=students.map(s=>progressMetrics(progressRecord(s).snapshot||{}));
  const sum=k=>stats.reduce((n,s)=>n+s[k],0);
  $("#classMetrics").innerHTML='<div class="metric"><b>'+students.length+'</b><span>Learners on roster</span></div><div class="metric"><b>'+students.filter(s=>s.auth_user_id).length+'</b><span>Connected accounts</span></div><div class="metric"><b>'+sum("done")+'</b><span>Week completions in total</span></div><div class="metric"><b>'+sum("recognition")+'</b><span>Recognition attempts</span></div>';
 }
 function evidenceForStudent(row){
- const snap=(row.student_progress||[])[0]?.snapshot||{};
+ const snap=progressRecord(row).snapshot||{};
  const items=[];
  Object.entries(snap.recognition||{}).forEach(([week,item])=>{
   const arr=Array.isArray(item&&item.attempts)?item.attempts:(item&&item.words?[item]:[]);
@@ -174,8 +175,8 @@ async function openClass(id){
  $("#selectedClassTitle").textContent=c.class_name;$("#selectedClassMeta").textContent=c.school_name+" · Class code "+c.join_code+" · created "+new Date(c.created_at).toLocaleDateString();
  outputClassMetrics(currentClassStudents);
  selectedRowData=currentClassStudents.map(st=>{
-  const snap=(st.student_progress||[])[0]?.snapshot||{},p=progressMetrics(snap);
-  return {student:st,...p,snapshot:snap,lastSeen:(st.student_progress||[])[0]?.last_seen||null};
+  const snap=progressRecord(st).snapshot||{},p=progressMetrics(snap);
+  return {student:st,...p,snapshot:snap,lastSeen:progressRecord(st).last_seen||null};
  });
  $("#progressRows").innerHTML=selectedRowData.length?selectedRowData.map(item=>{
   const last=item.lastSeen?new Date(item.lastSeen).toLocaleString():"Not synced yet";
@@ -197,11 +198,11 @@ async function resetCode(id){
  try{
   const {data,error}=await getClient().rpc("reset_student_access_code",{p_student_id:id});if(error)throw error;
   const student=currentClassStudents.find(x=>x.id===id);latestCodes=[{display_name:student?.display_name||"Learner",access_code:data}];
-  showCodes(latestCodes,"New access code created. Give it privately to this learner; it will not be shown again.");
+  showCodes(latestCodes,"New access code created. Give it privately to this learner; it will not be shown again.",selectedClass?.join_code||"");
  }catch(e){setStatus("#rosterStatus","Could not reset code: "+e.message,"error")}
 }
-function showCodes(rows,message){
- latestCodes=rows||[];$("#rosterStatus").textContent=message||"Codes generated.";
+function showCodes(rows,message,classCode){
+ latestCodes=rows||[];latestClassCode=classCode||latestClassCode||"";$("#rosterStatus").textContent=message||"Codes generated.";
  $("#newCodes").innerHTML=latestCodes.map(r=>'<div class="roster-row"><span>'+esc(r.display_name)+'</span><span class="code">'+esc(r.access_code)+'</span></div>').join("");
  const enabled=latestCodes.length>0;$("#downloadCodes").disabled=!enabled;$("#printCodes").disabled=!enabled;
 }
@@ -252,11 +253,11 @@ $("#rosterForm").addEventListener("submit",async e=>{
   const id=$("#rosterClass").value;if(!id)throw new Error("Choose a class.");
   const names=$("#studentNames").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!names.length)throw new Error("Enter at least one learner name.");
   const {data,error}=await getClient().rpc("add_class_students",{p_class_id:id,p_names:names});if(error)throw error;
-  $("#studentNames").value="";showCodes(data||[],"Codes generated. Download the roster now; the raw learner codes will not be stored for later display.");
+  $("#studentNames").value="";const rosterClass=classes.find(c=>c.id===id);showCodes(data||[],"Codes generated. Download the roster now; the raw learner codes will not be stored for later display.",rosterClass?.join_code||"");
   await refresh();
  }catch(e){setStatus("#rosterStatus","Could not create learner codes: "+e.message,"error")}
 });
-$("#downloadCodes").onclick=()=>download("8020-arabic-learner-access-codes.csv",csv([["Learner","Personal access code"],...latestCodes.map(x=>[x.display_name,x.access_code])]),"text/csv;charset=utf-8");
+$("#downloadCodes").onclick=()=>download("8020-arabic-learner-access-codes.csv",csv([["Class code","Learner","Personal access code"],...latestCodes.map(x=>[latestClassCode,x.display_name,x.access_code])]),"text/csv;charset=utf-8");
 $("#printCodes").onclick=()=>window.print();
 $("#refreshClasses").onclick=refresh;
 $("#signOutBtn").onclick=async()=>{try{const client=getClient();if(client)await client.auth.signOut();user=null;classes=[];selectedClass=null;resetUI();setStatus("#authStatus","Signed out. Class records remain safely stored online.","success");}catch(e){setStatus("#authStatus","Sign-out failed: "+e.message,"error")}};
