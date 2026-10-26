@@ -221,9 +221,10 @@
   function renderLibrarySetup() {
     return '<section class="weekly-guide source-method-card" aria-labelledby="sourceMethodTitle"><div class="guide-eyebrow">HOW THE METHOD WORKS</div><h2 id="sourceMethodTitle">Learn the concept, then apply it to the Qur’an</h2><div class="method-rhythm">' +
       '<div><b>1 · Source-book concept</b><p>Read only this week’s assigned FSTU page(s): definition, rule(s), worked example and relevant tarkīb (تَرْكِيبٌ).</p></div>' +
-      '<div><b>2 · Guided understanding</b><p>Close the source and explain the idea in your own words. Check the concept question before continuing.</p></div>' +
-      '<div><b>3 · Qur’anic application</b><p>Apply the same structure to the 15-line Mushaf page only after the source check is passed.</p></div>' +
-      '<div><b>4 · Retrieval + teacher evidence</b><p>Select the Arabic words, name the role, justify the clue and save attempts for teacher review.</p></div></div>' +
+      '<div><b>2 · Guided understanding</b><p>Close the source, confirm the worked example, explain the idea in your own words, and answer the concept check.</p></div>' +
+      '<div><b>3 · Qur’anic application</b><p>Apply the same concept to the 15-line Mushaf page only after the source check is passed.</p></div>' +
+      '<div><b>4 · Retrieval and transfer</b><p>Select the Arabic evidence, name the role in English and Arabic, justify the clue, then revisit it on another memorised page where appropriate.</p></div>' +
+      '<div><b>5 · Teacher evidence</b><p>The dashboard stores source answers, teach-back and recognition attempts for human review: Secure, Developing or Needs revision.</p></div></div>' +
       '<p class="guide-small">The FSTU PDF is supplied by the learner, processed locally and never uploaded. The viewer shows only the pages assigned for the current week. The digital 15-line Madina layout may differ in calligraphy or line breaks from the printed Mushaf, so verify the sūrah, page and verse with your teacher.</p>' +
       '<p class="guide-small">Sources: <a href="https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources" target="_blank" rel="noreferrer">FSTU Naḥw</a> · <a href="https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources" target="_blank" rel="noreferrer">FSTU Ṣarf</a> · <a href="https://github.com/tarekeldeeb/quran-madina-html" target="_blank" rel="noreferrer">digital Mushaf renderer</a>. References are provided for educational study with attribution.</p></section>';
   }
