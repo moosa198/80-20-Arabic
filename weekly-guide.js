@@ -374,9 +374,10 @@
       '<section class="weekly-step textbook-step" aria-labelledby="textbookTitle-' + n + '"><div class="step-topline"><span class="step-number">01</span><div><div class="guide-eyebrow">SOURCE BOOK FIRST · ONE CONCEPT AT A TIME</div><h2 id="textbookTitle-' + n + '">Study the assigned FSTU pages</h2></div></div>' +
       '<p class="step-intro">Begin with the source book—not the Qur’an page. Read the definition and relevant rule(s), inspect the worked example, and complete or orally explain the relevant <i>tarkīb</i> (تَرْكِيبٌ). Only the page(s) assigned to this week are shown; the original PDF stays on this device and is never uploaded.</p>' +
       '<div class="textbook-focus-note"><div class="textbook-focus-item"><b>Ṣarf · صَرْفٌ · ṣarf</b><p>' + esc(d.sarf) + '</p></div><div class="textbook-focus-item nahw-focus"><b>Naḥw · نَحْوٌ · naḥw</b><p>' + esc(d.nahw) + '</p></div></div>' +
-      renderKeyTerms(n) + '<div class="textbook-stack">' + renderBookGroup("sarf", d.sarfPages, d.sarf) + renderBookGroup("nahw", d.nahwPages, d.nahw) + '</div>' +
+      '<div class="textbook-stack">' + renderBookGroup("sarf", d.sarfPages, d.sarf) + renderBookGroup("nahw", d.nahwPages, d.nahw) + '</div>' +
+      renderKeyTerms(n) + renderPlaylists(n) +
       '<p class="source-return-note"><b>Before continuing:</b> close or minimise the source view and explain what the rule does, which clue it uses, and how the source example demonstrates it.</p></section>' +
-      renderSourceCheck(n) + renderPlaylists(n) +
+      renderSourceCheck(n) +
       '<div id="applicationFlow-' + n + '" class="application-flow" ' + (ready ? "" : "hidden") + '><section class="weekly-step mushaf-step" aria-labelledby="mushafTitle-' + n + '">' +
       '<div class="step-topline"><span class="step-number">03</span><div><div class="guide-eyebrow">APPLY THE SOURCE CONCEPT TO REAL QUR’AN</div><h2 id="mushafTitle-' + n + '">Now find it on the 15-line Qur’an page</h2></div></div>' +
       '<p class="step-intro">Only now move to the Mushaf. Look at the full phrase first, then identify the word or relationship that matches the concept you just explained. If handling a physical Mushaf, make wudhu first; the digital page is not gated by a Wudhu checkbox.</p>' +
