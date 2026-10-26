@@ -59,8 +59,8 @@
       '<label>Class / group <span class="required-mark">required</span><input name="className" autocomplete="organization" maxlength="80" value="'+escapeHtml(p.className)+'" placeholder="e.g. Saturday Hifz Group A" required></label>'+
       '<label>Display name or initials <span class="optional-mark">optional</span><input name="displayName" autocomplete="off" maxlength="60" value="'+escapeHtml(p.displayName)+'" placeholder="e.g. M. or student initials"></label>'+
       '<label>Teacher <span class="optional-mark">optional</span><input name="teacherName" autocomplete="off" maxlength="80" value="'+escapeHtml(p.teacherName)+'" placeholder="e.g. Teacher initials"></label>'+
-      '</div><div class="actions profile-actions"><button class="btn light" type="submit">Save class details on this device</button><button class="btn" type="button" data-export-class-record>Export progress for teacher</button></div><p class="learner-profile-status" data-profile-status role="status" aria-live="polite">Progress is still stored locally in this browser.</p></form>'+
-      '<p class="guide-small">To share progress, save these details, export the JSON record, and give the file to your teacher. The teacher imports files into the separate dashboard. This site does not sync student data live between devices.</p>';
+      '</div><div class="actions profile-actions"><button class="btn light" type="submit">Save class details on this device</button><button class="btn" type="button" data-export-class-record>Export progress for teacher</button><button class="btn light" type="button" data-clear-learner-profile>Clear class details</button></div><p class="learner-profile-status" data-profile-status role="status" aria-live="polite">Progress is still stored locally in this browser.</p></form>'+
+      '<p class="guide-small">To share progress, save these details, export the JSON record, and give the file to your teacher. The teacher imports files into the separate dashboard. This site does not sync student data live between devices. On a shared tablet, export first, then use the course reset control before another learner begins; a label alone does not isolate each learner’s local progress.</p>';
     container.appendChild(holder);
     var form=holder.querySelector("[data-learner-profile-form]");
     var status=holder.querySelector("[data-profile-status]");
@@ -71,6 +71,13 @@
       status.textContent="Saved for this browser: "+saved.studentId+" · "+saved.className+".";
       status.classList.remove("profile-warning");
       status.classList.add("profile-saved");
+    });
+    holder.querySelector("[data-clear-learner-profile]").addEventListener("click",function(){
+      if(typeof root.confirm==="function"&&!root.confirm("Clear the student ID and class details stored in this browser? Course progress will remain until you reset it separately."))return;
+      root.localStorage.removeItem(PROFILE_KEY);
+      form.querySelectorAll("input").forEach(function(input){input.value="";});
+      status.textContent="Class details cleared. The course progress on this browser has not been reset.";
+      status.classList.remove("profile-saved","profile-warning");
     });
     holder.querySelector("[data-export-class-record]").addEventListener("click",function(){
       var data=new FormData(form);
