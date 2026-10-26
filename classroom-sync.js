@@ -16,7 +16,10 @@
   function config(){return readJson(CONFIG_KEY,{});}
   function enrolment(){return readJson(ENROLMENT_KEY,null);}
   function saveConfig(value){
-    root.localStorage.setItem(CONFIG_KEY,JSON.stringify({url:String(value.url||"").trim().replace(/\/$/,""),anonKey:String(value.anonKey||"").trim()}));
+    var nextUrl=String(value.url||"").trim().replace(/\/$/,"");
+    var prior=config(),active=enrolment();
+    if(active&&prior.url&&nextUrl!==prior.url)throw new Error("Disconnect this learner from the current class before changing the classroom project.");
+    root.localStorage.setItem(CONFIG_KEY,JSON.stringify({url:nextUrl,anonKey:String(value.anonKey||"").trim()}));
     client=null;clientConfig=null;
   }
   function getClient(){
@@ -202,7 +205,8 @@
     div.querySelector("[data-classroom-save-settings]").addEventListener("click",function(){
       var values=currentInputs();
       if(!/^https:\/\//i.test(values.url)||!values.anonKey){status("Enter a valid HTTPS project URL and public anon key first.","error");return;}
-      saveConfig(values);status("Classroom setup saved in this browser. Add your two learner codes to connect.","success");
+      try{saveConfig(values);status("Classroom setup saved in this browser. Add your class and personal learner codes to connect.","success");}
+      catch(e){status(e.message||"Could not change classroom project.","error");}
     });
     div.querySelector("[data-classroom-disconnect]").addEventListener("click",async function(){
       try{
