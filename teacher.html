@@ -63,7 +63,7 @@ footer{max-width:1180px;padding:0 18px 28px;margin:0 auto;color:var(--muted);fon
 
   <section class="grid hidden" id="dashboard" style="margin-top:16px">
     <div class="panel">
-      <div class="class-page-head"><div><h2>Your classes</h2><p class="muted">Create one class per group or teaching cohort.</p></div><button class="btn secondary" id="refreshClasses">Refresh</button></div>
+      <div class="class-page-head"><div><h2>Your classes</h2><p class="muted">Create one class per group or teaching cohort.</p></div><button class="btn secondary" id="refreshClasses">Refresh</button><button class="btn secondary" id="signOutBtn">Sign out</button></div>
       <form id="createClassForm">
         <div class="field"><label for="schoolName">Madrassa / school</label><input id="schoolName" maxlength="100" placeholder="Your madrassa" required></div>
         <div class="field"><label for="className">Class or group name</label><input id="className" maxlength="100" placeholder="e.g. Weekend Hifz Group A" required></div>
@@ -101,7 +101,6 @@ footer{max-width:1180px;padding:0 18px 28px;margin:0 auto;color:var(--muted);fon
 </main>
 <footer>80/20 Arabic · Teacher classroom pilot · <a href="./CURRICULUM-AUDIT.md">Curriculum audit</a></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./classroom-sync.js"></script>
 <script>
 (function(){
 "use strict";
@@ -114,7 +113,6 @@ function setStatus(id,msg,kind){const el=$(id);if(!el)return;el.textContent=msg;
 function saveSettings(){
  const url=$("#projectUrl").value.trim().replace(/\/$/,""),anonKey=$("#anonKey").value.trim();
  if(!/^https:\/\//i.test(url)||!anonKey){setStatus("#setupStatus","Enter a valid HTTPS URL and public anon/publishable key.","error");return false}
- window.ClassroomSync.saveConfig({url,anonKey});
  localStorage.setItem(CONFIG_KEY,JSON.stringify({url,anonKey}));
  sb=window.supabase.createClient(url,anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"8020-teacher-auth-v1"}});
  setStatus("#setupStatus","Settings saved in this browser. They are not stored in the repository.","success");return true;
@@ -261,6 +259,7 @@ $("#rosterForm").addEventListener("submit",async e=>{
 $("#downloadCodes").onclick=()=>download("8020-arabic-learner-access-codes.csv",csv([["Learner","Personal access code"],...latestCodes.map(x=>[x.display_name,x.access_code])]),"text/csv;charset=utf-8");
 $("#printCodes").onclick=()=>window.print();
 $("#refreshClasses").onclick=refresh;
+$("#signOutBtn").onclick=async()=>{try{const client=getClient();if(client)await client.auth.signOut();user=null;classes=[];selectedClass=null;resetUI();setStatus("#authStatus","Signed out. Class records remain safely stored online.","success");}catch(e){setStatus("#authStatus","Sign-out failed: "+e.message,"error")}};
 $("#exportProgress").onclick=renderProgressCSV;
 $("#closeClass").onclick=()=>$("#classProgressPanel").classList.add("hidden");
 $("#closeEvidence").onclick=()=>$("#evidencePanel").classList.add("hidden");
