@@ -6,6 +6,7 @@ on:
       - "curriculum.js"
       - "weekly-guide.js"
       - "book-pages.js"
+      - "progress-transfer.js"
       - "index.html"
       - "student.html"
       - "tests/**"
