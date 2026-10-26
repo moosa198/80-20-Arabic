@@ -219,8 +219,41 @@ const assert = require("node:assert/strict");
     assert.equal(await teacher.locator("#progressFiles").count(),1,"Teacher dashboard progress import control missing");
     assert.equal(await teacher.locator("#rosterFile").count(),1,"Teacher dashboard roster import control missing");
     assert.equal(await teacher.locator("#exportCsv").count(),1,"Teacher dashboard CSV export control missing");
+    const samplePath=path.join(out,"qa-progress-sample.json");
+    const sampleRecord={
+      format:"80-20-arabic-class-record",schemaVersion:1,exportedAt:"2026-10-26T00:00:00.000Z",
+      learner:{studentId:"QA-001",displayName:"QA Student",className:"QA Madrassa Group",teacherName:"QA Teacher"},
+      source:"qa-student-studio",
+      progress:{cards:{"w1-0":{reps:4,interval:7,ease:2.4,due:"2026-11-02"}},doneWeeks:{1:true,2:true},lastSession:"2026-10-26",streak:2,seconds:120},
+      recognition:{"1":{week:1,attempts:[{words:[{page:440,index:1,text:"كلمة"}],labelEn:"Noun",labelAr:"اِسْمٌ",explanation:"The word form supports this label.",savedAt:"2026-10-26T00:00:00.000Z"}]}},
+      weeklyRecall:{"1":{week:1,choice:0,correct:true,answeredAt:"2026-10-26T00:00:00.000Z"}}
+    };
+    await fs.promises.writeFile(samplePath,JSON.stringify(sampleRecord,null,2));
+    const rosterPath=path.join(out,"qa-roster.csv");
+    await fs.promises.writeFile(rosterPath,"studentId,displayName,className\\nQA-001,QA Student,QA Madrassa Group\\nQA-002,Unsubmitted Student,QA Madrassa Group\\n");
+    await teacher.locator("#progressFiles").setInputFiles(samplePath);
+    await teacher.locator("#studentsBody").getByText("QA-001").waitFor();
+    assert.equal(await teacher.locator("#studentsBody tr").count(),1,"Teacher dashboard should show the imported student");
+    await teacher.locator("#rosterFile").setInputFiles(rosterPath);
+    await teacher.locator("#studentsBody").getByText("QA-002").waitFor();
+    assert.equal(await teacher.locator("#studentsBody tr").count(),2,"Roster-only learners should be visible as no-submission rows");
+    assert.equal((await teacher.locator("#mSubmitted").innerText()).trim(),"1","Submitted student metric is inaccurate");
+    await teacher.locator('[data-open-student]').first().click();
+    assert.equal(await teacher.locator("#studentDetail").evaluate(el=>el.classList.contains("show")),true,"Teacher detail panel did not open");
+    const detailText=await teacher.locator("#detailContent").innerText();
+    assert(detailText.includes("The word form supports this label."),"Saved grammar evidence was not shown in learner detail");
+    assert(detailText.includes("2/31 weeks"),"Course completion data was not parsed correctly");
+    await teacher.locator("#progressFiles").setInputFiles([]);
+    await teacher.locator("#progressFiles").setInputFiles(samplePath);
+    assert.equal(await teacher.locator("#studentsBody tr").count(),2,"Re-importing an identical snapshot should not duplicate its row");
+    const [csvDownload]=await Promise.all([teacher.waitForEvent("download"),teacher.locator("#exportCsv").click()]);
+    assert.equal(csvDownload.suggestedFilename(),"80-20-arabic-class-progress.csv","Class CSV download filename unexpected");
+    const csvPath=path.join(out,csvDownload.suggestedFilename());
+    await csvDownload.saveAs(csvPath);
+    const csvContent=await fs.promises.readFile(csvPath,"utf8");
+    assert(csvContent.includes("QA-001")&&csvContent.includes("QA-002"),"Class CSV should include submitted and non-submitted roster learners");
     await teacher.screenshot({path:path.join(out,"qa-teacher-dashboard.png"),fullPage:true});
-    audit.passed.push("Teacher dashboard loads, accepts multiple progress exports and roster CSV, and provides class-summary export");
+    audit.passed.push("Teacher dashboard imports labelled student evidence, handles roster-only learners, de-duplicates repeated snapshots, and exports a class CSV");
     audit.finishedAt = new Date().toISOString();
     await fs.promises.writeFile(path.join(out, "content-audit.json"), JSON.stringify(audit, null, 2));
     console.log(JSON.stringify(audit, null, 2));
