@@ -30,6 +30,16 @@ for (const book of ["sarf", "nahw"]) {
   assert.equal(new Set(pageMap[book]).size, pageMap[book].length, book + " pages must be unique");
   assert.ok(pageMap[book].every(page => Number.isInteger(page) && page > 0), book + " pages must be positive printed page numbers");
 }
+for (let n = 1; n <= 31; n++) {
+  const week = guideContext.window.WeeklyGuide.get(n);
+  const rendered = guideContext.window.WeeklyGuide.renderSequence(n);
+  assert.ok(!/drive\\.google\\.com\\/file\\/d\\//i.test(rendered), "week " + n + " must not link to a full FSTU PDF");
+  for (const book of ["sarf", "nahw"]) {
+    const actual = Array.from(rendered.matchAll(new RegExp('data-book-page="' + book + ':([0-9]+)"', "g")), match => Number(match[1])).sort((a, b) => a - b);
+    const assigned = (week[book + "Pages"] || []).map(Number).sort((a, b) => a - b);
+    assert.deepEqual(actual, assigned, "week " + n + " must display only assigned " + book + " pages");
+  }
+}
 const guide = fs.readFileSync("weekly-guide.js", "utf8");
 assert.ok(!/drive\.google\.com\/file\/d\//i.test(guide), "student lesson renderer must not expose a complete FSTU PDF URL");
 assert.ok(!/var\s+(?:preview|direct)\s*=/i.test(guide), "student lesson renderer must not create full-book preview/direct links");
