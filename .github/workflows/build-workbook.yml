@@ -1,12 +1,21 @@
 name: Build and audit student workbook
 on:
   push:
-    branches: ["main", "build/structure-first-recognition"]
+    branches: ["main", "build/structure-first-recognition", "feature/madrassa-cloud-progress"]
     paths:
       - "index.html"
       - "student.html"
+      - "teacher.html"
       - "weekly-guide.js"
+      - "book-pages.js"
       - "recognition.js"
+      - "term-support.js"
+      - "supabase-config.js"
+      - "cloud-progress.js"
+      - "supabase/**"
+      - "SUPABASE-SETUP.md"
+      - "README.md"
+      - "sw.js"
       - "scripts/build-workbook.cjs"
       - "CURRICULUM-AUDIT.md"
       - ".github/workflows/build-workbook.yml"
