@@ -81,3 +81,14 @@ The app’s terminology map lives in `TERMS` in `index.html`. Store every techni
 ## Scope
 
 This is a practical teaching aid, not a replacement for a qualified teacher, reliable tafsīr, dictionary work or careful tarkīb. Vocabulary glosses are short recall cues rather than exhaustive lexical definitions. In the capstone, students choose words from a memorised page, justify their analysis and check any uncertainty with a teacher.
+
+
+## Multi-class Madrassa system
+
+The current deployed app still uses browser-local progress. A separate foundation branch documents the proposed multi-class architecture and introduces a Supabase/Postgres schema with row-level security; it is **not** a live sync integration yet.
+
+- [Madrassa platform roadmap](docs/MADRASSA-PLATFORM-ROADMAP.md): staged delivery, pedagogical sequence, teacher dashboard and rollout gates.
+- [Supabase setup and security checklist](supabase/README.md): development setup, role model, RLS boundaries and manual access-control tests.
+- [Database migration](supabase/migrations/202610260001_madrassa_progress.sql): schema foundation for classes, assignments, progress, recognition attempts and teacher reviews.
+
+The next safe step is to apply and test the migration in a separate development Supabase project, consolidate the duplicated lesson definitions into one canonical curriculum module, and only then connect authentication and sync. Do not enter live student data until the RLS tests and the Madrassa's privacy/retention process have been checked.
