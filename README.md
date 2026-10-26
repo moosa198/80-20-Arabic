@@ -19,7 +19,7 @@ A Qur’an-first, 31-week learning product for students who are memorising the Q
 - See technical terms paired every time they are taught or retrieved: **Pronoun — ضمير**, **Nominal sentence — جملة اسمية**, **Prepositional phrase — جار ومجرور**, **Emphasis — توكيد**.
 - Complete Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr before optional Arabic work; defer Arabic whenever Hifz needs attention.
 - See a digital 15-line Madina Qur’an page without uploading PDFs, and tap individual Arabic words to record recognition evidence.
-- Open the official Al-Qalam Institute FSTU Ṣarf (صرف) and Naḥw (نحو) source pages in the lesson.
+- Prepare an FSTU Naḥw or Ṣarf PDF locally; lessons show only the mapped page images and do not embed or link to complete textbooks.
 - Use the core Arabic listening playlist as part of the weekly lesson, with the bonus playlist available for repeated practice.
 - Complete a short retrieval quiz, select the relevant word(s) and role, explain the Arabic clue, and save multiple attempts locally. The app does **not** automatically grade complex grammatical analysis; a teacher checks uncertain or disputed parses.
 - Build transfer through progressively less scaffolding and an independent week-31 page analysis.
@@ -51,7 +51,7 @@ The digital 15-line renderer uses a 604-page Madina layout, but calligraphy and 
 - [Core Arabic lesson playlist](https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa)
 - [Bonus listening playlist](https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7)
 
-The lesson's source-page library accepts the full FSTU Naḥw and Ṣarf PDFs and renders only the specific pages mapped to the current week. Assigned rendered pages are cached locally in the browser; the original PDFs are not uploaded to the app's server. Official Al-Qalam resource links and source attribution remain available. Check the institute's current usage policy before redistributing copies or using them commercially.
+The source-page library accepts the FSTU PDFs locally and renders only pages assigned in the 31-week course map. Assigned images are cached in that browser; the original PDFs are never uploaded to the app's server. Student lessons do not embed or link to the complete books. Source attribution remains with Al-Qalam Institute.
 
 ## Learning rhythm
 
