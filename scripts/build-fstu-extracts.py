@@ -50,7 +50,9 @@ def download_drive(file_id: str, destination: Path) -> None:
         content = response.read()
     if not content.startswith(b"%PDF-"):
         page = content.decode("utf-8", "ignore")
-        match = re.search(r'(?:confirm=|name=["\\']confirm["\\']\\s+value=["\\'])([A-Za-z0-9_-]+)', page)
+        match = re.search(r"confirm=([A-Za-z0-9_-]+)", page)
+        if not match:
+            match = re.search('name="confirm"\\s+value="([^"]+)"', page)
         token = match.group(1) if match else "t"
         retry_url = base + "&confirm=" + urllib.parse.quote(token)
         request = urllib.request.Request(retry_url, headers=headers)
