@@ -15,6 +15,7 @@ on:
       - "scripts/build-workbook.cjs"
       - "README.md"
       - "CURRICULUM-AUDIT.md"
+      - "sw.js"
       - ".github/workflows/build-workbook.yml"
   workflow_dispatch:
 permissions:
