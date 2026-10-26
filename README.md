@@ -51,7 +51,7 @@ The digital 15-line renderer uses a 604-page Madina layout, but calligraphy and 
 - [Core Arabic lesson playlist](https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa)
 - [Bonus listening playlist](https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7)
 
-The FSTU previews link to Al-Qalam Institute’s official materials and include attribution. The institute’s published usage policy allows educational/non-commercial use with attribution; obtain written permission for commercial use and check current terms before redistributing copies.
+The lesson's source-page library accepts the full FSTU Naḥw and Ṣarf PDFs and renders only the specific pages mapped to the current week. Assigned rendered pages are cached locally in the browser; the original PDFs are not uploaded to the app's server. Official Al-Qalam resource links and source attribution remain available. Check the institute's current usage policy before redistributing copies or using them commercially.
 
 ## Learning rhythm
 
