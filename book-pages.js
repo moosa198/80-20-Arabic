@@ -155,6 +155,7 @@
       await storePut("meta",{id:kind,fileName:file.name,pdfPageCount:sourcePageCount,pagesSaved:total,renderedBytes:bytes,importedAt:new Date().toISOString()});
       setStatus(kind,"Ready: "+file.name+" · "+total+" assigned pages saved on this device.",false);
       await refreshLibraryStatus();
+      resetHydration(kind);
       await hydrate(root.document);
     }catch(error){
       setStatus(kind,"Could not prepare this source: "+(error&&error.message?error.message:"unknown error"),false);
