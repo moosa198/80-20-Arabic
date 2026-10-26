@@ -225,6 +225,15 @@ function renderEvidence(){
   });
   var quiz=bySnapshot(selectedStudent,"8020-weekly-recall-v2"),q=(quiz&&quiz.state||{})[selectedWeek];
   if(q){var qc=document.createElement("article");qc.className="attempt";qc.innerHTML='<b>Quick retrieval</b><p>Choice '+(Number(q.choice)+1)+' · '+(q.correct?"correct option selected":"review needed")+'</p><small>'+(q.answeredAt?new Date(q.answeredAt).toLocaleString():"")+'</small>';target.appendChild(qc);}
+  if(q&&(q.sourceExplanation||q.sourceRead||q.sourceExample||q.sourceReady||q.sourceCompletedAt)){
+    var sc=document.createElement("article");sc.className="attempt";
+    sc.innerHTML='<b>Source-book understanding · FSTU</b>'+
+      '<p>Definition/rule read: <b>'+(q.sourceRead?"Yes":"Not confirmed")+'</b> · Worked example explained: <b>'+(q.sourceExample?"Yes":"Not confirmed")+'</b></p>'+
+      '<p>Concept check: <b>'+(q.correct?"Correct":"Needs review")+'</b> · Qur’an stage unlocked: <b>'+(q.sourceReady&&q.correct?"Yes":"No")+'</b></p>'+
+      '<p><b>Student teach-back:</b> '+esc(q.sourceExplanation||"No explanation recorded.")+'</p>'+
+      '<small>'+(q.sourceCompletedAt?"Source check recorded "+new Date(q.sourceCompletedAt).toLocaleString():"Source check not completed")+'</small>';
+    target.appendChild(sc);
+  }
   var existing=reviews.find(function(r){return r.student_user_id===selectedStudent&&Number(r.week_no)===selectedWeek;});
   el("conceptKey").value=existing?existing.concept_key:(item.labelAr||"");
   el("reviewStatus").value=existing?existing.status:"developing";
