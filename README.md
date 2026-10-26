@@ -19,39 +19,42 @@ A Qur’an-first, 31-week learning product for students who are memorising the Q
 - See technical terms paired every time they are taught or retrieved: **Pronoun — ضمير**, **Nominal sentence — جملة اسمية**, **Prepositional phrase — جار ومجرور**, **Emphasis — توكيد**.
 - Complete Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr before optional Arabic work; defer Arabic whenever Hifz needs attention.
 - See a digital 15-line Madina Qur’an page without uploading PDFs, and tap individual Arabic words to record recognition evidence.
-- Open the official Al-Qalam Institute FSTU Ṣarf (صرف) and Naḥw (نحو) source pages in the lesson.
+- Learn from the **specific assigned FSTU page(s) first**, then apply that concept to the lesson’s 15-line Madina Qur’an page. Each lesson renders only the assigned textbook page extracts, not a full-book PDF viewer.
+- Open the official Al-Qalam Institute FSTU Ṣarf (صرف) and Naḥw (نحو) resource pages when further study is needed.
+- Read key grammar terminology in Arabic with full vowel marks and a small, muted Latin transliteration cue beneath it; Arabic remains visually primary.
 - Use the core Arabic listening playlist as part of the weekly lesson, with the bonus playlist available for repeated practice.
-- Complete a short retrieval quiz, select the relevant word(s) and role, explain the Arabic clue, and save multiple attempts locally. The app does **not** automatically grade complex grammatical analysis; a teacher checks uncertain or disputed parses.
+- Complete a short retrieval quiz, tap the relevant Qur’anic word(s), choose the grammatical role, explain the Arabic clue, and save multiple attempts locally. The app does **not** automatically grade complex grammatical analysis; a teacher checks uncertain or disputed parses.
 - Build transfer through progressively less scaffolding and an independent week-31 page analysis.
-- Track learning locally, export a progress backup, and import it in another browser.
+- Export a labelled student progress record containing course progress, review data, grammar-recognition attempts and quiz results. Teachers can import records from multiple learners, compare snapshots, load a roster and export a class-summary CSV in the [Teacher Dashboard](https://moosa198.github.io/80-20-Arabic/teacher.html).
 
 ## Pedagogical approach: whole → map → whole → retrieve → transfer
 
 The course adapts the high-level 80/20 and early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf). It does not reproduce the report’s wording or assume its performance estimates apply to this classroom.
 
-1. **Whole:** Start with a real Qur’anic phrase before presenting a grammar rule. Students ask what the statement is doing and notice a clue.
-2. **Map:** Teach the smallest useful structural map: word type, complete form, phrase relationship or sentence role. Avoid an exhaustive grammar catalogue.
-3. **Whole again:** Return to the same phrase after the focused FSTU reference and explain how the rule helps read the actual words.
-4. **Retrieve:** Ask the student to tap the evidence, pair the English label with Arabic, and explain the clue without copying the source wording.
-5. **Transfer:** Revisit the pattern in later weeks and on another memorised page. The three Fātiḥah checkpoints are retrieval exercises, not new teaching units; students are told to use a transfer page when the target feature is absent from Al-Fātiḥah.
+1. **Source first:** The student studies the assigned FSTU page, works through its own worked examples and exercises, and explains the concept without simply reading the printed definition.
+2. **Apply:** The student then opens the lesson’s 15-line Qur’an page, finds the same pattern and points to the Arabic evidence.
+3. **Retrieve:** The student names the role in English and Arabic, with a vocalised term and a subtle reading cue, and explains the clue.
+4. **Transfer:** Revisit the pattern in later weeks and on another memorised page. Reduce the prompts as confidence grows.
+5. **Verify:** The app records attempts but does not auto-grade complex syntax. Teachers check students’ reasoning against the source book and a fresh passage. The three Fātiḥah checkpoints are retrieval exercises, not new teaching units; students are told to use a transfer page when the target feature is absent from Al-Fātiḥah.
 
 The weekly lesson is designed for around 45 minutes. Hifz remains the priority; this optional Arabic supplement must not compete with memorisation or revision.
 
 ## Hifz-first weekly workflow
 
-Each week follows: **(1) Qur’anic passage → (2) focused FSTU map → (3) listening → (4) apply and explain**. An adab note reminds students to make wudhu before handling a physical Mushaf; the software does not gate a digital page behind a checkbox.
+Each week follows: **(1) assigned FSTU source page(s) → (2) 15-line Qur’an application → (3) listening → (4) retrieve, explain and transfer**. A short comprehension check asks students to explain the rule or source-book example before moving to the Qur’an. An adab note reminds students to make wudhu before handling a physical Mushaf; the software does not gate a digital page behind a checkbox.
 
 The digital 15-line renderer uses a 604-page Madina layout, but calligraphy and line breaks may differ from the physical Mushaf used by a student. Confirm the passage and page context with the teacher and printed Mushaf. Page numbers refer to the digital layout.
 
 ## Course and source materials
 
-- [FSTU Naḥw official resources](https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources). The embedded reference uses the August 2026 edition.
-- [FSTU Ṣarf official resources](https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources). The embedded reference uses the October 2023 resource. Some mapping was initially made against a March 2022 copy, so follow the printed section heading if pagination differs.
+- [FSTU Naḥw official resources](https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources). The assigned-page extracts use the official August 2026 resource and include only 29 unique printed pages across the course.
+- [FSTU Ṣarf official resources](https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources). The assigned-page extracts use the official October 2023 resource and include only 13 unique printed pages. Some mapping was initially made against the uploaded March 2022 copy; the printed section heading takes precedence if pagination differs.
+- The build script downloads the public official resources, extracts the assigned pages without annotating or modifying their contents, and verifies the excerpt page counts. Each weekly lesson displays only the particular pages mapped to that week.
 - [Digital 15-line Madina renderer](https://github.com/tarekeldeeb/quran-madina-html). The upstream repository lists the Waqf General Public License (GPL-2.0); check its licence before redistributing or modifying the renderer. Source code is loaded from upstream and is not copied into this repository.
 - [Core Arabic lesson playlist](https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa)
 - [Bonus listening playlist](https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7)
 
-The FSTU previews link to Al-Qalam Institute’s official materials and include attribution. The institute’s published usage policy allows educational/non-commercial use with attribution; obtain written permission for commercial use and check current terms before redistributing copies.
+The FSTU page extracts reproduce selected original pages unchanged and include source attribution. Al-Qalam Institute’s published [copyright and usage policy](https://www.alqalaminstitute.org/resources) allows educational/non-commercial use with attribution; the extracts are not altered or sold. Obtain written permission before any commercial use or integration into a paid service.
 
 ## Learning rhythm
 
@@ -66,13 +69,13 @@ The “well-established” word count means a card has been answered successfull
 
 ## Privacy and offline use
 
-The app stores course progress, quiz results and word-recognition attempts in the current browser’s local storage. It does not upload a student profile, source PDFs or written answers to its own server. Export progress before changing devices.
+Course progress, quizzes and grammar-recognition evidence stay in the learner’s browser until they choose to export a labelled JSON progress record. The Teacher Dashboard imports those files locally and can export a CSV; it does not send the imported records to a server or keep them after the browser session ends. It is a file-based workflow, not live synchronisation or an account system. Use short student IDs or agreed initials, keep records on a protected device, and follow Madrassa/parental data-protection policy.
 
-The Qur’an renderer, Google Drive FSTU previews, YouTube and Google Fonts load from third-party services and require an internet connection; those services may receive normal network metadata. The service worker caches the app’s own files, but the source-page and listening experience is not fully offline.
+The Qur’an renderer, PDF.js library, YouTube and Google Fonts load from third-party services and require an internet connection; those services may receive normal network metadata. The locally hosted FSTU excerpts are fetched only after the app’s build has generated and included them. The service worker caches the app and source map; the source-page and listening experience is not fully offline.
 
 ## Printable workbook and automated quality checks
 
-The in-app **Print full course workbook** creates a student copy with writing space and no answer key. GitHub Actions tests the rendered interface in Chromium before generating the PDF. Checks cover all 31 lessons, paired English/Arabic terminology, right-to-left Arabic, seven lexical slots per teaching week, Fātiḥah checkpoint behaviour, page/source references, recognition controls, mobile width and workbook page count. Screenshots and the content audit are stored as workflow artifacts.
+The in-app **Print full course workbook** creates a student copy with writing space and no answer key. GitHub Actions tests the rendered interface in Chromium before generating the PDF. Checks cover all 31 lessons, paired English/Arabic terminology with reading cues, right-to-left Arabic, seven lexical slots per teaching week, Fātiḥah checkpoint behaviour, source-first sequence, exact assigned FSTU excerpt counts and rendering, word-recognition controls, mobile width, the teacher dashboard and workbook page count. Screenshots and the content audit are stored as workflow artifacts.
 
 ## Maintain the bilingual terminology
 
