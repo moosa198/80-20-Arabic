@@ -79,7 +79,14 @@ const assert = require("node:assert/strict");
       } else {
         assert.equal(count, 7, "Week " + n + " should expose seven lexical/learner-selected word slots");
       }
-       if (n === 1) assert(await page.locator(".source-key-term .term-pronunciation").count() >= 1, "First-encounter terms should show subtle pronunciation support on week 1");
+       if (n === 1) {
+         assert(await page.locator(".source-key-term .term-pronunciation").count() >= 1, "First-encounter terms should show subtle pronunciation support on week 1");
+         await page.locator("#complete").check();
+         await page.locator("#saveWeek").click();
+         const prematureCompletion = await page.evaluate(() => !!(JSON.parse(localStorage.getItem("8020arabic-progress-v1") || "{}").doneWeeks || {})[1]);
+         assert.equal(prematureCompletion, false, "A week must not be marked complete before the FSTU source check");
+         await page.locator("#complete").uncheck();
+       }
        await page.locator('[data-source-read="' + n + '"]').check();
        await page.locator('[data-source-example="' + n + '"]').check();
        await page.locator('[data-source-explanation="' + n + '"]').fill("The source example shows the rule and the relationship between these Arabic words.");
@@ -180,6 +187,11 @@ const assert = require("node:assert/strict");
       assert.equal(await student.locator("#applicationFlow-1").isVisible(), false, "Student Studio must keep Qur’an application locked before the source check");
       assert.equal(await student.locator("#mushafTask-1").isVisible(), false, "Student Studio must not show the Qur’an page before source understanding");
       assert.equal(await student.locator('[data-recognition-task="1"]').count(), 1, "Student Studio word-recognition task missing");
+    await student.locator("#complete").check();
+    await student.locator("#saveWeek").click();
+    const prematureStudentCompletion = await student.evaluate(() => !!(JSON.parse(localStorage.getItem("8020-student-v2") || "{}").done || {})[1]);
+    assert.equal(prematureStudentCompletion, false, "Student Studio must not record completion before the source check");
+    await student.locator("#complete").uncheck();
     await student.locator('[data-source-read="1"]').check();
     await student.locator('[data-source-example="1"]').check();
     await student.locator('[data-source-explanation="1"]').fill("The source example shows how this Arabic structure works and how to identify it.");
