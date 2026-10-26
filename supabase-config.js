@@ -1,6 +1,5 @@
-/* Public browser configuration only. Never put a Supabase service_role key here.
-   Set these two values after creating the project and applying the migration. */
+/* Public browser configuration only. Never put a Supabase service_role key here. */
 window.SUPABASE_CONFIG = {
-  url: "",
-  publishableKey: ""
+  url: "https://fthhgtkwndqyopxyzsxt.supabase.co",
+  publishableKey: "sb_publishable_IsrPivA1vAlaioVI_bjNEA_kF_m-K2t"
 };
