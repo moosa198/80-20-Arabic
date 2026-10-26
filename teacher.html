@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#183f34">
+<title>Teacher Classroom | 80/20 Arabic</title>
+<style>
+:root{--green:#183f34;--green2:#285a49;--gold:#a88742;--paper:#fffdf8;--bg:#f2f4ee;--ink:#20322b;--muted:#6a776f;--line:#dce3d9;--red:#8e3838;--shadow:0 12px 35px rgba(24,63,52,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--green2)}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #c9a85b;outline-offset:2px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px max(18px,calc((100% - 1180px)/2));background:var(--green);color:#fff}
+.brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-weight:750}.brandmark{display:grid;place-items:center;background:#f3e7c9;color:var(--green);width:37px;height:37px;border-radius:11px;font:700 24px serif}.brand small{display:block;color:#d4dfd6;font-size:11px;font-weight:500}
+.toplinks{display:flex;gap:8px;flex-wrap:wrap}.toplinks a,.toplinks button{border:1px solid #ffffff53;border-radius:9px;color:#fff;text-decoration:none;background:transparent;padding:7px 10px;font-size:12px}
+main{max-width:1180px;margin:0 auto;padding:24px 18px 50px}.intro{margin:0 0 20px}.eyebrow{color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.intro h1{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.035em;margin:7px 0 11px;color:var(--green)}.intro p{max-width:800px;color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);gap:16px;align-items:start}.panel{border:1px solid var(--line);background:var(--paper);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.panel h2{font-size:18px;color:var(--green);margin:0 0 6px}.panel h3{font-size:15px;color:var(--green);margin:0 0 8px}.muted{color:var(--muted);font-size:12px}.field{display:grid;gap:5px;margin:12px 0}.field label,.field>label{font-weight:700;font-size:12px}.field input,.field textarea,.field select{width:100%;border:1px solid #cdd8cd;border-radius:9px;padding:10px 11px;background:#fff;color:var(--ink);min-width:0}.field textarea{min-height:115px;resize:vertical}.field input[type=file]{padding:8px}.row{display:flex;gap:9px;flex-wrap:wrap}.row>*{flex:1;min-width:170px}.btn{border:1px solid var(--green);background:var(--green);color:#fff;padding:10px 13px;border-radius:9px;font-weight:750;font-size:12px}.btn.secondary{background:#fff;color:var(--green)}.btn.danger{border-color:#e3c7c7;background:#fff7f7;color:var(--red)}.btn:disabled{opacity:.55;cursor:not-allowed}.stack{display:grid;gap:10px}.notice{font-size:12px;padding:11px 12px;border-radius:9px;border:1px solid var(--line);background:#f8f9f4;color:#435449;white-space:pre-wrap}.notice.error{border-color:#edcaca;background:#fff4f4;color:#802e2e}.notice.success{border-color:#c6dec9;background:#f1f8f0;color:#2d6040}.hidden{display:none!important}
+.classes{display:grid;gap:10px;margin-top:12px}.class-card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:13px;display:grid;gap:8px}.class-card-head{display:flex;align-items:start;justify-content:space-between;gap:12px}.class-card strong{color:var(--green)}.class-meta{display:flex;flex-wrap:wrap;gap:7px}.pill{display:inline-flex;border-radius:999px;background:#edf2eb;color:#345646;padding:3px 8px;font-size:10px;font-weight:750}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:14px 0}.metric{border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px}.metric b{display:block;font-size:23px;line-height:1.1;color:var(--green)}.metric span{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}table{border-collapse:collapse;width:100%;min-width:760px;font-size:12px}th,td{text-align:left;border-bottom:1px solid #e9eee7;padding:10px;vertical-align:top}th{background:#f1f4ed;color:var(--green);font-size:10px;text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0}tbody tr:last-child td{border-bottom:0}.student-name{font-weight:800;color:var(--green)}.student-detail{margin-top:7px}.student-detail summary{color:var(--green2);cursor:pointer;font-weight:750;font-size:11px}.evidence{border-left:3px solid #c6d8c6;padding:7px 10px;margin:7px 0;background:#f8faf6;border-radius:0 8px 8px 0}.evidence b{font-size:10px}.evidence p{font-size:11px;margin:4px 0 0;white-space:pre-wrap}
+.roster-list{display:grid;gap:0}.roster-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12px}.roster-row:last-child{border-bottom:0}.code{font-family:ui-monospace,monospace;font-weight:800;letter-spacing:.05em;white-space:nowrap}
+.class-page-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}.class-page-head h2{margin-bottom:2px}.rule{height:1px;background:var(--line);margin:17px 0}.privacy{border-top:1px solid var(--line);margin-top:22px;padding-top:13px;color:var(--muted);font-size:11px}
+footer{max-width:1180px;padding:0 18px 28px;margin:0 auto;color:var(--muted);font-size:11px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.top{align-items:flex-start}.toplinks{justify-content:flex-end}.panel{padding:14px}main{padding-top:18px}}
+@media print{.top,.intro,.auth-panel,.no-print,footer{display:none!important}body{background:#fff}.panel{box-shadow:none}.class-card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="./"><span class="brandmark" lang="ar" dir="rtl">ع</span><span>80/20 Arabic<small>Teacher Classroom</small></span></a><div class="toplinks"><a href="./">Main course ↗</a><a href="./student.html">Student Studio ↗</a></div></header>
+<main>
+  <section class="intro"><div class="eyebrow">Teacher workspace</div><h1>See progress, not just completion.</h1><p>Create a class, give each learner an individual access code, and see weekly completion, recall checks, source-page readiness and their saved Qur’anic grammar explanations. Each teacher account is isolated to its own classes.</p></section>
+
+  <section class="panel stack auth-panel" id="setupPanel">
+    <h2>1. Connect a classroom data store</h2>
+    <p class="muted">This static website needs a Supabase project for secure cross-device progress. Create the project, run <a href="https://github.com/moosa198/80-20-Arabic/blob/main/classroom-schema.sql" target="_blank" rel="noreferrer">classroom-schema.sql</a> in its SQL Editor, and enable Anonymous Sign-Ins for student sessions. Use only the public anon/publishable key in this page—never the service_role key.</p>
+    <div class="row">
+      <div class="field"><label for="projectUrl">Supabase project URL</label><input id="projectUrl" type="url" placeholder="https://your-project.supabase.co" autocomplete="url"></div>
+      <div class="field"><label for="anonKey">Public anon / publishable key</label><input id="anonKey" type="password" autocomplete="off" placeholder="sb_publishable_… or anon key"></div>
+    </div>
+    <div class="row"><button class="btn" id="saveSettings">Save project settings</button><button class="btn secondary" id="exportSetup">Download learner setup file</button><button class="btn secondary" id="testConnection">Test connection</button></div>
+    <p class="muted">The learner setup file contains only the project URL and public key. Give students their class code and personal learner code separately. Do not post learner codes publicly.</p>
+    <div class="notice" id="setupStatus" role="status" aria-live="polite">No classroom connection configured in this browser yet.</div>
+  </section>
+
+  <section class="grid" style="margin-top:16px">
+    <div class="panel auth-panel" id="authPanel">
+      <h2>2. Teacher sign-in</h2><p class="muted">Each teacher can create and monitor their own classes. Use a staff email account and a strong password.</p>
+      <form id="authForm">
+        <div class="field"><label for="teacherEmail">Teacher email</label><input id="teacherEmail" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="teacherPassword">Password</label><input id="teacherPassword" type="password" autocomplete="current-password" minlength="8" required></div>
+        <div class="row"><button class="btn" type="submit" id="signInBtn">Sign in</button><button class="btn secondary" type="button" id="signUpBtn">Create teacher account</button></div>
+      </form>
+      <div class="notice" id="authStatus" role="status" aria-live="polite">Sign in to see your classes and learner progress.</div>
+    </div>
+    <div class="panel auth-panel" id="securityPanel">
+      <h2>What this dashboard stores</h2>
+      <div class="stack muted">
+        <p><b>Teachers:</b> email/password authentication, class names and roster.</p>
+        <p><b>Learners:</b> display name chosen by the teacher, an individual access-code hash, pseudonymous browser session, and learning progress.</p>
+        <p><b>Progress:</b> completed weeks, recall activity, source-first check, selected Arabic words and the learner’s explanation. Teachers can view only their own classes.</p>
+        <p><b>Minimise data:</b> use first name plus initial or a teacher-assigned identifier where suitable. Do not enter medical, family or other sensitive information.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid hidden" id="dashboard" style="margin-top:16px">
+    <div class="panel">
+      <div class="class-page-head"><div><h2>Your classes</h2><p class="muted">Create one class per group or teaching cohort.</p></div><button class="btn secondary" id="refreshClasses">Refresh</button></div>
+      <form id="createClassForm">
+        <div class="field"><label for="schoolName">Madrassa / school</label><input id="schoolName" maxlength="100" placeholder="Your madrassa" required></div>
+        <div class="field"><label for="className">Class or group name</label><input id="className" maxlength="100" placeholder="e.g. Weekend Hifz Group A" required></div>
+        <button class="btn" type="submit">Create class</button>
+      </form>
+      <div class="notice" id="createClassStatus" role="status" aria-live="polite"></div>
+      <div id="classList" class="classes"></div>
+    </div>
+    <div class="panel">
+      <h2>Roster access codes</h2>
+      <p class="muted">Add one learner name per line. The system generates a personal access code and stores only its hash. Download or print the codes immediately—teachers cannot retrieve a lost code; reset it instead.</p>
+      <form id="rosterForm">
+        <div class="field"><label for="rosterClass">Class</label><select id="rosterClass" required><option value="">Choose a class</option></select></div>
+        <div class="field"><label for="studentNames">Learner display names (one per line)</label><textarea id="studentNames" maxlength="10000" placeholder="Student 01&#10;Student 02&#10;Student 03" required></textarea></div>
+        <button class="btn" type="submit">Create learner codes</button>
+      </form>
+      <div class="notice" id="rosterStatus" role="status" aria-live="polite">Select a class to create its roster.</div>
+      <div class="roster-list" id="newCodes"></div>
+      <div class="row no-print" style="margin-top:10px"><button class="btn secondary" id="downloadCodes" type="button" disabled>Download learner codes CSV</button><button class="btn secondary" id="printCodes" type="button" disabled>Print code sheet</button></div>
+    </div>
+  </section>
+
+  <section class="panel hidden" id="classProgressPanel" style="margin-top:16px">
+    <div class="class-page-head"><div><div class="eyebrow">Class progress</div><h2 id="selectedClassTitle">Class</h2><p class="muted" id="selectedClassMeta"></p></div><div class="row no-print" style="max-width:380px"><button class="btn secondary" id="exportProgress">Export class progress CSV</button><button class="btn secondary" id="closeClass">Close class</button></div></div>
+    <div class="metrics" id="classMetrics"></div>
+    <div class="tablewrap"><table><thead><tr><th>Learner</th><th>Weeks done</th><th>Source readiness</th><th>Recall checks</th><th>Recognitions</th><th>Last activity</th><th>Access</th></tr></thead><tbody id="progressRows"></tbody></table></div>
+    <p class="muted">Completion is only one signal. Check the saved explanation and selected Arabic evidence before deciding whether a student understands a concept. The system does not auto-grade disputed grammar analysis.</p>
+  </section>
+
+  <section class="panel hidden" id="evidencePanel" style="margin-top:16px">
+    <div class="class-page-head"><div><div class="eyebrow">Teacher review</div><h2 id="evidenceTitle">Learner evidence</h2></div><button class="btn secondary no-print" id="closeEvidence">Close evidence</button></div>
+    <div id="evidenceList"></div>
+  </section>
+  <p class="privacy">Classroom data is stored in the Supabase project you configure—not in the GitHub repository. RLS policies restrict teachers to their own classes and students to their own progress. Before using this with minors, the madrassa should approve the service, give students/parents age-appropriate privacy information, define retention/deletion, and confirm who is responsible for the data.</p>
+</main>
+<footer>80/20 Arabic · Teacher classroom pilot · <a href="./CURRICULUM-AUDIT.md">Curriculum audit</a></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./classroom-sync.js"></script>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const CONFIG_KEY="8020-classroom-config-v1";
+let sb=null,user=null,classes=[],selectedClass=null,selectedRowData=[],latestCodes=[],currentClassStudents=[];
+function cfg(){try{return JSON.parse(localStorage.getItem(CONFIG_KEY)||"{}")}catch(e){return{}}}
+function setStatus(id,msg,kind){const el=$(id);if(!el)return;el.textContent=msg;el.className="notice"+(kind?" "+kind:"");}
+function saveSettings(){
+ const url=$("#projectUrl").value.trim().replace(/\/$/,""),anonKey=$("#anonKey").value.trim();
+ if(!/^https:\/\//i.test(url)||!anonKey){setStatus("#setupStatus","Enter a valid HTTPS URL and public anon/publishable key.","error");return false}
+ window.ClassroomSync.saveConfig({url,anonKey});
+ localStorage.setItem(CONFIG_KEY,JSON.stringify({url,anonKey}));
+ sb=window.supabase.createClient(url,anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"8020-teacher-auth-v1"}});
+ setStatus("#setupStatus","Settings saved in this browser. They are not stored in the repository.","success");return true;
+}
+function getClient(){if(!sb){const c=cfg();if(!c.url||!c.anonKey)return null;sb=window.supabase.createClient(c.url,c.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"8020-teacher-auth-v1"}})}return sb}
+function download(name,text,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:type||"text/plain;charset=utf-8"}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function csv(rows){return rows.map(row=>row.map(v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"').join(",")).join("\r\n")}
+function progressMetrics(snapshot){
+ const course=snapshot&&snapshot.course||{},studio=snapshot&&snapshot.studio||{},doneA=course.doneWeeks||{},doneB=studio.done||{};
+ const doneWeeks=new Set();
+ Object.keys(doneA).forEach(k=>{if(doneA[k])doneWeeks.add(String(k))});
+ Object.keys(doneB).forEach(k=>{if(doneB[k])doneWeeks.add(String(k))});
+ const cardsA=course.cards||{},cardsB=studio.cards||{};
+ const known=new Set();
+ Object.keys(cardsA).forEach(k=>{if(Number(cardsA[k]&&cardsA[k].reps||0)>=4)known.add(k)});
+ Object.keys(cardsB).forEach(k=>{if(Number(cardsB[k]&&cardsB[k].reps||0)>=4)known.add(k)});
+ const quizzes=Object.values(snapshot&&snapshot.quizzes||{});
+ const good=quizzes.filter(x=>x&&x.correct).length;
+ const recognition=Object.values(snapshot&&snapshot.recognition||{}).reduce((sum,item)=>sum+(Array.isArray(item&&item.attempts)?item.attempts.length:(item&&item.words?1:0)),0);
+ const ready=Object.keys(snapshot&&snapshot.sourceFirst||{}).filter(k=>snapshot.sourceFirst[k]&&snapshot.sourceFirst[k].ready).length;
+ return {done:doneWeeks.size,known:known.size,quizzes:quizzes.length,quizGood:good,recognition,ready};
+}
+function resetUI(){
+ $("#authPanel").classList.remove("hidden");$("#securityPanel").classList.remove("hidden");
+ $("#dashboard").classList.add("hidden");$("#classProgressPanel").classList.add("hidden");$("#evidencePanel").classList.add("hidden");
+}
+function escapeData(s){return esc(s)}
+function rosterHTML(items){
+ $("#classList").innerHTML=items.length?items.map(c=>{
+  const roster=c.class_students||[],ready=roster.filter(s=>!!s.auth_user_id).length;
+  return '<article class="class-card"><div class="class-card-head"><div><strong>'+esc(c.class_name)+'</strong><div class="muted">'+esc(c.school_name)+'</div></div><span class="pill">'+roster.length+' learners</span></div><div class="class-meta"><span class="pill">'+ready+' connected</span><span class="pill">Class code: '+esc(c.join_code)+'</span></div><div class="row"><button class="btn" data-open-class="'+esc(c.id)+'">View progress</button><button class="btn secondary" data-class-config="'+esc(c.id)+'">Setup file</button></div></article>';
+ }).join(""):'<div class="notice">No classes yet. Create your first class above.</div>';
+ $("#classList").querySelectorAll("[data-open-class]").forEach(b=>b.onclick=()=>openClass(b.dataset.openClass));
+ $("#classList").querySelectorAll("[data-class-config]").forEach(b=>b.onclick=()=>exportSetup(b.dataset.classConfig));
+ $("#rosterClass").innerHTML='<option value="">Choose a class</option>'+items.map(c=>'<option value="'+esc(c.id)+'">'+esc(c.school_name)+' · '+esc(c.class_name)+'</option>').join("");
+}
+async function loadClasses(){
+ const client=getClient();if(!client)throw new Error("Save your Supabase project settings first.");
+ const {data,error}=await client.from("classes").select("id,school_name,class_name,join_code,created_at,class_students(id,display_name,auth_user_id,joined_at,student_progress(snapshot,last_seen,updated_at))").order("created_at",{ascending:false});
+ if(error)throw error;classes=data||[];rosterHTML(classes);
+}
+function outputClassMetrics(students){
+ const stats=students.map(s=>progressMetrics((s.student_progress||[])[0]?.snapshot||{}));
+ const sum=k=>stats.reduce((n,s)=>n+s[k],0);
+ $("#classMetrics").innerHTML='<div class="metric"><b>'+students.length+'</b><span>Learners on roster</span></div><div class="metric"><b>'+students.filter(s=>s.auth_user_id).length+'</b><span>Connected accounts</span></div><div class="metric"><b>'+sum("done")+'</b><span>Week completions in total</span></div><div class="metric"><b>'+sum("recognition")+'</b><span>Recognition attempts</span></div>';
+}
+function evidenceForStudent(row){
+ const snap=(row.student_progress||[])[0]?.snapshot||{};
+ const items=[];
+ Object.entries(snap.recognition||{}).forEach(([week,item])=>{
+  const arr=Array.isArray(item&&item.attempts)?item.attempts:(item&&item.words?[item]:[]);
+  arr.forEach((a,i)=>items.push({week:Number(week),attempt:i+1,words:(a.words||[]).map(w=>w.text).join(" · "),label:(a.labelEn||"Role not recorded")+" · "+(a.labelAr||""),explanation:a.explanation||"",savedAt:a.savedAt||""}));
+ });
+ items.sort((a,b)=>a.week-b.week||a.attempt-b.attempt);
+ return items;
+}
+async function openClass(id){
+ const c=classes.find(x=>x.id===id);if(!c)return;selectedClass=c;currentClassStudents=c.class_students||[];
+ $("#selectedClassTitle").textContent=c.class_name;$("#selectedClassMeta").textContent=c.school_name+" · Class code "+c.join_code+" · created "+new Date(c.created_at).toLocaleDateString();
+ outputClassMetrics(currentClassStudents);
+ selectedRowData=currentClassStudents.map(st=>{
+  const snap=(st.student_progress||[])[0]?.snapshot||{},p=progressMetrics(snap);
+  return {student:st,...p,snapshot:snap,lastSeen:(st.student_progress||[])[0]?.last_seen||null};
+ });
+ $("#progressRows").innerHTML=selectedRowData.length?selectedRowData.map(item=>{
+  const last=item.lastSeen?new Date(item.lastSeen).toLocaleString():"Not synced yet";
+  return '<tr><td><span class="student-name">'+esc(item.student.display_name)+'</span><details class="student-detail"><summary>Review saved evidence</summary><button type="button" class="btn secondary" data-evidence="'+esc(item.student.id)+'">Open explanations</button></details></td><td>'+item.done+' / 31</td><td>'+item.ready+' / 31</td><td>'+item.quizGood+' / '+item.quizzes+'</td><td>'+item.recognition+'</td><td>'+esc(last)+'</td><td>'+(item.student.auth_user_id?'<span class="pill">Connected</span>':'<span class="pill">Not joined</span>')+'<div style="margin-top:5px"><button class="btn secondary" data-reset-code="'+esc(item.student.id)+'">Reset code</button></div></td></tr>';
+ }).join(""):'<tr><td colspan="7">No learners yet. Add names in the roster panel.</td></tr>';
+ $("#progressRows").querySelectorAll("[data-evidence]").forEach(b=>b.onclick=()=>openEvidence(b.dataset.evidence));
+ $("#progressRows").querySelectorAll("[data-reset-code]").forEach(b=>b.onclick=()=>resetCode(b.dataset.resetCode));
+ $("#classProgressPanel").classList.remove("hidden");$("#evidencePanel").classList.add("hidden");
+}
+async function openEvidence(studentId){
+ const item=selectedRowData.find(x=>x.student.id===studentId);if(!item)return;
+ const evidence=evidenceForStudent(item.student);
+ $("#evidenceTitle").textContent=item.student.display_name+" · saved explanations";
+ $("#evidenceList").innerHTML=evidence.length?evidence.map(e=>'<article class="evidence"><b>Week '+e.week+' · attempt '+e.attempt+' · '+esc(e.label)+'</b><p lang="ar" dir="rtl">'+esc(e.words||"No selected word")+'</p><p>'+esc(e.explanation||"No explanation provided.")+'</p><p class="muted">'+esc(e.savedAt?new Date(e.savedAt).toLocaleString():"")+'</p></article>').join(""):'<div class="notice">This learner has no saved word-recognition explanations yet.</div>';
+ $("#evidencePanel").classList.remove("hidden");$("#evidencePanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+async function resetCode(id){
+ if(!confirm("Reset this learner’s personal access code? Their previous progress will remain, but their old device will need to reconnect."))return;
+ try{
+  const {data,error}=await getClient().rpc("reset_student_access_code",{p_student_id:id});if(error)throw error;
+  const student=currentClassStudents.find(x=>x.id===id);latestCodes=[{display_name:student?.display_name||"Learner",access_code:data}];
+  showCodes(latestCodes,"New access code created. Give it privately to this learner; it will not be shown again.");
+ }catch(e){setStatus("#rosterStatus","Could not reset code: "+e.message,"error")}
+}
+function showCodes(rows,message){
+ latestCodes=rows||[];$("#rosterStatus").textContent=message||"Codes generated.";
+ $("#newCodes").innerHTML=latestCodes.map(r=>'<div class="roster-row"><span>'+esc(r.display_name)+'</span><span class="code">'+esc(r.access_code)+'</span></div>').join("");
+ const enabled=latestCodes.length>0;$("#downloadCodes").disabled=!enabled;$("#printCodes").disabled=!enabled;
+}
+async function refresh(){
+ try{await loadClasses();setStatus("#createClassStatus","Class list refreshed.","success");}
+ catch(e){setStatus("#createClassStatus","Could not load classes: "+e.message,"error")}
+}
+function exportSetup(classId){
+ const c=cfg();if(!c.url||!c.anonKey){setStatus("#setupStatus","Save settings first.","error");return;}
+ const selected=classes.find(x=>x.id===classId);
+ download("8020-arabic-learner-setup.json",JSON.stringify({url:c.url,anonKey:c.anonKey,classCode:selected?.join_code||""},null,2),"application/json");
+}
+function renderProgressCSV(){
+ if(!selectedClass)return;
+ const rows=[["Madrassa","Class","Class code","Learner","Weeks completed","Source self-checks","Known words","Recall checks","Correct recall checks","Recognition attempts","Connected","Last activity"]];
+ selectedRowData.forEach(x=>rows.push([selectedClass.school_name,selectedClass.class_name,selectedClass.join_code,x.student.display_name,x.done,x.ready,x.known,x.quizzes,x.quizGood,x.recognition,!!x.student.auth_user_id,x.lastSeen||""]));
+ download("8020-arabic-class-progress.csv",csv(rows),"text/csv;charset=utf-8");
+}
+$("#saveSettings").onclick=()=>{if(!saveSettings())return;};
+$("#exportSetup").onclick=()=>exportSetup(null);
+$("#testConnection").onclick=async()=>{try{if(!saveSettings())return;const{data,error}=await getClient().auth.getSession();if(error)throw error;setStatus("#setupStatus","Supabase client reached the project. "+(data.session?"A teacher session is already active.":"Sign in to continue."),"success")}catch(e){setStatus("#setupStatus","Connection check failed: "+e.message,"error")}};
+$("#authForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ try{if(!getClient())throw new Error("Save project settings first.");const {data,error}=await getClient().auth.signInWithPassword({email:$("#teacherEmail").value.trim(),password:$("#teacherPassword").value});if(error)throw error;user=data.user;await signedIn();}
+ catch(err){setStatus("#authStatus","Sign-in failed: "+err.message,"error")}
+});
+$("#signUpBtn").onclick=async()=>{
+ try{if(!getClient())throw new Error("Save project settings first.");const {data,error}=await getClient().auth.signUp({email:$("#teacherEmail").value.trim(),password:$("#teacherPassword").value});if(error)throw error;
+  if(!data.session){setStatus("#authStatus","Account request submitted. Check the email inbox to confirm the teacher account, then sign in here.","success");return;}
+  user=data.user;await signedIn();
+ }catch(e){setStatus("#authStatus","Account creation failed: "+e.message,"error")}
+};
+async function signedIn(){
+ $("#authPanel").classList.add("hidden");$("#securityPanel").classList.add("hidden");$("#dashboard").classList.remove("hidden");$("#setupPanel").classList.remove("hidden");
+ setStatus("#authStatus","Signed in as "+(user?.email||"teacher")+".","success");
+ await refresh();
+}
+$("#createClassForm").addEventListener("submit",async e=>{
+ e.preventDefault();try{
+  const client=getClient();if(!user)throw new Error("Sign in first.");
+  const {data,error}=await client.from("classes").insert({teacher_id:user.id,school_name:$("#schoolName").value.trim(),class_name:$("#className").value.trim()}).select("id,school_name,class_name,join_code,created_at").single();
+  if(error)throw error;setStatus("#createClassStatus","Class created. Give students the class code plus their individual code.","success");$("#className").value="";await refresh();
+  const row=classes.find(x=>x.id===data.id);if(row)openClass(row.id);
+ }catch(e){setStatus("#createClassStatus","Could not create class: "+e.message,"error")}
+});
+$("#rosterForm").addEventListener("submit",async e=>{
+ e.preventDefault();try{
+  const id=$("#rosterClass").value;if(!id)throw new Error("Choose a class.");
+  const names=$("#studentNames").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!names.length)throw new Error("Enter at least one learner name.");
+  const {data,error}=await getClient().rpc("add_class_students",{p_class_id:id,p_names:names});if(error)throw error;
+  $("#studentNames").value="";showCodes(data||[],"Codes generated. Download the roster now; the raw learner codes will not be stored for later display.");
+  await refresh();
+ }catch(e){setStatus("#rosterStatus","Could not create learner codes: "+e.message,"error")}
+});
+$("#downloadCodes").onclick=()=>download("8020-arabic-learner-access-codes.csv",csv([["Learner","Personal access code"],...latestCodes.map(x=>[x.display_name,x.access_code])]),"text/csv;charset=utf-8");
+$("#printCodes").onclick=()=>window.print();
+$("#refreshClasses").onclick=refresh;
+$("#exportProgress").onclick=renderProgressCSV;
+$("#closeClass").onclick=()=>$("#classProgressPanel").classList.add("hidden");
+$("#closeEvidence").onclick=()=>$("#evidencePanel").classList.add("hidden");
+const c=cfg();$("#projectUrl").value=c.url||"";$("#anonKey").value=c.anonKey||"";
+if(c.url&&c.anonKey){getClient().auth.getSession().then(async r=>{if(r.data?.session?.user?.email){user=r.data.session.user;await signedIn()}}).catch(()=>{});}
+})();
+</script>
+</body>
+</html>
