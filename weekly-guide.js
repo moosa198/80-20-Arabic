@@ -304,6 +304,12 @@
     try { all = JSON.parse(root.localStorage.getItem("8020-weekly-recall-v2") || "{}"); } catch (e) {}
     return all[Number(week)] || {};
   }
+  function weekIsComplete(week) {
+    var main = {}, studio = {};
+    try { main = JSON.parse(root.localStorage.getItem("8020arabic-progress-v1") || "{}"); } catch (e) {}
+    try { studio = JSON.parse(root.localStorage.getItem("8020-student-v2") || "{}"); } catch (e) {}
+    return !!((main.doneWeeks || {})[Number(week)] || (studio.done || {})[Number(week)]);
+  }
   function renderKeyTerms(week) {
     var task = RECOGNITION_TASKS[Number(week)], labels = task && task.labels || [], seen = Object.create(null);
     var items = labels.filter(function (item) {
@@ -315,7 +321,7 @@
     return '<section class="source-key-terms" aria-label="Key grammar terms for this week"><div class="source-key-terms-title">KEY TERMS · ENGLISH + ARABIC</div><div class="source-key-term-list">' +
       items.map(function (item) {
         var key = TERM_KEYS_BY_ARABIC[item[1]], meta = key && root.TermSupport && root.TermSupport.terms[key];
-        var firstEncounter = !!(meta && Number(meta.week) === Number(week));
+        var firstEncounter = !!(meta && Number(meta.week) === Number(week) && !weekIsComplete(week));
         var arabic = firstEncounter ? meta.ar : item[1];
         var transliteration = firstEncounter && meta.latin ? '<small class="term-pronunciation" lang="en" dir="ltr">' + esc(meta.latin) + '</small>' : "";
         return '<div class="source-key-term"><span>' + esc(item[0]) + '</span><b lang="ar" dir="rtl">' + esc(arabic) + '</b>' + transliteration + '</div>';
