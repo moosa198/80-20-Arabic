@@ -23,7 +23,7 @@ The current app already provides a strong starting point:
 - Seven new lexical words per teaching week and a separate high-frequency-word review set.
 - English–Arabic grammar labels, Hifz-first reminders and a 15-line digital Mushaf reader.
 - Full FSTU Naḥw and Ṣarf PDFs are supported through the existing source-page library. The guide maps each week to exact printed pages, renders only those assigned pages, and caches the rendered page images locally; it does not upload the full PDF to a server.
-- Word selection, a required written explanation, multiple recognition attempts, local progress and JSON export/import.
+- Word selection, a required written explanation, multiple recognition attempts, local progress and cross-screen JSON export/import with compatibility for the two legacy card-key formats.
 - A printable student workbook and browser-based quality checks.
 
 The main platform limitations are:
@@ -31,7 +31,7 @@ The main platform limitations are:
 - Progress and recognition attempts are stored in the current browser rather than a shared database.
 - There is no sign-in, class membership, teacher role or teacher dashboard.
 - Both student entry points now read the canonical course data and bilingual term map from curriculum.js. Hosted curriculum versioning and publication controls remain future work.
-- Current progress can be moved only via a learner-managed export/import file; it is not centrally visible to teachers.
+- Progress backup files can move between the two student screens and support the previous backup key formats; progress is still local and not centrally visible to teachers.
 
 Keep the present app functioning while the database and front-end migration are built and tested separately.
 
@@ -101,7 +101,7 @@ A future curriculum audit should verify the exact Arabic vocalisation, translite
 - Provide concept-mastery views whose denominator is students with a recorded teacher judgement, not all enrolled students.
 - Document local setup, administrator bootstrap and a manual isolation-test checklist.
 
-**Exit gate:** migration applies cleanly to a local Supabase database; role-isolation tests pass for two students, two teachers and separate classes. This branch is not the complete app.
+**Exit gate:** the migration has passed the local Postgres smoke-test workflow. Role-isolation testing with separate student/teacher accounts remains a required test before live learner data is used. This branch is not the complete app.
 
 ### Stage 2 — Canonical curriculum and source mapping
 
