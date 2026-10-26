@@ -68,7 +68,7 @@ The “well-established” word count means a card has been answered successfull
 
 ## Privacy and offline use
 
-By default, course progress, quizzes and word-recognition evidence remain in the current browser. When a configured Supabase project is used, students explicitly sign in, select a class and sync; the database stores progress snapshots and teacher reviews under row-level security. The source FSTU PDFs are not uploaded. The teacher dashboard can inspect only the classes allowed by the signed-in account’s database memberships.
+By default, course progress, quizzes and word-recognition evidence remain in the current browser. When a configured Supabase project is used, students explicitly sign in, select a class and sync; row-level security protects progress snapshots, including source-book checks and teach-back explanations, as well as teacher reviews. The source FSTU PDFs are not uploaded. The teacher dashboard can inspect only the classes allowed by the signed-in account’s database memberships.
 
 The Qur’an renderer, PDF.js, Supabase JS, YouTube and Google Fonts load from third-party services and require an internet connection; those services may receive normal network metadata. The service worker caches the app’s own files, but the source-page and listening experience is not fully offline.
 
