@@ -301,7 +301,7 @@ language sql
 stable
 security definer
 set search_path = ''
-as $
+as $fn$
   select exists (
     select 1
     from public.class_memberships cm
@@ -309,7 +309,7 @@ as $
       and cm.user_id = target_user_id
       and cm.role = 'student'
   );
-$;
+$fn$;
 
 
 create or replace function public.is_published_lesson(
@@ -321,7 +321,7 @@ language sql
 stable
 security definer
 set search_path = ''
-as $
+as $fn$
   select exists (
     select 1
     from public.curriculum_lessons cl
@@ -331,7 +331,7 @@ as $
       and cl.week_number = target_week_number
       and cv.status = 'published'
   );
-$;
+$fn$;
 
 revoke all on function public.set_updated_at() from public, anon, authenticated;
 revoke all on function public.handle_new_auth_user() from public, anon, authenticated;
