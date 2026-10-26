@@ -1,5 +1,5 @@
-const CACHE="8020-arabic-v3";
-const ASSETS=["./","./index.html","./student.html","./weekly-guide.js","./recognition.js","./manifest.webmanifest","./icon.svg"];
+const CACHE="8020-arabic-v4";
+const ASSETS=["./","./index.html","./student.html","./teacher.html","./weekly-guide.js","./recognition.js","./grammar-terms.js","./learner-tools.js","./source-pages.js","./manifest.webmanifest","./icon.svg","./assets/fstu-page-map.json"];
 self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener("fetch",event=>{
