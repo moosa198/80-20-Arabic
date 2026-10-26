@@ -96,7 +96,7 @@ function normaliseRecord(record,filename){
   const cards=raw.cards||{};
   const reps=Object.values(cards).reduce((sum,c)=>sum+Number((c&&c.reps)||0),0);
   const reviewed=Object.keys(cards).length;
-  const known=Object.entries(cards).filter(([key,c])=>/^w\\d+[-:]/.test(key)&&Number((c&&c.reps)||0)>=4).length;
+  const known=Object.entries(cards).filter(([key,c])=>/^w\d+[-:]/.test(key)&&Number((c&&c.reps)||0)>=4).length;
   const recognition=(wrapper&&wrapper.recognition)||{};
   const weeklyRecall=(wrapper&&wrapper.weeklyRecall)||{};
   const attempts=[];
