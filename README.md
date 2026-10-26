@@ -45,8 +45,8 @@ The digital 15-line renderer uses a 604-page Madina layout, but calligraphy and 
 
 ## Course and source materials
 
-- [FSTU Naḥw official resources](https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources). The embedded reference uses the August 2026 edition.
-- [FSTU Ṣarf official resources](https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources). The embedded reference uses the October 2023 resource. Some mapping was initially made against a March 2022 copy, so follow the printed section heading if pagination differs.
+- [FSTU Naḥw official resources](https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources). The 31-week source map currently references the August 2026 edition.
+- [FSTU Ṣarf official resources](https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources). The source map currently references the October 2023 resource. Some mapping was initially made against a March 2022 copy, so follow the printed section heading if pagination differs.
 - [Digital 15-line Madina renderer](https://github.com/tarekeldeeb/quran-madina-html). The upstream repository lists the Waqf General Public License (GPL-2.0); check its licence before redistributing or modifying the renderer. Source code is loaded from upstream and is not copied into this repository.
 - [Core Arabic lesson playlist](https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa)
 - [Bonus listening playlist](https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7)
