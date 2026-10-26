@@ -301,7 +301,7 @@ language sql
 stable
 security definer
 set search_path = ''
-as $$
+as $
   select exists (
     select 1
     from public.class_memberships cm
@@ -309,7 +309,29 @@ as $$
       and cm.user_id = target_user_id
       and cm.role = 'student'
   );
-$$;
+$;
+
+
+create or replace function public.is_published_lesson(
+  target_curriculum_version_id uuid,
+  target_week_number smallint
+)
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $
+  select exists (
+    select 1
+    from public.curriculum_lessons cl
+    join public.curriculum_versions cv
+      on cv.id = cl.curriculum_version_id
+    where cl.curriculum_version_id = target_curriculum_version_id
+      and cl.week_number = target_week_number
+      and cv.status = 'published'
+  );
+$;
 
 revoke all on function public.set_updated_at() from public, anon, authenticated;
 revoke all on function public.handle_new_auth_user() from public, anon, authenticated;
@@ -319,6 +341,7 @@ revoke all on function public.is_class_staff(uuid) from public, anon;
 revoke all on function public.can_manage_class(uuid) from public, anon;
 revoke all on function public.is_class_member(uuid) from public, anon;
 revoke all on function public.is_student_in_class(uuid, uuid) from public, anon;
+revoke all on function public.is_published_lesson(uuid, smallint) from public, anon;
 
 grant execute on function public.is_global_class_admin() to authenticated;
 grant execute on function public.is_madrassa_admin() to authenticated;
@@ -326,6 +349,7 @@ grant execute on function public.is_class_staff(uuid) to authenticated;
 grant execute on function public.can_manage_class(uuid) to authenticated;
 grant execute on function public.is_class_member(uuid) to authenticated;
 grant execute on function public.is_student_in_class(uuid, uuid) to authenticated;
+grant execute on function public.is_published_lesson(uuid, smallint) to authenticated;
 
 alter table public.profiles enable row level security;
 alter table public.classes enable row level security;
@@ -462,6 +486,7 @@ create policy assignments_insert_staff
   with check (
     (select public.is_class_staff(class_id))
     and assigned_by = (select auth.uid())
+    and (select public.is_published_lesson(curriculum_version_id, week_number))
     and (student_id is null or (select public.is_student_in_class(class_id, student_id)))
   );
 
@@ -470,6 +495,7 @@ create policy assignments_update_staff
   using ((select public.is_class_staff(class_id)))
   with check (
     (select public.is_class_staff(class_id))
+    and (select public.is_published_lesson(curriculum_version_id, week_number))
     and (student_id is null or (select public.is_student_in_class(class_id, student_id)))
   );
 
@@ -490,6 +516,7 @@ create policy lesson_progress_insert_self
   with check (
     user_id = (select auth.uid())
     and (select public.is_student_in_class(class_id, (select auth.uid())))
+    and (select public.is_published_lesson(curriculum_version_id, week_number))
   );
 
 create policy lesson_progress_update_self
@@ -501,6 +528,7 @@ create policy lesson_progress_update_self
   with check (
     user_id = (select auth.uid())
     and (select public.is_student_in_class(class_id, (select auth.uid())))
+    and (select public.is_published_lesson(curriculum_version_id, week_number))
   );
 
 create policy recognition_attempts_select_self_or_staff
@@ -515,6 +543,7 @@ create policy recognition_attempts_insert_self
   with check (
     user_id = (select auth.uid())
     and (select public.is_student_in_class(class_id, (select auth.uid())))
+    and (select public.is_published_lesson(curriculum_version_id, week_number))
   );
 
 create policy teacher_reviews_select_student_or_staff
@@ -530,6 +559,7 @@ create policy teacher_reviews_insert_staff
     teacher_id = (select auth.uid())
     and (select public.is_class_staff(class_id))
     and (select public.is_student_in_class(class_id, student_id))
+    and (select public.is_published_lesson(curriculum_version_id, week_number))
   );
 
 create policy teacher_reviews_update_author_or_manager
