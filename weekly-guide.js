@@ -49,10 +49,10 @@
     catch(e){ return null; }
   }
   function renderSourceCheck(week) {
-    var saved=savedSourceReady(week)||{};
-    return '<section class="weekly-step source-mastery-step" aria-labelledby="sourceCheckTitle-'+week+'"><div class="step-topline"><span class="step-number">02</span><div><div class="guide-eyebrow">TEACH IT BACK · BEFORE APPLICATION</div><h2 id="sourceCheckTitle-'+week+'">Can you explain the concept?</h2></div></div><p class="step-intro">Close the book or look away from the page. Say the concept in your own words, then write a brief explanation below. Do not copy the textbook wording. You should be able to explain the source example before moving to the Qur’an.</p><div class="source-check-items"><label><input type="checkbox" data-source-read="'+week+'" '+(saved.readRules?"checked":"")+'> I have read the definition and relevant rule(s) on the assigned FSTU page(s).</label><label><input type="checkbox" data-source-example="'+week+'" '+(saved.understoodExample?"checked":"")+'> I can explain the source-book example and its grammatical labels.</label></div><label class="evidence-label">Explain the concept in your own words <textarea data-source-explanation="'+week+'" rows="3" minlength="20" placeholder="What does the structure do? Which clue in the source example helped you recognise it?">'+esc(saved.explanation||"")+'</textarea></label><div class="actions"><button type="button" class="btn" data-source-continue="'+week+'">'+(saved.ready?"Save explanation and continue":"I understand the source concept — apply it to the Qur’an")+'</button><span class="guide-small">This is a learner self-check, not a teacher grade. Your teacher can review it when classroom tracking is connected.</span></div><div class="recognition-feedback" data-source-feedback="'+week+'" role="status" aria-live="polite" hidden></div></section>';
+    var saved=savedSourceReady(week)||{},d=get(week),q=d.quiz,quizRecord={};
+    try{quizRecord=JSON.parse(root.localStorage.getItem("8020-weekly-recall-v2")||"{}")[Number(week)]||{};}catch(e){}
+    return '<section class="weekly-step source-mastery-step" aria-labelledby="sourceCheckTitle-'+week+'"><div class="step-topline"><span class="step-number">02</span><div><div class="guide-eyebrow">TEACH IT BACK · BEFORE APPLICATION</div><h2 id="sourceCheckTitle-'+week+'">Can you explain the concept?</h2></div></div><p class="step-intro">Close the book or look away from the page. Explain the concept in your own words, then answer the concept question from memory. The Qur’an page remains closed until you can justify the concept.</p><div class="source-check-items"><label><input type="checkbox" data-source-read="'+week+'" '+(saved.readRules?"checked":"")+'> I have read the definition and relevant rule(s) on the assigned FSTU page(s).</label><label><input type="checkbox" data-source-example="'+week+'" '+(saved.understoodExample?"checked":"")+'> I can explain the worked example and its grammatical labels.</label></div><label class="evidence-label">Explain the concept in your own words <textarea data-source-explanation="'+week+'" rows="3" minlength="20" placeholder="What does the structure do? Which clue in the source example helped you recognise it?">'+esc(saved.explanation||"")+'</textarea></label><div class="source-concept-check"><div class="guide-eyebrow">SOURCE CONCEPT CHECK · NO QUR’AN PAGE YET</div><fieldset class="quiz-fieldset"><legend>'+esc(q.question)+'</legend>'+q.options.map(function(option,i){return '<label class="quiz-option"><input type="radio" name="source-choice-'+week+'" value="'+i+'" '+(Number(quizRecord.choice)===i?"checked":"")+'><span>'+esc(option)+'</span></label>';}).join("")+'</fieldset><div class="quiz-actions"><button type="button" class="btn" data-check-source-quiz="'+week+'">Check concept understanding</button></div><div class="quiz-feedback" data-source-quiz-feedback="'+week+'" role="status" aria-live="polite" '+(quizRecord.choice!==undefined?"":"hidden")+'>'+(quizRecord.choice!==undefined?esc(quizRecord.why||"Previous answer loaded. Check it again to continue."):"")+'</div></div><div class="actions"><button type="button" class="btn" data-source-continue="'+week+'">I understand the source concept — apply it to the Qur’an</button><span class="guide-small">This is a learner self-check, not a teacher grade. Your teacher can review it when classroom tracking is connected.</span></div><div class="recognition-feedback" data-source-feedback="'+week+'" role="status" aria-live="polite" hidden></div></section>';
   }
-
   var SARF_PAGE_TITLES = {
     16:"Introduction: verb + pronoun",17:"Verb conjugation",19:"Part 1: Past/perfect form",
     24:"Part 2: Imperfect form",29:"Part 3: Verb chapters",42:"Part 4: Passive verb",
@@ -312,17 +312,15 @@
     return '<section class="recognition-lab" data-recognition-task="'+Number(week)+'" aria-labelledby="recognitionTitle-'+Number(week)+'"><div class="guide-eyebrow">PART B · RECOGNISE IT ON THE PAGE</div><h3 id="recognitionTitle-'+Number(week)+'">Tap the Arabic evidence</h3><p class="recognition-stage">'+esc(t.stage)+'</p><p>'+esc(t.prompt)+'</p><div class="recognition-selected" aria-live="polite"><b>Selected word(s)</b><span class="selected-arabic" data-recognition-selected lang="ar" dir="rtl">No words selected yet</span><small data-recognition-location>Choose a word from the digital Qur’an page above.</small></div><div class="recognition-actions"><button type="button" class="btn light" data-clear-recognition="'+Number(week)+'">Clear selection</button></div><div class="recognition-labels" role="group" aria-label="Choose the grammatical role">'+t.labels.map(function(x){var detail=TERM_DISPLAY[x[1]]||[x[1],""];return '<button type="button" class="recognition-label" data-recognition-label="'+esc(x[1])+'" data-recognition-en="'+esc(x[0])+'"><span>'+esc(x[0])+'</span><span class="recognition-ar-wrap"><b lang="ar" dir="rtl">'+esc(detail[0])+'</b>'+(detail[1]?'<small class="term-translit">'+esc(detail[1])+'</small>':'')+'</span></button>';}).join("")+'</div><label class="evidence-label">Your explanation (required)<textarea data-recognition-explanation="'+Number(week)+'" rows="3" placeholder="Which clue in the Arabic supports your choice? How do the words relate?"></textarea></label><div class="actions"><button type="button" class="btn" data-save-recognition="'+Number(week)+'">Save recognition attempt</button><span class="guide-small">Saved on this device. This is evidence for learning, not an automatic grammar mark; ask your teacher to verify the role.</span></div><div class="recognition-history-wrap"><b>Saved attempts · most recent five</b><div class="recognition-history" data-recognition-history aria-live="polite">No attempts saved on this device yet.</div></div><div class="recognition-feedback" data-recognition-feedback="'+Number(week)+'" role="status" aria-live="polite" hidden></div></section>';
   }
   function renderAssessment(week) {
-    var n=Number(week),d=get(n),q=d.quiz;
-    return '<section class="weekly-guide assessment-layer" id="weeklyTest-'+n+'" aria-labelledby="testTitle-'+n+'"><div class="test-step-label">05 · APPLY AND EXPLAIN</div><h2 id="testTitle-'+n+'">'+(d.checkpoint?"Cumulative retrieval checkpoint":"Quick retrieval, then real-page analysis")+'</h2><p class="test-intro">Retrieve the idea from the source page first. Then identify the concept on the real Qur’anic page and explain the clue. The quiz is a retrieval prompt, not proof of independent understanding.</p><div class="quiz-question"><div class="guide-eyebrow">PART A · RETRIEVE</div><fieldset class="quiz-fieldset"><legend>'+esc(q.question)+'</legend>'+q.options.map(function (option,i) {
-      return '<label class="quiz-option"><input type="radio" name="weekly-choice-'+n+'" value="'+i+'"><span>'+esc(option)+'</span></label>';
-    }).join("")+'</fieldset><div class="quiz-actions"><button type="button" class="btn" data-check-quiz="'+n+'">Check my answer</button><span class="guide-small">Try from memory first; inspect the source only after attempting the answer.</span></div><div id="quizFeedback-'+n+'" class="quiz-feedback" role="status" aria-live="polite" hidden></div></div>'+renderRecognitionLab(n)+'</section>';
+    var n=Number(week);
+    return '<section class="weekly-guide assessment-layer" id="weeklyTest-'+n+'" aria-labelledby="testTitle-'+n+'"><div class="test-step-label">05 · APPLY AND EXPLAIN</div><h2 id="testTitle-'+n+'">Apply the source concept to real Arabic evidence</h2><p class="test-intro">Now that you have studied and explained the source concept, select actual Arabic evidence on the 15-line Qur’an page, choose the role in English and Arabic, and justify the clue. The app stores your reasoning for teacher review; it does not automatically grade nuanced Arabic syntax.</p>'+renderRecognitionLab(n)+'</section>';
   }
   function renderSequence(week, options) {
     options=options||{};
     var n=Number(week),d=get(n),page=Number(d.page||604);
     var passage=options.passage||d.passage;
     var apply=options.apply||(d.capstone?"Use the reference page as a model, then repeat the analysis on a full page from your own memorised Qur’an.":"Apply the source-book concept to this passage: select the Arabic evidence and explain it.");
-    var readyRecord=savedSourceReady(n)||{},ready=!!readyRecord.ready;
+    var readyRecord=savedSourceReady(n)||{},ready=!!(readyRecord.ready&&readyRecord.quizCorrect);
     var pageNote=d.capstone
       ?"Page 604 is a reference model only. For independent transfer, load a different page from your own memorised Qur’an."
       :"Confirm the page and verse context against the physical Mushaf used in class. The digital 15-line layout may differ in calligraphy or line breaks.";
@@ -335,34 +333,24 @@
       '<div id="applicationFlow-'+n+'" class="application-flow" '+(ready?'':'hidden')+'><section class="weekly-step mushaf-step" aria-labelledby="mushafTitle-'+n+'"><div class="step-topline"><span class="step-number">03</span><div><div class="guide-eyebrow">APPLY THE SOURCE CONCEPT TO REAL QUR’AN</div><h2 id="mushafTitle-'+n+'">Now find it on the 15-line Qur’an page</h2></div></div><p class="step-intro">Only now move to the Mushaf. Look at the full phrase first, then identify the word or relationship that matches the concept you just explained. If handling a physical Mushaf, make wudhu first; the digital page is not gated by a Wudhu checkbox.</p><div class="mushaf-task" id="mushafTask-'+n+'"><div class="mushaf-reference"><div class="mushaf-reference-meta"><span class="guide-eyebrow">TARGET PASSAGE</span><span class="page-pill">Madina page '+page+'</span></div><h3>'+esc(passage)+'</h3><p class="guide-small">'+esc(pageNote)+'</p>'+picker+'</div>'+pageFrame("quran",page)+'<p class="mushaf-application">'+esc(apply)+'</p><div class="mushaf-transfer-note"><b>Source → Qur’an → explain</b><p>Use the source-book rule to justify your selection. If the evidence is uncertain, leave the label open and ask the teacher rather than forcing a parse.</p></div></div></section>'+
       renderPlaylists(n)+renderAssessment(n)+'</div></div>';
   }
-  function bindAssessment(week) {
-    var n=Number(week),d=get(n),q=d.quiz;
-    var panel=root.document.getElementById("weeklyTest-"+n);
-    if(!panel)return;
-    var answerButton=panel.querySelector('[data-check-quiz="'+n+'"]');
-    var feedback=panel.querySelector("#quizFeedback-"+n);
-    var key="8020-weekly-recall-v2";
-    var previous={};
-    try{previous=JSON.parse(root.localStorage.getItem(key)||"{}")[n]||{};}catch(e){}
-    if(previous.choice!==undefined){
-      var old=panel.querySelector('input[name="weekly-choice-'+n+'"][value="'+previous.choice+'"]');
-      if(old)old.checked=true;
-    }
-    if(answerButton)answerButton.addEventListener("click",function(){
-      var chosen=panel.querySelector('input[name="weekly-choice-'+n+'"]:checked');
-      if(!chosen){feedback.hidden=false;feedback.textContent="Choose an answer, then check your reasoning.";return;}
-      var correct=Number(chosen.value)===q.answer;
-      var record={};try{record=JSON.parse(root.localStorage.getItem(key)||"{}");}catch(e){}
-      record[n]={week:n,choice:Number(chosen.value),correct:correct,answeredAt:new Date().toISOString()};
-      var saved=true;try{root.localStorage.setItem(key,JSON.stringify(record));}catch(e){saved=false;}
-      feedback.hidden=false;
-      feedback.className="quiz-feedback "+(correct?"quiz-correct":"quiz-review");
-      feedback.innerHTML="<b>"+(correct?"Correct — good recognition.":"Not yet — inspect the source and try again.")+"</b><p><b>Answer:</b> "+esc(q.options[q.answer])+"</p><p>"+esc(q.why)+"</p><p>Now complete the real-page word-recognition task below.</p>"+(saved?"":"<p>Your browser did not save this quiz result.</p>"); if(saved&&root.ClassroomSync)root.ClassroomSync.queueSync("weekly-quiz");
-    });
-  }
+  function bindAssessment(week) { /* The concept quiz is completed before the Qur’an page unlocks. */ }
   function bindSourceFirst(week) {
     var n=Number(week),wrap=root.document.querySelector('[data-week-sequence="'+n+'"]');
     if(!wrap)return;
+    var q=get(n).quiz,quizButton=wrap.querySelector('[data-check-source-quiz="'+n+'"]');
+    if(quizButton)quizButton.addEventListener("click",function(){
+      var chosen=wrap.querySelector('input[name="source-choice-'+n+'"]:checked');
+      var fb=wrap.querySelector('[data-source-quiz-feedback="'+n+'"]');
+      if(!chosen){fb.hidden=false;fb.className="quiz-feedback quiz-review";fb.textContent="Choose the answer that best matches the source-book concept, then check it.";return;}
+      var correct=Number(chosen.value)===q.answer,record={};
+      try{record=JSON.parse(root.localStorage.getItem("8020-weekly-recall-v2")||"{}");}catch(e){}
+      record[n]={week:n,choice:Number(chosen.value),correct:correct,answeredAt:new Date().toISOString(),why:q.why};
+      try{root.localStorage.setItem("8020-weekly-recall-v2",JSON.stringify(record));}
+      catch(e){fb.hidden=false;fb.className="quiz-feedback quiz-review";fb.textContent="The browser could not save this answer. Check storage settings and try again.";return;}
+      fb.hidden=false;fb.className="quiz-feedback "+(correct?"quiz-correct":"quiz-review");
+      fb.innerHTML="<b>"+(correct?"Correct — you’ve understood this point.":"Not yet — reread the assigned source page and try again.")+"</b><p><b>Answer:</b> "+esc(q.options[q.answer])+"</p><p>"+esc(q.why)+"</p>";
+      if(root.ClassroomSync)root.ClassroomSync.queueSync("weekly-quiz");
+    });
     var btn=wrap.querySelector('[data-source-continue="'+n+'"]');
     if(!btn)return;
     btn.addEventListener("click",function(){
@@ -370,19 +358,25 @@
       var example=wrap.querySelector('[data-source-example="'+n+'"]');
       var explanation=wrap.querySelector('[data-source-explanation="'+n+'"]');
       var feedback=wrap.querySelector('[data-source-feedback="'+n+'"]');
-      var text=(explanation&&explanation.value||"").trim();
+      var text=(explanation&&explanation.value||"").trim(),quizRecord={};
+      try{quizRecord=JSON.parse(root.localStorage.getItem("8020-weekly-recall-v2")||"{}")[n]||{};}catch(e){}
       if(!read.checked||!example.checked||text.length<20){
         feedback.hidden=false;feedback.className="recognition-feedback needs-work";
-        feedback.textContent="Before opening the Qur’an page, confirm both source checks and write at least a sentence in your own words (20 characters or more).";
+        feedback.textContent="Before opening the Qur’an, confirm both source checks and write at least a sentence in your own words (20 characters or more).";
         return;
       }
-      var record={};try{record=JSON.parse(root.localStorage.getItem("8020-source-first-v1")||"{}");}catch(e){}
-      record[n]={week:n,ready:true,readRules:read.checked,understoodExample:example.checked,explanation:text,completedAt:new Date().toISOString()};
-      try{root.localStorage.setItem("8020-source-first-v1",JSON.stringify(record));}
+      if(!quizRecord.correct){
+        feedback.hidden=false;feedback.className="recognition-feedback needs-work";
+        feedback.textContent="Check the source-concept question and answer it correctly before applying the concept to the Qur’an.";
+        return;
+      }
+      var all={};try{all=JSON.parse(root.localStorage.getItem("8020-source-first-v1")||"{}");}catch(e){}
+      all[n]={week:n,ready:true,quizCorrect:true,readRules:read.checked,understoodExample:example.checked,explanation:text,completedAt:new Date().toISOString()};
+      try{root.localStorage.setItem("8020-source-first-v1",JSON.stringify(all));}
       catch(e){feedback.hidden=false;feedback.className="recognition-feedback needs-work";feedback.textContent="The browser could not save this source check. Check local storage settings and try again.";return;}
       var app=wrap.querySelector("#applicationFlow-"+n);if(app)app.hidden=false;
       feedback.hidden=false;feedback.className="recognition-feedback saved";
-      feedback.textContent="Source concept recorded. Now apply it on the assigned Qur’an page.";
+      feedback.textContent="Source concept and teach-back recorded. Now apply it on the assigned Qur’an page.";
       if(root.ClassroomSync)root.ClassroomSync.queueSync("source-first-check");
       if(app)app.scrollIntoView({behavior:"smooth",block:"start"});
     });
