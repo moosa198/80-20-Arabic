@@ -1,10 +1,10 @@
-# Curriculum and pedagogy audit — 25 October 2026
+# Curriculum and pedagogy audit — 26 October 2026
 
 ## Outcome and method
 
-The course has been reshaped around **whole → map → whole → retrieve → transfer**: begin with a real Qur’anic phrase, notice the structure, study only the relevant rule, return to the same phrase, then locate the pattern again later. This applies the high-level 80/20 / early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf), without copying its wording or treating its stated outcomes as guarantees.
+The teaching sequence is now **FSTU source → guided understanding → Qur’anic application → retrieval → teacher evidence**. FSTU Naḥw and Ṣarf remain the primary conceptual sources. Students see only that week’s assigned pages from a learner-supplied PDF; the source is processed locally, not uploaded. The source check asks students to verify the rule and worked example, explain the concept in their own words, and answer a concept question before the Qur’anic application unlocks. This is a course design choice informed by 80/20 / early-real-text principles, not a claim that any single teaching sequence guarantees outcomes.
 
-Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come first. The wudhu reminder remains as adab guidance for a physical Mushaf, not a software gate. Each lesson has a real-page recognition task, paired English/Arabic role labels, a required explanation, local attempt history, and teacher-verification guidance. The app records evidence but does not auto-grade nuanced Arabic syntax.
+Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come first. The wudhu reminder remains as adab guidance for a physical Mushaf, not a software gate. Each lesson has a real-page recognition task, paired English/Arabic role labels, a required explanation, local attempt history, and teacher-verification guidance. Transliteration is a temporary bridge at each term’s first teaching encounter: the first display uses a vowelled term and a small scholarly transliteration, then later displays return to the Arabic label. The app records evidence but does not auto-grade nuanced Arabic syntax.
 
 ## Week-by-week mapping and decisions
 
@@ -46,14 +46,24 @@ Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come firs
 
 - The integrated reader uses a digital 15-line Madina layout. It may not reproduce the exact calligraphy or line breaks of the supplied King Fahd Complex PDF. The student must confirm the passage with the teacher and the physical Mushaf.
 - FSTU Naḥw references use the official August 2026 resource. The embedded FSTU Ṣarf resource is October 2023; earlier mapping was made against a March 2022 copy. If pagination differs, use the printed section heading and check with a teacher. The weekly notes explain this where the reference is shown.
-- The live course embeds/links the publisher’s official FSTU resources rather than storing scans in this repository. Attribution and educational/non-commercial use are indicated; obtain written permission for commercial use.
+- The lesson no longer embeds a full FSTU PDF. A student can load a personal source PDF; the browser extracts and stores only the pages assigned in the curriculum, with the original PDF kept local and not uploaded. Official publisher resource links and attribution remain visible. Obtain written permission before redistributing scans commercially.
 - The renderer is an upstream dependency. Its published licence should be checked before redistributing a bundled copy of the code.
 - These are instructional mappings, not claims that every disputed Qur’anic parse has one uncontested answer. The app deliberately saves explanations for teacher review rather than pretending an automated test can grade all syntax.
 
 ## Next QA gates
 
 1. Parse and render all 31 lessons in Chromium.
-2. Verify page selection and saved recognition attempts, including multiple saved attempts per week.
-3. Verify Fātiḥah checkpoints and custom page loading.
-4. Check desktop/mobile width, RTL rendering, printed workbook pagination and the Hifz-first language.
-5. Confirm GitHub Actions build, workbook generation and Pages deployment are successful before considering the rollout complete.
+2. Verify that every week is locked before source understanding, unlocks only after a correct concept answer and valid teach-back, and saves evidence for teacher review.
+3. Verify page selection and saved recognition attempts, including multiple saved attempts per week.
+4. Verify Fātiḥah checkpoints and custom page loading.
+5. Check desktop/mobile width, RTL rendering, printed workbook pagination and the Hifz-first language.
+6. Confirm GitHub Actions build, workbook generation and Pages deployment are successful before considering the rollout complete.
+
+
+## Multi-class platform and lesson-page delivery update — 26 October 2026
+
+- The five-stage lesson sequence is FSTU source → guided understanding → Qur’anic application → retrieval / explanation / transfer → teacher evidence. The application is locked until the student confirms the source rules/example, writes a teach-back explanation, and answers the concept check correctly. That source evidence is saved in the same weekly progress record used by cloud sync and displayed in the teacher dashboard. The new term-support layer vowelises core grammatical labels and provides subtle transliteration only on the first introduction screen, before that week is marked complete.
+- The FSTU reader no longer embeds a full-book Google Drive preview. Students load a copy of FSTU Naḥw / Ṣarf; the local PDF renderer saves only the course-assigned page images in browser IndexedDB. This is device-local and separate from the cloud progress system. Page counts and edition headings should be checked with a teacher if the printed edition differs from the course mapping.
+- The Supabase migration defines Madrassa and class membership boundaries; student snapshots, 31-week progress and append-only teacher reviews are scoped by class. One-use invitations assign the role server-side. The optional browser sync does not activate until a public project URL/key are configured.
+- The teacher dashboard displays course progress, source-book understanding and recognition evidence; Secure / Developing / Needs revision entries are human judgements. No automated syntax marking is claimed.
+- The migration and front-end integration have not been exercised against a live Supabase project in this branch. Before entering real student data, run the migration and RLS tests in a development project and test cross-class denial, invited roles, expired/reused codes, progress merge and teacher reviews.

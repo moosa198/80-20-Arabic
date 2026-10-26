@@ -7,6 +7,10 @@
   var PDFJS_WORKER="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   var urls={}, jobs={}, zoomBound=false;
   var LABELS={quran:"15-line Madani Mushaf",sarf:"FSTU Ṣarf",nahw:"FSTU Naḥw"};
+  var SOURCES={
+    sarf:"https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources",
+    nahw:"https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources"
+  };
   var ACCEPTS={quran:"application/pdf",sarf:"application/pdf",nahw:"application/pdf"};
   var WIDTHS={quran:1000,sarf:1000,nahw:1000};
 
@@ -65,21 +69,25 @@
   }
   function makeMissing(kind,page,message) {
     var label=LABELS[kind]||"source book";
-    var msg=message||("Load your own "+label+" PDF once to display printed page "+page+".");
-    return '<div class="book-page-missing"><div class="book-missing-mark" aria-hidden="true">↥</div><b>Actual page not loaded yet</b><p>'+escapeHtml(msg)+'</p><label class="book-upload-button" data-book-upload-label="'+kind+'">Choose '+escapeHtml(label)+' PDF<input type="file" accept="'+(ACCEPTS[kind]||"application/pdf")+'" data-book-upload="'+kind+'"></label><p class="guide-small">Only the assigned page images are saved locally. The PDF is not sent to a server.</p></div>';
+    var msg=message||("Load the relevant "+label+" PDF to display only the assigned printed pages.");
+    var official=SOURCES[kind]||"";
+    var officialLink=official?'<p><a class="source-download-link" href="'+official+'" target="_blank" rel="noreferrer">Get the official '+escapeHtml(label)+' resource ↗</a></p>':"";
+    return '<div class="book-page-missing"><div class="book-missing-mark" aria-hidden="true">↥</div><b>Assigned page '+Number(page)+' · not loaded yet</b><p>'+escapeHtml(msg)+'</p>'+officialLink+'<label class="book-upload-button" data-book-upload-label="'+kind+'">Choose '+escapeHtml(label)+' PDF<input type="file" accept="'+(ACCEPTS[kind]||"application/pdf")+'" data-book-upload="'+kind+'"></label><p class="guide-small">The browser extracts only the course-assigned pages and stores those page images on this device. The source PDF is never uploaded.</p></div>';
   }
   function escapeHtml(s) {
     return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]);});
   }
-  async function hydrate(container) {
+  async function hydrate(container,kinds) {
     container=container||root.document;
     if(!container||!container.querySelectorAll)return;
+    var allowed=kinds&&kinds.length?new Set(kinds):null;
     var nodes=Array.prototype.slice.call(container.querySelectorAll("[data-book-page]"));
     await Promise.all(nodes.map(async function(el){
-      if(el.dataset.hydrating==="true")return;
-      el.dataset.hydrating="true";
       var parts=String(el.getAttribute("data-book-page")||"").split(":");
       var kind=parts[0],page=Number(parts[1]);
+      if(allowed&&!allowed.has(kind))return;
+      if(el.dataset.hydrating==="true")return;
+      el.dataset.hydrating="true";
       if(!LABELS[kind]||!page){el.innerHTML='<div class="book-page-placeholder">Unknown source-page reference.</div>';return;}
       try{
         var item=await storeGet("pages",sourceKey(kind,page));
@@ -155,7 +163,7 @@
       await storePut("meta",{id:kind,fileName:file.name,pdfPageCount:sourcePageCount,pagesSaved:total,renderedBytes:bytes,importedAt:new Date().toISOString()});
       setStatus(kind,"Ready: "+file.name+" · "+total+" assigned pages saved on this device.",false);
       await refreshLibraryStatus();
-      await hydrate(root.document);
+      await hydrate(root.document,[kind]);
     }catch(error){
       setStatus(kind,"Could not prepare this source: "+(error&&error.message?error.message:"unknown error"),false);
       try{if(root.console)root.console.error("80/20 Arabic page import failed ("+kind+")",error);}catch(e){}
@@ -194,7 +202,7 @@
       tx.oncomplete=resolve;tx.onerror=function(){reject(tx.error);};
     });
     Object.keys(urls).forEach(function(key){if(key.indexOf(kind+":")===0){URL.revokeObjectURL(urls[key]);delete urls[key];}});
-    await refreshLibraryStatus();await hydrate(root.document);
+    await refreshLibraryStatus();await hydrate(root.document,[kind]);
   }
   function bindPageZoom(container) {
     container=container||root.document;

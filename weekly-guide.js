@@ -216,28 +216,31 @@
     return '<section id="hifzPriority" class="weekly-guide hifz-priority" aria-labelledby="hifzPriorityTitle">' +
       '<div class="guide-eyebrow">PRIORITY 1 · HIFZ FIRST</div><h2 id="hifzPriorityTitle">Complete your Hifz targets first</h2>' +
       '<p>Complete your teacher-assigned <b>Sabaq</b>, <b>Sabaq Sipara / Sabqi</b> and <b>Dhor / Dawr</b> first. Arabic is support for Hifz, not a competing target. If your Hifz work is unfinished or you are tired, defer Arabic without guilt.</p>' +
-      '<p class="guide-small">The Arabic loop is whole → map → whole → retrieve: begin with the Qur’anic structure, learn only the rule needed to explain it, then return to the same words and find the pattern again elsewhere.</p></section>';
+      '<p class="guide-small">Every lesson follows the same sequence: source-book concept → guided understanding → Qur’anic application → retrieval → teacher evidence. The assigned FSTU page teaches the rule before the Qur’an page opens.</p></section>';
   }
   function renderLibrarySetup() {
-    return '<section class="weekly-guide source-method-card" aria-labelledby="sourceMethodTitle"><div class="guide-eyebrow">HOW THE METHOD WORKS</div><h2 id="sourceMethodTitle">See the structure before collecting rules</h2><div class="method-rhythm"><div><b>1 · Whole</b><p>Begin with the Qur’anic phrase. Notice what the statement is doing before analysing a word.</p></div><div><b>2 · Map</b><p>Zoom in to the smallest useful clue: word type, form, phrase relationship or sentence role. Pair every English grammar term with Arabic.</p></div><div><b>3 · Return</b><p>Use FSTU as a focused reference, then return to the same words and explain the relationship in context.</p></div><div><b>4 · Retrieve</b><p>Tap the evidence, name the role, explain the clue and revisit the pattern later on another memorised page.</p></div></div><p class="guide-small">The Qur’an viewer is a digital 15-line Madina layout and may differ in calligraphy or line breaks from your printed Mushaf. Verify the sūrah, page number and verse context with your teacher. Official FSTU copies are embedded from Al-Qalam Institute; Ṣarf page labels may vary between editions.</p><p class="guide-small">Sources: <a href="https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources" target="_blank" rel="noreferrer">FSTU Naḥw</a> · <a href="https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources" target="_blank" rel="noreferrer">FSTU Ṣarf</a> · <a href="https://github.com/tarekeldeeb/quran-madina-html" target="_blank" rel="noreferrer">digital Mushaf renderer</a>. References are provided for educational study with attribution; the source books are not republished by this site.</p></section>';
+    return '<section class="weekly-guide source-method-card" aria-labelledby="sourceMethodTitle"><div class="guide-eyebrow">HOW THE METHOD WORKS</div><h2 id="sourceMethodTitle">Learn the concept, then apply it to the Qur’an</h2><div class="method-rhythm">' +
+      '<div><b>1 · Source-book concept</b><p>Read only this week’s assigned FSTU page(s): definition, rule(s), worked example and relevant tarkīb (تَرْكِيبٌ).</p></div>' +
+      '<div><b>2 · Guided understanding</b><p>Close the source, confirm the worked example, explain the idea in your own words, and answer the concept check.</p></div>' +
+      '<div><b>3 · Qur’anic application</b><p>Apply the same concept to the 15-line Mushaf page only after the source check is passed.</p></div>' +
+      '<div><b>4 · Retrieval and transfer</b><p>Select the Arabic evidence, name the role in English and Arabic, justify the clue, then revisit it on another memorised page where appropriate.</p></div>' +
+      '<div><b>5 · Teacher evidence</b><p>The dashboard stores source answers, teach-back and recognition attempts for human review: Secure, Developing or Needs revision.</p></div></div>' +
+      '<p class="guide-small">The FSTU PDF is supplied by the learner, processed locally and never uploaded. The viewer shows only the pages assigned for the current week. The digital 15-line Madina layout may differ in calligraphy or line breaks from the printed Mushaf, so verify the sūrah, page and verse with your teacher.</p>' +
+      '<p class="guide-small">Sources: <a href="https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources" target="_blank" rel="noreferrer">FSTU Naḥw</a> · <a href="https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources" target="_blank" rel="noreferrer">FSTU Ṣarf</a> · <a href="https://github.com/tarekeldeeb/quran-madina-html" target="_blank" rel="noreferrer">digital Mushaf renderer</a>. References are provided for educational study with attribution.</p></section>';
   }
   function pageFrame(kind,page) {
     var p=Number(page);
     if(kind==="quran"){
       return '<div class="book-page-frame digital-mushaf-frame" data-book-page="quran:'+p+'" aria-label="Digital 15-line Madina Qur’an page '+p+'"><quran-madina-html page="'+p+'" headless="true" highlight="1" data-recognition-page="true" aria-label="Qur’an page '+p+'"><p class="digital-reader-fallback">The digital page viewer is loading. If it does not load, check your connection and use your own Mushaf with the same page number.</p></quran-madina-html><p class="page-caption">Digital 15-line Madina layout · page '+p+' · tap an Arabic word to select it</p></div>';
     }
-    var id=kind==="sarf"?"1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr":"1BdY0tAvoaKvJVUhmMQn09bxLh0fAXO03";
-    var label=kind==="sarf"?"Official FSTU Ṣarf resource (2023 October edition)":"Official FSTU Naḥw resource (August 2026 edition)";
-    var direct="https://drive.google.com/file/d/"+id+"/view#page="+p;
-    var preview="https://drive.google.com/file/d/"+id+"/preview#page="+p;
-    return '<div class="book-page-frame fstu-page-frame" data-book-page="'+kind+':'+p+'" aria-label="'+(kind==="sarf"?"FSTU Ṣarf":"FSTU Naḥw")+' assigned page '+p+'"><iframe loading="lazy" title="'+label+' · page '+p+'" src="'+preview+'" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen"></iframe><p class="fstu-open-link"><a href="'+direct+'" target="_blank" rel="noreferrer">Open official source at printed page '+p+' ↗</a></p></div>';
+    return '<div class="book-page-frame fstu-page-frame" data-book-page="'+kind+':'+p+'" aria-label="'+(kind==="sarf"?"FSTU Ṣarf":"FSTU Naḥw")+' assigned page '+p+'"></div>';
   }
   function renderBookGroup(kind,pages,focus) {
     var title=kind==="sarf"?"FSTU Ṣarf (صرف)":"FSTU Naḥw (نحو)";
     var sourcePages=pages||[];
     var note=kind==="sarf"
-      ?'<p class="source-edition-note">The embedded source is Al-Qalam Institute’s October 2023 resource. This course was initially mapped against a March 2022 copy; check the section heading if the page number differs in your edition.</p>'
-      :'<p class="source-edition-note">Embedded from Al-Qalam Institute’s August 2026 FSTU Naḥw resource.</p>';
+      ?'<p class="source-edition-note">The assigned pages are rendered from your own October 2023 FSTU Ṣarf copy. The course was initially mapped against a March 2022 copy; follow the printed section heading if your page number differs.</p>'
+      :'<p class="source-edition-note">The assigned pages are rendered from your own FSTU Naḥw copy. The current Al-Qalam resource is the August 2026 edition; follow the printed section heading if pagination differs.</p>';
     return '<article class="textbook-panel '+kind+'-panel"><div class="textbook-panel-head"><div><div class="guide-eyebrow">'+(kind==="sarf"?"SOURCE BOOK · MORPHOLOGY":"SOURCE BOOK · GRAMMAR")+'</div><h3>'+title+'</h3></div><span class="book-page-count">'+sourcePages.length+' page'+(sourcePages.length===1?"":"s")+'</span></div><p>'+esc(focus)+'</p>'+note+'<div class="textbook-pages">'+sourcePages.map(function (p) {
       var pageTitle=(kind==="sarf"?SARF_PAGE_TITLES:NAHW_PAGE_TITLES)[p]||"Source page";
       return '<section class="textbook-page"><div class="textbook-page-caption"><b>Printed p. '+p+'</b><span>'+esc(pageTitle)+'</span></div>'+pageFrame(kind,p)+'</section>';
@@ -284,57 +287,214 @@
     var t=RECOGNITION_TASKS[Number(week)]||RECOGNITION_TASKS[31];
     return '<section class="recognition-lab" data-recognition-task="'+Number(week)+'" aria-labelledby="recognitionTitle-'+Number(week)+'"><div class="guide-eyebrow">PART B · RECOGNISE IT ON THE PAGE</div><h3 id="recognitionTitle-'+Number(week)+'">Tap the Arabic evidence</h3><p class="recognition-stage">'+esc(t.stage)+'</p><p>'+esc(t.prompt)+'</p><div class="recognition-selected" aria-live="polite"><b>Selected word(s)</b><span class="selected-arabic" data-recognition-selected lang="ar" dir="rtl">No words selected yet</span><small data-recognition-location>Choose a word from the digital Qur’an page above.</small></div><div class="recognition-actions"><button type="button" class="btn light" data-clear-recognition="'+Number(week)+'">Clear selection</button></div><div class="recognition-labels" role="group" aria-label="Choose the grammatical role">'+t.labels.map(function(x){return '<button type="button" class="recognition-label" data-recognition-label="'+esc(x[1])+'" data-recognition-en="'+esc(x[0])+'"><span>'+esc(x[0])+'</span><b lang="ar" dir="rtl">'+esc(x[1])+'</b></button>';}).join("")+'</div><label class="evidence-label">Your explanation (required)<textarea data-recognition-explanation="'+Number(week)+'" rows="3" placeholder="Which clue in the Arabic supports your choice? How do the words relate?"></textarea></label><div class="actions"><button type="button" class="btn" data-save-recognition="'+Number(week)+'">Save recognition attempt</button><span class="guide-small">Saved on this device. This is evidence for learning, not an automatic grammar mark; ask your teacher to verify the role.</span></div><div class="recognition-history-wrap"><b>Saved attempts · most recent five</b><div class="recognition-history" data-recognition-history aria-live="polite">No attempts saved on this device yet.</div></div><div class="recognition-feedback" data-recognition-feedback="'+Number(week)+'" role="status" aria-live="polite" hidden></div></section>';
   }
+  var TERM_KEYS_BY_ARABIC = {
+    "اسم":"noun","فعل":"verb","حرف":"particle","فعل ماضٍ":"past","فعل مضارع":"imperfect","فعل أمر":"imperative",
+    "جملة اسمية":"nominal","جملة فعلية":"verbal","مبتدأ":"mubtada","خبر":"khabar","فاعل":"faail","مفعول به":"mafool",
+    "حرف جر":"preposition","اسم مجرور":"genitive","جار ومجرور":"jarMajrur","عطف":"conjunction","حرف عطف":"conjunctionParticle",
+    "معطوف":"conjunction","إضافة":"idafah","مضاف":"mudaf","مضاف إليه":"mudafIlayh","ضمير":"pronoun","ضمير متصل":"attachedPronoun",
+    "نعت":"adjective","منعوت":"described","اسم موصول":"relativePronoun","صلة الموصول":"relativeClause","واو القسم":"oath",
+    "مقسم به":"oath","جواب القسم":"oath","أداة استثناء":"exception","مستثنى":"exception","أداة استفهام":"question",
+    "أداة نداء":"vocative","منادى":"vocative","حرف نفي":"negation","فعل مبني للمجهول":"passive","نائب الفاعل":"naib",
+    "اسم الفاعل":"activeParticiple","اسم المفعول":"passiveParticiple","ظرف زمان":"zarf","ظرف مكان":"zarf",
+    "لام التعليل":"purposeLam","تعبير عن الغرض":"purpose","حال":"haal","مثنّى":"dual","مجزوم":"jussive",
+    "منصوب":"subjunctive","شرط":"condition","جواب الشرط":"result","استفهام":"question","نداء":"vocative",
+    "نفي":"negation","قصر":"restriction","مفعول مطلق":"absolute","تركيب":"tarkib","جذر":"root","وزن":"pattern","تَرْكِيبٌ":"tarkib","مفعول لأجله":"mafoolAjlihi","مصدر":"verbalNoun"
+  };
+  function savedSourceState(week) {
+    var all = {};
+    try { all = JSON.parse(root.localStorage.getItem("8020-weekly-recall-v2") || "{}"); } catch (e) {}
+    return all[Number(week)] || {};
+  }
+  function weekIsComplete(week) {
+    var main = {}, studio = {};
+    try { main = JSON.parse(root.localStorage.getItem("8020arabic-progress-v1") || "{}"); } catch (e) {}
+    try { studio = JSON.parse(root.localStorage.getItem("8020-student-v2") || "{}"); } catch (e) {}
+    return !!((main.doneWeeks || {})[Number(week)] || (studio.done || {})[Number(week)]);
+  }
+  function renderKeyTerms(week) {
+    var task = RECOGNITION_TASKS[Number(week)], labels = task && task.labels || [], seen = Object.create(null);
+    var items = labels.filter(function (item) {
+      if (seen[item[1]]) return false;
+      seen[item[1]] = true;
+      return true;
+    });
+    if (!items.length) return "";
+    return '<section class="source-key-terms" aria-label="Key grammar terms for this week"><div class="source-key-terms-title">KEY TERMS · ENGLISH + ARABIC</div><div class="source-key-term-list">' +
+      items.map(function (item) {
+        var key = TERM_KEYS_BY_ARABIC[item[1]], meta = key && root.TermSupport && root.TermSupport.terms[key];
+        var firstEncounter = !!(meta && Number(meta.week) === Number(week) && !weekIsComplete(week));
+        var arabic = firstEncounter ? meta.ar : item[1];
+        var transliteration = firstEncounter && meta.latin ? '<small class="term-pronunciation" lang="en" dir="ltr">' + esc(meta.latin) + '</small>' : "";
+        return '<div class="source-key-term"><span>' + esc(item[0]) + '</span><b lang="ar" dir="rtl">' + esc(arabic) + '</b>' + transliteration + '</div>';
+      }).join("") + '</div><p class="guide-small">Arabic remains primary. Transliteration appears only when a term is first introduced.</p></section>';
+  }
+  function renderSourceCheck(week) {
+    var saved = savedSourceState(week), d = get(week), q = d.quiz;
+    var choiceFeedback = saved.choice !== undefined
+      ? '<b>' + (saved.correct ? 'Correct — now show that you understand the source example.' : 'Not yet — reread the assigned page and try again.') + '</b><p>' + esc(q.why) + '</p>'
+      : "";
+    return '<section class="weekly-step source-mastery-step" aria-labelledby="sourceCheckTitle-' + week + '">' +
+      '<div class="step-topline"><span class="step-number">02</span><div><div class="guide-eyebrow">GUIDED UNDERSTANDING · BEFORE APPLICATION</div><h2 id="sourceCheckTitle-' + week + '">Can you explain the concept?</h2></div></div>' +
+      '<p class="step-intro">Close the source book or look away from the page. Explain the concept in your own words, then answer the question from memory. The Qur’an application stays closed until you can justify the concept.</p>' +
+      '<div class="source-check-items"><label><input type="checkbox" data-source-read="' + week + '" ' + (saved.sourceRead ? "checked" : "") + '> I have read the definition and relevant rule(s) on the assigned FSTU page(s).</label>' +
+      '<label><input type="checkbox" data-source-example="' + week + '" ' + (saved.sourceExample ? "checked" : "") + '> I can explain the worked example and its grammatical labels.</label></div>' +
+      '<label class="evidence-label">Explain the concept in your own words<textarea data-source-explanation="' + week + '" rows="3" minlength="20" placeholder="What does this structure do? Which clue in the source example helps you recognise it?">' + esc(saved.sourceExplanation || "") + '</textarea></label>' +
+      '<div class="source-concept-check"><div class="guide-eyebrow">SOURCE CONCEPT CHECK · NO QUR’AN PAGE YET</div><fieldset class="quiz-fieldset"><legend>' + esc(q.question) + '</legend>' +
+      q.options.map(function (option, i) {
+        return '<label class="quiz-option"><input type="radio" name="source-choice-' + week + '" value="' + i + '" ' + (Number(saved.choice) === i ? "checked" : "") + '><span>' + esc(option) + '</span></label>';
+      }).join("") + '</fieldset><div class="quiz-actions"><button type="button" class="btn" data-check-source-quiz="' + week + '">Check concept understanding</button></div>' +
+      '<div class="quiz-feedback" data-source-quiz-feedback="' + week + '" role="status" aria-live="polite" ' + (saved.choice !== undefined ? "" : "hidden") + '>' + choiceFeedback + '</div></div>' +
+      '<div class="actions"><button type="button" class="btn" data-source-continue="' + week + '">I understand the source concept — apply it to the Qur’an</button>' +
+      '<span class="guide-small">This is a learning self-check, not a teacher grade. Your explanation and answer are saved for teacher review when the class is connected.</span></div>' +
+      '<div class="recognition-feedback" data-source-feedback="' + week + '" role="status" aria-live="polite" hidden></div></section>';
+  }
   function renderAssessment(week) {
-    var n=Number(week),d=get(n),q=d.quiz;
-    return '<section class="weekly-guide assessment-layer" id="weeklyTest-'+n+'" aria-labelledby="testTitle-'+n+'"><div class="test-step-label">04 · APPLY AND EXPLAIN</div><h2 id="testTitle-'+n+'">'+(d.checkpoint?"Cumulative retrieval checkpoint":"Quick retrieval, then real-page analysis")+'</h2><p class="test-intro">First retrieve the idea without reopening the source. Then tap actual Arabic evidence, identify the role and explain the clue. The small quiz is a prompt, not proof of independent understanding.</p><div class="quiz-question"><div class="guide-eyebrow">PART A · RETRIEVE</div><fieldset class="quiz-fieldset"><legend>'+esc(q.question)+'</legend>'+q.options.map(function (option,i) {
-      return '<label class="quiz-option"><input type="radio" name="weekly-choice-'+n+'" value="'+i+'"><span>'+esc(option)+'</span></label>';
-    }).join("")+'</fieldset><div class="quiz-actions"><button type="button" class="btn" data-check-quiz="'+n+'">Check my answer</button><span class="guide-small">Try from memory first; the explanation appears after checking.</span></div><div id="quizFeedback-'+n+'" class="quiz-feedback" role="status" aria-live="polite" hidden></div></div>'+renderRecognitionLab(n)+'</section>';
-  }  function renderSequence(week, options) {
-    options=options||{};
-    var n=Number(week),d=get(n),page=Number(d.page||604);
-    var passage=options.passage||d.passage;
-    var apply=options.apply||(d.capstone?"Use the reference page as a model, then repeat the analysis on a full page from your own memorised Qur’an.":"Find one example of this week’s target, point to the Arabic evidence and explain it in your own words.");
-    var pageNote=d.capstone
-      ?"Page 604 is the starting model only. For independent transfer, load a different page from your own memorised Qur’an."
-      :"Begin with the whole passage. The online renderer uses a digital 15-line Madina layout; check page and verse context against the edition you use in class.";
-    var picker=(d.checkpoint||d.capstone)
-      ?'<div class="transfer-page-picker"><label for="transferPage-'+n+'">'+(d.capstone?"Choose your capstone page (1–604)":"Optional transfer page (1–604)")+'</label><div><input id="transferPage-'+n+'" data-transfer-page="'+n+'" type="number" min="1" max="604" value="'+(d.capstone?604:page)+'" inputmode="numeric"><button type="button" class="btn light" data-load-transfer-page="'+n+'">Load page</button></div><small>For Weeks 8, 16 and 24, start with Al-Fātiḥah and use another memorised page only when the target feature is not present there.</small></div>'
-      :"";
-    return '<div class="weekly-sequence" data-week-sequence="'+n+'"><div class="sequence-overview" aria-label="Four lesson stages"><div class="sequence-node active"><span>01</span><b>Qur’an</b></div><div class="sequence-line"></div><div class="sequence-node"><span>02</span><b>Map</b></div><div class="sequence-line"></div><div class="sequence-node"><span>03</span><b>Listen</b></div><div class="sequence-line"></div><div class="sequence-node"><span>04</span><b>Apply</b></div></div>'+
-      '<section class="weekly-step mushaf-step" aria-labelledby="mushafTitle-'+n+'"><div class="step-topline"><span class="step-number">01</span><div><div class="guide-eyebrow">START WITH THE WHOLE · THEN NOTICE THE CLUE</div><h2 id="mushafTitle-'+n+'">Read the Qur’anic passage first</h2></div></div><p class="step-intro">Look at the whole phrase before analysing a part. Ask what the statement is about, what is happening, and which words connect. If handling a physical Mushaf, make wudhu first; this online study aid does not enforce an adab reminder as a software gate.</p><div class="mushaf-task" id="mushafTask-'+n+'"><div class="mushaf-reference"><div class="mushaf-reference-meta"><span class="guide-eyebrow">TARGET PASSAGE</span><span class="page-pill">Madina page '+page+'</span></div><h3>'+esc(passage)+'</h3><p class="guide-small">'+esc(pageNote)+'</p>'+picker+'</div>'+pageFrame("quran",page)+'<p class="mushaf-application">'+esc(apply)+'</p><div class="mushaf-transfer-note"><b>First pass · without notes</b><p>Before reading the rule, try to spot one feature in the whole phrase. Tap the exact word or words that led you to your decision. After studying the map, return here and revise your explanation if needed.</p></div></div></section>'+
-      '<section class="weekly-step textbook-step" aria-labelledby="textbookTitle-'+n+'"><div class="step-topline"><span class="step-number">02</span><div><div class="guide-eyebrow">A SMALL MAP · NOT A CATALOGUE</div><h2 id="textbookTitle-'+n+'">Use the FSTU page to explain what you saw</h2></div></div><p class="step-intro">Read only the assigned section. Identify the minimum rule needed to explain the pattern, say the English term with its Arabic equivalent, then return to the Qur’anic words. The official source opens below; the assigned heading matters if editions paginate differently.</p><div class="textbook-focus-note"><div class="textbook-focus-item"><b>Ṣarf · صرف</b><p>'+esc(d.sarf)+'</p></div><div class="textbook-focus-item nahw-focus"><b>Naḥw · نحو</b><p>'+esc(d.nahw)+'</p></div></div><div class="textbook-stack">'+renderBookGroup("sarf",d.sarfPages,d.sarf)+renderBookGroup("nahw",d.nahwPages,d.nahw)+'</div><p class="source-return-note"><b>Return to the whole:</b> close or minimise the source view and explain how the rule helps you read the same Qur’anic phrase.</p></section>'+
-      renderPlaylists(n)+renderAssessment(n)+'</div>';
-  }  function bindAssessment(week) {
-    var n=Number(week),d=get(n),q=d.quiz;
-    var panel=root.document.getElementById("weeklyTest-"+n);
-    if(!panel)return;
-    var answerButton=panel.querySelector('[data-check-quiz="'+n+'"]');
-    var feedback=panel.querySelector("#quizFeedback-"+n);
-    var key="8020-weekly-recall-v2";
-    var previous={};
-    try{previous=JSON.parse(root.localStorage.getItem(key)||"{}")[n]||{};}catch(e){}
-    if(previous.choice!==undefined){
-      var old=panel.querySelector('input[name="weekly-choice-'+n+'"][value="'+previous.choice+'"]');
-      if(old)old.checked=true;
+    var n = Number(week), d = get(n);
+    return '<section class="weekly-guide assessment-layer" id="weeklyTest-' + n + '" aria-labelledby="testTitle-' + n + '">' +
+      '<div class="test-step-label">04 · RETRIEVE AND EXPLAIN</div><h2 id="testTitle-' + n + '">' + (d.checkpoint ? "Cumulative retrieval checkpoint" : "Find it, name it, justify it") + '</h2>' +
+      '<p class="test-intro">Use the source concept to identify actual Arabic evidence on the 15-line Qur’an page. Select the word or words, choose the grammatical role, and explain the clue in your own words. Your teacher can inspect these attempts and record Secure / Developing / Needs revision; the app does not pretend to grade nuanced syntax automatically.</p>' +
+      renderRecognitionLab(n) + '</section>';
+  }
+  function renderSequence(week, options) {
+    options = options || {};
+    var n = Number(week), d = get(n), page = Number(d.page || 604);
+    var passage = options.passage || d.passage;
+    var apply = options.apply || (d.capstone
+      ? "Use the source pages as a reference only, then repeat the analysis on a full page from your own memorised Qur’an."
+      : "Apply the source-book concept to this passage: select the Arabic evidence and explain it.");
+    var readyRecord = savedSourceState(n);
+    var ready = !!(readyRecord.sourceReady && readyRecord.correct);
+    var pageNote = d.capstone
+      ? "Page 604 is a reference model only. For independent transfer, load a different page from your own memorised Qur’an."
+      : "Confirm the page and verse context against the physical Mushaf used in class. The digital 15-line layout may differ in calligraphy or line breaks.";
+    var picker = (d.checkpoint || d.capstone)
+      ? '<div class="transfer-page-picker"><label for="transferPage-' + n + '">' + (d.capstone ? "Choose your capstone page (1–604)" : "Optional transfer page (1–604)") + '</label><div><input id="transferPage-' + n + '" data-transfer-page="' + n + '" type="number" min="1" max="604" value="' + (d.capstone ? 604 : page) + '" inputmode="numeric"><button type="button" class="btn light" data-load-transfer-page="' + n + '">Load page</button></div><small>For Weeks 8, 16 and 24, begin with Al-Fātiḥah. Use another memorised page only when the target feature is absent from Al-Fātiḥah.</small></div>'
+      : "";
+    return '<div class="weekly-sequence" data-week-sequence="' + n + '">' +
+      '<div class="sequence-overview" aria-label="Five lesson stages"><div class="sequence-node active"><span>01</span><b>FSTU source</b></div><div class="sequence-line"></div><div class="sequence-node"><span>02</span><b>Understand</b></div><div class="sequence-line"></div><div class="sequence-node"><span>03</span><b>Qur’an</b></div><div class="sequence-line"></div><div class="sequence-node"><span>04</span><b>Retrieve</b></div><div class="sequence-line"></div><div class="sequence-node"><span>05</span><b>Teacher review</b></div></div>' +
+      '<section class="weekly-step textbook-step" aria-labelledby="textbookTitle-' + n + '"><div class="step-topline"><span class="step-number">01</span><div><div class="guide-eyebrow">SOURCE BOOK FIRST · ONE CONCEPT AT A TIME</div><h2 id="textbookTitle-' + n + '">Study the assigned FSTU pages</h2></div></div>' +
+      '<p class="step-intro">Begin with the source book—not the Qur’an page. Read the definition and relevant rule(s), inspect the worked example, and complete or orally explain the relevant <i>tarkīb</i> (تَرْكِيبٌ). Only the page(s) assigned to this week are shown; the original PDF stays on this device and is never uploaded.</p>' +
+      '<div class="textbook-focus-note"><div class="textbook-focus-item"><b>Ṣarf · صَرْفٌ · ṣarf</b><p>' + esc(d.sarf) + '</p></div><div class="textbook-focus-item nahw-focus"><b>Naḥw · نَحْوٌ · naḥw</b><p>' + esc(d.nahw) + '</p></div></div>' +
+      '<div class="textbook-stack">' + renderBookGroup("sarf", d.sarfPages, d.sarf) + renderBookGroup("nahw", d.nahwPages, d.nahw) + '</div>' +
+      renderKeyTerms(n) + renderPlaylists(n) +
+      '<p class="source-return-note"><b>Before continuing:</b> close or minimise the source view and explain what the rule does, which clue it uses, and how the source example demonstrates it.</p></section>' +
+      renderSourceCheck(n) +
+      '<div id="applicationFlow-' + n + '" class="application-flow" ' + (ready ? "" : "hidden") + '><section class="weekly-step mushaf-step" aria-labelledby="mushafTitle-' + n + '">' +
+      '<div class="step-topline"><span class="step-number">03</span><div><div class="guide-eyebrow">APPLY THE SOURCE CONCEPT TO REAL QUR’AN</div><h2 id="mushafTitle-' + n + '">Now find it on the 15-line Qur’an page</h2></div></div>' +
+      '<p class="step-intro">Only now move to the Mushaf. Look at the full phrase first, then identify the word or relationship that matches the concept you just explained. If handling a physical Mushaf, make wudhu first; the digital page is not gated by a Wudhu checkbox.</p>' +
+      '<div class="mushaf-task" id="mushafTask-' + n + '"><div class="mushaf-reference"><div class="mushaf-reference-meta"><span class="guide-eyebrow">TARGET PASSAGE</span><span class="page-pill">Madina page ' + page + '</span></div><h3>' + esc(passage) + '</h3><p class="guide-small">' + esc(pageNote) + '</p>' + picker + '</div>' +
+      pageFrame("quran", page) + '<p class="mushaf-application">' + esc(apply) + '</p><div class="mushaf-transfer-note"><b>Source → Qur’an → explain</b><p>Use the source-book rule to justify your selection. If the evidence is uncertain, leave the label open and ask your teacher rather than forcing a parse.</p></div></div></section>' +
+      renderAssessment(n) + '</div></div>';
+  }
+  function bindSourceFirst(week) {
+    var n = Number(week), wrap = root.document.querySelector('[data-week-sequence="' + n + '"]');
+    if (!wrap) return;
+    var q = get(n).quiz;
+    var quizButton = wrap.querySelector('[data-check-source-quiz="' + n + '"]');
+    var feedback = wrap.querySelector('[data-source-feedback="' + n + '"]');
+    var quizFeedback = wrap.querySelector('[data-source-quiz-feedback="' + n + '"]');
+    var flow = wrap.querySelector('#applicationFlow-' + n);
+    function readState() {
+      var all = {};
+      try { all = JSON.parse(root.localStorage.getItem("8020-weekly-recall-v2") || "{}"); } catch (e) {}
+      return { all: all, record: all[n] || { week: n } };
     }
-    if(answerButton)answerButton.addEventListener("click",function(){
-      var chosen=panel.querySelector('input[name="weekly-choice-'+n+'"]:checked');
-      if(!chosen){feedback.hidden=false;feedback.textContent="Choose an answer, then check your reasoning.";return;}
-      var correct=Number(chosen.value)===q.answer;
-      var record={};try{record=JSON.parse(root.localStorage.getItem(key)||"{}");}catch(e){}
-      record[n]={week:n,choice:Number(chosen.value),correct:correct,answeredAt:new Date().toISOString()};
-      var saved=true;try{root.localStorage.setItem(key,JSON.stringify(record));}catch(e){saved=false;}
-      feedback.hidden=false;
-      feedback.className="quiz-feedback "+(correct?"quiz-correct":"quiz-review");
-      feedback.innerHTML="<b>"+(correct?"Correct — good recognition.":"Not yet — inspect the source and try again.")+"</b><p><b>Answer:</b> "+esc(q.options[q.answer])+"</p><p>"+esc(q.why)+"</p><p>Now complete the real-page word-recognition task below.</p>"+(saved?"":"<p>Your browser did not save this quiz result.</p>");
+    function saveState(record) {
+      var state = readState();
+      state.all[n] = record;
+      try { root.localStorage.setItem("8020-weekly-recall-v2", JSON.stringify(state.all)); return true; }
+      catch (e) { return false; }
+    }
+    function draftFields() {
+      var read = wrap.querySelector('[data-source-read="' + n + '"]');
+      var example = wrap.querySelector('[data-source-example="' + n + '"]');
+      var explanation = wrap.querySelector('[data-source-explanation="' + n + '"]');
+      var state = readState(), prior = state.record, wasReady = !!prior.sourceReady;
+      var next = Object.assign({}, prior, {
+        week:n,
+        sourceRead:!!(read && read.checked),
+        sourceExample:!!(example && example.checked),
+        sourceExplanation:explanation ? explanation.value : (prior.sourceExplanation || ""),
+        sourceReady:false,
+        sourceCompletedAt:wasReady ? null : prior.sourceCompletedAt
+      });
+      if (!saveState(next)) {
+        if (feedback) { feedback.hidden = false; feedback.className = "recognition-feedback needs-work"; feedback.textContent = "Your browser could not save this source check. Check storage settings and try again."; }
+        return;
+      }
+      if (wasReady && flow) {
+        flow.hidden = true;
+        if (feedback) { feedback.hidden = false; feedback.className = "recognition-feedback needs-work"; feedback.textContent = "You changed the source explanation/checks. Confirm the source understanding again before continuing."; }
+      }
+    }
+    var readField = wrap.querySelector('[data-source-read="' + n + '"]');
+    var exampleField = wrap.querySelector('[data-source-example="' + n + '"]');
+    var explanationField = wrap.querySelector('[data-source-explanation="' + n + '"]');
+    if (readField) readField.addEventListener("change", draftFields);
+    if (exampleField) exampleField.addEventListener("change", draftFields);
+    if (explanationField) explanationField.addEventListener("input", draftFields);
+
+    if (quizButton) quizButton.addEventListener("click", function () {
+      var chosen = wrap.querySelector('input[name="source-choice-' + n + '"]:checked');
+      if (!chosen) {
+        quizFeedback.hidden = false; quizFeedback.className = "quiz-feedback quiz-review";
+        quizFeedback.textContent = "Choose the answer that best matches the source-book concept, then check it.";
+        return;
+      }
+      var state = readState();
+      var correct = Number(chosen.value) === q.answer;
+      var next = Object.assign({}, state.record, {
+        week:n, choice:Number(chosen.value), correct:correct,
+        answeredAt:new Date().toISOString(), why:q.why, sourceReady:false, sourceCompletedAt:null
+      });
+      if (!saveState(next)) {
+        quizFeedback.hidden = false; quizFeedback.className = "quiz-feedback quiz-review";
+        quizFeedback.textContent = "Your browser could not save this answer. Check storage settings and try again.";
+        return;
+      }
+      if (flow) flow.hidden = true;
+      quizFeedback.hidden = false;
+      quizFeedback.className = "quiz-feedback " + (correct ? "quiz-correct" : "quiz-review");
+      quizFeedback.innerHTML = "<b>" + (correct ? "Correct — now explain the source concept in your own words." : "Not yet — reread the assigned source page and try again.") + "</b><p>" + esc(q.options[q.answer]) + "</p><p>" + esc(q.why) + "</p>";
+      if (feedback) feedback.hidden = true;
+    });
+
+    var continueButton = wrap.querySelector('[data-source-continue="' + n + '"]');
+    if (continueButton) continueButton.addEventListener("click", function () {
+      var read = wrap.querySelector('[data-source-read="' + n + '"]');
+      var example = wrap.querySelector('[data-source-example="' + n + '"]');
+      var explanation = wrap.querySelector('[data-source-explanation="' + n + '"]');
+      var state = readState(), text = (explanation && explanation.value || "").trim();
+      if (!read || !read.checked || !example || !example.checked || text.length < 20) {
+        feedback.hidden = false; feedback.className = "recognition-feedback needs-work";
+        feedback.textContent = "Before opening the Qur’an, confirm both source checks and write at least a sentence in your own words (20 characters or more).";
+        return;
+      }
+      if (!state.record.correct) {
+        feedback.hidden = false; feedback.className = "recognition-feedback needs-work";
+        feedback.textContent = "Answer the source-concept question correctly before applying the concept to the Qur’an.";
+        return;
+      }
+      var next = Object.assign({}, state.record, {
+        week:n, sourceRead:true, sourceExample:true, sourceExplanation:text,
+        sourceReady:true, sourceCompletedAt:new Date().toISOString()
+      });
+      if (!saveState(next)) {
+        feedback.hidden = false; feedback.className = "recognition-feedback needs-work";
+        feedback.textContent = "Your browser could not save the source check. Check storage settings and try again.";
+        return;
+      }
+      feedback.hidden = false; feedback.className = "recognition-feedback saved";
+      feedback.textContent = "Source understanding recorded. The Qur’an application is now open; your answer and explanation are available for teacher review.";
+      if (flow) flow.hidden = false;
+      if (flow && typeof flow.scrollIntoView === "function") flow.scrollIntoView({behavior:"smooth",block:"start"});
     });
   }
   function bind(week) {
-    var n=Number(week);
-    bindAssessment(n);
-    if(root.Recognition&&root.document)root.Recognition.bind(n);
+    var n = Number(week);
+    bindSourceFirst(n);
+    if (root.Recognition && root.document) root.Recognition.bind(n);
   }
-
   root.WeeklyGuide={
     get:get, getPageSourceMap:getPageSourceMap,
     renderPriority:renderPriority, renderLibrarySetup:renderLibrarySetup,
