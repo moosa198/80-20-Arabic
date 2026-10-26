@@ -37,7 +37,7 @@ for (let n = 1; n <= 31; n++) {
   for (const book of ["sarf", "nahw"]) {
     const actual = Array.from(rendered.matchAll(new RegExp('data-book-page="' + book + ':([0-9]+)"', "g")), match => Number(match[1])).sort((a, b) => a - b);
     const assigned = Array.from(week[book + "Pages"] || [], Number).sort((a, b) => a - b);
-    assert.deepEqual(actual, assigned, "week " + n + " must display only assigned " + book + " pages");
+    assert.equal(JSON.stringify(actual), JSON.stringify(assigned), "week " + n + " must display only assigned " + book + " pages");
   }
 }
 const guide = fs.readFileSync("weekly-guide.js", "utf8");
