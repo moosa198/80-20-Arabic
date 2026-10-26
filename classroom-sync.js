@@ -122,9 +122,15 @@
   }
   function hasSubstantiveLocalProgress(){
     var data=snapshot(),course=data.course||{},studio=data.studio||{};
-    return Object.keys(course.doneWeeks||{}).some(function(k){return course.doneWeeks[k];})||
-      Object.keys(studio.done||{}).some(function(k){return studio.done[k];})||
-      Object.keys(course.cards||{}).length>0||Object.keys(studio.cards||{}).length>0||
+    function hasReviewed(cards){
+      return Object.keys(cards||{}).some(function(k){
+        var card=cards[k]||{};
+        return Number(card.reps||0)>0||Number(card.correct||0)>0||!!card.lastReviewed;
+      });
+    }
+    return Object.keys(course.doneWeeks||{}).some(function(k){return !!course.doneWeeks[k];})||
+      Object.keys(studio.done||{}).some(function(k){return !!studio.done[k];})||
+      hasReviewed(course.cards)||hasReviewed(studio.cards)||
       Object.keys(data.quizzes||{}).length>0||Object.keys(data.recognition||{}).length>0||
       Object.keys(data.sourceFirst||{}).length>0;
   }
