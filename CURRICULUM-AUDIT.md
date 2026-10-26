@@ -1,11 +1,20 @@
-# Curriculum and pedagogy audit — 25 October 2026
+# Curriculum and pedagogy audit — 26 October 2026
 
 ## Outcome and method
 
-The course has been reshaped around **whole → map → whole → retrieve → transfer**: begin with a real Qur’anic phrase, notice the structure, study only the relevant rule, return to the same phrase, then locate the pattern again later. This applies the high-level 80/20 / early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf), without copying its wording or treating its stated outcomes as guarantees.
+The course uses **source → teach back → Qur’an → retrieve → transfer**. Each student studies the exact FSTU pages assigned for that week, then answers a source-concept question and explains the concept in their own words. Only after passing this self-check does the 15-line Qur’an stage open. The lesson presents fully vowelled key Arabic terms with subtle transliteration, especially in the source-concept checklist and role labels used for word-level recognition.
 
-Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come first. The wudhu reminder remains as adab guidance for a physical Mushaf, not a software gate. Each lesson has a real-page recognition task, paired English/Arabic role labels, a required explanation, local attempt history, and teacher-verification guidance. The app records evidence but does not auto-grade nuanced Arabic syntax.
+The course keeps FSTU as its primary source because the materials explicitly develop rule application and tarkīb (تَرْكِيبٌ, tarkīb). The official page cards open at the assigned page rather than embedding an entire book as an inline learning resource. The external preview may permit navigation elsewhere; the lesson itself lists only the assigned page numbers. The digital Qur’an layout may differ from a student’s physical Mushaf, so the passage context should be checked with a teacher.
 
+The app records progress and student explanations but does not automatically grade nuanced grammar. Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come first. The Wudhu reminder remains adab guidance for physical Mushaf handling, not a software gate.
+
+## Classroom monitoring and security
+
+The Teacher Classroom is designed for multiple teachers, with teacher-owned classes, class codes, individual learner codes, row-level security, and progress/evidence review. Learner access codes are hashed; raw codes are shown only once when the roster is generated. A teacher must configure a Supabase project controlled by the madrassa, run `classroom-schema.sql`, and enable Anonymous Sign-Ins for learners. Until that project is configured, progress remains local to the browser and is not visible centrally.
+
+On shared devices, the learner should disconnect before the next learner uses the device. Disconnect attempts to sync first, unlinks the session and clears local learning stores. This reduces—but cannot eliminate all risks from—shared-browser or failed-network situations. The deployment should be approved by the madrassa, with age-appropriate privacy information for children and parents and a clear retention/deletion process.
+
+## Week-by-week mapping and decisions
 ## Week-by-week mapping and decisions
 
 | Week | Qur’anic passage / target | FSTU references | Audit decision |
@@ -46,14 +55,15 @@ Hifz remains the priority: Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr come firs
 
 - The integrated reader uses a digital 15-line Madina layout. It may not reproduce the exact calligraphy or line breaks of the supplied King Fahd Complex PDF. The student must confirm the passage with the teacher and the physical Mushaf.
 - FSTU Naḥw references use the official August 2026 resource. The embedded FSTU Ṣarf resource is October 2023; earlier mapping was made against a March 2022 copy. If pagination differs, use the printed section heading and check with a teacher. The weekly notes explain this where the reference is shown.
-- The live course embeds/links the publisher’s official FSTU resources rather than storing scans in this repository. Attribution and educational/non-commercial use are indicated; obtain written permission for commercial use.
+- The lesson lists only the FSTU page numbers assigned for the current week and opens each source preview at that printed page. The external preview may permit navigation elsewhere, so the code does not claim that every other page is technically inaccessible. Al-Qalam’s published terms support educational/non-commercial use with attribution; obtain written permission for commercial use or broader republication.
 - The renderer is an upstream dependency. Its published licence should be checked before redistributing a bundled copy of the code.
 - These are instructional mappings, not claims that every disputed Qur’anic parse has one uncontested answer. The app deliberately saves explanations for teacher review rather than pretending an automated test can grade all syntax.
 
-## Next QA gates
+## Additional delivery QA
 
-1. Parse and render all 31 lessons in Chromium.
-2. Verify page selection and saved recognition attempts, including multiple saved attempts per week.
-3. Verify Fātiḥah checkpoints and custom page loading.
-4. Check desktop/mobile width, RTL rendering, printed workbook pagination and the Hifz-first language.
-5. Confirm GitHub Actions build, workbook generation and Pages deployment are successful before considering the rollout complete.
+1. Confirm Qur’an application remains closed until the FSTU source checks, explanation and correct source-concept answer are completed.
+2. Confirm each lesson’s FSTU source-card set exactly equals that week’s assigned page references.
+3. Verify multiple saved recognition attempts, Fātiḥah checkpoints and custom page loading.
+4. Check desktop/mobile width, RTL rendering, vowel marks, transliteration legibility, printed workbook pagination and Hifz-first language.
+5. Verify teacher isolation, student own-row policies, learner-code reset and shared-device disconnect/restore against a configured Supabase project before enrolling learners.
+6. Confirm GitHub Actions build, workbook generation and Pages deployment are successful before considering the rollout complete.
