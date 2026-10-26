@@ -36,7 +36,7 @@ for (let n = 1; n <= 31; n++) {
   assert.ok(!rendered.includes("drive.google.com/file/d/"), "week " + n + " must not link to a full FSTU PDF");
   for (const book of ["sarf", "nahw"]) {
     const actual = Array.from(rendered.matchAll(new RegExp('data-book-page="' + book + ':([0-9]+)"', "g")), match => Number(match[1])).sort((a, b) => a - b);
-    const assigned = (week[book + "Pages"] || []).map(Number).sort((a, b) => a - b);
+    const assigned = Array.from(week[book + "Pages"] || [], Number).sort((a, b) => a - b);
     assert.deepEqual(actual, assigned, "week " + n + " must display only assigned " + book + " pages");
   }
 }
