@@ -35,7 +35,7 @@
     </div>
     <div class="panel">
       <div class="panelHead"><h2>2. Optional class roster</h2><span class="status">CSV</span></div>
-      <div class="file-drop"><b>Load the expected student list</b><p>CSV columns: <code>studentId,displayName,className</code>. Use IDs or initials rather than unnecessary personal information. Students who appear on the roster but have not submitted a progress file are shown as “No submission”.</p><input id="rosterFile" type="file" accept=".csv,text/csv"><div class="feedback" id="rosterFeedback" role="status" aria-live="polite">No roster loaded.</div></div>
+      <div class="file-drop"><b>Load the expected student list</b><p>CSV columns: <code>studentId,displayName,className</code>. Use IDs or initials rather than unnecessary personal information. Students who appear on the roster but have not submitted a progress file are shown as “No submission”.</p><input id="rosterFile" type="file" accept=".csv,text/csv"><div class="feedback" id="rosterFeedback" role="status" aria-live="polite">No roster loaded.</div><div class="actions" style="margin-top:11px"><button class="btn" id="exportArchive" type="button">Export reusable class archive</button><label class="btn secondary" for="archiveFile">Import class archive</label><input id="archiveFile" type="file" accept=".json,application/json" style="max-width:100%;font-size:10px"></div><p class="muted">A class archive preserves all imported student snapshots and the roster for a later session. Keep the archive on a protected device and use your Madrassa’s retention policy.</p></div>
       <div class="privacy-points"><div><span class="tick">✓</span><span>Files are not sent to a course server.</span></div><div><span class="tick">✓</span><span>The dashboard doesn’t store imported files after you close or refresh it.</span></div><div><span class="tick">✓</span><span>Export a class summary CSV for your teaching records, following your Madrassa’s data-protection policy.</span></div></div>
     </div>
   </section>
@@ -129,6 +129,7 @@ function normaliseRecord(record,filename){
     quizAccuracy:quizzes.length?Math.round(quizCorrect/quizzes.length*100):null,
     progress:raw,
     recordsRecognised:true,
+    rawRecord:record,
     displayLabel:name
   };
 }
@@ -246,6 +247,40 @@ function showDetail(key){
 }
 function csvCell(value){const s=String(value==null?"":value);return '"'+s.replace(/"/g,'""')+'"';}
 function downloadText(filename,text,mime){const a=document.createElement("a"),url=URL.createObjectURL(new Blob([text],{type:mime||"text/plain"}));a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);}
+function exportArchive(){
+  const archive={
+    format:"80-20-arabic-teacher-archive",
+    schemaVersion:1,
+    exportedAt:new Date().toISOString(),
+    records:state.records.map(record=>({
+      fileName:record.fileName,
+      importedAt:record.importedAt,
+      recordId:record.recordId,
+      rawRecord:record.rawRecord
+    })),
+    roster:state.roster,
+    rosterName:state.rosterName
+  };
+  downloadText("80-20-arabic-teacher-archive.json",JSON.stringify(archive,null,2),"application/json");
+  $("#dashboardFeedback").textContent="Class archive exported with "+archive.records.length+" student snapshot"+(archive.records.length===1?"":"s")+" and "+archive.roster.length+" roster entries.";
+}
+async function importArchive(file){
+  const archive=JSON.parse(await file.text());
+  if(!archive||archive.format!=="80-20-arabic-teacher-archive"||!Array.isArray(archive.records))throw new Error("This is not a recognised 80/20 Arabic class archive.");
+  let imported=0,duplicates=0;
+  for(const item of archive.records){
+    if(!item||!item.rawRecord)continue;
+    const record=normaliseRecord(item.rawRecord,item.fileName||"Archived student export");
+    record.importedAt=item.importedAt||record.importedAt;
+    record.recordId=item.recordId||[record.fileName,record.exportedAt||"",keyOf(record),record.doneCount,record.cardsReviewed,record.evidenceCount,record.quizCount].join("|");
+    if(state.records.some(existing=>existing.recordId===record.recordId)){duplicates++;continue;}
+    state.records.push(record);imported++;
+  }
+  if(Array.isArray(archive.roster))state.roster=archive.roster;
+  if(typeof archive.rosterName==="string")state.rosterName=archive.rosterName;
+  renderFilters();render();
+  $("#dashboardFeedback").textContent="Class archive restored: "+imported+" new snapshots imported"+(duplicates?"; "+duplicates+" existing snapshots skipped":"")+" and "+state.roster.length+" roster entries loaded.";
+}
 function exportCsv(){
   const rows=filteredRows();
   const headers=["studentId","displayName","className","submitted","weeksCompleted","progressPercent","vocabularyCardsReviewed","reviewRatings","cardsEstablished","grammarEvidenceAttempts","evidenceWithExplanation","quizCorrect","quizCount","quizAccuracyPercent","snapshotCount","latestExportAt","previousWeekCount","weekDelta"];
@@ -292,6 +327,17 @@ $("#search").addEventListener("input",render);
 $("#classFilter").addEventListener("change",render);
 $("#clearFilters").addEventListener("click",()=>{$("#search").value="";$("#classFilter").value="";render();});
 $("#exportCsv").addEventListener("click",exportCsv);
+$("#exportArchive").addEventListener("click",exportArchive);
+$("#archiveFile").addEventListener("change",async event=>{
+  const file=event.target.files&&event.target.files[0];if(!file)return;
+  try{
+    await importArchive(file);
+    $("#importFeedback").textContent="Teacher class archive restored.";
+  }catch(error){
+    $("#importFeedback").textContent=error.message||"The archive could not be restored.";
+  }
+  event.target.value="";
+});
 $("#clearData").addEventListener("click",()=>{
   if(!confirm("Clear all student progress files and the roster imported into this browser session? This does not affect student devices."))return;
   state.records=[];state.roster=[];state.rosterName="";state.importErrors=[];
