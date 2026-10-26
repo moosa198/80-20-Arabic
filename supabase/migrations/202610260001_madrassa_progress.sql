@@ -591,17 +591,21 @@ from anon, authenticated;
 grant select on public.profiles to authenticated;
 grant update (display_name) on public.profiles to authenticated;
 
-grant select, insert, update, delete on public.classes to authenticated;
+grant select, insert, delete on public.classes to authenticated;
+grant update (name, year_group, is_active) on public.classes to authenticated;
 grant select, insert, update, delete on public.class_memberships to authenticated;
 
 grant select, insert, update, delete on public.curriculum_versions to authenticated;
 grant select, insert, update, delete on public.curriculum_lessons to authenticated;
 
-grant select, insert, update, delete on public.lesson_assignments to authenticated;
+grant select, insert, delete on public.lesson_assignments to authenticated;
+grant update (student_id, curriculum_version_id, week_number, due_at, is_active)
+  on public.lesson_assignments to authenticated;
 grant select, insert, update on public.lesson_progress to authenticated;
 grant select, insert on public.recognition_attempts to authenticated;
 grant select, insert, update on public.teacher_reviews to authenticated;
-grant select, insert, update, delete on public.teacher_notes to authenticated;
+grant select, insert, delete on public.teacher_notes to authenticated;
+grant update (week_number, concept_key, note) on public.teacher_notes to authenticated;
 
 -- Latest teacher judgement per student/concept. Views run with caller privileges so that
 -- base-table RLS remains effective; they do not auto-grade student-written explanations.
