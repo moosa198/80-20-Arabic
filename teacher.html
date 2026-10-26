@@ -8,273 +8,66 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#172b29;--muted:#687772;--green:#163c36;--green2:#245a4d;--cream:#f8f4eb;--paper:#fffdf8;--line:#dce3de;--amber:#e5b864;--mint:#e7efe9;--red:#984b3e;--font:"DM Sans",system-ui,sans-serif;--ar:"Amiri","Noto Naskh Arabic",serif}
+:root{--ink:#172b29;--muted:#687772;--green:#163c36;--green2:#245a4d;--paper:#fffdf8;--line:#dce3de;--amber:#e5b864;--red:#984b3e;--font:"DM Sans",system-ui,sans-serif;--ar:"Amiri","Noto Naskh Arabic",serif}
 *{box-sizing:border-box}body{margin:0;background:#f4f5ef;color:var(--ink);font:14px/1.55 var(--font)}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:var(--green2)}
-header{position:sticky;top:0;z-index:5;background:var(--green);color:white;padding:15px clamp(16px,4vw,42px);display:flex;align-items:center;justify-content:space-between;gap:15px;box-shadow:0 3px 15px #0002}.brand{display:flex;align-items:center;gap:10px}.mark{width:39px;height:39px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:12px;color:var(--amber);font:30px var(--ar)}header h1{font-size:16px;margin:0}header small{display:block;color:#c9d9d2;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}.wrap{max-width:1500px;margin:auto;padding:25px clamp(14px,3vw,38px) 55px}.lede{color:var(--muted);max-width:850px}.box{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}.box h2{font-size:18px;margin:0 0 10px}.box h3{font-size:13px;margin:0 0 8px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:13px;margin-top:15px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}.metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.1em}.metric strong{font-size:24px;display:block;margin:5px 0}.field{display:grid;gap:5px;margin:10px 0}.field label{font-size:11px;font-weight:700}.field input,.field select,.field textarea{border:1px solid #cbd7cd;border-radius:9px;background:white;color:var(--ink);padding:10px;width:100%;min-width:0}.field textarea{min-height:90px;resize:vertical}.btn{border:1px solid var(--green);background:var(--green);color:white;border-radius:9px;padding:9px 12px;font-size:11px;font-weight:700}.btn.light{background:#fff;color:var(--green);border-color:var(--line)}.btn:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.note{padding:11px;border:1px solid var(--line);background:#f5f7f2;border-radius:10px;color:#53665c;font-size:11px;margin:10px 0}.note.error{background:#fff0eb;border-color:#e3bfb5;color:#7e3629}.note.success{background:#edf5ed;border-color:#c7dcc9;color:#31573d}.status{font-size:11px;color:var(--muted);overflow-wrap:anywhere;margin-top:10px}.table-wrap{overflow:auto;width:100%;border:1px solid var(--line);border-radius:11px;margin-top:10px;background:white}.matrix{border-collapse:separate;border-spacing:0;font-size:10px;white-space:nowrap;width:max-content;min-width:100%}.matrix th,.matrix td{padding:8px 9px;text-align:center;border-bottom:1px solid #e8ece7;border-right:1px solid #eef1ed}.matrix th{position:sticky;top:0;background:#eff4ef;color:#3a584a;font-weight:700;z-index:1}.matrix th:first-child,.matrix td:first-child{position:sticky;left:0;text-align:left;background:#fffdf8;z-index:2;min-width:145px}.matrix th:first-child{background:#eff4ef;z-index:3}.matrix tr:last-child td{border-bottom:0}.secure{color:#27603d;font-weight:800}.developing{color:#8a6727;font-weight:800}.revisit{color:#984b3e;font-weight:800}.unstarted{color:#a2aaa5}.student-link{border:0;background:none;color:var(--green2);font:inherit;font-weight:700;text-align:left;padding:0}.pill{display:inline-block;border-radius:20px;padding:3px 7px;background:#f1f2ed;font-size:9px;font-weight:700}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}.section-head p{font-size:11px;color:var(--muted);margin:3px 0}.evidence{display:grid;gap:10px;margin-top:12px}.attempt{border:1px solid var(--line);background:#fff;border-radius:11px;padding:12px}.attempt p{margin:6px 0;font-size:12px;overflow-wrap:anywhere}.attempt small{color:var(--muted)}.arabic{font:20px var(--ar);direction:rtl;unicode-bidi:isolate}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mastery-table{width:100%;border-collapse:collapse;font-size:11px}.mastery-table th,.mastery-table td{padding:8px;border-bottom:1px solid #e6ebe5;text-align:left}.mastery-table th{color:#5e7167;background:#f4f6f1}.hidden{display:none!important}.code{font:700 17px ui-monospace,monospace;letter-spacing:.1em;overflow-wrap:anywhere}.top-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}@media(max-width:850px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.two{grid-template-columns:1fr}header{align-items:flex-start}.metrics{gap:7px}.metric strong{font-size:21px}.box{padding:13px}}
+header{position:sticky;top:0;z-index:5;background:var(--green);color:white;padding:15px clamp(16px,4vw,42px);display:flex;align-items:center;justify-content:space-between;gap:15px;box-shadow:0 3px 15px #0002}.brand{display:flex;align-items:center;gap:10px}.mark{width:39px;height:39px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:12px;color:var(--amber);font:30px var(--ar)}header h1{font-size:16px;margin:0}header small{display:block;color:#c9d9d2;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}.wrap{max-width:1500px;margin:auto;padding:25px clamp(14px,3vw,38px) 55px}.lede{color:var(--muted);max-width:900px}.box{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}.box h2{font-size:18px;margin:0 0 10px}.box h3{font-size:13px;margin:0 0 8px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:13px;margin-top:15px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}.metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.1em}.metric strong{font-size:24px;display:block;margin:5px 0}.field{display:grid;gap:5px;margin:10px 0}.field label{font-size:11px;font-weight:700}.field input,.field select,.field textarea{border:1px solid #cbd7cd;border-radius:9px;background:white;color:var(--ink);padding:10px;width:100%;min-width:0}.btn{border:1px solid var(--green);background:var(--green);color:white;border-radius:9px;padding:9px 12px;font-size:11px;font-weight:700}.btn.light{background:#fff;color:var(--green);border-color:var(--line)}.btn:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.note{padding:11px;border:1px solid var(--line);background:#f5f7f2;border-radius:10px;color:#53665c;font-size:11px;margin:10px 0}.note.error{background:#fff0eb;border-color:#e3bfb5;color:#7e3629}.note.success{background:#edf5ed;border-color:#c7dcc9;color:#31573d}.status{font-size:11px;color:var(--muted);overflow-wrap:anywhere;margin-top:10px}.table-wrap{overflow:auto;width:100%;border:1px solid var(--line);border-radius:11px;margin-top:10px;background:white}.matrix{border-collapse:separate;border-spacing:0;font-size:10px;white-space:nowrap;width:max-content;min-width:100%}.matrix th,.matrix td{padding:8px 9px;text-align:center;border-bottom:1px solid #e8ece7;border-right:1px solid #eef1ed}.matrix th{position:sticky;top:0;background:#eff4ef;color:#3a584a;font-weight:700;z-index:1}.matrix th:first-child,.matrix td:first-child{position:sticky;left:0;text-align:left;background:#fffdf8;z-index:2;min-width:145px}.matrix th:first-child{background:#eff4ef;z-index:3}.secure{color:#27603d;font-weight:800}.developing{color:#8a6727;font-weight:800}.revisit{color:#984b3e;font-weight:800}.unstarted{color:#a2aaa5}.arabic{font:20px var(--ar);direction:rtl;unicode-bidi:isolate}.attempt{border:1px solid var(--line);background:#fff;border-radius:11px;padding:12px;margin-top:10px}.attempt p{margin:6px 0;font-size:12px;overflow-wrap:anywhere}.attempt small{color:var(--muted)}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mastery-table{width:100%;border-collapse:collapse;font-size:11px}.mastery-table th,.mastery-table td{padding:8px;border-bottom:1px solid #e6ebe5;text-align:left}.mastery-table th{color:#5e7167;background:#f4f6f1}.hidden{display:none!important}.top-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.pill{display:inline-block;border-radius:20px;padding:3px 7px;background:#f1f2ed;font-size:9px;font-weight:700}@media(max-width:850px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.two{grid-template-columns:1fr}header{align-items:flex-start}.metrics{gap:7px}.metric strong{font-size:21px}.box{padding:13px}}
 </style>
 </head>
 <body>
 <header><div class="brand"><span class="mark" lang="ar" dir="rtl">ع</span><div><h1>80/20 Arabic · Teacher Dashboard</h1><small>Class progress · evidence · concept mastery</small></div></div><div class="top-actions"><a href="./" style="color:white;font-size:11px">Student app ↗</a><button id="signOut" class="btn light hidden" type="button">Sign out</button></div></header>
 <div class="wrap">
-  <h1 style="font-size:clamp(27px,4vw,40px);letter-spacing:-1.2px;margin:0 0 8px">See evidence, not just completion</h1>
-  <p class="lede">Review your assigned students, inspect the exact word selections and explanations they saved, then record Secure / Developing / Revisit by concept. Access is scoped by the class memberships enforced in the database.</p>
-  <section id="authBox" class="box" style="max-width:610px;margin-top:18px">
-    <h2>Sign in to your Madrassa</h2>
-    <p class="lede" style="font-size:11px">Use the account linked to your class invitation. If this is the first setup, create an account and then create a Madrassa with its first class.</p>
-    <form id="authForm">
-      <div class="two"><div class="field"><label for="displayName">Name (new account)</label><input id="displayName" autocomplete="name" maxlength="100"></div><div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div></div>
-      <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required></div>
-      <div class="actions"><button class="btn" id="login" type="button">Sign in</button><button class="btn light" id="signup" type="button">Create account</button></div>
-    </form>
-    <div id="authStatus" class="status" role="status" aria-live="polite"></div>
-  </section>
-  <div id="dashboard" class="hidden">
-    <section class="box" style="margin-top:15px">
-      <div class="section-head"><div><h2>Class workspace</h2><p id="who"></p></div><div class="top-actions"><select id="classSelect" aria-label="Select class" style="min-width:230px;padding:9px;border-radius:9px;border:1px solid var(--line)"></select><button id="refresh" class="btn light" type="button">Refresh</button></div></div>
-      <div id="noClass" class="note hidden"></div>
-      <form id="joinForm" class="box" style="padding:12px;margin:10px 0;background:#fbfcf8">
-        <h3>Join a class with an invitation code</h3>
-        <div class="two"><div class="field"><label for="joinCode">One-use code from your administrator</label><input id="joinCode" autocomplete="off" spellcheck="false" placeholder="Paste invitation code"></div><div class="field" style="align-self:end"><button class="btn" type="submit">Join class</button></div></div>
-      </form>
-      <div id="bootstrap" class="hidden">
-        <h3>Create the first Madrassa and class</h3>
-        <div class="two"><div class="field"><label for="madrassaName">Madrassa name</label><input id="madrassaName" maxlength="160" placeholder="Madrassa name"></div><div class="field"><label for="firstClassName">First class name</label><input id="firstClassName" maxlength="160" placeholder="Year 4 Hifz · Saturday"></div></div>
-        <button class="btn" id="createBase" type="button">Create Madrassa + class</button>
-      </div>
-      <div id="makeClass" class="hidden">
-        <h3>Create another class</h3><div class="two"><div class="field"><label for="newClassName">Class name</label><input id="newClassName" maxlength="160" placeholder="Year 5 Hifz · Sunday"></div><div class="field"><label for="cohort">Cohort / term (optional)</label><input id="cohort" maxlength="100" placeholder="2026–27"></div></div><button class="btn light" id="createClass" type="button">Create class</button>
-      </div>
-    </section>
-    <div id="classContent" class="hidden">
-      <div class="metrics">
-        <div class="metric"><small>Students</small><strong id="studentCount">0</strong><span id="studentCaption" class="status">in this class</span></div>
-        <div class="metric"><small>Weeks complete</small><strong id="weekCount">0</strong><span class="status">all student-week records</span></div>
-        <div class="metric"><small>Evidence attempts</small><strong id="attemptCount">0</strong><span class="status">saved recognition attempts</span></div>
-        <div class="metric"><small>Concepts reviewed</small><strong id="reviewCount">0</strong><span class="status">latest teacher reviews</span></div>
-      </div>
-      <section class="box" style="margin-top:14px">
-        <div class="section-head"><div><h2>Class progress · 31 weeks</h2><p>✓ completed · • evidence / started · — no saved activity</p></div><span class="pill" id="curriculumVersion"></span></div>
-        <div id="matrix" class="table-wrap"></div>
-      </section>
-      <div class="grid">
-        <section class="box">
-          <h2>Student evidence</h2>
-          <p class="lede" style="font-size:11px">Open a student and week to review the saved words, selected role and written reasoning. The app does not auto-grade disputed grammatical analysis.</p>
-          <div class="two"><div class="field"><label for="evidenceStudent">Student</label><select id="evidenceStudent"></select></div><div class="field"><label for="evidenceWeek">Week</label><select id="evidenceWeek"></select></div></div>
-          <div id="evidence" class="evidence"></div>
-        </section>
-        <section class="box">
-          <h2>Record teacher verification</h2>
-          <p class="lede" style="font-size:11px">Use one record per concept review. Earlier reviews are preserved as an audit trail rather than overwritten.</p>
-          <form id="reviewForm">
-            <div class="field"><label for="conceptKey">Concept key / term</label><input id="conceptKey" maxlength="120" required placeholder="e.g. mafool"></div>
-            <div class="field"><label for="reviewStatus">Teacher judgement</label><select id="reviewStatus" required><option value="secure">Secure</option><option value="developing">Developing</option><option value="revisit">Needs revision</option></select></div>
-            <div class="field"><label for="teacherNote">Evidence / teacher note</label><textarea id="teacherNote" maxlength="4000" placeholder="What the student recognised; which clue was sound; what needs revisiting…"></textarea></div>
-            <button class="btn" type="submit">Save teacher review</button>
-          </form>
-          <div id="reviewStatusText" class="status" role="status" aria-live="polite"></div>
-        </section>
-      </div>
-      <section class="box" style="margin-top:14px">
-        <div class="section-head"><div><h2>Concept mastery</h2><p>Latest review per student and concept, not a claim of automatic grammatical certainty.</p></div></div>
-        <div id="mastery"></div>
-      </section>
-      <section class="box" style="margin-top:14px">
-        <h2>Invite a teacher or student</h2>
-        <p class="lede" style="font-size:11px">Generate a separate, one-use code for each person. Share it privately. Only class administrators and Madrassa administrators can issue invitations.</p>
-        <div class="two"><div class="field"><label for="inviteRole">Role</label><select id="inviteRole"><option value="student">Student</option><option value="teacher">Teacher</option><option value="class_admin">Class administrator</option></select></div><div class="field"><label for="inviteExpiry">Expires after</label><select id="inviteExpiry"><option value="1">1 day</option><option value="7" selected>7 days</option><option value="14">14 days</option><option value="30">30 days</option></select></div></div>
-        <div class="actions"><button id="createInvite" class="btn" type="button">Generate one-use invitation</button><button id="copyInvite" class="btn light hidden" type="button">Copy code</button></div>
-        <div id="inviteOutput" class="note hidden" aria-live="polite"></div>
-      </section>
-    </div>
-  </div>
-  <p id="pageStatus" class="status" role="status" aria-live="polite"></p>
+<h1 style="font-size:clamp(27px,4vw,40px);letter-spacing:-1.2px;margin:0 0 8px">See evidence, not just completion</h1>
+<p class="lede">Manage your classes, review learner evidence and record Secure / Developing / Revisit by concept. Access is scoped by the class memberships enforced in Supabase.</p>
+<section id="authBox" class="box" style="max-width:610px;margin-top:18px">
+<h2>Sign in to your Madrassa</h2><p class="lede" style="font-size:11px">Use your teacher account. Account roles are controlled in the database; the browser cannot promote itself.</p>
+<form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div><div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required></div><div class="actions"><button class="btn" id="login" type="button">Sign in</button></div></form><div id="authStatus" class="status" role="status" aria-live="polite"></div>
+</section>
+<div id="dashboard" class="hidden">
+<section class="box" style="margin-top:15px"><div class="section-head" style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h2>Class workspace</h2><p id="who" class="status"></p></div><div class="top-actions"><select id="classSelect" aria-label="Select class" style="min-width:230px;padding:9px;border-radius:9px;border:1px solid var(--line)"></select><button id="refresh" class="btn light" type="button">Refresh</button></div></div>
+<div id="noClass" class="note hidden"></div>
+<div id="createPanel" class="hidden" style="margin-top:12px"><h3>Create your first class</h3><p class="lede" style="font-size:11px">The current database models the Madrassa through class membership. Your first class is the secure classroom space; no separate organisation record is required.</p><div class="two"><div class="field"><label for="firstClassName">Class name</label><input id="firstClassName" maxlength="120" placeholder="Hifz · Saturday · 2026–27"></div><div class="field"><label for="firstYearGroup">Year group / cohort (optional)</label><input id="firstYearGroup" maxlength="80" placeholder="2026–27"></div></div><button class="btn" id="createFirstClass" type="button">Create class</button></div>
+<div id="makeClass" class="hidden" style="margin-top:12px"><h3>Create another class</h3><div class="two"><div class="field"><label for="newClassName">Class name</label><input id="newClassName" maxlength="120" placeholder="Hifz · Sunday · 2026–27"></div><div class="field"><label for="cohort">Year group / cohort (optional)</label><input id="cohort" maxlength="80" placeholder="2026–27"></div></div><button class="btn light" id="createClass" type="button">Create class</button></div>
+<div id="memberPanel" class="hidden" style="margin-top:12px"><h3>Add an existing account to this class</h3><p class="lede" style="font-size:11px">For the current pilot, the person's Supabase Auth account must already exist. Paste their Auth user UUID from Authentication → Users. Invitation-code automation will be added as a separate database migration.</p><div class="two"><div class="field"><label for="memberUserId">Auth user UUID</label><input id="memberUserId" maxlength="36" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"></div><div class="field"><label for="memberRole">Class role</label><select id="memberRole"><option value="student">Student</option><option value="teacher">Teacher</option><option value="class_admin">Class administrator</option></select></div></div><button class="btn light" id="addMember" type="button">Add to class</button><div id="memberStatus" class="status"></div></div>
+</section>
+<div id="classContent" class="hidden">
+<div class="metrics"><div class="metric"><small>Students</small><strong id="studentCount">0</strong><span class="status">in this class</span></div><div class="metric"><small>Weeks complete</small><strong id="weekCount">0</strong><span class="status">student-week records</span></div><div class="metric"><small>Evidence attempts</small><strong id="attemptCount">0</strong><span class="status">recognition attempts</span></div><div class="metric"><small>Concepts reviewed</small><strong id="reviewCount">0</strong><span class="status">latest teacher reviews</span></div></div>
+<section class="box" style="margin-top:14px"><div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h2>Class progress · 31 weeks</h2><p class="status">✓ completed · • started · — no saved activity</p></div></div><div id="matrix" class="table-wrap"></div></section>
+<div class="grid"><section class="box"><h2>Student evidence</h2><p class="lede" style="font-size:11px">Review the exact Qur’anic word selections and explanations saved by the learner. The dashboard does not auto-grade disputed grammatical analysis.</p><div class="two"><div class="field"><label for="evidenceStudent">Student</label><select id="evidenceStudent"></select></div><div class="field"><label for="evidenceWeek">Week</label><select id="evidenceWeek"></select></div></div><div id="evidence"></div></section>
+<section class="box"><h2>Record teacher verification</h2><p class="lede" style="font-size:11px">Teacher judgement is separate from learner completion. Earlier reviews remain in the audit trail.</p><form id="reviewForm"><div class="field"><label for="conceptKey">Concept key / term</label><input id="conceptKey" maxlength="100" required placeholder="e.g. mafool"></div><div class="field"><label for="reviewStatus">Teacher judgement</label><select id="reviewStatus"><option value="secure">Secure</option><option value="developing">Developing</option><option value="revisit">Needs revision</option></select></div><div class="field"><label for="teacherNote">Evidence / teacher note</label><textarea id="teacherNote" maxlength="3000" placeholder="What the student recognised; what needs revisiting…"></textarea></div><button class="btn" type="submit">Save teacher review</button></form><div id="reviewStatusText" class="status"></div></section></div>
+<section class="box" style="margin-top:14px"><h2>Concept mastery</h2><p class="lede" style="font-size:11px">Latest review per student and concept, not a claim of automatic grammatical certainty.</p><div id="mastery"></div></section>
+</div></div><p id="pageStatus" class="status" role="status" aria-live="polite"></p>
 </div>
-<script src="./supabase-config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase-config.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-(function(){
-"use strict";
-var cfg=window.SUPABASE_CONFIG||{},client=null,session=null,classes=[],activeClass=null,students=[],profiles={},progress=[],snapshots=[],reviews=[],selectedStudent="",selectedWeek=1,lastInvite="";
-var el=function(id){return document.getElementById(id)};
-var esc=function(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
-var status=function(t,error){el("pageStatus").textContent=t||"";if(error)el("pageStatus").style.color="var(--red)";else el("pageStatus").style.color="var(--muted)"};
-var setAuthStatus=function(t){el("authStatus").textContent=t||""};
-function isConfigured(){return !!(cfg.url&&cfg.publishableKey&&window.supabase&&window.supabase.createClient)}
-function setSignedIn(on){el("authBox").classList.toggle("hidden",on);el("dashboard").classList.toggle("hidden",!on);el("signOut").classList.toggle("hidden",!on)}
-function getError(result){if(result&&result.error)throw result.error;return result&&result.data}
-async function signIn(){setAuthStatus("Signing in…");var r=await client.auth.signInWithPassword({email:el("email").value.trim(),password:el("password").value});if(r.error)throw r.error;session=r.data.session;await afterLogin()}
-async function signUp(){var name=el("displayName").value.trim();if(!name)throw new Error("Enter your name for the new account.");setAuthStatus("Creating account…");var r=await client.auth.signUp({email:el("email").value.trim(),password:el("password").value,options:{data:{display_name:name}}});if(r.error)throw r.error;if(!r.data.session){setAuthStatus("Account created. Confirm the email address, then sign in.");return;}session=r.data.session;await afterLogin()}
-async function signOut(){await client.auth.signOut();session=null;classes=[];activeClass=null;setSignedIn(false);status("Signed out. Student learning records remain in their own accounts.")}
-async function afterLogin(){setSignedIn(true);el("who").textContent="Signed in as "+(session.user.email||session.user.id);await loadClasses();status("Account loaded. Class data is restricted by database row-level security.")}
-async function acceptInvite(e){
-  if(e&&e.preventDefault)e.preventDefault();
-  var code=el("joinCode").value.trim();if(!code)throw new Error("Paste your one-use invitation code.");
-  var joined=getError(await client.rpc("accept_class_invite",{p_code:code}));
-  el("joinCode").value="";
-  await loadClasses();
-  activeClass=classes.find(function(c){return c.id===joined;})||activeClass;
-  if(activeClass){el("classSelect").value=activeClass.id;await loadClassData();}
-  status("Invitation accepted. Your account has joined the class with the role assigned by its administrator.");
-}
+(function(){"use strict";
+var cfg=window.SUPABASE_CONFIG||{},client=null,session=null,classes=[],activeClass=null,students=[],profiles={},progress=[],attempts=[],reviews=[],selectedStudent="",selectedWeek=1;
+var $=function(id){return document.getElementById(id)}, esc=function(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':'&quot;',"'":'&#39;'}[c]})};
+function status(t,error){$("pageStatus").textContent=t||"";$("pageStatus").style.color=error?"var(--red)":"var(--muted)"} function authStatus(t){$("authStatus").textContent=t||""}
+function err(r){if(r&&r.error)throw r.error;return r&&r.data}
+function signed(on){$("authBox").classList.toggle("hidden",on);$("dashboard").classList.toggle("hidden",!on);$("signOut").classList.toggle("hidden",!on)}
+async function signIn(){authStatus("Signing in…");var r=await client.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(r.error)throw r.error;session=r.data.session;await afterLogin()}
+async function signOut(){await client.auth.signOut();session=null;classes=[];activeClass=null;signed(false);status("Signed out.")}
+async function afterLogin(){signed(true);$("who").textContent="Signed in as "+(session.user.email||session.user.id);await loadClasses()}
 async function loadClasses(){
-  status("Loading your classes…");
-  var own=getError(await client.from("class_memberships").select("class_id,role").eq("user_id",session.user.id))||[];
-  var ownIds=own.map(function(x){return x.class_id;});
-  var madrassaRows=getError(await client.from("madrassa_memberships").select("madrassa_id,role").eq("user_id",session.user.id))||[];
-  var adminIds=madrassaRows.filter(function(x){return x.role==="madrassa_admin";}).map(function(x){return x.madrassa_id;});
-  var rows=[];
-  if(ownIds.length){rows=rows.concat(getError(await client.from("classes").select("id,name,madrassa_id,cohort_label,curriculum_version").in("id",ownIds))||[]);}
-  if(adminIds.length){rows=rows.concat(getError(await client.from("classes").select("id,name,madrassa_id,cohort_label,curriculum_version").in("madrassa_id",adminIds))||[]);}
-  var byId={};rows.forEach(function(c){byId[c.id]=c;});
-  classes=Object.keys(byId).map(function(id){var c=byId[id],m=own.find(function(x){return x.class_id===id;});return Object.assign({},c,{role:(adminIds.indexOf(c.madrassa_id)>=0?"madrassa_admin":m&&m.role||"student")});});
-  var prior=activeClass&&activeClass.id;
-  activeClass=classes.find(function(c){return c.id===prior;})||classes[0]||null;
-  var sel=el("classSelect");sel.innerHTML=classes.map(function(c){return '<option value="'+esc(c.id)+'">'+esc(c.name)+' · '+esc(c.role)+'</option>';}).join("");
-  if(!classes.length){el("noClass").textContent="No class is connected to this account yet. Create the first Madrassa and class, or ask a Madrassa administrator for a one-use invitation.";el("noClass").classList.remove("hidden");el("bootstrap").classList.remove("hidden");el("makeClass").classList.add("hidden");el("classContent").classList.add("hidden");return;}
-  el("noClass").classList.add("hidden");el("bootstrap").classList.add("hidden");el("makeClass").classList.toggle("hidden",!(activeClass.role==="class_admin"||activeClass.role==="madrassa_admin"));sel.value=activeClass.id;
-  await loadClassData();
-}
-async function selectClass(){activeClass=classes.find(function(c){return c.id===el("classSelect").value;})||null;if(!activeClass)return;el("makeClass").classList.toggle("hidden",!(activeClass.role==="class_admin"||activeClass.role==="madrassa_admin"));await loadClassData()}
-async function createBase(){
-  var mName=el("madrassaName").value.trim(),className=el("firstClassName").value.trim();
-  if(!mName||!className)throw new Error("Enter both the Madrassa name and first class name.");
-  status("Creating Madrassa and class…");
-  var m=getError(await client.from("madrassas").insert({name:mName,created_by:session.user.id}).select("id").single());
-  var c=getError(await client.from("classes").insert({madrassa_id:m.id,name:className,cohort_label:"",created_by:session.user.id}).select("id").single());
-  await loadClasses();activeClass=classes.find(function(x){return x.id===c.id;})||activeClass;el("classSelect").value=activeClass.id;await loadClassData();status("Madrassa and first class created. Create an invitation for each teacher or student.");}
-async function createClass(){
-  if(!activeClass)throw new Error("Choose a Madrassa class first.");
-  var name=el("newClassName").value.trim();if(!name)throw new Error("Enter the new class name.");
-  var c=getError(await client.from("classes").insert({madrassa_id:activeClass.madrassa_id,name:name,cohort_label:el("cohort").value.trim(),created_by:session.user.id}).select("id").single());
-  await loadClasses();activeClass=classes.find(function(x){return x.id===c.id;})||activeClass;el("classSelect").value=activeClass.id;await loadClassData();status("Class created. Generate student and teacher invitations below.");
-}
-async function loadClassData(){
-  if(!activeClass)return;
-  el("curriculumVersion").textContent="Curriculum v"+(activeClass.curriculum_version||"1.0.0");
-  if(activeClass.role==="student"){
-    el("classContent").classList.add("hidden");el("noClass").textContent="This account is a student in the selected class. Use the student app to study; this dashboard is available only to class staff.";el("noClass").classList.remove("hidden");return;
-  }
-  status("Loading class roster, progress and evidence…");
-  var roster=getError(await client.from("class_memberships").select("user_id,role,created_at").eq("class_id",activeClass.id).eq("role","student"))||[];
-  students=roster;
-  profiles={};progress=[];snapshots=[];reviews=[];
-  var ids=students.map(function(s){return s.user_id;});
-  if(ids.length){
-    var p=getError(await client.from("profiles").select("user_id,display_name").in("user_id",ids))||[];
-    p.forEach(function(x){profiles[x.user_id]=x.display_name;});
-    progress=getError(await client.from("lesson_progress").select("student_user_id,week_no,status,completed_at,updated_at").eq("class_id",activeClass.id).in("student_user_id",ids))||[];
-    snapshots=getError(await client.from("student_learning_state").select("student_user_id,store_key,state,updated_at").eq("class_id",activeClass.id).in("student_user_id",ids))||[];
-    reviews=getError(await client.from("teacher_reviews").select("student_user_id,week_no,concept_key,status,note,created_at,reviewer_user_id").eq("class_id",activeClass.id).order("created_at",{ascending:false}))||[];
-  }
-  el("classContent").classList.remove("hidden");
-  el("noClass").classList.add("hidden");
-  el("studentCount").textContent=students.length;
-  el("studentCaption").textContent="enrolled in "+activeClass.name;
-  el("weekCount").textContent=progress.filter(function(p){return p.status==="completed";}).length;
-  el("attemptCount").textContent=snapshots.filter(function(s){return s.store_key==="8020-word-recognition-v1";}).reduce(function(total,row){return total+Object.keys(row.state||{}).reduce(function(n,k){var x=row.state[k]||{};return n+(Array.isArray(x.attempts)?x.attempts.length:x.words?1:0);},0);},0);
-  el("reviewCount").textContent=latestReviews().length;
-  renderMatrix();renderEvidenceSelectors();renderMastery();
-  status("Class refreshed · "+students.length+" student(s), "+reviews.length+" review record(s).");
-}
-function bySnapshot(user,key){return snapshots.find(function(s){return s.student_user_id===user&&s.store_key===key;});}
-function reviewLatestFor(user,week,concept){return reviews.find(function(r){return r.student_user_id===user&&Number(r.week_no)===Number(week)&&r.concept_key===concept;});}
-function latestReviews(){
-  var out={},sorted=reviews.slice().sort(function(a,b){return Date.parse(b.created_at||0)-Date.parse(a.created_at||0);});
-  sorted.forEach(function(r){var key=r.student_user_id+"|"+r.concept_key;if(!out[key])out[key]=r;});
-  return Object.keys(out).map(function(k){return out[k];});
-}
-function renderMatrix(){
-  var completed={};progress.forEach(function(p){completed[p.student_user_id+"|"+p.week_no]=p.status;});
-  var html='<table class="matrix"><thead><tr><th>Student</th>';
-  for(var w=1;w<=31;w++)html+='<th>W'+w+'</th>';
-  html+='<th>Complete</th></tr></thead><tbody>';
-  students.forEach(function(s){
-    var count=0;html+='<tr><td><button class="student-link" data-open-student="'+esc(s.user_id)+'">'+esc(profiles[s.user_id]||("Student "+s.user_id.slice(0,8)))+'</button></td>';
-    for(var w=1;w<=31;w++){var st=completed[s.user_id+"|"+w]||"not_started";if(st==="completed")count++;var symbol=st==="completed"?"✓":st==="in_progress"?"•":"—";var cls=st==="completed"?"secure":st==="in_progress"?"developing":"unstarted";html+='<td class="'+cls+'" title="Week '+w+' · '+st+'">'+symbol+'</td>';}
-    html+='<td><b>'+count+'/31</b></td></tr>';
-  });
-  if(!students.length)html+='<tr><td colspan="33">No student accounts have joined this class yet. Generate an invitation code below.</td></tr>';
-  html+='</tbody></table>';el("matrix").innerHTML=html;
-  el("matrix").querySelectorAll("[data-open-student]").forEach(function(b){b.addEventListener("click",function(){el("evidenceStudent").value=b.getAttribute("data-open-student");selectedStudent=el("evidenceStudent").value;renderEvidence();});});
-}
-function renderEvidenceSelectors(){
-  el("evidenceStudent").innerHTML=students.map(function(s){return '<option value="'+esc(s.user_id)+'">'+esc(profiles[s.user_id]||("Student "+s.user_id.slice(0,8)))+'</option>';}).join("");
-  el("evidenceWeek").innerHTML=Array.from({length:31},function(_,i){return '<option value="'+(i+1)+'">Week '+(i+1)+'</option>';}).join("");
-  var desiredStudent=selectedStudent,desiredWeek=selectedWeek||1;
-  selectedStudent=students.some(function(s){return s.user_id===desiredStudent;})?desiredStudent:(students[0]&&students[0].user_id||"");
-  selectedWeek=Number(desiredWeek);
-  if(selectedStudent)el("evidenceStudent").value=selectedStudent;
-  el("evidenceWeek").value=String(selectedWeek);
-  renderEvidence();
-}
-function renderEvidence(){
-  selectedStudent=el("evidenceStudent").value;selectedWeek=Number(el("evidenceWeek").value||1);
-  var target=el("evidence");target.innerHTML="";
-  if(!selectedStudent){target.innerHTML='<div class="note">No student evidence yet. When a student joins and synchronises, saved attempts will appear here.</div>';return;}
-  var rec=bySnapshot(selectedStudent,"8020-word-recognition-v1"),state=(rec&&rec.state)||{},item=state[selectedWeek]||{},attempts=Array.isArray(item.attempts)?item.attempts:(item.words?[item]:[]);
-  if(!attempts.length){target.innerHTML='<div class="note">No saved word-recognition attempts for this student and week yet.</div>';}
-  attempts.slice().reverse().forEach(function(a,i){
-    var words=(a.words||[]).map(function(w){return w.text||"";}).filter(Boolean).join(" · ");
-    var card=document.createElement("article");card.className="attempt";
-    var time=document.createElement("small");time.textContent="Attempt "+(attempts.length-i)+" · "+(a.savedAt?new Date(a.savedAt).toLocaleString():"time not recorded");
-    var selected=document.createElement("p");selected.innerHTML='<b>Selected Arabic evidence:</b> <span class="arabic" lang="ar" dir="rtl">'+esc(words||"No word recorded")+'</span>';
-    var label=document.createElement("p");label.innerHTML='<b>Chosen role:</b> '+esc(a.labelEn||"Not recorded")+' · <span class="arabic" lang="ar" dir="rtl">'+esc(a.labelAr||"—")+'</span>';
-    var explanation=document.createElement("p");explanation.innerHTML='<b>Student explanation:</b> '+esc(a.explanation||"No explanation recorded.");
-    card.appendChild(time);card.appendChild(selected);card.appendChild(label);card.appendChild(explanation);target.appendChild(card);
-  });
-  var quiz=bySnapshot(selectedStudent,"8020-weekly-recall-v2"),q=(quiz&&quiz.state||{})[selectedWeek];
-  if(q){var qc=document.createElement("article");qc.className="attempt";qc.innerHTML='<b>Quick retrieval</b><p>Choice '+(Number(q.choice)+1)+' · '+(q.correct?"correct option selected":"review needed")+'</p><small>'+(q.answeredAt?new Date(q.answeredAt).toLocaleString():"")+'</small>';target.appendChild(qc);}
-  if(q&&(q.sourceExplanation||q.sourceRead||q.sourceExample||q.sourceReady||q.sourceCompletedAt)){
-    var sc=document.createElement("article");sc.className="attempt";
-    sc.innerHTML='<b>Source-book understanding · FSTU</b>'+
-      '<p>Definition/rule read: <b>'+(q.sourceRead?"Yes":"Not confirmed")+'</b> · Worked example explained: <b>'+(q.sourceExample?"Yes":"Not confirmed")+'</b></p>'+
-      '<p>Concept check: <b>'+(q.correct?"Correct":"Needs review")+'</b> · Qur’an stage unlocked: <b>'+(q.sourceReady&&q.correct?"Yes":"No")+'</b></p>'+
-      '<p><b>Student teach-back:</b> '+esc(q.sourceExplanation||"No explanation recorded.")+'</p>'+
-      '<small>'+(q.sourceCompletedAt?"Source check recorded "+new Date(q.sourceCompletedAt).toLocaleString():"Source check not completed")+'</small>';
-    target.appendChild(sc);
-  }
-  var existing=reviews.find(function(r){return r.student_user_id===selectedStudent&&Number(r.week_no)===selectedWeek;});
-  el("conceptKey").value=existing?existing.concept_key:(item.labelAr||"");
-  el("reviewStatus").value=existing?existing.status:"developing";
-  el("teacherNote").value=existing?existing.note:"";
-}
-function renderMastery(){
-  var latest=latestReviews(),group={};
-  latest.forEach(function(r){if(!group[r.concept_key])group[r.concept_key]={secure:0,developing:0,revisit:0,total:0};group[r.concept_key][r.status]=(group[r.concept_key][r.status]||0)+1;group[r.concept_key].total++;});
-  var keys=Object.keys(group).sort();
-  if(!keys.length){el("mastery").innerHTML='<div class="note">No teacher reviews saved yet. Use the evidence panel to record the first concept judgement.</div>';return;}
-  el("mastery").innerHTML='<div class="table-wrap"><table class="mastery-table"><thead><tr><th>Concept key</th><th>Secure</th><th>Developing</th><th>Revisit</th><th>Reviewed</th></tr></thead><tbody>'+keys.map(function(k){return '<tr><td>'+esc(k)+'</td><td class="secure">'+group[k].secure+'</td><td class="developing">'+group[k].developing+'</td><td class="revisit">'+group[k].revisit+'</td><td>'+group[k].total+'</td></tr>';}).join("")+'</tbody></table></div>';
-}
-async function saveReview(e){
-  e.preventDefault();
-  if(!activeClass||!selectedStudent)throw new Error("Choose a class and student.");
-  var concept=el("conceptKey").value.trim();if(!concept)throw new Error("Enter the concept key or grammatical term.");
-  var row={class_id:activeClass.id,student_user_id:selectedStudent,week_no:selectedWeek,concept_key:concept,status:el("reviewStatus").value,note:el("teacherNote").value.trim(),reviewer_user_id:session.user.id};
-  var result=await client.from("teacher_reviews").insert(row);if(result.error)throw result.error;
-  el("reviewStatusText").textContent="Saved. The previous teacher judgements remain in the review history.";
-  await loadClassData();
-}
-async function makeInvite(){
-  if(!activeClass)throw new Error("Choose a class first.");
-  var role=el("inviteRole").value,days=Number(el("inviteExpiry").value);
-  var r=await client.rpc("create_class_invite",{p_class_id:activeClass.id,p_role:role,p_expires_in_days:days});
-  if(r.error)throw r.error;
-  lastInvite=r.data;el("inviteOutput").classList.remove("hidden");el("inviteOutput").innerHTML='<b>One-use invitation code · '+esc(role)+' · expires in '+days+' day(s)</b><p class="code">'+esc(lastInvite)+'</p><p>Share privately with one person. This code can only be accepted once.</p>';el("copyInvite").classList.remove("hidden");status("Invitation code created. It is stored hashed in the database.");}
-async function copyInvite(){if(!lastInvite)return;try{await navigator.clipboard.writeText(lastInvite);status("Invitation copied.");}catch(e){status("Copy is blocked by this browser. Select the displayed code and copy it manually.");}}
-function guard(action){return function(e){if(e&&e.preventDefault)e.preventDefault();Promise.resolve(action(e)).catch(function(err){status(err.message||String(err),true);setAuthStatus(err.message||String(err));});};}
-async function init(){
-  if(!isConfigured()){setAuthStatus("Supabase is not configured. Add the project URL and public publishable/anon key to supabase-config.js; never expose a service_role key.");el("login").disabled=true;el("signup").disabled=true;return;}
-  client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-  el("login").addEventListener("click",guard(signIn));el("signup").addEventListener("click",guard(signUp));el("joinForm").addEventListener("submit",guard(acceptInvite));
-  el("signOut").addEventListener("click",guard(signOut));el("classSelect").addEventListener("change",guard(selectClass));
-  el("refresh").addEventListener("click",guard(loadClassData));el("createBase").addEventListener("click",guard(createBase));el("createClass").addEventListener("click",guard(createClass));
-  el("evidenceStudent").addEventListener("change",renderEvidence);el("evidenceWeek").addEventListener("change",renderEvidence);
-  el("reviewForm").addEventListener("submit",guard(saveReview));el("createInvite").addEventListener("click",guard(makeInvite));el("copyInvite").addEventListener("click",guard(copyInvite));
-  var r=await client.auth.getSession();if(r.error)throw r.error;session=r.data.session;
-  if(session)await afterLogin();
-}
-init().catch(function(e){status(e.message||String(e),true);});
+ status("Loading your classes…");
+ var m=err(await client.from("class_memberships").select("class_id,role").eq("user_id",session.user.id))||[];var ids=m.map(function(x){return x.class_id});
+ if(!ids.length){classes=[];activeClass=null;$("classSelect").innerHTML="";$("noClass").textContent="You are signed in, but no class is linked to this teacher account yet.";$("noClass").classList.remove("hidden");$("createPanel").classList.remove("hidden");$("makeClass").classList.add("hidden");$("memberPanel").classList.add("hidden");$("classContent").classList.add("hidden");return}
+ var rows=err(await client.from("classes").select("id,name,year_group,is_active,created_by").in("id",ids))||[];classes=rows.map(function(c){var x=m.find(function(z){return z.class_id===c.id});return Object.assign({},c,{role:x&&x.role})});
+ activeClass=classes.find(function(c){return c.id===(activeClass&&activeClass.id)})||classes[0];$("classSelect").innerHTML=classes.map(function(c){return '<option value="'+esc(c.id)+'">'+esc(c.name)+' · '+esc(c.role)+'</option>'}).join("");$("classSelect").value=activeClass.id;$("noClass").classList.add("hidden");$("createPanel").classList.add("hidden");$("makeClass").classList.toggle("hidden",activeClass.role!=="class_admin");$("memberPanel").classList.toggle("hidden",activeClass.role!=="class_admin");await loadClassData()}
+async function createFirst(){var name=$("firstClassName").value.trim(),year=$("firstYearGroup").value.trim();if(!name)throw new Error("Enter a class name.");var r=err(await client.from("classes").insert({name:name,year_group:year||null,created_by:session.user.id}).select("id").single());await loadClasses();activeClass=classes.find(function(c){return c.id===r.id})||activeClass;$("classSelect").value=activeClass.id;await loadClassData();status("Class created successfully. The creator has been granted class-admin membership automatically.")}
+async function createClass(){var name=$("newClassName").value.trim(),year=$("cohort").value.trim();if(!name)throw new Error("Enter a class name.");var r=err(await client.from("classes").insert({name:name,year_group:year||null,created_by:session.user.id}).select("id").single());await loadClasses();activeClass=classes.find(function(c){return c.id===r.id})||activeClass;$("classSelect").value=activeClass.id;await loadClassData();status("Class created.")}
+async function addMember(){if(!activeClass||activeClass.role!=="class_admin")throw new Error("Only a class administrator can add members.");var uid=$("memberUserId").value.trim(),role=$("memberRole").value;if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uid))throw new Error("Enter a valid Auth user UUID.");var r=await client.from("class_memberships").insert({class_id:activeClass.id,user_id:uid,role:role,added_by:session.user.id});if(r.error)throw r.error;$("memberUserId").value="";$("memberStatus").textContent="Account added to the class.";await loadClassData()}
+async function loadClassData(){if(!activeClass)return;status("Loading class roster, progress and evidence…");var roster=err(await client.from("class_memberships").select("user_id,role").eq("class_id",activeClass.id))||[];students=roster.filter(function(x){return x.role==="student"});var ids=students.map(function(x){return x.user_id});profiles={};progress=[];attempts=[];reviews=[];if(ids.length){var p=err(await client.from("profiles").select("id,display_name").in("id",ids))||[];p.forEach(function(x){profiles[x.id]=x.display_name});progress=err(await client.from("lesson_progress").select("user_id,week_number,status,completed_at,updated_at").eq("class_id",activeClass.id).in("user_id",ids))||[];attempts=err(await client.from("recognition_attempts").select("user_id,week_number,concept_key,source_page,selected_words,selected_label_en,selected_label_ar,explanation,created_at").eq("class_id",activeClass.id).in("user_id",ids).order("created_at",{ascending:false}))||[];reviews=err(await client.from("teacher_reviews").select("student_id,week_number,concept_key,status,note,reviewed_at,teacher_id").eq("class_id",activeClass.id).order("reviewed_at",{ascending:false}))||[]}
+$("classContent").classList.remove("hidden");$("studentCount").textContent=students.length;$("weekCount").textContent=progress.filter(function(x){return x.status==="complete"}).length;$("attemptCount").textContent=attempts.length;$("reviewCount").textContent=latestReviews().length;renderMatrix();renderSelectors();renderMastery();status("Class refreshed · "+students.length+" student(s).")}
+function renderMatrix(){var html='<table class="matrix"><thead><tr><th>Student</th>';for(var w=1;w<=31;w++)html+='<th>W'+w+'</th>';html+='<th>Complete</th></tr></thead><tbody>';students.forEach(function(s){var count=0;html+='<tr><td>'+esc(profiles[s.user_id]||("Student "+s.user_id.slice(0,8)))+'</td>';for(var w=1;w<=31;w++){var p=progress.find(function(x){return x.user_id===s.user_id&&Number(x.week_number)===w});var st=p&&p.status||"not_started";if(st==="complete")count++;var symbol=st==="complete"?"✓":st==="in_progress"?"•":"—";var cls=st==="complete"?"secure":st==="in_progress"?"developing":"unstarted";html+='<td class="'+cls+'">'+symbol+'</td>'}html+='<td><b>'+count+'/31</b></td></tr>'});if(!students.length)html+='<tr><td colspan="33">No student accounts are in this class yet.</td></tr>';html+='</tbody></table>';$('matrix').innerHTML=html}
+function renderSelectors(){$("evidenceStudent").innerHTML=students.map(function(s){return '<option value="'+esc(s.user_id)+'">'+esc(profiles[s.user_id]||("Student "+s.user_id.slice(0,8)))+'</option>'}).join("");$("evidenceWeek").innerHTML=Array.from({length:31},function(_,i){return '<option value="'+(i+1)+'">Week '+(i+1)+'</option>'}).join("");if(!selectedStudent||!students.some(function(s){return s.user_id===selectedStudent}))selectedStudent=students[0]&&students[0].user_id||"";$("evidenceStudent").value=selectedStudent;$("evidenceWeek").value=String(selectedWeek);renderEvidence()}
+function renderEvidence(){selectedStudent=$("evidenceStudent").value;selectedWeek=Number($("evidenceWeek").value||1);var rows=attempts.filter(function(a){return a.user_id===selectedStudent&&Number(a.week_number)===selectedWeek}),target=$("evidence");if(!selectedStudent){target.innerHTML='<div class="note">No students yet.</div>';return}if(!rows.length){target.innerHTML='<div class="note">No saved recognition attempts for this student and week.</div>';return}target.innerHTML=rows.map(function(a){var words=Array.isArray(a.selected_words)?a.selected_words.map(function(w){return typeof w==='string'?w:(w.text||"")}).filter(Boolean).join(" · "):"";return '<article class="attempt"><small>'+new Date(a.created_at).toLocaleString()+" · source page "+esc(a.source_page)+"</small><p><b>Selected Arabic evidence:</b> <span class="arabic" lang="ar" dir="rtl">'+esc(words||"Not recorded")+'</span></p><p><b>Chosen role:</b> '+esc(a.selected_label_en)+' · <span class="arabic" lang="ar" dir="rtl">'+esc(a.selected_label_ar)+'</span></p><p><b>Student explanation:</b> '+esc(a.explanation)+'</p></article>'}).join("");var existing=reviews.find(function(r){return r.student_id===selectedStudent&&Number(r.week_number)===selectedWeek});$("conceptKey").value=existing?existing.concept_key:(rows[0].concept_key||"");$("reviewStatus").value=existing?existing.status:"developing";$("teacherNote").value=existing?existing.note:""}
+function latestReviews(){var out={};reviews.forEach(function(r){var k=r.student_id+"|"+r.concept_key;if(!out[k]||new Date(r.reviewed_at)>new Date(out[k].reviewed_at))out[k]=r});return Object.keys(out).map(function(k){return out[k]})}
+function renderMastery(){var latest=latestReviews(),g={};latest.forEach(function(r){g[r.concept_key]||(g[r.concept_key]={secure:0,developing:0,revisit:0});g[r.concept_key][r.status]++});var keys=Object.keys(g).sort();$("mastery").innerHTML=keys.length?'<div class="table-wrap"><table class="mastery-table"><thead><tr><th>Concept</th><th>Secure</th><th>Developing</th><th>Revisit</th></tr></thead><tbody>'+keys.map(function(k){return '<tr><td>'+esc(k)+'</td><td class="secure">'+g[k].secure+'</td><td class="developing">'+g[k].developing+'</td><td class="revisit">'+g[k].revisit+'</td></tr>'}).join("")+'</tbody></table></div>':'<div class="note">No teacher reviews saved yet.</div>'}
+async function saveReview(e){e.preventDefault();if(!activeClass||!selectedStudent)throw new Error("Choose a class and student.");var concept=$("conceptKey").value.trim();if(!concept)throw new Error("Enter a concept key or grammatical term.");var r=await client.from("teacher_reviews").insert({class_id:activeClass.id,student_id:selectedStudent,teacher_id:session.user.id,curriculum_version_id:"00000000-0000-0000-0000-000000000000",week_number:selectedWeek,concept_key:concept,status:$("reviewStatus").value,note:$("teacherNote").value.trim()});if(r.error){$("reviewStatusText").textContent="A published curriculum lesson must exist before a teacher review can be saved.";throw r.error}$("reviewStatusText").textContent="Saved. Earlier reviews remain in the audit trail.";await loadClassData()}
+function guard(fn){return function(e){if(e&&e.preventDefault)e.preventDefault();Promise.resolve(fn(e)).catch(function(x){status(x.message||String(x),true);authStatus(x.message||String(x))})}}
+async function init(){if(!(cfg.url&&cfg.publishableKey&&window.supabase&&window.supabase.createClient)){authStatus("Supabase is not configured.");$("login").disabled=true;return}client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});$("login").addEventListener("click",guard(signIn));$("signOut").addEventListener("click",guard(signOut));$("classSelect").addEventListener("change",guard(async function(){activeClass=classes.find(function(c){return c.id===$("classSelect").value})||null;$("makeClass").classList.toggle("hidden",!activeClass||activeClass.role!=="class_admin");$("memberPanel").classList.toggle("hidden",!activeClass||activeClass.role!=="class_admin");await loadClassData()}));$("refresh").addEventListener("click",guard(loadClassData));$("createFirstClass").addEventListener("click",guard(createFirst));$("createClass").addEventListener("click",guard(createClass));$("addMember").addEventListener("click",guard(addMember));$("evidenceStudent").addEventListener("change",renderEvidence);$("evidenceWeek").addEventListener("change",renderEvidence);$("reviewForm").addEventListener("submit",guard(saveReview));var r=await client.auth.getSession();if(r.error)throw r.error;session=r.data.session;if(session)await afterLogin()}
+init().catch(function(e){status(e.message||String(e),true)})
 }());
 </script>
 </body>
