@@ -25,13 +25,13 @@ The migration stores lesson metadata and source-page references. It does **not**
 - Class administrators manage memberships and class assignments; only the Madrassa administrator can edit canonical curriculum versions.
 - Teacher-only notes are not visible to students.
 - The student completion flag is not mastery. Only a teacher review records Secure / Developing / Revisit. Student explanations are never automatically marked correct by SQL.
-- New Auth users are created with the Student role. Global roles must be provisioned by a trusted administrator; do not trust role values sent in sign-up metadata.
+- New Auth users are created with the Student role. The global profile role is limited to Student, Teacher or Madrassa Admin. `class_admin` is a class-membership role, not a global role: a Teacher who creates a class is automatically made a class administrator for that class only. A user must never be able to self-promote; do not trust role values sent in sign-up metadata.
 
 ## Before applying to a hosted project
 
 1. Create a **separate development Supabase project** first. Do not run a new schema migration directly against a live student database.
 2. Install the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started) and initialise its configuration in the repository with `supabase init`.
-3. Start the local database and apply migrations with `supabase start`function raw() { [native code] } and `supabase db reset`function raw() { [native code] }. Review any errors, then test the permissions in the checklist below.
+3. Start the local database and apply migrations with `supabase start` and `supabase db reset`. Review any errors, then test the permissions in the checklist below.
 4. Link the CLI to the development project and deploy only after the local migration is clean. Supabase recommends versioned migrations rather than undocumented edits to the hosted database: https://supabase.com/docs/guides/deployment/database-migrations
 5. Create a test student, a test teacher and two separate classes. Verify the access boundaries before inviting real students.
 
@@ -77,6 +77,7 @@ Use separate Auth test accounts and verify each item through the Supabase API as
 - [ ] Student can read their own review feedback but cannot read private teacher_notes.
 - [ ] Class administrator can manage memberships and assignments but cannot edit the canonical curriculum.
 - [ ] Only the Madrassa administrator can publish or change the canonical curriculum.
+- [ ] A teacher who creates a class is automatically a class administrator for that class only, and cannot see or manage other classes.
 - [ ] An unauthenticated request receives no student or teacher data.
 - [ ] Removing a user's class membership removes that class's access on the next request.
 
