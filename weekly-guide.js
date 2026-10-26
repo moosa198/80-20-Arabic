@@ -258,8 +258,9 @@
     var id=kind==="sarf"?"1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr":"1BdY0tAvoaKvJVUhmMQn09bxLh0fAXO03";
     var label=kind==="sarf"?"FSTU Ṣarf (صرف)":"FSTU Naḥw (نحو)";
     var direct="https://drive.google.com/file/d/"+id+"/view#page="+p;
+    var preview="https://drive.google.com/file/d/"+id+"/preview#page="+p;
     var title=(kind==="sarf"?SARF_PAGE_TITLES:NAHW_PAGE_TITLES)[p]||"Assigned source page";
-    return '<section class="fstu-assigned-page" data-book-page="'+kind+':'+p+'" aria-label="'+label+' assigned page '+p+'"><div class="fstu-assigned-meta"><span class="guide-eyebrow">ASSIGNED SOURCE PAGE</span><span class="page-pill">Printed p. '+p+'</span></div><h4>'+esc(label)+' · '+esc(title)+'</h4><p>Read the definition, rule(s), worked example and relevant <i>tarkīb</i> (تَرْكِيبٌ, tarkīb) on this exact page. Do not read ahead through the rest of the book for this task.</p><a class="fstu-open-link" href="'+direct+'" target="_blank" rel="noreferrer">Open the assigned page in the official book ↗</a></section>';
+    return '<section class="fstu-assigned-page" data-book-page="'+kind+':'+p+'" aria-label="'+label+' assigned page '+p+'"><div class="fstu-assigned-meta"><span class="guide-eyebrow">ASSIGNED SOURCE PAGE</span><span class="page-pill">Printed p. '+p+'</span></div><h4>'+esc(label)+' · '+esc(title)+'</h4><p>Study the definition, rule(s), worked example and relevant <i>tarkīb</i> (تَرْكِيبٌ, tarkīb) here first. The official source preview opens at the assigned page.</p><div class="fstu-preview"><iframe loading="lazy" title="'+label+' · assigned page '+p+'" src="'+preview+'" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen"></iframe></div><a class="fstu-open-link" href="'+direct+'" target="_blank" rel="noreferrer">Open the official book at printed page '+p+' ↗</a></section>';
   }
   function renderBookGroup(kind,pages,focus) {
     var title=kind==="sarf"?"FSTU Ṣarf (صرف)":"FSTU Naḥw (نحو)";
