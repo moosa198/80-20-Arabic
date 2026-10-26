@@ -231,16 +231,54 @@ main{padding:32px clamp(18px,4vw,54px) 20px;min-width:0;max-width:1250px;width:1
 @media(max-width:760px){.method-rhythm{grid-template-columns:1fr 1fr}.recognition-labels{grid-template-columns:1fr 1fr}.fstu-page-frame iframe{height:360px}.digital-mushaf-frame{padding:6px}.digital-mushaf-frame quran-madina-html{overflow:auto}}
 @media(max-width:430px){.recognition-labels{grid-template-columns:1fr}.recognition-label{padding:8px 10px}.recognition-label b{font-size:19px}}
 
+
+/* Classroom sync and subtle beginner transliteration */
+.term-translit{display:block;font-size:9px;line-height:1.25;color:#77867e;font-style:italic;font-weight:500;letter-spacing:.015em;margin-top:2px;direction:ltr;text-align:inherit}
+.term .tar{display:block}
+.fstu-assigned-page{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;margin:8px 0}
+.fstu-assigned-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.fstu-assigned-page h4{font-size:13px;color:var(--green);margin:7px 0}
+.fstu-assigned-page p{font-size:11px;line-height:1.6;color:var(--muted);margin:6px 0 10px}
+.fstu-open-link{display:inline-flex;padding:8px 10px!important;margin:0!important;border:1px solid #cfdbcf;border-radius:8px;background:#f7faf5;font-size:11px;font-weight:750;text-decoration:none}
+.source-check-items{display:grid;gap:10px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px;margin:12px 0}
+.source-check-items label{display:flex;gap:9px;align-items:flex-start;font-size:12px}
+.source-check-items input{margin-top:4px;accent-color:var(--green2)}
+.application-flow[hidden]{display:none!important}
+.source-mastery-step{margin-top:14px}
+.recognition-ar-wrap{display:grid;justify-items:end;gap:1px}
+.classroom-modal[hidden]{display:none!important}
+.classroom-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:14px;font:14px/1.5 system-ui,sans-serif;color:#20322b}
+.classroom-backdrop{position:absolute;inset:0;background:#0c211bc9;backdrop-filter:blur(3px)}
+.classroom-dialog{position:relative;max-height:92vh;overflow:auto;width:min(660px,100%);background:#fffdf8;border:1px solid #dce3d9;border-radius:17px;padding:20px;box-shadow:0 24px 80px #0c211b35}
+.classroom-dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.classroom-kicker{margin:0;font-size:10px;font-weight:800;letter-spacing:.12em;color:#a88742}
+.classroom-dialog h2{font-size:22px;color:#183f34;margin:5px 0 8px}
+.classroom-close{width:35px;height:35px;border:1px solid #dce3d9;background:#fff;border-radius:10px;font-size:22px;color:#183f34}
+.classroom-intro,.classroom-privacy-note{font-size:12px;color:#66766d}
+.classroom-dialog form{display:grid;gap:10px}
+.classroom-dialog label{display:grid;gap:5px;font-size:11px;font-weight:750}
+.classroom-dialog input{width:100%;min-width:0;padding:9px 10px;border:1px solid #cdd8cd;border-radius:9px;background:white;color:#20322b}
+.classroom-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.classroom-help{font-size:10px;color:#6a776f;margin:0}
+.classroom-dialog-actions{display:flex;gap:8px;flex-wrap:wrap}
+.classroom-primary,.classroom-secondary{padding:9px 12px;border-radius:9px;border:1px solid #183f34;font-size:11px;font-weight:750}
+.classroom-primary{background:#183f34;color:white}.classroom-secondary{background:white;color:#183f34}
+.classroom-status{padding:10px 11px;background:#f3f6ef;border:1px solid #dce3d9;border-radius:9px;font-size:11px;white-space:pre-wrap}
+.classroom-status.error{background:#fff4f4;border-color:#edcaca;color:#802e2e}.classroom-status.success{background:#f1f8f0;border-color:#c6dec9;color:#2d6040}
+@media(max-width:520px){.classroom-fields{grid-template-columns:1fr}.classroom-dialog{padding:15px}.classroom-dialog h2{font-size:19px}}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to learning</a>
-<header class="top"><a class="brand" href="./" aria-label="80/20 Arabic home"><span class="brandmark" lang="ar" dir="rtl">ع</span><span class="brandtext"><strong>80/20 Arabic</strong><small>Qur’an-first learning</small></span></a><div class="topright"><span class="privacy"><span class="dot"></span>Progress stays on this device</span><button id="installBtn" class="btn btntop hidden" type="button">Install app</button><button id="menuBtn" class="iconbtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button></div></header>
+<header class="top"><a class="brand" href="./" aria-label="80/20 Arabic home"><span class="brandmark" lang="ar" dir="rtl">ع</span><span class="brandtext"><strong>80/20 Arabic</strong><small>Qur’an-first learning</small></span></a><div class="topright"><span class="privacy"><span class="dot"></span>Local first · class sync optional</span><button id="installBtn" class="btn btntop hidden" type="button">Install app</button><button id="menuBtn" class="iconbtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button></div></header>
 <div class="shell"><aside id="side" class="side" aria-label="Main navigation"><div class="sideLabel">YOUR LEARNING</div><nav class="nav"><button class="active" data-view="today"><span class="navIcon">◷</span>Today<span id="dueBadge" class="badge">0</span></button><button data-view="course"><span class="navIcon">▦</span>31-week course</button><button data-view="review"><span class="navIcon">↻</span>Word review</button><button data-view="progress"><span class="navIcon">↗</span>My progress</button><button data-view="reference"><span class="navIcon">⌘</span>Language map</button></nav><div class="sideTrack"><div class="sideLabel">YOUR PATH</div><div class="track"><i id="sideBar"></i></div><div class="sideStats"><span id="sideDone">0 of 31 weeks</span><span id="sidePct">0%</span></div></div><div class="sideBottom"><div class="tiny">THE METHOD</div><p>Recall it. Spot it. Explain the clue. Find it again.</p><a target="_blank" rel="noreferrer" href="https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa">Core lesson playlist ↗</a><br><a target="_blank" rel="noreferrer" href="https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7">Bonus listening playlist ↗</a></div></aside>
-<main id="main" tabindex="-1"><div id="app" aria-live="polite"></div><footer class="footer"><b>80/20 Arabic</b><span>Recognise before you translate.</span><button id="exportBtn" class="txtbtn">Export progress</button><label class="txtbtn" for="importFile">Import progress</label><input id="importFile" type="file" accept="application/json" hidden><button id="printAllBtn" class="txtbtn">Print full course workbook</button></footer></main></div><div id="printRoot"></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
+<main id="main" tabindex="-1"><div id="app" aria-live="polite"></div><footer class="footer"><b>80/20 Arabic</b><span>Recognise before you translate.</span><button id="classroomOpen" class="txtbtn" type="button">Class tracking</button><button id="exportBtn" class="txtbtn">Export progress</button><label class="txtbtn" for="importFile">Import progress</label><input id="importFile" type="file" accept="application/json" hidden><button id="printAllBtn" class="txtbtn">Print full course workbook</button></footer></main></div><div id="printRoot"></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script data-font-size="24" src="https://unpkg.com/quran-madina-html@2"></script>
 <script src="./weekly-guide.js"></script>
 <script src="./recognition.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./classroom-sync.js"></script>
 <script>
 (function(){
 "use strict";
@@ -248,6 +286,21 @@ var TERMS={
 noun:["Noun","اسم"],verb:["Verb","فعل"],particle:["Particle","حرف"],past:["Past/perfect form","فعل ماضٍ"],imperfect:["Imperfect form","فعل مضارع"],imperative:["Imperative form","فعل أمر"],nominal:["Nominal sentence","جملة اسمية"],verbal:["Verbal sentence","جملة فعلية"],mubtada:["Topic","مبتدأ"],khabar:["Predicate","خبر"],faail:["Doer/subject","فاعل"],mafool:["Object","مفعول به"],preposition:["Preposition","حرف جر"],genitive:["Genitive form","مجرور"],jarMajrur:["Preposition phrase","جار ومجرور"],conjunction:["Conjunction link","عطف"],conjunctionParticle:["Conjunction particle","حرف عطف"],idafah:["Possessive construction","إضافة"],mudaf:["Possessed noun","مضاف"],mudafIlayh:["Possessor / genitive complement","مضاف إليه"],pronoun:["Pronoun","ضمير"],attachedPronoun:["Attached pronoun","ضمير متصل"],adjective:["Adjective","نعت"],described:["Described noun","منعوت"],relativePronoun:["Relative pronoun","اسم موصول"],relativeClause:["Relative clause","صلة الموصول"],inna:["Inna and its sisters","إنّ وأخواتها"],emphasis:["Emphasis","توكيد"],kana:["Kāna and its sisters","كان وأخواتها"],laysa:["Laysa","ليس"],negation:["Negation","نفي"],jussive:["Jussive form","مجزوم"],subjunctive:["Subjunctive form","منصوب"],passive:["Passive voice","مبني للمجهول"],naib:["Passive subject","نائب الفاعل"],derived:["Derived word forms","الأوزان المزيدة"],activeParticiple:["Active participle","اسم الفاعل"],passiveParticiple:["Passive participle","اسم المفعول"],conjugation:["Conjugation","تصريف"],condition:["Condition","شرط"],result:["Result of the condition","جواب الشرط"],exception:["Exception","استثناء"],question:["Question","استفهام"],vocative:["Vocative","نداء"],oath:["Oath","قسم"],zarf:["Adverb of time/place","ظرف"],subordinate:["Subordinate clause","جملة تابعة"],purpose:["Purpose expression","تعبير عن الغرض"],purposeLam:["Purpose lām","لام التعليل"],mafoolAjlihi:["Purpose object","مفعول لأجله"],haal:["Circumstantial qualifier","حال"],dual:["Dual","مثنّى"],number:["Number","عدد"],restriction:["Restriction","قصر"],absolute:["Absolute object","مفعول مطلق"],particleChoice:["Particle function","وظيفة الحرف"],tarkib:["Word-by-word analysis","تركيب"],agreement:["Agreement","مطابقة"],definiteness:["Definiteness","تعريف"],gender:["Grammatical gender","جنس"],case:["Case ending","علامة الإعراب"],weak:["Weak verb","فعل معتل"],manMa:["Context-sensitive من / ما","من / ما بحسب السياق"],lamu:["Emphatic lām","لام التوكيد"],expression:["Phrase / expression","تركيب"],sentenceClause:["Clause","جملة"],root:["Root","جذر"],pattern:["Word pattern","وزن"],verbalNoun:["Verbal noun","مصدر"]
 };
 var V=function(ar,en){return {ar:ar,en:en}}, W=function(n,passage,page,focus,objective,words,hf,nawh,sarf,apply,fstu,extra){return Object.assign({n:n,passage:passage,page:page,focus:focus,objective:objective,words:words.map(function(x){return V(x[0],x[1])}),hf:hf.map(function(x){return V(x[0],x[1])}),nawh:nawh,sarf:sarf,apply:apply,fstu:fstu},extra||{})};
+var TERM_HELP={
+noun:["اِسْمٌ","ism"],verb:["فِعْلٌ","fiʿl"],particle:["حَرْفٌ","ḥarf"],past:["فِعْلٌ مَاضٍ","fiʿl māḍin"],imperfect:["فِعْلٌ مُضَارِعٌ","fiʿl muḍāriʿ"],imperative:["فِعْلُ أَمْرٍ","fiʿlu amr"],
+nominal:["جُمْلَةٌ اِسْمِيَّةٌ","jumlatun ismiyyah"],verbal:["جُمْلَةٌ فِعْلِيَّةٌ","jumlatun fiʿliyyah"],mubtada:["مُبْتَدَأٌ","mubtadaʾ"],khabar:["خَبَرٌ","khabar"],faail:["فَاعِلٌ","fāʿil"],mafool:["مَفْعُولٌ بِهِ","mafʿūl bihi"],
+preposition:["حَرْفُ جَرٍّ","ḥarfu jarr"],genitive:["مَجْرُورٌ","majrūr"],jarMajrur:["جَارٌّ وَمَجْرُورٌ","jārr wa-majrūr"],conjunction:["عَطْفٌ","ʿaṭf"],conjunctionParticle:["حَرْفُ عَطْفٍ","ḥarfu ʿaṭf"],
+idafah:["إِضَافَةٌ","iḍāfah"],mudaf:["مُضَافٌ","muḍāf"],mudafIlayh:["مُضَافٌ إِلَيْهِ","muḍāfun ilayhi"],pronoun:["ضَمِيرٌ","ḍamīr"],attachedPronoun:["ضَمِيرٌ مُتَّصِلٌ","ḍamīrun muttaṣil"],
+adjective:["نَعْتٌ","naʿt"],described:["مَنْعُوتٌ","manʿūt"],relativePronoun:["اِسْمٌ مَوْصُولٌ","ism mawṣūl"],relativeClause:["صِلَةُ الْمَوْصُولِ","ṣilatu l-mawṣūl"],
+inna:["إِنَّ وَأَخَوَاتُهَا","inna wa-akhawātuhā"],emphasis:["تَوْكِيدٌ","tawkīd"],kana:["كَانَ وَأَخَوَاتُهَا","kāna wa-akhawātuhā"],laysa:["لَيْسَ","laysa"],negation:["نَفْيٌ","nafy"],
+jussive:["مَجْزُومٌ","majzūm"],subjunctive:["مَنْصُوبٌ","manṣūb"],passive:["مَبْنِيٌّ لِلْمَجْهُولِ","mabniyy li-l-majhūl"],naib:["نَائِبُ الْفَاعِلِ","nāʾibu l-fāʿil"],
+derived:["أَوْزَانٌ مَزِيدَةٌ","awzān mazīdah"],activeParticiple:["اِسْمُ الْفَاعِلِ","ismu l-fāʿil"],passiveParticiple:["اِسْمُ الْمَفْعُولِ","ismu l-mafʿūl"],
+conjugation:["تَصْرِيفٌ","taṣrīf"],condition:["شَرْطٌ","sharṭ"],result:["جَوَابُ الشَّرْطِ","jawābu sh-sharṭ"],exception:["اِسْتِثْنَاءٌ","istithnāʾ"],question:["اِسْتِفْهَامٌ","istifhām"],vocative:["نِدَاءٌ","nidāʾ"],oath:["قَسَمٌ","qasam"],
+zarf:["ظَرْفٌ","ẓarf"],subordinate:["جُمْلَةٌ تَابِعَةٌ","jumlatun tābiʿah"],purpose:["تَعْبِيرٌ عَنِ الْغَرَضِ","taʿbīrun ʿani l-gharaḍ"],purposeLam:["لَامُ التَّعْلِيلِ","lāmu t-taʿlīl"],mafoolAjlihi:["مَفْعُولٌ لِأَجْلِهِ","mafʿūlun li-ajlihi"],
+haal:["حَالٌ","ḥāl"],dual:["مُثَنَّى","muthannā"],number:["عَدَدٌ","ʿadad"],restriction:["قَصْرٌ","qaṣr"],absolute:["مَفْعُولٌ مُطْلَقٌ","mafʿūlun muṭlaq"],
+particleChoice:["وَظِيفَةُ الْحَرْفِ","waẓīfatu l-ḥarf"],tarkib:["تَرْكِيبٌ","tarkīb"],agreement:["مُطَابَقَةٌ","muṭābaqah"],definiteness:["تَعْرِيفٌ","taʿrīf"],gender:["جِنْسٌ نَحْوِيٌّ","jinsun naḥwiyy"],case:["عَلَامَةُ الْإِعْرَابِ","ʿalāmatu l-iʿrāb"],weak:["فِعْلٌ مُعْتَلٌّ","fiʿlun muʿtall"],
+manMa:["مِنْ / مَا بِحَسَبِ السِّيَاقِ","min / mā biḥasabi s-siyāq"],lamu:["لَامُ التَّوْكِيدِ","lāmu t-tawkīd"],expression:["تَرْكِيبٌ","tarkīb"],sentenceClause:["جُمْلَةٌ","jumlah"],root:["جَذْرٌ","jذر"],pattern:["وَزْنٌ","wazn"],verbalNoun:["مَصْدَرٌ","maṣdar"]
+};
 var C=[
 W(1,"Yā-Sīn 1–12",440,["noun","verb","particle","past","imperfect"],"Classify the visible form before trying to translate it.",[["قَوْم","people"],["رَسُول","messenger"],["قُرْآن","Qur’an / recitation"],["حَكِيم","wise"],["عَزِيز","mighty"],["تَنْزِيل","revelation / sending down"],["غَافِلُون","heedless"]],[["مِنْ","from / of"],["فِي","in"],["عَلَى","on / upon"],["إِنَّ","indeed"],["لَا","not"],["مَا","what / that / not by context"]],"Before interpreting a word, sort it into one of the three word types shown above. Point to a visible clue and say why it supports your choice.","Compare a completed-action form with an ongoing, future or habitual form. Notice the full shape, its ending, and any piece attached to it.","Find five examples on page 440. Label each using the three paired word-type labels above. Explain one clue aloud before translating.","Use FSTU Naḥw (نحو) Unit 1 for word types and FSTU Ṣarf (صرف) Unit 1 for basic forms.","What are the three word types, and what clue helped you classify one?"),
 W(2,"Al-Mulk 1–12",562,["nominal","mubtada","khabar"],"Find a statement built around a topic and information about that topic.",[["مُلْك","kingdom / dominion"],["سَمَاء","sky / heaven"],["زَيَّنَ","adorned"],["مَصَابِيح","lamps"],["شُهُب","flaming projectiles"],["غَفُور","ever-forgiving"],["قَدِير","all-powerful"]],[["الَّذِي","who / which"],["كُلّ","every / all"],["شَيْء","thing"],["مَا","what / whatever / not by context"],["هُوَ","he / it"],["هُمْ","they"]],"A statement can begin with the thing being discussed; the rest gives information about it. Find the two parts, then explain how the second relates to the first.","Keep recognising the forms already met. Ask who is represented inside the whole word before deciding how to translate it.","Choose one short statement on page 562. Mark the two main parts with different colours, then say what the evidence is.","Use FSTU Naḥw (نحو) Unit 1 for sentence patterns. Repeat the familiar Ṣarf (صرف) forms aloud.","Can you identify the topic and what is said about it without first reading a translation?"),
@@ -292,10 +345,10 @@ function allTerms(){
 function reviewItems(mode){var m=mode||reviewMode;return m==="terms"?allTerms():m==="high"?allHighWords():allWords();}
 function blank(){return {cards:{},doneWeeks:{},lastSession:null,streak:0,seconds:0}}
 function state(){try{return Object.assign(blank(),JSON.parse(localStorage.getItem(STORE)||"{}"))}catch(e){return blank()}}
-function save(s){localStorage.setItem(STORE,JSON.stringify(s));chrome()}
+function save(s){localStorage.setItem(STORE,JSON.stringify(s));chrome();if(window.ClassroomSync)window.ClassroomSync.queueSync("course-progress");}
 function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function arabic(x,cl){return '<span class="'+(cl||"tar")+'" lang="ar" dir="rtl">'+esc(x)+'</span>'}
-function term(k,small){var x=TERMS[k]||[k,""];return '<span class="term '+(small?"small":"")+'"><span class="ten">'+esc(x[0])+'</span>'+arabic(x[1])+'</span>'}
+function term(k,small){var x=TERMS[k]||[k,""],h=TERM_HELP[k]||[x[1]||"",""];return '<span class="term '+(small?"small":"")+'"><span class="ten">'+esc(x[0])+'</span><span class="tar" lang="ar" dir="rtl">'+esc(h[0])+'</span>'+(h[1]?'<small class="term-translit" lang="en" dir="ltr">'+esc(h[1])+'</small>':'')+'</span>'}
 function termrow(keys,small){return '<div class="termrow">'+keys.map(function(k){return term(k,small)}).join("")+'</div>'}
 function focusHtml(w){return termrow(w.focus,true)}
 function weekLabel(w){return lessonTitle(w)}
