@@ -32,6 +32,10 @@ header{position:sticky;top:0;z-index:5;background:var(--green);color:white;paddi
     <section class="box" style="margin-top:15px">
       <div class="section-head"><div><h2>Class workspace</h2><p id="who"></p></div><div class="top-actions"><select id="classSelect" aria-label="Select class" style="min-width:230px;padding:9px;border-radius:9px;border:1px solid var(--line)"></select><button id="refresh" class="btn light" type="button">Refresh</button></div></div>
       <div id="noClass" class="note hidden"></div>
+      <form id="joinForm" class="box" style="padding:12px;margin:10px 0;background:#fbfcf8">
+        <h3>Join a class with an invitation code</h3>
+        <div class="two"><div class="field"><label for="joinCode">One-use code from your administrator</label><input id="joinCode" autocomplete="off" spellcheck="false" placeholder="Paste invitation code"></div><div class="field" style="align-self:end"><button class="btn" type="submit">Join class</button></div></div>
+      </form>
       <div id="bootstrap" class="hidden">
         <h3>Create the first Madrassa and class</h3>
         <div class="two"><div class="field"><label for="madrassaName">Madrassa name</label><input id="madrassaName" maxlength="160" placeholder="Madrassa name"></div><div class="field"><label for="firstClassName">First class name</label><input id="firstClassName" maxlength="160" placeholder="Year 4 Hifz · Saturday"></div></div>
@@ -103,6 +107,16 @@ async function signIn(){setAuthStatus("Signing in…");var r=await client.auth.s
 async function signUp(){var name=el("displayName").value.trim();if(!name)throw new Error("Enter your name for the new account.");setAuthStatus("Creating account…");var r=await client.auth.signUp({email:el("email").value.trim(),password:el("password").value,options:{data:{display_name:name}}});if(r.error)throw r.error;if(!r.data.session){setAuthStatus("Account created. Confirm the email address, then sign in.");return;}session=r.data.session;await afterLogin()}
 async function signOut(){await client.auth.signOut();session=null;classes=[];activeClass=null;setSignedIn(false);status("Signed out. Student learning records remain in their own accounts.")}
 async function afterLogin(){setSignedIn(true);el("who").textContent="Signed in as "+(session.user.email||session.user.id);await loadClasses();status("Account loaded. Class data is restricted by database row-level security.")}
+async function acceptInvite(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  var code=el("joinCode").value.trim();if(!code)throw new Error("Paste your one-use invitation code.");
+  var joined=getError(await client.rpc("accept_class_invite",{p_code:code}));
+  el("joinCode").value="";
+  await loadClasses();
+  activeClass=classes.find(function(c){return c.id===joined;})||activeClass;
+  if(activeClass){el("classSelect").value=activeClass.id;await loadClassData();}
+  status("Invitation accepted. Your account has joined the class with the role assigned by its administrator.");
+}
 async function loadClasses(){
   status("Loading your classes…");
   var own=getError(await client.from("class_memberships").select("class_id,role").eq("user_id",session.user.id))||[];
@@ -187,9 +201,11 @@ function renderMatrix(){
 function renderEvidenceSelectors(){
   el("evidenceStudent").innerHTML=students.map(function(s){return '<option value="'+esc(s.user_id)+'">'+esc(profiles[s.user_id]||("Student "+s.user_id.slice(0,8)))+'</option>';}).join("");
   el("evidenceWeek").innerHTML=Array.from({length:31},function(_,i){return '<option value="'+(i+1)+'">Week '+(i+1)+'</option>';}).join("");
-  selectedStudent=students[0]&&students[0].user_id||"";selectedWeek=1;
+  var desiredStudent=selectedStudent,desiredWeek=selectedWeek||1;
+  selectedStudent=students.some(function(s){return s.user_id===desiredStudent;})?desiredStudent:(students[0]&&students[0].user_id||"");
+  selectedWeek=Number(desiredWeek);
   if(selectedStudent)el("evidenceStudent").value=selectedStudent;
-  el("evidenceWeek").value="1";
+  el("evidenceWeek").value=String(selectedWeek);
   renderEvidence();
 }
 function renderEvidence(){
@@ -241,7 +257,7 @@ function guard(action){return function(e){if(e&&e.preventDefault)e.preventDefaul
 async function init(){
   if(!isConfigured()){setAuthStatus("Supabase is not configured. Add the project URL and public publishable/anon key to supabase-config.js; never expose a service_role key.");el("login").disabled=true;el("signup").disabled=true;return;}
   client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-  el("login").addEventListener("click",guard(signIn));el("signup").addEventListener("click",guard(signUp));
+  el("login").addEventListener("click",guard(signIn));el("signup").addEventListener("click",guard(signUp));el("joinForm").addEventListener("submit",guard(acceptInvite));
   el("signOut").addEventListener("click",guard(signOut));el("classSelect").addEventListener("change",guard(selectClass));
   el("refresh").addEventListener("click",guard(loadClassData));el("createBase").addEventListener("click",guard(createBase));el("createClass").addEventListener("click",guard(createClass));
   el("evidenceStudent").addEventListener("change",renderEvidence);el("evidenceWeek").addEventListener("change",renderEvidence);
