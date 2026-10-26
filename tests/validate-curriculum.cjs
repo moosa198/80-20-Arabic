@@ -20,7 +20,7 @@ for (const week of curriculum.lessons) {
 assert.deepEqual(missingTerms, [], "every lesson focus term must be mapped");
 assert.deepEqual(Array.from(curriculum.lessons.filter(week => week.checkpoint), week => week.n), [8, 16, 24], "the three Al-Fatihah checkpoints must remain");
 assert.ok(curriculum.lessons.some(week => week.n === 31 && week.capstone), "week 31 must remain an independent capstone");
-assert.ok(curriculum.terms.noun[2] && curriculum.terms.noun[3], "technical terms must support fully vocalised Arabic and transliteration");
+for (const [key, term] of Object.entries(curriculum.terms)) { assert.ok(term[2] && term[3] && term[4], "term " + key + " needs vocalised Arabic, transliteration and a gloss"); }
 
 const guideContext = { window: {} };
 vm.runInNewContext(fs.readFileSync("weekly-guide.js", "utf8"), guideContext, { filename: "weekly-guide.js" });
