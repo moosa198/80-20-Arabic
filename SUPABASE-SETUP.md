@@ -46,7 +46,7 @@ Invitation codes are one-use bearer secrets. Share each code privately with the 
 
 ## 6. What is stored centrally
 
-After a student explicitly syncs a class, the database stores the app's progress snapshots (week completion, spaced-repetition cards, quiz answers and word-recognition evidence), normalised week statuses, and teacher-review records. Teacher reviews are append-only; earlier judgements remain available as a record.
+After a student explicitly syncs a class, the database stores the app's progress snapshots (week completion, spaced-repetition cards, source-book reading/example checks, student teach-back explanations, concept-check answers and word-recognition evidence), normalised week statuses, and teacher-review records. Teacher reviews are append-only; earlier judgements remain available as a record.
 
 The source FSTU PDFs are not sent to Supabase. The app renders the course-assigned page images locally in the student's browser, and only those assigned pages are saved to IndexedDB on that device. The student’s original PDF is not uploaded.
 
@@ -56,6 +56,7 @@ The source FSTU PDFs are not sent to Supabase. The app renders the course-assign
 - Verify RLS denies cross-class reads/writes: a student must never read another student's progress; teachers must see only classes where their membership permits access; Madrassa administrators can see only their own Madrassa.
 - Test sign-up, email confirmation, sign-in, forgotten password, class invitation, expired invitation, reused invitation, progress sync, teacher review and sign-out.
 - Confirm that a student account cannot create classes/invitations, read another student's records, or insert teacher reviews.
+- Confirm that source-check / teach-back answers appear in the teacher evidence panel only for the student's enrolled class.
 - Do not enable real student data until the RLS/permission tests pass. The browser uses only the public client key; all sensitive authorization remains at the database layer.
 
 Supabase's official guidance explains [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security) and [publishable vs secret API keys](https://supabase.com/docs/guides/getting-started/api-keys). The repository migration follows the same grants-plus-policies model, but a project owner must still execute and test it in their own Supabase environment.
