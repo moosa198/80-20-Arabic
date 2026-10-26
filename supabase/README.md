@@ -14,7 +14,7 @@ This directory contains the first database migration for the multi-class Madrass
 - Private teacher notes.
 - Secure views showing the latest teacher-verified concept status.
 
-The migration stores lesson metadata and source-page references. It does **not** upload or reproduce FSTU pages, Qur'an PDFs or rendered page images.
+The migration stores lesson metadata and source-page references. It does **not** upload or reproduce FSTU pages, Qur'an PDFs or rendered page images. The existing app already accepts the full FSTU PDFs through its source-page library and renders only mapped pages for the lesson; the page images are cached in the learner's browser. Keep that privacy-preserving behaviour when adding central progress sync.
 
 ## Safety model
 
