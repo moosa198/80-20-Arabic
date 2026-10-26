@@ -50,7 +50,7 @@ const assert = require("node:assert/strict");
        if (![8, 16, 24].includes(n)) {
          const sourceBeforeVocabulary = await page.locator("body").evaluate(root => {
            const source = root.querySelector(".weekly-sequence .textbook-step");
-           const vocabulary = root.querySelector(".lessonGrid");
+           const vocabulary = root.querySelector(".words");
            return !!source && !!vocabulary && !!(source.compareDocumentPosition(vocabulary) & Node.DOCUMENT_POSITION_FOLLOWING);
          });
          assert.equal(sourceBeforeVocabulary, true, "The FSTU lesson must precede supplementary word cards on week " + n);
