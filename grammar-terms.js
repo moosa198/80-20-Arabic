@@ -71,7 +71,7 @@
     expression:{ar:"تَرْكِيبٌ",latin:"tarkīb"},
     sentenceClause:{ar:"جُمْلَةٌ",latin:"jumlah"},
     clause:{ar:"جُمْلَةٌ",latin:"jumlah"},
-    root:{ar:"جَذْرٌ",latin:"jذر / jذر (root)"},
+    root:{ar:"جَذْرٌ",latin:"jadhr"},
     pattern:{ar:"وَزْنٌ",latin:"wazn"},
     verbalNoun:{ar:"مَصْدَرٌ",latin:"maṣdar"}
   };
