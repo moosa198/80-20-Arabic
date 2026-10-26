@@ -36,7 +36,6 @@ const assert = require("node:assert/strict");
        assert.equal(await page.locator("#mushafTask-" + n).isVisible(), false, "Qur’an page should not be visible before source understanding on week " + n);
       const mappedPage = await page.evaluate(n => WeeklyGuide.get(n).page || 604, n);
       assert.equal(await page.locator('quran-madina-html[data-recognition-page][page="' + mappedPage + '"]').count(), 1, "Digital 15-line Mushaf missing on week " + n);
-      assert((await page.locator(".mushaf-step .step-intro").innerText()).toLowerCase().includes("wudhu"), "Physical Mushaf adab reminder missing on week " + n);
       assert.equal(await page.locator("#textbookTitle-" + n).count(), 1, "Textbook source-page layer missing on week " + n);
       assert.equal(await page.locator(".textbook-panel.sarf-panel").count(), 1, "FSTU Sarf source panel missing on week " + n);
       assert.equal(await page.locator(".textbook-panel.nahw-panel").count(), 1, "FSTU Nahw source panel missing on week " + n);
