@@ -140,7 +140,13 @@ const assert = require("node:assert/strict");
     await mobile.locator('[data-view="course"]').click();
     await mobile.locator('[data-week="1"]').click();
     assert.equal(await mobile.locator(".word").count(), 7, "Mobile lesson word cards missing");
-    const mobileOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    const mobileDiagnostics = await mobile.evaluate(() => {
+      const width = document.documentElement.clientWidth;
+      return {viewport:width,scrollWidth:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll("body *")].map(el=>({tag:el.tagName,cls:typeof el.className==="string"?el.className:"",id:el.id,left:Math.round(el.getBoundingClientRect().left),right:Math.round(el.getBoundingClientRect().right),width:Math.round(el.getBoundingClientRect().width),scrollWidth:el.scrollWidth,text:(el.innerText||"").slice(0,80)})).filter(x=>x.right>width+1||x.left < -1).sort((a,b)=>b.right-a.right).slice(0,20)};
+    });
+    console.log("MOBILE_OVERFLOW_DIAGNOSTICS "+JSON.stringify(mobileDiagnostics));
+    const mobileOverflow = mobileDiagnostics.scrollWidth > mobileDiagnostics.viewport;
+    await mobile.screenshot({ path: path.join(out, "qa-week-01-mobile-debug.png"), fullPage: true });
     assert.equal(mobileOverflow, false, "Mobile layout has horizontal overflow");
     await mobile.screenshot({ path: path.join(out, "qa-week-01-mobile.png"), fullPage: true });
     audit.passed.push("Mobile navigation and lesson fit a 390px viewport");
