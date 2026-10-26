@@ -127,9 +127,9 @@
     var found=byArabic[normalise(fallback)];
     return found||{ar:fallback||"",latin:""};
   }
-  function renderTerm(key,english,fallback){
+  function renderTerm(key,english,fallback,small){
     var item=get(key,fallback);
-    return '<span class="term '+(english==="small"?"small":"")+'"><span class="ten">'+escapeHtml(english||"")+'</span><span class="term-ar-wrap"><span class="tar" lang="ar" dir="rtl">'+escapeHtml(item.ar||fallback||"")+'</span>'+(item.latin?'<small class="term-translit" lang="en" dir="ltr">'+escapeHtml(item.latin)+'</small>':"")+'</span></span>';
+    return '<span class="term '+(small?"small":"")+'"><span class="ten">'+escapeHtml(english||"")+'</span><span class="term-ar-wrap"><span class="tar" lang="ar" dir="rtl">'+escapeHtml(item.ar||fallback||"")+'</span>'+(item.latin?'<small class="term-translit" lang="en" dir="ltr">'+escapeHtml(item.latin)+'</small>':"")+'</span></span>';
   }
   function renderLabel(arabicText,english){
     var item=get("",arabicText);
