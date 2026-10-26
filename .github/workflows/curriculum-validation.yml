@@ -1,0 +1,37 @@
+name: Validate curriculum and assigned-page access
+
+on:
+  pull_request:
+    paths:
+      - "curriculum.js"
+      - "weekly-guide.js"
+      - "book-pages.js"
+      - "index.html"
+      - "student.html"
+      - "tests/**"
+      - ".github/workflows/curriculum-validation.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "curriculum.js"
+      - "weekly-guide.js"
+      - "book-pages.js"
+      - "index.html"
+      - "student.html"
+      - "tests/**"
+      - ".github/workflows/curriculum-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  curriculum:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate canonical curriculum and assigned source pages
+        run: node tests/validate-curriculum.cjs
