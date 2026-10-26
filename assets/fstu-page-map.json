@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "sourceNotice": "Selected, unaltered pages from official Al-Qalam Institute FSTU resources. For educational/non-commercial teaching use with attribution. No original full textbook is included.",
+  "pages": {
+    "nahw": [
+      8,
+      12,
+      20,
+      21,
+      27,
+      34,
+      36,
+      38,
+      41,
+      47,
+      48,
+      49,
+      50,
+      52,
+      53,
+      54,
+      56,
+      57,
+      65,
+      69,
+      72,
+      84,
+      95,
+      99,
+      117,
+      127,
+      137,
+      139,
+      150
+    ],
+    "sarf": [
+      16,
+      17,
+      19,
+      24,
+      42,
+      43,
+      57,
+      58,
+      60,
+      65,
+      68,
+      70,
+      72
+    ]
+  },
+  "sources": {
+    "nahw": {
+      "title": "FSTU Naḥw, August 2026 resource",
+      "url": "https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources",
+      "fileId": "1BdY0tAvoaKvJVUhmMQn09bxLh0fAXO03"
+    },
+    "sarf": {
+      "title": "FSTU Ṣarf, October 2023 resource",
+      "url": "https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources",
+      "fileId": "1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr"
+    }
+  }
+}
