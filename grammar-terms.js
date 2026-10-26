@@ -139,5 +139,53 @@
   function escapeHtml(value){
     return String(value==null?"":value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});
   }
-  root.GrammarTerms={get:get,renderTerm:renderTerm,renderLabel:renderLabel,byArabic:byArabic,normalise:normalise};
+  var INLINE_PHRASES=[
+    {variants:["مفعول مطلق للعدد"],ar:"مَفْعُولٌ مُطْلَقٌ لِلْعَدَدِ",latin:"mafʿūlun muṭlaq lil-ʿadad"},
+    {variants:["فعل مضارع مجزوم"],ar:"فِعْلٌ مُضَارِعٌ مَجْزُومٌ",latin:"fiʿl muḍāriʿ majzūm"},
+    {variants:["مفعول مطلق","مَفْعُولٌ مُطْلَقٌ"],ar:"مَفْعُولٌ مُطْلَقٌ",latin:"mafʿūlun muṭlaq"},
+    {variants:["مفعول لأجله","مَفْعُولٌ لِأَجْلِهِ"],ar:"مَفْعُولٌ لِأَجْلِهِ",latin:"mafʿūl li-ajlihi"},
+    {variants:["جار ومجرور","جَارٌّ وَمَجْرُورٌ"],ar:"جَارٌّ وَمَجْرُورٌ",latin:"jārr wa-majrūr"},
+    {variants:["مضاف إليه","مُضَافٌ إِلَيْهِ"],ar:"مُضَافٌ إِلَيْهِ",latin:"muḍāfun ilayhi"},
+    {variants:["اسم الفاعل","اِسْمُ الْفَاعِلِ"],ar:"اِسْمُ الْفَاعِلِ",latin:"ism al-fāʿil"},
+    {variants:["اسم المفعول","اِسْمُ الْمَفْعُولِ"],ar:"اِسْمُ الْمَفْعُولِ",latin:"ism al-mafʿūl"},
+    {variants:["اسم موصول","اِسْمٌ مَوْصُولٌ"],ar:"اِسْمٌ مَوْصُولٌ",latin:"ism mawṣūl"},
+    {variants:["صلة الموصول","صِلَةُ الْمَوْصُولِ"],ar:"صِلَةُ الْمَوْصُولِ",latin:"ṣilatu l-mawṣūl"},
+    {variants:["لام التعليل","لَامُ التَّعْلِيلِ"],ar:"لَامُ التَّعْلِيلِ",latin:"lām at-taʿlīl"},
+    {variants:["واو القسم","وَاوُ الْقَسَمِ"],ar:"وَاوُ الْقَسَمِ",latin:"wāw al-qasam"},
+    {variants:["ظرف زمان","ظَرْفُ زَمَانٍ"],ar:"ظَرْفُ زَمَانٍ",latin:"ẓarf zamān"},
+    {variants:["ظرف مكان","ظَرْفُ مَكَانٍ"],ar:"ظَرْفُ مَكَانٍ",latin:"ẓarf makān"},
+    {variants:["جملة اسمية","جُمْلَةٌ اِسْمِيَّةٌ"],ar:"جُمْلَةٌ اِسْمِيَّةٌ",latin:"jumlah ismiyyah"},
+    {variants:["جملة فعلية","جُمْلَةٌ فِعْلِيَّةٌ"],ar:"جُمْلَةٌ فِعْلِيَّةٌ",latin:"jumlah fiʿliyyah"},
+    {variants:["اسم مجرور","اِسْمٌ مَجْرُورٌ"],ar:"اِسْمٌ مَجْرُورٌ",latin:"ism majrūr"},
+    {variants:["حرف نفي","حَرْفُ نَفْيٍ"],ar:"حَرْفُ نَفْيٍ",latin:"ḥarf nafy"},
+    {variants:["مبتدأ","مُبْتَدَأٌ"],ar:"مُبْتَدَأٌ",latin:"mubtadaʾ"},
+    {variants:["خبر","خَبَرٌ"],ar:"خَبَرٌ",latin:"khabar"},
+    {variants:["فاعل","فَاعِلٌ"],ar:"فَاعِلٌ",latin:"fāʿil"},
+    {variants:["مفعول به","مَفْعُولٌ بِهِ"],ar:"مَفْعُولٌ بِهِ",latin:"mafʿūl bihi"},
+    {variants:["مضاف","مُضَافٌ"],ar:"مُضَافٌ",latin:"muḍāf"},
+    {variants:["إضافة","إِضَافَةٌ"],ar:"إِضَافَةٌ",latin:"iḍāfah"},
+    {variants:["نعت","نَعْتٌ"],ar:"نَعْتٌ",latin:"naʿt"},
+    {variants:["منعوت","مَنْعُوتٌ"],ar:"مَنْعُوتٌ",latin:"manʿūt"},
+    {variants:["ضمير متصل","ضَمِيرٌ مُتَّصِلٌ"],ar:"ضَمِيرٌ مُتَّصِلٌ",latin:"ḍamīrun muttaṣil"},
+    {variants:["ضمير","ضَمِيرٌ"],ar:"ضَمِيرٌ",latin:"ḍamīr"},
+    {variants:["حال","حَالٌ"],ar:"حَالٌ",latin:"ḥāl"},
+    {variants:["مثنّى","مُثَنَّى"],ar:"مُثَنَّى",latin:"muthannā"}
+  ];
+  function annotateText(value){
+    var output=escapeHtml(value);
+    var ordered=INLINE_PHRASES.slice().sort(function(a,b){
+      var aLen=Math.max.apply(null,a.variants.map(function(v){return v.length;}));
+      var bLen=Math.max.apply(null,b.variants.map(function(v){return v.length;}));
+      return bLen-aLen;
+    });
+    ordered.forEach(function(phrase){
+      var markup='<span class="inline-grammar-phrase"><span lang="ar" dir="rtl">'+escapeHtml(phrase.ar)+'</span><small class="term-translit" lang="en" dir="ltr">'+escapeHtml(phrase.latin)+'</small></span>';
+      phrase.variants.forEach(function(variant){
+        var needle=escapeHtml(variant);
+        output=output.split(needle).join(markup);
+      });
+    });
+    return output;
+  }
+  root.GrammarTerms={get:get,renderTerm:renderTerm,renderLabel:renderLabel,annotateText:annotateText,byArabic:byArabic,normalise:normalise};
 })(window);
