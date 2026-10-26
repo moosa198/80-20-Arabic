@@ -47,6 +47,14 @@ const assert = require("node:assert/strict");
          return nodes.every((node, i) => !!node && (i === nodes.length - 1 || !!(node.compareDocumentPosition(nodes[i + 1]) & Node.DOCUMENT_POSITION_FOLLOWING)));
        });
        assert.equal(sequenceOrder, true, "Lesson must order FSTU source → guided understanding → Qur’anic application → retrieval on week " + n);
+       if (![8, 16, 24].includes(n)) {
+         const sourceBeforeVocabulary = await page.locator("body").evaluate(root => {
+           const source = root.querySelector(".weekly-sequence .textbook-step");
+           const vocabulary = root.querySelector(".lessonGrid");
+           return !!source && !!vocabulary && !!(source.compareDocumentPosition(vocabulary) & Node.DOCUMENT_POSITION_FOLLOWING);
+         });
+         assert.equal(sourceBeforeVocabulary, true, "The FSTU lesson must precede supplementary word cards on week " + n);
+       }
        const sourcePages = await page.locator(".book-page-frame").evaluateAll(nodes => nodes.map(el => el.getAttribute("data-book-page")));
        const mappedQuranPage = await page.evaluate(n => WeeklyGuide.get(n).page || 604, n);
        assert(sourcePages.includes("quran:" + mappedQuranPage), "Actual assigned Mushaf page reference missing on week " + n);
@@ -55,14 +63,14 @@ const assert = require("node:assert/strict");
        const assignedFstuPages = await page.locator(".textbook-stack .book-page-frame").evaluateAll(nodes => nodes.map(el => el.getAttribute("data-book-page")));
        const expectedFstuPages = await page.evaluate(n => WeeklyGuide.get(n).sarfPages.map(p => "sarf:" + p).concat(WeeklyGuide.get(n).nahwPages.map(p => "nahw:" + p)), n);
        assert.deepEqual(assignedFstuPages, expectedFstuPages, "Only the week's specifically mapped FSTU pages should be shown on week " + n);
-      const chips = await page.locator(".focus .term").evaluateAll(nodes => nodes.map(node => ({
-        en: (node.querySelector(".ten") || {}).textContent || "",
-        ar: (node.querySelector(".tar") || {}).textContent || "",
-        lang: node.querySelector(".tar") && node.querySelector(".tar").getAttribute("lang"),
-        dir: node.querySelector(".tar") && node.querySelector(".tar").getAttribute("dir")
+      const chips = await page.locator(".weekly-sequence .source-key-term").evaluateAll(nodes => nodes.map(node => ({
+        en: (node.querySelector("span") || {}).textContent || "",
+        ar: (node.querySelector("b") || {}).textContent || "",
+        lang: node.querySelector("b") && node.querySelector("b").getAttribute("lang"),
+        dir: node.querySelector("b") && node.querySelector("b").getAttribute("dir")
       })));
-      assert(chips.length > 0, "No paired terminology on week " + n);
-      assert(chips.every(x => x.en.trim() && x.ar.trim() && x.lang === "ar" && x.dir === "rtl"), "Unpaired or incorrectly directed term in week " + n);
+      assert(chips.length > 0, "No paired terminology in the source-first lesson on week " + n);
+      assert(chips.every(x => x.en.trim() && x.ar.trim() && x.lang === "ar" && x.dir === "rtl"), "Unpaired or incorrectly directed source-first term in week " + n);
       const isCheck = [8, 16, 24].includes(n);
       const count = await page.locator(".word").count();
       if (isCheck) {
@@ -161,6 +169,12 @@ const assert = require("node:assert/strict");
     await student.locator('[data-view="course"]').click();
     await student.locator('[data-week="1"]').click();
     assert.equal(await student.locator("#textbookTitle-1").count(), 1, "Student Studio weekly source-page layer missing");
+    const studentSourceBeforeVocabulary = await student.locator("body").evaluate(root => {
+      const source = root.querySelector(".weekly-sequence .textbook-step");
+      const vocabulary = root.querySelector(".lessonGrid");
+      return !!source && !!vocabulary && !!(source.compareDocumentPosition(vocabulary) & Node.DOCUMENT_POSITION_FOLLOWING);
+    });
+    assert.equal(studentSourceBeforeVocabulary, true, "Student Studio must show the FSTU lesson before supplementary word cards");
     assert.equal(await student.locator(".playlist-player iframe").count(), 1, "Student Studio weekly embedded playlist missing");
     assert.equal(await student.locator("#weeklyTest-1").count(), 1, "Student Studio weekly quiz missing");
       assert.equal(await student.locator("#applicationFlow-1").isVisible(), false, "Student Studio must keep Qur’an application locked before the source check");
