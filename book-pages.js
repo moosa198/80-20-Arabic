@@ -74,9 +74,9 @@
   async function hydrate(container) {
     container=container||root.document;
     if(!container||!container.querySelectorAll)return;
-    var nodes=Array.prototype.slice.call(container.querySelectorAll("[data-book-page]"));
+    var nodes=Array.prototype.slice.call(container.querySelectorAll("[data-book-page]")).filter(function(el){var kind=String(el.getAttribute("data-book-page")||"").split(":")[0];return kind==="sarf"||kind==="nahw";});
     await Promise.all(nodes.map(async function(el){
-      if(el.dataset.hydrating==="true")return;
+      if(el.dataset.hydrating==="true"||el.dataset.hydrated==="true")return;
       el.dataset.hydrating="true";
       var parts=String(el.getAttribute("data-book-page")||"").split(":");
       var kind=parts[0],page=Number(parts[1]);
@@ -93,7 +93,7 @@
         }
       }catch(e){
         el.innerHTML=makeMissing(kind,page,"Local page storage is unavailable. "+(e&&e.message?e.message:"Open the hosted website and retry."));
-      }finally{delete el.dataset.hydrating;}
+      }finally{el.dataset.hydrated="true";delete el.dataset.hydrating;}
     }));
     bindPageZoom(container);
   }
@@ -155,6 +155,7 @@
       await storePut("meta",{id:kind,fileName:file.name,pdfPageCount:sourcePageCount,pagesSaved:total,renderedBytes:bytes,importedAt:new Date().toISOString()});
       setStatus(kind,"Ready: "+file.name+" · "+total+" assigned pages saved on this device.",false);
       await refreshLibraryStatus();
+      resetHydration(kind);
       await hydrate(root.document);
     }catch(error){
       setStatus(kind,"Could not prepare this source: "+(error&&error.message?error.message:"unknown error"),false);
@@ -194,7 +195,7 @@
       tx.oncomplete=resolve;tx.onerror=function(){reject(tx.error);};
     });
     Object.keys(urls).forEach(function(key){if(key.indexOf(kind+":")===0){URL.revokeObjectURL(urls[key]);delete urls[key];}});
-    await refreshLibraryStatus();await hydrate(root.document);
+    await refreshLibraryStatus();resetHydration(kind);await hydrate(root.document);
   }
   function bindPageZoom(container) {
     container=container||root.document;
@@ -223,6 +224,21 @@
     root.document.getElementById("bookPageZoomImage").alt=alt||"Source page";
     modal.hidden=false;
   }
+  function resetHydration(kind){
+    if(!root.document)return;
+    root.document.querySelectorAll("[data-book-page]").forEach(function(el){var k=String(el.getAttribute("data-book-page")||"").split(":")[0];if((!kind||k===kind)&&(k==="sarf"||k==="nahw"))delete el.dataset.hydrated;});
+  }
+  function observeLessonPages(){
+    if(!root.MutationObserver||!root.document||!root.document.body||root.document.body.dataset.bookPagesObserver==="true")return;
+    root.document.body.dataset.bookPagesObserver="true";
+    var queued=false;
+    var observer=new root.MutationObserver(function(records){
+      var addedPage=records.some(function(record){return Array.prototype.some.call(record.addedNodes,function(node){return node.nodeType===1&&(node.matches("[data-book-page]")||node.querySelector("[data-book-page]"));});});
+      if(!addedPage||queued)return;
+      queued=true;root.setTimeout(function(){queued=false;hydrate(root.document);},0);
+    });
+    observer.observe(root.document.body,{childList:true,subtree:true});
+  }
   if(root.document){
     root.document.addEventListener("change",function(e){
       var input=e.target.closest&&e.target.closest("[data-book-upload]");
@@ -232,7 +248,7 @@
       var btn=e.target.closest&&e.target.closest("[data-clear-book]");
       if(btn){var kind=btn.getAttribute("data-clear-book");clear(kind).catch(function(err){setStatus(kind,"Could not clear the local page library: "+err.message,false);});}
     });
-    root.addEventListener("load",function(){refreshLibraryStatus();},{once:true});
+    root.addEventListener("load",function(){refreshLibraryStatus();hydrate(root.document);observeLessonPages();},{once:true});
   }
   root.BookPages={
     hydrate:hydrate,refreshLibraryStatus:refreshLibraryStatus,processUpload:processUpload,

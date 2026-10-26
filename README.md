@@ -19,7 +19,7 @@ A Qur’an-first, 31-week learning product for students who are memorising the Q
 - See technical terms paired every time they are taught or retrieved: **Pronoun — ضمير**, **Nominal sentence — جملة اسمية**, **Prepositional phrase — جار ومجرور**, **Emphasis — توكيد**.
 - Complete Sabaq, Sabaq Sipara / Sabqi and Dhor / Dawr before optional Arabic work; defer Arabic whenever Hifz needs attention.
 - See a digital 15-line Madina Qur’an page without uploading PDFs, and tap individual Arabic words to record recognition evidence.
-- Open the official Al-Qalam Institute FSTU Ṣarf (صرف) and Naḥw (نحو) source pages in the lesson.
+- Prepare an FSTU Naḥw or Ṣarf PDF locally; lessons show only the mapped page images and do not embed or link to complete textbooks.
 - Use the core Arabic listening playlist as part of the weekly lesson, with the bonus playlist available for repeated practice.
 - Complete a short retrieval quiz, select the relevant word(s) and role, explain the Arabic clue, and save multiple attempts locally. The app does **not** automatically grade complex grammatical analysis; a teacher checks uncertain or disputed parses.
 - Build transfer through progressively less scaffolding and an independent week-31 page analysis.
@@ -45,13 +45,13 @@ The digital 15-line renderer uses a 604-page Madina layout, but calligraphy and 
 
 ## Course and source materials
 
-- [FSTU Naḥw official resources](https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources). The embedded reference uses the August 2026 edition.
-- [FSTU Ṣarf official resources](https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources). The embedded reference uses the October 2023 resource. Some mapping was initially made against a March 2022 copy, so follow the printed section heading if pagination differs.
+- [FSTU Naḥw official resources](https://www.alqalaminstitute.org/resources/nahw-resources/fstu-nahw-resources). The 31-week source map currently references the August 2026 edition.
+- [FSTU Ṣarf official resources](https://www.alqalaminstitute.org/resources/sarf-resources/fstu-sarf-resources). The source map currently references the October 2023 resource. Some mapping was initially made against a March 2022 copy, so follow the printed section heading if pagination differs.
 - [Digital 15-line Madina renderer](https://github.com/tarekeldeeb/quran-madina-html). The upstream repository lists the Waqf General Public License (GPL-2.0); check its licence before redistributing or modifying the renderer. Source code is loaded from upstream and is not copied into this repository.
 - [Core Arabic lesson playlist](https://youtube.com/playlist?list=PLXJPAz2MwdUCSoBK47tg79-BeIF9w2toa)
 - [Bonus listening playlist](https://youtube.com/playlist?list=PLe15deUUtdVLEWAMlit0drqO3Cjm7zYY7)
 
-The FSTU previews link to Al-Qalam Institute’s official materials and include attribution. The institute’s published usage policy allows educational/non-commercial use with attribution; obtain written permission for commercial use and check current terms before redistributing copies.
+The source-page library accepts the FSTU PDFs locally and renders only pages assigned in the 31-week course map. Assigned images are cached in that browser; the original PDFs are never uploaded to the app's server. Student lessons do not embed or link to the complete books. Source attribution remains with Al-Qalam Institute.
 
 ## Learning rhythm
 
@@ -68,7 +68,7 @@ The “well-established” word count means a card has been answered successfull
 
 The app stores course progress, quiz results and word-recognition attempts in the current browser’s local storage. It does not upload a student profile, source PDFs or written answers to its own server. Export progress before changing devices.
 
-The Qur’an renderer, Google Drive FSTU previews, YouTube and Google Fonts load from third-party services and require an internet connection; those services may receive normal network metadata. The service worker caches the app’s own files, but the source-page and listening experience is not fully offline.
+The digital Qur’an renderer, PDF.js library, YouTube and Google Fonts load from third-party services and may receive normal network metadata. FSTU source PDFs are selected locally; only mapped page images are rendered and cached in that browser. The service worker caches the app’s own files, but the full source-preparation and listening experience is not fully offline.
 
 ## Printable workbook and automated quality checks
 
@@ -81,3 +81,14 @@ The app’s terminology map lives in `TERMS` in `index.html`. Store every techni
 ## Scope
 
 This is a practical teaching aid, not a replacement for a qualified teacher, reliable tafsīr, dictionary work or careful tarkīb. Vocabulary glosses are short recall cues rather than exhaustive lexical definitions. In the capstone, students choose words from a memorised page, justify their analysis and check any uncertainty with a teacher.
+
+
+## Multi-class Madrassa system
+
+The current deployed app still uses browser-local progress. A separate foundation branch documents the proposed multi-class architecture and introduces a Supabase/Postgres schema with row-level security; it is **not** a live sync integration yet.
+
+- [Madrassa platform roadmap](docs/MADRASSA-PLATFORM-ROADMAP.md): staged delivery, pedagogical sequence, teacher dashboard and rollout gates.
+- [Supabase setup and security checklist](supabase/README.md): development setup, role model, RLS boundaries and manual access-control tests.
+- [Database migration](supabase/migrations/202610260001_madrassa_progress.sql): schema foundation for classes, assignments, progress, recognition attempts and teacher reviews.
+
+The next safe step is to apply and test the migration in a separate development Supabase project, consolidate the duplicated lesson definitions into one canonical curriculum module, and only then connect authentication and sync. Do not enter live student data until the RLS tests and the Madrassa's privacy/retention process have been checked.
