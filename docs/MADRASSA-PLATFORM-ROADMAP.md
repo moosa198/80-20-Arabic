@@ -22,7 +22,7 @@ The current app already provides a strong starting point:
 - 31 weeks, including Al-Fātiḥah retrieval checkpoints in Weeks 8, 16 and 24.
 - Seven new lexical words per teaching week and a separate high-frequency-word review set.
 - English–Arabic grammar labels, Hifz-first reminders and a 15-line digital Mushaf reader.
-- Week-specific FSTU references and source-page selection from learner-supplied PDFs.
+- Full FSTU Naḥw and Ṣarf PDFs are supported through the existing source-page library. The guide maps each week to exact printed pages, renders only those assigned pages, and caches the rendered page images locally; it does not upload the full PDF to a server.
 - Word selection, a required written explanation, multiple recognition attempts, local progress and JSON export/import.
 - A printable student workbook and browser-based quality checks.
 
@@ -109,9 +109,9 @@ A future curriculum audit should verify the exact Arabic vocalisation, translite
 - Add a schema/content validator for all 31 lessons, all three checkpoints, paired English/Arabic terminology, seven lexical slots per teaching week and source-edition references.
 - Import and version the initial course as a draft; review it; then publish it.
 - Keep source_refs to resource identifier, edition, printed page or page range, URL and attribution. Do not store copyrighted page scans in the database.
-- Verify that the lesson renderer displays only that week's assigned FSTU page(s).
+- Preserve and regression-test the existing assigned-page renderer against the canonical source map; correct only any missing or inaccurate page mappings, edition mismatches or display issues.
 
-**Exit gate:** both current student entry points render the same canonical lesson data; all 31 weeks have a valid versioned record.
+**Exit gate:** both current student entry points render the same canonical lesson data; all 31 weeks have a valid versioned record, and the existing FSTU page map still opens only each lesson's assigned page(s).
 
 ### Stage 3 — Authentication and resilient sync
 
