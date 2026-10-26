@@ -2,12 +2,28 @@ const { chromium } = require("playwright");
 const fs = require("node:fs");
 const path = require("node:path");
 const { execFileSync } = require("node:child_process");
+const http = require("node:http");
 const assert = require("node:assert/strict");
 
 (async function buildAndAudit() {
   const root = process.cwd();
   const out = path.join(root, "dist");
   await fs.promises.mkdir(out, { recursive: true });
+  const contentTypes = {".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".json":"application/json; charset=utf-8",".pdf":"application/pdf",".svg":"image/svg+xml",".webmanifest":"application/manifest+json"};
+  const server = http.createServer((req, res) => {
+    try {
+      const pathname = decodeURIComponent(new URL(req.url, "http://127.0.0.1").pathname);
+      const filename = path.resolve(root, "." + (pathname === "/" ? "/index.html" : pathname));
+      if (filename !== root && !filename.startsWith(root + path.sep)) { res.writeHead(403); res.end("Forbidden"); return; }
+      fs.stat(filename, (statError, stat) => {
+        if (statError || !stat.isFile()) { res.writeHead(404); res.end("Not found"); return; }
+        res.writeHead(200, {"Content-Type":contentTypes[path.extname(filename)]||"application/octet-stream","Cache-Control":"no-store"});
+        fs.createReadStream(filename).pipe(res);
+      });
+    } catch (error) { res.writeHead(400); res.end("Bad request"); }
+  });
+  await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
+  const baseUrl = "http://127.0.0.1:" + server.address().port;
   const browser = await chromium.launch({ headless: true, args: ["--no-sandbox"] });
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
   await page.addInitScript(() => {
@@ -18,7 +34,7 @@ const assert = require("node:assert/strict");
 
   const audit = { browser: "Chromium / Playwright", source: "index.html", passed: [], warnings: [] };
   try {
-    await page.goto("file://" + path.join(root, "index.html"), { waitUntil: "domcontentloaded" });
+    await page.goto(baseUrl + "/index.html", { waitUntil: "domcontentloaded" });
     await page.locator(".hero").waitFor();
     await page.evaluate(() => Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 3500))]));
     assert((await page.locator(".hero h1").innerText()).includes("See the Qur’an"), "Home page headline did not render");
@@ -44,15 +60,20 @@ const assert = require("node:assert/strict");
       assert.equal(await page.locator("#weeklyTest-" + n).count(), 1, "Weekly recognition test missing on week " + n);
       const sequenceOrder = await page.locator(".weekly-sequence").evaluate(root => {
         const y = selector => root.querySelector(selector).getBoundingClientRect().top;
-        return [y(".mushaf-step"), y(".textbook-step"), y(".listening-resources"), y(".assessment-layer")];
+        return [y(".textbook-step"), y(".mushaf-step"), y(".listening-resources"), y(".assessment-layer")];
       });
       assert(sequenceOrder[0] < sequenceOrder[1] && sequenceOrder[1] < sequenceOrder[2] && sequenceOrder[2] < sequenceOrder[3],
-        "Weekly layers must be ordered Qur’an → FSTU map → listening → apply on week " + n);
+        "Weekly layers must be ordered source book → Qur’an → listening → apply on week " + n);
       const sourcePages = await page.locator(".book-page-frame").evaluateAll(nodes => nodes.map(el => el.getAttribute("data-book-page")));
-      const mappedQuranPage = await page.evaluate(n => WeeklyGuide.get(n).page || 604, n);
-      assert(sourcePages.includes("quran:" + mappedQuranPage), "Actual assigned Mushaf page reference missing on week " + n);
-      assert(sourcePages.some(x => x.startsWith("sarf:")), "Assigned FSTU Sarf page reference missing on week " + n);
-      assert(sourcePages.some(x => x.startsWith("nahw:")), "Assigned FSTU Naḥw page reference missing on week " + n);
+      const mappedPages = await page.evaluate(n => ({page:WeeklyGuide.get(n).page||604,sarf:WeeklyGuide.get(n).sarfPages,nahw:WeeklyGuide.get(n).nahwPages}), n);
+      assert(sourcePages.includes("quran:" + mappedPages.page), "Actual assigned Mushaf page reference missing on week " + n);
+      assert.equal(sourcePages.filter(x => x.startsWith("sarf:")).length, mappedPages.sarf.length, "Only the specific assigned FSTU Ṣarf pages should appear on week " + n);
+      assert.equal(sourcePages.filter(x => x.startsWith("nahw:")).length, mappedPages.nahw.length, "Only the specific assigned FSTU Naḥw pages should appear on week " + n);
+      assert.equal(await page.locator(".textbook-panel iframe").count(), 0, "The full textbook must not be embedded; use assigned page extracts only on week " + n);
+      assert.equal(await page.locator(".fstu-page-canvas").count(), mappedPages.sarf.length + mappedPages.nahw.length, "Each assigned FSTU page should have a separate canvas on week " + n);
+      await page.waitForFunction(() => Array.from(document.querySelectorAll(".fstu-page-canvas")).every(canvas => canvas.dataset.rendered === "true" || canvas.dataset.error === "true"), null, {timeout:30000});
+      const sourceRender = await page.locator(".fstu-page-canvas").evaluateAll(nodes => nodes.map(canvas => ({ok:canvas.dataset.rendered==="true",width:canvas.width,height:canvas.height})));
+      assert(sourceRender.every(item => item.ok && item.width > 150 && item.height > 150), "One or more assigned FSTU page extracts failed to render on week " + n);
       const chips = await page.locator(".focus .term").evaluateAll(nodes => nodes.map(node => ({
         en: (node.querySelector(".ten") || {}).textContent || "",
         ar: (node.querySelector(".tar") || {}).textContent || "",
@@ -121,7 +142,7 @@ const assert = require("node:assert/strict");
     // Check mobile navigation, cards and viewport fit.
     const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
     await mobile.addInitScript(() => { window.print = () => {}; });
-    await mobile.goto("file://" + path.join(root, "index.html"), { waitUntil: "domcontentloaded" });
+    await mobile.goto(baseUrl + "/index.html", { waitUntil: "domcontentloaded" });
     await mobile.locator(".hero").waitFor();
     await mobile.screenshot({ path: path.join(out, "qa-home-mobile.png"), fullPage: true });
     await mobile.locator("#menuBtn").click();
@@ -136,7 +157,7 @@ const assert = require("node:assert/strict");
 
     // Smoke-test the separate Student Studio against the same weekly guide.
     const student = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 });
-    await student.goto("file://" + path.join(root, "student.html"), { waitUntil: "domcontentloaded" });
+    await student.goto(baseUrl + "/student.html", { waitUntil: "domcontentloaded" });
     await student.locator(".hero").waitFor();
     assert.equal(await student.locator("#hifzPriority").count(), 1, "Student Studio home must state Hifz priority");
       assert.equal(await student.locator(".source-method-card").count(), 1, "Student Studio should explain the whole–map–whole method");
@@ -192,10 +213,19 @@ const assert = require("node:assert/strict");
     }
     audit.passed.push("Printable workbook renders 63 pages with non-empty, explicitly RTL Arabic labels");
     audit.pdfPages = audit.pdfPages || 63;
+    const teacher = await browser.newPage({viewport:{width:1360,height:900},deviceScaleFactor:1});
+    await teacher.goto(baseUrl + "/teacher.html", {waitUntil:"domcontentloaded"});
+    await teacher.locator("#studentsBody").waitFor();
+    assert.equal(await teacher.locator("#progressFiles").count(),1,"Teacher dashboard progress import control missing");
+    assert.equal(await teacher.locator("#rosterFile").count(),1,"Teacher dashboard roster import control missing");
+    assert.equal(await teacher.locator("#exportCsv").count(),1,"Teacher dashboard CSV export control missing");
+    await teacher.screenshot({path:path.join(out,"qa-teacher-dashboard.png"),fullPage:true});
+    audit.passed.push("Teacher dashboard loads, accepts multiple progress exports and roster CSV, and provides class-summary export");
     audit.finishedAt = new Date().toISOString();
     await fs.promises.writeFile(path.join(out, "content-audit.json"), JSON.stringify(audit, null, 2));
     console.log(JSON.stringify(audit, null, 2));
   } finally {
     await browser.close();
+    await new Promise(resolve => server.close(resolve));
   }
 })().catch(err => { console.error(err); process.exit(1); });
