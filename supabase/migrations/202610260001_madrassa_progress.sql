@@ -565,12 +565,22 @@ create policy teacher_reviews_insert_staff
 create policy teacher_reviews_update_author_or_manager
   on public.teacher_reviews for update to authenticated
   using (
-    (teacher_id = (select auth.uid()) and (select public.is_class_staff(class_id)))
-    or (select public.can_manage_class(class_id))
+    (teacher_id = (select auth.uid())
+      and (select public.is_class_staff(class_id))
+      and (select public.is_student_in_class(class_id, student_id)))
+    or (
+      (select public.can_manage_class(class_id))
+      and (select public.is_student_in_class(class_id, student_id))
+    )
   )
   with check (
-    (teacher_id = (select auth.uid()) and (select public.is_class_staff(class_id)))
-    or (select public.can_manage_class(class_id))
+    (teacher_id = (select auth.uid())
+      and (select public.is_class_staff(class_id))
+      and (select public.is_student_in_class(class_id, student_id)))
+    or (
+      (select public.can_manage_class(class_id))
+      and (select public.is_student_in_class(class_id, student_id))
+    )
   );
 
 -- Teacher-only working notes are intentionally not visible to students.
@@ -623,7 +633,8 @@ grant update (display_name) on public.profiles to authenticated;
 
 grant select, insert, delete on public.classes to authenticated;
 grant update (name, year_group, is_active) on public.classes to authenticated;
-grant select, insert, update, delete on public.class_memberships to authenticated;
+grant select, insert, delete on public.class_memberships to authenticated;
+grant update (role) on public.class_memberships to authenticated;
 
 grant select, insert, update, delete on public.curriculum_versions to authenticated;
 grant select, insert, update, delete on public.curriculum_lessons to authenticated;
@@ -633,7 +644,8 @@ grant update (student_id, curriculum_version_id, week_number, due_at, is_active)
   on public.lesson_assignments to authenticated;
 grant select, insert, update on public.lesson_progress to authenticated;
 grant select, insert on public.recognition_attempts to authenticated;
-grant select, insert, update on public.teacher_reviews to authenticated;
+grant select, insert on public.teacher_reviews to authenticated;
+grant update (status, note) on public.teacher_reviews to authenticated;
 grant select, insert, delete on public.teacher_notes to authenticated;
 grant update (week_number, concept_key, note) on public.teacher_notes to authenticated;
 
