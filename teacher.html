@@ -117,7 +117,7 @@ function saveSettings(){
  sb=window.supabase.createClient(url,anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"8020-teacher-auth-"+url.replace("https://","").replace("http://","").replace(/[^a-zA-Z0-9]/g,"-").slice(0,55)}});
  setStatus("#setupStatus","Settings saved in this browser. They are not stored in the repository.","success");return true;
 }
-function getClient(){if(!sb){const c=cfg();if(!c.url||!c.anonKey)return null;sb=window.supabase.createClient(c.url,c.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"8020-teacher-auth-"+url.replace("https://","").replace("http://","").replace(/[^a-zA-Z0-9]/g,"-").slice(0,55)}})}return sb}
+function getClient(){if(!sb){const c=cfg();if(!c.url||!c.anonKey)return null;sb=window.supabase.createClient(c.url,c.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"8020-teacher-auth-"+c.url.replace("https://","").replace("http://","").replace(/[^a-zA-Z0-9]/g,"-").slice(0,55)}})}return sb}
 function download(name,text,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:type||"text/plain;charset=utf-8"}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function csv(rows){return rows.map(row=>row.map(v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"').join(",")).join("\r\n")}
 function progressRecord(row){const value=row&&row.student_progress;return Array.isArray(value)?(value[0]||{}):(value||{});}
