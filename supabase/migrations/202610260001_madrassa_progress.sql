@@ -221,15 +221,14 @@ language sql
 stable
 security definer
 set search_path = ''
-as $
+as $fn$
   select exists (
     select 1
     from public.profiles p
     where p.id = (select auth.uid())
       and p.role = 'madrassa_admin'
   );
-$;
-
+$fn$;
 
 -- A teacher may create a class; the trigger grants only class-scoped admin
 -- membership to its creator. It does not give them power over other classes.
