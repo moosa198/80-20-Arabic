@@ -25,21 +25,23 @@ A Qur’an-first, 31-week learning product for students who are memorising the Q
 - Build transfer through progressively less scaffolding and an independent week-31 page analysis.
 - Track learning locally and export/import a progress backup. With Supabase configured, a signed-in student can merge local and class progress, then sync further progress to the selected class.
 
-## Pedagogical approach: whole → map → whole → retrieve → transfer
+## Pedagogical approach: FSTU source → guided understanding → Qur’anic application → retrieval → teacher evidence
 
-The course adapts the high-level 80/20 and early-real-text approach discussed in the publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf). It does not reproduce the report’s wording or assume its performance estimates apply to this classroom.
+FSTU Naḥw (نحو) and Ṣarf (صرف) remain the primary conceptual sources. Each lesson uses the exact page references mapped to the week; students load their own copy, and the browser renders only those assigned pages locally. The original PDF is not uploaded or redistributed by the app.
 
-1. **Whole:** Start with a real Qur’anic phrase before presenting a grammar rule. Students ask what the statement is doing and notice a clue.
-2. **Map:** Teach the smallest useful structural map: word type, complete form, phrase relationship or sentence role. Avoid an exhaustive grammar catalogue.
-3. **Whole again:** Return to the same phrase after the focused FSTU reference and explain how the rule helps read the actual words.
-4. **Retrieve:** Ask the student to tap the evidence, pair the English label with Arabic, and explain the clue without copying the source wording.
-5. **Transfer:** Revisit the pattern in later weeks and on another memorised page. The three Fātiḥah checkpoints are retrieval exercises, not new teaching units; students are told to use a transfer page when the target feature is absent from Al-Fātiḥah.
+1. **Source-book concept:** Read the definition and relevant rule(s), study the worked example, and inspect the source-book tarkīb (تَرْكِيبٌ).
+2. **Guided understanding:** Close the source view, confirm the worked example, explain the concept in the student's own words, and answer a short concept check. The next stage stays locked until this evidence is saved and the answer is correct.
+3. **Qur’anic application:** Apply the same concept to the 15-line Madina Qur’an page. The app preserves the actual Qur’anic text and vowel marks; students should verify page and verse context with their teacher and printed Mushaf.
+4. **Retrieval and transfer:** Select the relevant Arabic word(s), name the grammatical role in English and Arabic, and justify the clue. Revisit the concept on another memorised page where appropriate, without inventing evidence when a structure is absent.
+5. **Teacher evidence:** The class dashboard shows the source check, teach-back, concept answer and saved recognition attempts. Teachers—not the app—record Secure / Developing / Needs revision for concepts and add notes.
+
+The course uses high-frequency structures and early contact with meaningful Qur’anic Arabic, but accuracy takes priority over speed. The publisher’s [Arabic Acceleration Report](https://www.learnarabiconline.com/ArabicAccelerationReport.pdf) is a contextual reference, not a claim that its outcomes are guaranteed for this course.
 
 The weekly lesson is designed for around 45 minutes. Hifz remains the priority; this optional Arabic supplement must not compete with memorisation or revision.
 
 ## Hifz-first weekly workflow
 
-Each week follows: **(1) Qur’anic passage → (2) focused FSTU map → (3) listening → (4) apply and explain**. An adab note reminds students to make wudhu before handling a physical Mushaf; the software does not gate a digital page behind a checkbox.
+Each week follows: **(1) assigned FSTU source → (2) guided teach-back and concept check → (3) Qur’anic application → (4) retrieval and explanation → (5) teacher review**. Listening remains an optional support rather than a substitute for understanding the source example. An adab note reminds students to make wudhu before handling a physical Mushaf; the software does not gate a digital page behind a checkbox.
 
 The digital 15-line renderer uses a 604-page Madina layout, but calligraphy and line breaks may differ from the physical Mushaf used by a student. Confirm the passage and page context with the teacher and printed Mushaf. Page numbers refer to the digital layout.
 
