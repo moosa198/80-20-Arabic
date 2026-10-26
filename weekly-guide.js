@@ -226,11 +226,7 @@
     if(kind==="quran"){
       return '<div class="book-page-frame digital-mushaf-frame" data-book-page="quran:'+p+'" aria-label="Digital 15-line Madina Qur’an page '+p+'"><quran-madina-html page="'+p+'" headless="true" highlight="1" data-recognition-page="true" aria-label="Qur’an page '+p+'"><p class="digital-reader-fallback">The digital page viewer is loading. If it does not load, check your connection and use your own Mushaf with the same page number.</p></quran-madina-html><p class="page-caption">Digital 15-line Madina layout · page '+p+' · tap an Arabic word to select it</p></div>';
     }
-    var id=kind==="sarf"?"1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr":"1BdY0tAvoaKvJVUhmMQn09bxLh0fAXO03";
-    var label=kind==="sarf"?"Official FSTU Ṣarf resource (2023 October edition)":"Official FSTU Naḥw resource (August 2026 edition)";
-    var direct="https://drive.google.com/file/d/"+id+"/view#page="+p;
-    var preview="https://drive.google.com/file/d/"+id+"/preview#page="+p;
-    return '<div class="book-page-frame fstu-page-frame" data-book-page="'+kind+':'+p+'" aria-label="'+(kind==="sarf"?"FSTU Ṣarf":"FSTU Naḥw")+' assigned page '+p+'"><iframe loading="lazy" title="'+label+' · page '+p+'" src="'+preview+'" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen"></iframe><p class="fstu-open-link"><a href="'+direct+'" target="_blank" rel="noreferrer">Open official source at printed page '+p+' ↗</a></p></div>';
+    return '<div class="book-page-frame fstu-page-frame" data-book-page="'+kind+':'+p+'" aria-label="'+(kind==="sarf"?"FSTU Ṣarf":"FSTU Naḥw")+' assigned page '+p+'"></div>';
   }
   function renderBookGroup(kind,pages,focus) {
     var title=kind==="sarf"?"FSTU Ṣarf (صرف)":"FSTU Naḥw (نحو)";
