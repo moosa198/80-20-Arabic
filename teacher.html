@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#163c36">
+<title>80/20 Arabic — Teacher Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#172b29;--muted:#64736d;--green:#163c36;--green2:#245a4d;--paper:#fffdf8;--cream:#f8f4eb;--amber:#e5b864;--line:#dce3de;--soft:#edf4ef;--red:#984b3e;--blue:#e8f0f3;--sans:"DM Sans",system-ui,sans-serif;--ar:"Amiri","Noto Naskh Arabic",serif}
+*{box-sizing:border-box}body{margin:0;background:#f4f5ef;color:var(--ink);font:14px/1.55 var(--sans)}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--green2)}.top{background:var(--green);color:#fff;padding:17px clamp(16px,4vw,45px);display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}.mark{width:43px;height:43px;display:grid;place-items:center;border:1px solid #ffffff45;border-radius:13px;color:var(--amber);font:700 29px var(--ar)}.brand b{font-size:17px}.brand small{display:block;color:#c6d9d0;text-transform:uppercase;letter-spacing:.12em;font-size:9px;margin-top:3px}.top a.btn{color:var(--ink);text-decoration:none}.btn{border:0;border-radius:10px;padding:10px 14px;background:var(--green);color:white;font-size:11px;font-weight:700}.btn.secondary{background:white;border:1px solid var(--line);color:var(--green)}.btn.gold{background:var(--amber);color:#26352c}.btn.danger{background:#fff7f4;color:var(--red);border:1px solid #ecd1ca}.wrap{max-width:1460px;margin:auto;padding:25px clamp(14px,3vw,38px) 55px}.hero{padding:25px 28px;background:var(--paper);border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center}.kicker{font-size:9px;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--green2)}h1{font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-1.1px;margin:8px 0 11px}h2{font-size:18px;margin:0}h3{font-size:14px;margin:0 0 8px}.lede{max-width:850px;font-size:13px;color:var(--muted);margin:0}.privacy-note{max-width:265px;background:#f7f3e9;border:1px solid #e9dfc8;border-radius:12px;padding:12px;font-size:10px;line-height:1.6;color:#66573d}.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}.panelHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.section{margin-top:17px}.import-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.file-drop{border:1px dashed #b6c8bb;border-radius:12px;background:#f9fcf8;padding:17px}.file-drop input{display:block;max-width:100%;margin-top:12px;font-size:11px}.file-drop p,.muted{color:var(--muted);font-size:11px;line-height:1.65;margin:7px 0}.privacy-points{display:grid;gap:8px;margin-top:10px}.privacy-points div{display:flex;gap:8px;align-items:flex-start;font-size:11px;color:#53635b}.tick{font-weight:700;color:var(--green2)}.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:16px}.metric{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:14px;min-width:0}.metric small{display:block;color:var(--muted);font-size:9px;line-height:1.4;min-height:25px}.metric strong{display:block;font-size:26px;letter-spacing:-.6px;margin-top:6px}.metric span{display:block;color:#839088;font-size:9px;margin-top:3px}.filters{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(160px,.7fr) auto;gap:9px;align-items:end;margin:15px 0 12px}.field label{display:block;font-weight:700;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;background:white;color:var(--ink);font-size:11px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff}table{width:100%;border-collapse:collapse;min-width:960px;font-size:10px}thead{background:#edf3ed;color:#3d5b4b;text-align:left}th,td{padding:11px 10px;border-bottom:1px solid #e7ece7;vertical-align:top}th{font-size:9px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#fbfcf8}.student-name{font-weight:700;font-size:11px}.student-sub{font-size:9px;color:var(--muted);margin-top:3px}.progress-track{height:5px;width:95px;background:#e7ece7;overflow:hidden;border-radius:10px;margin-top:6px}.progress-track i{display:block;height:100%;background:var(--green2)}.status{display:inline-flex;align-items:center;border-radius:7px;padding:4px 6px;font-weight:700;font-size:9px;background:#eef3ee;color:#42604c}.status.pending{background:#f7efe0;color:#8b6830}.status.new{background:#eef2f7;color:#48627c}.empty{padding:28px;text-align:center;color:var(--muted);font-size:12px}.table-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-top:11px}.feedback{font-size:11px;color:var(--muted);margin-top:8px;min-height:18px}.alert{padding:11px 12px;border:1px solid #ecd9b5;background:#fff8e9;border-radius:10px;font-size:10px;color:#725b2d;margin-top:12px;line-height:1.6}.detail-panel{margin-top:14px;display:none}.detail-panel.show{display:block}.detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.detail-item{border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px}.detail-item b{display:block;font-size:11px;margin-bottom:5px}.detail-item p{margin:0;font-size:10px;color:var(--muted);line-height:1.6}.history{display:grid;gap:8px;margin-top:14px}.history-row{border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px;display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:9px;align-items:start;font-size:10px}.history-row strong{display:block;font-size:11px}.history-row small{display:block;color:var(--muted);margin-top:3px}.footer{margin-top:24px;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:9px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:950px){.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.import-grid{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.privacy-note{max-width:none}}
+@media(max-width:600px){.wrap{padding:16px 10px 35px}.top{padding:12px}.top .btn{font-size:9px;padding:8px}.hero{padding:18px}.panel{padding:13px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.metric{padding:11px}.metric strong{font-size:22px}.filters{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}.history-row{grid-template-columns:1fr}.table-foot .btn{width:100%}}
+@media print{.top,.import-grid,.filters,.table-foot .btn,.footer a{display:none!important}body{background:white}.wrap{max-width:none;padding:0}.panel,.metric{break-inside:avoid}.table-wrap{overflow:visible}table{min-width:0;font-size:8px}th,td{padding:5px}.progress-track{width:55px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a href="./" class="brand"><span class="mark" lang="ar" dir="rtl">ع</span><span><b>80/20 Arabic</b><small>Madrassa teacher dashboard</small></span></a>
+  <a href="./" class="btn gold">Open student course ↗</a>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div><div class="kicker">CLASS MONITORING · NO STUDENT DATA UPLOAD</div><h1>See progress across your class.</h1><p class="lede">Import the progress files your students export from the course or Student Studio. The dashboard combines week completion, review activity, quiz results, and saved explanations of Arabic evidence. Import repeat submissions to see each student’s change over time.</p></div>
+    <div class="privacy-note"><b>Privacy by design</b><br>The page processes imported files inside this browser only. It has no login service or live synchronisation. Imported records disappear when the page is refreshed or closed; use a protected device and export only the summaries you need.</div>
+  </section>
+
+  <section class="import-grid section">
+    <div class="panel">
+      <div class="panelHead"><h2>1. Import student progress files</h2><span class="status">JSON</span></div>
+      <div class="file-drop"><b>Select one or more student progress exports</b><p>Students should use a short student ID and their agreed class/group name. Each export contains the saved progress snapshot, and—where available—the latest word-recognition explanations and weekly recall results. Re-import later exports to build a history.</p><input id="progressFiles" type="file" accept=".json,application/json" multiple><div class="feedback" id="importFeedback" role="status" aria-live="polite">No files imported in this session yet.</div></div>
+      <div class="alert">Older exports that do not include a student ID or class name can still be inspected, but the dashboard cannot reliably match them to a named learner. Ask students to export a labelled record from the updated Student Studio.</div>
+    </div>
+    <div class="panel">
+      <div class="panelHead"><h2>2. Optional class roster</h2><span class="status">CSV</span></div>
+      <div class="file-drop"><b>Load the expected student list</b><p>CSV columns: <code>studentId,displayName,className</code>. Use IDs or initials rather than unnecessary personal information. Students who appear on the roster but have not submitted a progress file are shown as “No submission”.</p><input id="rosterFile" type="file" accept=".csv,text/csv"><div class="feedback" id="rosterFeedback" role="status" aria-live="polite">No roster loaded.</div></div>
+      <div class="privacy-points"><div><span class="tick">✓</span><span>Files are not sent to a course server.</span></div><div><span class="tick">✓</span><span>The dashboard doesn’t store imported files after you close or refresh it.</span></div><div><span class="tick">✓</span><span>Export a class summary CSV for your teaching records, following your Madrassa’s data-protection policy.</span></div></div>
+    </div>
+  </section>
+
+  <section class="metrics" aria-live="polite">
+    <div class="metric"><small>Students in current view</small><strong id="mStudents">0</strong><span>Roster plus imported records</span></div>
+    <div class="metric"><small>Progress submitted</small><strong id="mSubmitted">0</strong><span>At least one export</span></div>
+    <div class="metric"><small>Average weeks completed</small><strong id="mWeeks">—</strong><span>Out of 31</span></div>
+    <div class="metric"><small>Saved grammar explanations</small><strong id="mEvidence">0</strong><span>Teacher-verification evidence</span></div>
+    <div class="metric"><small>Quiz accuracy</small><strong id="mQuiz">—</strong><span>From recorded quiz attempts</span></div>
+  </section>
+
+  <section class="panel section">
+    <div class="panelHead"><div><div class="kicker">ROSTER AND PROGRESS</div><h2 style="margin-top:6px">Class overview</h2></div><span class="status" id="recordStatus">Session-only</span></div>
+    <div class="filters">
+      <div class="field"><label for="search">Search student ID or name</label><input id="search" placeholder="Search by ID, initials or display name…"></div>
+      <div class="field"><label for="classFilter">Filter class / group</label><select id="classFilter"><option value="">All classes</option></select></div>
+      <button class="btn secondary" id="clearFilters" type="button">Clear filters</button>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Course progress</th><th>Vocabulary reviews</th><th>Grammar evidence</th><th>Quiz</th><th>Submissions</th><th>Latest activity</th><th>Record</th></tr></thead><tbody id="studentsBody"><tr><td colspan="9"><div class="empty">Import student progress files or a class roster to begin.</div></td></tr></tbody></table></div>
+    <div class="table-foot"><span class="muted" id="tableCount">No student rows yet.</span><div class="actions"><button class="btn" id="exportCsv" type="button">Export filtered CSV</button><button class="btn secondary" id="clearData" type="button">Clear imported data</button></div></div>
+    <div class="feedback" id="dashboardFeedback" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="panel detail-panel" id="studentDetail" aria-live="polite">
+    <div class="panelHead"><div><div class="kicker">STUDENT DETAIL</div><h2 id="detailTitle" style="margin-top:5px">Select a learner</h2></div><button class="btn secondary" type="button" id="closeDetail">Close detail</button></div>
+    <div id="detailContent"></div>
+  </section>
+
+  <section class="section panel">
+    <div class="panelHead"><h2>How to use this with teachers and classes</h2><span class="kicker">PRACTICAL WORKFLOW</span></div>
+    <div class="detail-grid">
+      <div class="detail-item"><b>Before the lesson</b><p>Students use their own browser profile and continue their week. For shared tablets, require each student to export at the end of a session and clear or switch the learner profile before the next student.</p></div>
+      <div class="detail-item"><b>During the lesson</b><p>Use course completion as a prompt, not a mastery grade. Review the saved Arabic words and explanations, then orally check one or two decisions with a fresh phrase.</p></div>
+      <div class="detail-item"><b>Between lessons</b><p>Import each learner’s next export. Compare the latest submission with previous snapshots and use the gaps to decide who needs revision, source-book reteaching or a transfer task.</p></div>
+    </div>
+    <div class="alert">This is a local, file-based teacher dashboard—not a secure account system or real-time classroom platform. Do not use it on an unmanaged public computer with identifiable student records. A future shared, multi-teacher live service would need authenticated accounts, access controls, a secure database, retention rules and appropriate parental/Madrassa permissions.</div>
+  </section>
+  <footer class="footer"><span><b>80/20 Arabic</b> · Teacher dashboard · Data stays in this browser session.</span><a href="./student.html">Student Studio ↗</a><a href="https://github.com/moosa198/80-20-Arabic/blob/main/CURRICULUM-AUDIT.md" target="_blank" rel="noreferrer">Curriculum audit ↗</a></footer>
+</main>
+<script>
+"use strict";
+const state={records:[],roster:[],rosterName:"",importErrors:[]};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dateText=v=>{if(!v)return"—";const d=new Date(v);return Number.isNaN(d.getTime())?String(v):d.toLocaleString("en-GB",{dateStyle:"medium",timeStyle:"short"});};
+const formatDate=v=>{if(!v)return"";const d=new Date(v);return Number.isNaN(d.getTime())?String(v):d.toISOString();};
+function normaliseRecord(record,filename){
+  const wrapper=record&&record.progress?record:null;
+  const raw=wrapper?wrapper.progress:record;
+  if(!raw||typeof raw!=="object"||!raw.cards||!(raw.doneWeeks||raw.done))throw new Error("Not a recognised 80/20 Arabic progress export.");
+  const learner=(wrapper&&wrapper.learner)||{};
+  const className=String(learner.className||raw.className||"").trim();
+  const studentId=String(learner.studentId||raw.studentId||"").trim();
+  const displayName=String(learner.displayName||raw.displayName||"").trim();
+  const doneWeeks=raw.doneWeeks||raw.done||{};
+  const completed=Object.keys(doneWeeks).filter(k=>doneWeeks[k]===true||doneWeeks[k]===1||doneWeeks[k]==="true").map(Number).filter(n=>n>=1&&n<=31);
+  const cards=raw.cards||{};
+  const reps=Object.values(cards).reduce((sum,c)=>sum+Number((c&&c.reps)||0),0);
+  const reviewed=Object.keys(cards).length;
+  const known=Object.values(cards).filter(c=>Number((c&&c.reps)||0)>=4).length;
+  const recognition=(wrapper&&wrapper.recognition)||{};
+  const weeklyRecall=(wrapper&&wrapper.weeklyRecall)||{};
+  const attempts=[];
+  Object.keys(recognition||{}).forEach(week=>{
+    const item=recognition[week];
+    const list=item&&Array.isArray(item.attempts)?item.attempts:(item&&item.words?[item]:[]);
+    list.forEach(a=>attempts.push({week:Number(week),words:a.words||[],labelEn:a.labelEn||"",labelAr:a.labelAr||"",explanation:a.explanation||"",savedAt:a.savedAt||item.updatedAt||null,page:a.page||null}));
+  });
+  const quizzes=Object.values(weeklyRecall||{}).filter(q=>q&&typeof q.correct==="boolean");
+  const quizCorrect=quizzes.filter(q=>q.correct).length;
+  const exportedAt=(wrapper&&wrapper.exportedAt)||record.exportedAt||record.updatedAt||record.lastSession||null;
+  const name=displayName||studentId||filename||"Unlabelled student";
+  return {
+    recordId:crypto.randomUUID?crypto.randomUUID():String(Date.now())+"-"+Math.random().toString(36).slice(2),
+    learner:{studentId:studentId||"",displayName:displayName||"",className:className||"",teacherName:learner.teacherName||""},
+    fileName:filename||"Imported JSON",
+    source:(wrapper&&wrapper.source)||"legacy-export",
+    exportedAt:exportedAt,
+    importedAt:new Date().toISOString(),
+    completedWeeks:[...new Set(completed)].sort((a,b)=>a-b),
+    doneCount:new Set(completed).size,
+    percent:Math.round(new Set(completed).size/31*100),
+    cardsReviewed:reviewed,
+    reviewReps:reps,
+    vocabularyEstablished:known,
+    evidenceAttempts:attempts,
+    evidenceCount:attempts.length,
+    quizCount:quizzes.length,
+    quizCorrect:quizCorrect,
+    quizAccuracy:quizzes.length?Math.round(quizCorrect/quizzes.length*100):null,
+    progress:raw,
+    recordsRecognised:true,
+    displayLabel:name
+  };
+}
+function keyOf(item){return (item.learner.className||"Unassigned")+"::"+(item.learner.studentId||item.learner.displayName||item.fileName);}
+function parseCSV(text){
+  const rows=[];let row=[],cell="",quoted=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i],next=text[i+1];
+    if(ch==='"'&&quoted&&next==='"'){cell+='"';i++;}
+    else if(ch==='"'){quoted=!quoted;}
+    else if(ch===","&&!quoted){row.push(cell.trim());cell="";}
+    else if((ch==="\n"||ch==="\r")&&!quoted){if(ch==="\r"&&next==="\n")i++;row.push(cell.trim());cell="";if(row.some(x=>x!==""))rows.push(row);row=[];}
+    else cell+=ch;
+  }
+  if(cell!==""||row.length){row.push(cell.trim());if(row.some(x=>x!==""))rows.push(row);}
+  if(rows.length<2)return[];
+  const headers=rows.shift().map(x=>x.trim().toLowerCase().replace(/\s+/g,""));
+  return rows.map(r=>{const o={};headers.forEach((h,i)=>o[h]=r[i]||"");return {
+    studentId:o.studentid||o.id||o.studentcode||"",
+    displayName:o.displayname||o.name||o.student||"",
+    className:o.classname||o.class||o.group||""
+  };}).filter(x=>x.studentId||x.displayName);
+}
+function latestByStudent(){
+  const map=new Map();
+  state.records.forEach(r=>{
+    const key=keyOf(r);
+    const list=map.get(key)||[];
+    list.push(r);
+    map.set(key,list);
+  });
+  map.forEach(list=>list.sort((a,b)=>new Date(b.exportedAt||b.importedAt)-new Date(a.exportedAt||a.importedAt)));
+  return map;
+}
+function rosterRows(){
+  const map=latestByStudent(),rows=[],submittedKeys=new Set();
+  map.forEach((history,key)=>{
+    const last=history[0];
+    submittedKeys.add(key);
+    rows.push({key,latest:last,history,roster:null,submitted:true});
+  });
+  state.roster.forEach(r=>{
+    const key=(r.className||"Unassigned")+"::"+(r.studentId||r.displayName);
+    if(submittedKeys.has(key))return;
+    rows.push({key,latest:null,history:[],roster:r,submitted:false});
+  });
+  return rows;
+}
+function selectedClass(){return $("#classFilter").value||"";}
+function filteredRows(){
+  const q=$("#search").value.trim().toLowerCase(),cl=selectedClass();
+  return rosterRows().filter(r=>{
+    const p=r.latest?r.latest.learner:r.roster||{};
+    const text=[p.studentId,p.displayName,p.className,r.latest&&r.latest.fileName].join(" ").toLowerCase();
+    return (!q||text.includes(q))&&(!cl||(p.className||"Unassigned")===cl);
+  }).sort((a,b)=>{
+    const ap=a.latest?a.latest.learner:{...a.roster};const bp=b.latest?b.latest.learner:{...b.roster};
+    return (ap.className||"").localeCompare(bp.className||"")||(ap.displayName||ap.studentId||"").localeCompare(bp.displayName||bp.studentId||"");
+  });
+}
+function renderFilters(){
+  const old=selectedClass(),classes=new Set();
+  state.records.forEach(r=>classes.add(r.learner.className||"Unassigned"));
+  state.roster.forEach(r=>classes.add(r.className||"Unassigned"));
+  $("#classFilter").innerHTML='<option value="">All classes</option>'+[...classes].sort().map(c=>'<option value="'+esc(c)+'">'+esc(c)+'</option>').join("");
+  if(classes.has(old))$("#classFilter").value=old;
+}
+function updateMetrics(rows){
+  const submitted=rows.filter(r=>r.submitted),valid=submitted.map(r=>r.latest);
+  const avg=valid.length?Math.round(valid.reduce((sum,r)=>sum+r.doneCount,0)/valid.length*10)/10:null;
+  const evidence=valid.reduce((sum,r)=>sum+r.evidenceCount,0);
+  const quizzes=valid.reduce((sum,r)=>sum+r.quizCount,0),correct=valid.reduce((sum,r)=>sum+r.quizCorrect,0);
+  $("#mStudents").textContent=rows.length;
+  $("#mSubmitted").textContent=submitted.length;
+  $("#mWeeks").textContent=avg===null?"—":avg.toFixed(avg%1?1:0);
+  $("#mEvidence").textContent=evidence;
+  $("#mQuiz").textContent=quizzes?Math.round(correct/quizzes*100)+"%":"—";
+}
+function rowHtml(r){
+  if(!r.submitted){
+    const p=r.roster||{};
+    return '<tr><td><div class="student-name">'+esc(p.displayName||"Unnamed learner")+'</div><div class="student-sub">'+esc(p.studentId||"No ID")+'</div></td><td>'+esc(p.className||"Unassigned")+'</td><td><span class="status pending">No submission</span></td><td>—</td><td>—</td><td>—</td><td>0</td><td>—</td><td>—</td></tr>';
+  }
+  const a=r.latest,profile=a.learner,prev=r.history[1]||null;
+  const delta=prev?a.doneCount-prev.doneCount:null;
+  const deltaText=delta===null?"first snapshot":delta>0?"+"+delta+" week"+(delta===1?"":"s"):delta<0?String(delta)+" weeks":"no change";
+  const status=a.exportedAt?'<span class="status">Submitted</span>':'<span class="status new">Imported</span>';
+  return '<tr><td><div class="student-name">'+esc(profile.displayName||profile.studentId||a.displayLabel)+'</div><div class="student-sub">'+esc(profile.studentId||"No ID")+'</div></td><td>'+esc(profile.className||"Unassigned")+'</td><td><b>'+a.doneCount+'/31 · '+a.percent+'%</b><div class="progress-track"><i style="width:'+a.percent+'%"></i></div><div class="student-sub">'+esc(deltaText)+'</div></td><td><b>'+a.cardsReviewed+'</b> cards<br><span class="student-sub">'+a.reviewReps+' review ratings · '+a.vocabularyEstablished+' retained cards</span></td><td><b>'+a.evidenceCount+'</b> saved attempts<br><span class="student-sub">'+a.evidenceAttempts.filter(e=>e.explanation.trim()).length+' with written explanation</span></td><td>'+(a.quizAccuracy===null?"—":'<b>'+a.quizAccuracy+'%</b><br><span class="student-sub">'+a.quizCorrect+'/'+a.quizCount+' correct</span>')+'</td><td><b>'+r.history.length+'</b> snapshot'+(r.history.length===1?"":"s")+'</td><td>'+esc(dateText(a.exportedAt||a.importedAt))+'</td><td><button class="btn secondary" data-open-student="'+esc(r.key)+'">View</button></td></tr>';
+}
+function render(){
+  const rows=filteredRows();
+  updateMetrics(rows);
+  $("#studentsBody").innerHTML=rows.length?rows.map(rowHtml).join(""):'<tr><td colspan="9"><div class="empty">No learners match the current filters.</div></td></tr>';
+  $("#tableCount").textContent=rows.length+" learner"+(rows.length===1?"":"s")+" shown · "+state.records.length+" imported snapshot"+(state.records.length===1?"":"s");
+  document.querySelectorAll("[data-open-student]").forEach(button=>button.addEventListener("click",()=>showDetail(button.getAttribute("data-open-student"))));
+}
+function showDetail(key){
+  const history=(latestByStudent().get(key)||[]).slice().sort((a,b)=>new Date(a.exportedAt||a.importedAt)-new Date(b.exportedAt||b.importedAt));
+  const roster=state.roster.find(r=>(r.className||"Unassigned")+"::"+(r.studentId||r.displayName)===key);
+  const latest=history[history.length-1],profile=latest?latest.learner:roster||{};
+  $("#detailTitle").textContent=(profile.displayName||profile.studentId||"Learner")+" · "+(profile.className||"Unassigned");
+  const completed=latest?latest.completedWeeks:[];
+  const phaseInfo=[["Foundations",1,8],["Relationships",9,16],["Connected meaning",17,24],["Independent reading",25,31]];
+  let phaseHtml=phaseInfo.map(p=>{
+    const n=completed.filter(w=>w>=p[1]&&w<=p[2]).length,all=p[2]-p[1]+1;
+    return '<div class="detail-item"><b>'+p[0]+'</b><p>'+n+'/'+all+' checkpoint/phase weeks completed.</p></div>';
+  }).join("");
+  const recentAttempts=(latest?latest.evidenceAttempts:[]).slice(-10).reverse().map(a=>{
+    return '<div class="history-row"><div><strong>Week '+esc(a.week)+'</strong><small>'+esc(a.words.map(w=>w.text).join(" · ")||"No selected word")+'</small></div><div><b>'+esc(a.labelEn||"Unlabelled")+'</b><small lang="ar" dir="rtl">'+esc(a.labelAr||"")+'</small></div><div><small>'+esc(dateText(a.savedAt))+'</small><p>'+esc(a.explanation||"No written explanation")+'</p></div></div>';
+  }).join("");
+  const timeline=history.map(h=>'<div class="history-row"><div><strong>'+esc(dateText(h.exportedAt||h.importedAt))+'</strong><small>'+esc(h.fileName)+'</small></div><div><b>'+h.doneCount+'/31 weeks · '+h.percent+'%</b><small>'+h.evidenceCount+' recognition attempts</small></div><div><b>'+h.cardsReviewed+' cards reviewed</b><small>'+h.quizCorrect+'/'+h.quizCount+' quiz answers correct</small></div></div>').join("");
+  $("#detailContent").innerHTML='<div class="detail-grid">'+phaseHtml+'<div class="detail-item"><b>Course status</b><p>'+(latest?latest.doneCount+'/31 weeks complete; latest export '+esc(dateText(latest.exportedAt||latest.importedAt)):'No submitted progress snapshot.')+'</p></div><div class="detail-item"><b>Review activity</b><p>'+(latest?latest.cardsReviewed+' distinct cards, '+latest.reviewReps+' review ratings, '+latest.vocabularyEstablished+' cards with 4+ recorded successful recalls.':'No review data available.')+'</p></div><div class="detail-item"><b>Quiz results</b><p>'+(latest?(latest.quizCount?latest.quizCorrect+'/'+latest.quizCount+' correct ('+latest.quizAccuracy+'%).':'No quiz attempts recorded.'):'No quiz data.')+'</p></div></div><h3 style="margin-top:17px">Latest grammar evidence</h3><div class="history">'+(recentAttempts||'<div class="empty">No word-recognition attempts were included in the latest export.</div>')+'</div><h3 style="margin-top:17px">Submission history</h3><div class="history">'+(timeline||'<div class="empty">No progress file has been imported for this learner.</div>')+'</div>';
+  $("#studentDetail").classList.add("show");
+  $("#studentDetail").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function csvCell(value){const s=String(value==null?"":value);return '"'+s.replace(/"/g,'""')+'"';}
+function downloadText(filename,text,mime){const a=document.createElement("a"),url=URL.createObjectURL(new Blob([text],{type:mime||"text/plain"}));a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);}
+function exportCsv(){
+  const rows=filteredRows();
+  const headers=["studentId","displayName","className","submitted","weeksCompleted","progressPercent","vocabularyCardsReviewed","reviewRatings","cardsEstablished","grammarEvidenceAttempts","evidenceWithExplanation","quizCorrect","quizCount","quizAccuracyPercent","snapshotCount","latestExportAt","previousWeekCount","weekDelta"];
+  const output=[headers];
+  rows.forEach(r=>{
+    const a=r.latest,profile=a?a.learner:r.roster||{},prev=r.history[1]||null;
+    const delta=a&&prev?a.doneCount-prev.doneCount:"";
+    output.push([profile.studentId||"",profile.displayName||"",profile.className||"",r.submitted?"yes":"no",a?a.doneCount:"",a?a.percent:"",a?a.cardsReviewed:"",a?a.reviewReps:"",a?a.vocabularyEstablished:"",a?a.evidenceCount:"",a?a.evidenceAttempts.filter(e=>e.explanation.trim()).length:"",a?a.quizCorrect:"",a?a.quizCount:"",a&&a.quizAccuracy!==null?a.quizAccuracy:"",r.history.length,a?(a.exportedAt||a.importedAt):"",prev?prev.doneCount:"",delta]);
+  });
+  downloadText("80-20-arabic-class-progress.csv",output.map(row=>row.map(csvCell).join(",")).join("\r\n"),"text/csv;charset=utf-8");
+}
+async function importProgressFiles(files){
+  if(!files.length)return;
+  let success=0,errors=[];
+  for(const file of files){
+    try{
+      const parsed=JSON.parse(await file.text());
+      const record=normaliseRecord(parsed,file.name);
+      const existing=state.records.findIndex(r=>r.recordId===record.recordId);
+      // Generate a stable, per-file snapshot ID for duplicate imports in this browser session.
+      record.recordId=file.name+"|"+record.exportedAt+"|"+keyOf(record);
+      state.records.push(record);success++;
+    }catch(error){errors.push(file.name+": "+error.message);}
+  }
+  renderFilters();render();
+  $("#importFeedback").textContent=success+" file"+(success===1?"":"s")+" imported. "+(errors.length?errors.join(" · "):"No errors.");
+  $("#dashboardFeedback").textContent="Latest snapshots are selected using the export time; all imported snapshots remain available in learner detail.";
+}
+$("#progressFiles").addEventListener("change",async event=>{
+  await importProgressFiles(Array.from(event.target.files||[]));
+  event.target.value="";
+});
+$("#rosterFile").addEventListener("change",async event=>{
+  const file=event.target.files&&event.target.files[0];if(!file)return;
+  try{
+    const rows=parseCSV(await file.text());
+    if(!rows.length)throw new Error("No rows found. Include a header row with studentId, displayName and className.");
+    state.roster=rows;state.rosterName=file.name;renderFilters();render();
+    $("#rosterFeedback").textContent=rows.length+" roster entries loaded from "+file.name+".";
+  }catch(e){$("#rosterFeedback").textContent=e.message;}
+  event.target.value="";
+});
+$("#search").addEventListener("input",render);
+$("#classFilter").addEventListener("change",render);
+$("#clearFilters").addEventListener("click",()=>{$("#search").value="";$("#classFilter").value="";render();});
+$("#exportCsv").addEventListener("click",exportCsv);
+$("#clearData").addEventListener("click",()=>{
+  if(!confirm("Clear all student progress files and the roster imported into this browser session? This does not affect student devices."))return;
+  state.records=[];state.roster=[];state.rosterName="";state.importErrors=[];
+  $("#importFeedback").textContent="Imported records cleared.";
+  $("#rosterFeedback").textContent="Roster cleared.";
+  $("#studentDetail").classList.remove("show");renderFilters();render();
+});
+$("#closeDetail").addEventListener("click",()=>$("#studentDetail").classList.remove("show"));
+renderFilters();render();
+</script>
+</body>
+</html>
