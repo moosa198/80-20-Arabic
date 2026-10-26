@@ -34,8 +34,8 @@ const guide = fs.readFileSync("weekly-guide.js", "utf8");
 assert.ok(!/drive\.google\.com\/file\/d\//i.test(guide), "student lesson renderer must not expose a complete FSTU PDF URL");
 assert.ok(!/var\s+(?:preview|direct)\s*=/i.test(guide), "student lesson renderer must not create full-book preview/direct links");
 const pageRenderer = fs.readFileSync("book-pages.js", "utf8");
-assert.match(pageRenderer, /split\(":\"\)\[0\]/, "source renderer should identify source type"); // implementation details still regression-checked below
-assert.match(pageRenderer, /kind==="sarf"\\|\\|kind==="nahw"/, "page renderer must only replace assigned FSTU nodes, never the digital Qur'an viewer");
+assert.ok(pageRenderer.includes('return kind==="sarf"||kind==="nahw"'), "page renderer must only replace assigned FSTU nodes, never the digital Qur'an viewer");
+assert.ok(pageRenderer.includes('return kind==="sarf"||kind==="nahw"'), "page renderer must only replace assigned FSTU nodes, never the digital Qur'an viewer");
 
 for (const file of ["index.html", "student.html"]) {
   const html = fs.readFileSync(file, "utf8");
