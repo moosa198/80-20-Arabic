@@ -222,6 +222,12 @@ begin
   for update of s;
 
   if not found then raise exception 'Those codes do not match a learner in this class.'; end if;
+  if exists (
+    select 1 from public.class_students s
+    where s.auth_user_id = auth.uid() and s.id <> v_student.id
+  ) then
+    raise exception 'This browser session is already linked to another learner. Disconnect that learner first.';
+  end if;
   if v_student.auth_user_id is not null and v_student.auth_user_id <> auth.uid() then
     raise exception 'This learner code is already linked to another browser session. Ask your teacher to reset it.';
   end if;
@@ -234,6 +240,21 @@ begin
   return query select v_student.id, v_student.display_name, v_class.class_name, v_class.school_name;
 end;
 $$;
+
+-- Explicitly unlink this browser session on sign-out. Saved progress remains in the class.
+create or replace function public.leave_class_student()
+returns void
+language plpgsql
+security definer
+set search_path = public, extensions, pg_temp
+as $
+begin
+  if auth.uid() is null then raise exception 'Student sign-in is required.'; end if;
+  update public.class_students
+  set auth_user_id = null
+  where auth_user_id = auth.uid();
+end;
+$;
 
 -- Reset one learner's access code when a device is lost. Existing progress is kept.
 create or replace function public.reset_student_access_code(p_student_id uuid)
@@ -266,9 +287,11 @@ $$;
 
 revoke all on function public.add_class_students(uuid, text[]) from public, anon;
 revoke all on function public.join_class_student(text, text) from public, anon;
+revoke all on function public.leave_class_student() from public, anon;
 revoke all on function public.reset_student_access_code(uuid) from public, anon;
 grant execute on function public.add_class_students(uuid, text[]) to authenticated;
 grant execute on function public.join_class_student(text, text) to authenticated;
+grant execute on function public.leave_class_student() to authenticated;
 grant execute on function public.reset_student_access_code(uuid) to authenticated;
 
 -- Recommended project setting: enable Anonymous Sign-Ins under Authentication for student sessions.
