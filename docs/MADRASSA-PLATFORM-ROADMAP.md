@@ -30,7 +30,7 @@ The main platform limitations are:
 
 - Progress and recognition attempts are stored in the current browser rather than a shared database.
 - There is no sign-in, class membership, teacher role or teacher dashboard.
-- The curriculum definitions are duplicated between index.html and student.html. This is a drift risk: the two student experiences can diverge when a lesson is edited.
+- Both student entry points now read the canonical course data and bilingual term map from curriculum.js. Hosted curriculum versioning and publication controls remain future work.
 - Current progress can be moved only via a learner-managed export/import file; it is not centrally visible to teachers.
 
 Keep the present app functioning while the database and front-end migration are built and tested separately.
@@ -105,11 +105,11 @@ A future curriculum audit should verify the exact Arabic vocalisation, translite
 
 ### Stage 2 — Canonical curriculum and source mapping
 
-- Consolidate duplicated course definitions into one canonical curriculum module/data file.
-- Add a schema/content validator for all 31 lessons, all three checkpoints, paired English/Arabic terminology, seven lexical slots per teaching week and source-edition references.
+- Consolidate course definitions into curriculum.js, shared by both student entry points (implemented in this branch).
+- Add automated validation for the 31-week curriculum, checkpoints, paired terms, seven lexical slots and assigned-page map (implemented in the new CI workflow; extend with source-edition checks after teacher review).
 - Import and version the initial course as a draft; review it; then publish it.
 - Keep source_refs to resource identifier, edition, printed page or page range, URL and attribution. Do not store copyrighted page scans in the database.
-- Preserve and regression-test the existing assigned-page renderer against the canonical source map; correct only any missing or inaccurate page mappings, edition mismatches or display issues.
+- Connect the page-image renderer to both student entry points; remove full-book embeds and links from the lesson UI; restrict rendering to assigned FSTU page images; and add regression tests (implemented in this branch).
 
 **Exit gate:** both current student entry points render the same canonical lesson data; all 31 weeks have a valid versioned record, and the existing FSTU page map still opens only each lesson's assigned page(s).
 
