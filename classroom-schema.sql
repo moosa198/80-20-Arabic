@@ -69,6 +69,11 @@ using (exists (
   where c.id = class_students.class_id and c.teacher_id = (select auth.uid())
 ));
 
+drop policy if exists "Learners read their own roster row" on public.class_students;
+create policy "Learners read their own roster row" on public.class_students
+for select to authenticated
+using (auth_user_id = (select auth.uid()));
+
 drop policy if exists "Teachers update their own roster" on public.class_students;
 create policy "Teachers update their own roster" on public.class_students
 for update to authenticated
@@ -130,7 +135,10 @@ for update to authenticated using (
 -- Do not give the unauthenticated anon role direct table access.
 revoke all on public.classes, public.class_students, public.student_progress from anon;
 grant select, insert, update, delete on public.classes to authenticated;
-grant select, update, delete on public.class_students to authenticated;
+-- Do not expose access_code_hash to authenticated API clients.
+revoke all on public.class_students from authenticated;
+grant select (id, class_id, display_name, auth_user_id, created_at, joined_at) on public.class_students to authenticated;
+grant update, delete on public.class_students to authenticated;
 grant select, insert, update, delete on public.student_progress to authenticated;
 
 -- Teacher uploads a roster as names. Codes are random, hashed in the database, and returned once.
