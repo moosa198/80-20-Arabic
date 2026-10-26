@@ -182,20 +182,34 @@
     {variants:["حال","حَالٌ"],ar:"حَالٌ",latin:"ḥāl"},
     {variants:["مثنّى","مُثَنَّى"],ar:"مُثَنَّى",latin:"muthannā"}
   ];
+  function isArabicChar(char){
+    return !!char&&/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(char);
+  }
   function annotateText(value){
-    var output=escapeHtml(value);
-    var ordered=INLINE_PHRASES.slice().sort(function(a,b){
-      var aLen=Math.max.apply(null,a.variants.map(function(v){return v.length;}));
-      var bLen=Math.max.apply(null,b.variants.map(function(v){return v.length;}));
-      return bLen-aLen;
+    var source=String(value==null?"":value),variants=[];
+    INLINE_PHRASES.forEach(function(phrase){
+      phrase.variants.forEach(function(variant){variants.push({variant:variant,phrase:phrase});});
     });
-    ordered.forEach(function(phrase){
-      var markup='<span class="inline-grammar-phrase"><span lang="ar" dir="rtl">'+escapeHtml(phrase.ar)+'</span><small class="term-translit" lang="en" dir="ltr">'+escapeHtml(phrase.latin)+'</small></span>';
-      phrase.variants.forEach(function(variant){
-        var needle=escapeHtml(variant);
-        output=output.split(needle).join(markup);
-      });
-    });
+    variants.sort(function(a,b){return b.variant.length-a.variant.length;});
+    var output="",position=0;
+    while(position<source.length){
+      var found=null;
+      for(var i=0;i<variants.length;i++){
+        var candidate=variants[i],start=position,end=position+candidate.variant.length;
+        if(source.slice(start,end)!==candidate.variant)continue;
+        var before=start>0?source.charAt(start-1):"",after=end<source.length?source.charAt(end):"";
+        if(isArabicChar(before)||isArabicChar(after))continue;
+        found=candidate;break;
+      }
+      if(found){
+        var phrase=found.phrase;
+        output+='<span class="inline-grammar-phrase"><span lang="ar" dir="rtl">'+escapeHtml(phrase.ar)+'</span><small class="term-translit" lang="en" dir="ltr">'+escapeHtml(phrase.latin)+'</small></span>';
+        position+=found.variant.length;
+      }else{
+        output+=escapeHtml(source.charAt(position));
+        position++;
+      }
+    }
     return output;
   }
   root.GrammarTerms={get:get,renderTerm:renderTerm,renderLabel:renderLabel,annotateText:annotateText,byArabic:byArabic,normalise:normalise};
