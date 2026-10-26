@@ -81,7 +81,7 @@ The exact page mapping should stay as lesson metadata, not be replaced by a gene
 
 ### Arabic terminology and pronunciation support
 
-Maintain one central terminology map with separate fields for the English label, Arabic label, scholarly transliteration and short teaching gloss. In the interface:
+Maintain one central terminology map in curriculum.js with separate fields for the English label, base Arabic label, fully vocalised Arabic form, scholarly transliteration and short teaching gloss. All 70 terms now have these fields. The interface shows vocalisation, transliteration and a concise gloss during initial learning; after three recorded successful recalls the scaffold recedes. In the interface:
 
 - Arabic remains primary and uses lang=ar and dir=rtl in its own element.
 - Introduce a new technical label with full vocalisation, transliteration and a short English gloss. For example: مَفْعُولٌ بِهِ — mafʿūlun bihi — object.
@@ -89,7 +89,7 @@ Maintain one central terminology map with separate fields for the English label,
 - Do not add transliteration to every Qur'anic word or use it as a permanent replacement for Arabic script.
 - Do not strip the diacritics from the actual Qur'anic passage. Teaching examples and technical terminology may be fully vocalised when first introduced.
 
-A future curriculum audit should verify the exact Arabic vocalisation, transliteration and English gloss of each introduced term before these fields are used in the app.
+The fields now exist for all 70 terms; a qualified Arabic/grammar teacher must review exact vocalisation and transliteration before real-class rollout.
 
 ## Delivery plan
 
@@ -118,7 +118,7 @@ A future curriculum audit should verify the exact Arabic vocalisation, translite
 - Add sign-in and invitation-based enrolment. Public sign-up must never grant a teacher or administrator role.
 - Add a configuration layer for the project URL and publishable key. Do not commit credentials; never ship a secret/service-role key in a browser app.
 - Introduce a storage adapter behind existing progress/recognition APIs so the interface no longer writes directly to localStorage.
-- Preserve a local cache and export/import path. Sync only signed-in learner records, retry safely when the device reconnects, and avoid duplicating attempts on retry.
+- Preserve a local cache and a cross-screen export/import path, with conversion for both legacy card-key formats (implemented and unit-tested). Next, sync only signed-in learner records, retry safely when the device reconnects, and avoid duplicating attempts on retry.
 - Make conflict handling explicit: append-only recognition attempts; per-week completion updates; teacher reviews kept as a timestamped history.
 - Keep PDF page rendering local to the device as it is today. Do not upload the learner's whole source PDF or page images.
 
