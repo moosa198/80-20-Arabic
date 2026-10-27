@@ -74,6 +74,7 @@ assert.ok(indexHtml.includes("pdf.min.js"), "index.html must load PDF.js for loc
 assert.ok(indexHtml.includes("term-transliteration"), "index.html must implement the gradual terminology scaffold");
 
 const studentHtml = fs.readFileSync("student.html", "utf8");
+const studentFocus = fs.readFileSync("student-focus.js", "utf8");
 assert.ok(studentHtml.includes('src="./curriculum.js"'), "student.html must use canonical curriculum data");
 assert.ok(studentHtml.includes('src="./weekly-guide.js"'), "student.html must use the canonical weekly guide data");
 assert.ok(studentHtml.includes('src="./book-pages.js"'), "student.html must use the assigned-page renderer");
@@ -81,8 +82,10 @@ assert.ok(studentHtml.includes('src="./cloud-progress.js"'), "student.html must 
 assert.ok(studentHtml.includes('src="./student-focus.js"'), "student.html must use the simplified weekly journey");
 assert.ok(studentHtml.includes('src="./fstu-auto.js"'), "student.html must use automatic FSTU source loading");
 assert.ok(studentHtml.includes("pdf.min.js"), "student.html must load PDF.js for assigned source pages");
-assert.ok(studentHtml.includes("Hifz-first"), "student.html must make the Hifz-first priority visible");
-assert.ok(studentHtml.includes("3 AMANAHS"), "student.html must retain the three-Amanah self-check space");
+assert.ok(studentFocus.includes("Hifz-first"), "student journey must make the Hifz-first priority visible");
+assert.ok(studentFocus.includes("3 AMANAHS"), "student journey must retain the three-Amanah self-check space");
+assert.ok(studentFocus.includes("Secure"), "student journey must retain explicit self-assessment");
+assert.ok(studentFocus.includes("solution"), "student journey must retain a solution/recovery path");
 
 const sw = fs.readFileSync("sw.js", "utf8");
 assert.ok(sw.includes('"8020-arabic-v6"'), "offline cache version must invalidate stale app UI and cloud-sync wiring");
