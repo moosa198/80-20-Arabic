@@ -133,14 +133,17 @@
     }
     body.innerHTML=html;
     var join=root.document.getElementById("cpJoin");
-    if(join)join.addEventListener("submit",async function(e){e.preventDefault();await joinClass();});
+    if(join)join.addEventListener("submit",function(e){e.preventDefault();joinClass().catch(function(err){setStatus(err.message||String(err));render();});});
     var select=root.document.getElementById("cpSelectClass");
-    if(select)select.addEventListener("submit",async function(e){
-      e.preventDefault();activeClassId=root.document.getElementById("cpClass").value;
-      var chosen=memberships.find(function(m){return m.id===activeClassId;});
-      activeRole=chosen&&chosen.role||"";ready=false;saveActiveChoice();
-      if(activeRole==="student"){await syncSelectedClass();}
-      else if(activeRole){setStatus("Staff account selected. Use the teacher dashboard for class administration and reviews.");root.open("./teacher.html","_blank","noopener");render();}
+    if(select)select.addEventListener("submit",function(e){
+      e.preventDefault();
+      (async function(){
+        activeClassId=root.document.getElementById("cpClass").value;
+        var chosen=memberships.find(function(m){return m.id===activeClassId;});
+        activeRole=chosen&&chosen.role||"";ready=false;saveActiveChoice();
+        if(activeRole==="student"){await syncSelectedClass();}
+        else if(activeRole){setStatus("Staff account selected. Use the teacher dashboard for class administration and reviews.");root.open("./teacher.html","_blank","noopener");render();}
+      })().catch(function(err){setStatus(err.message||String(err));render();});
     });
     bind("cpSyncNow",async function(){
       if(activeRole==="student"){await syncSelectedClass();}
