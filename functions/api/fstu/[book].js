@@ -1,8 +1,9 @@
 const SOURCES = {
-  // Official Al-Qalam Institute Google Drive sources. These defaults can be
-  // replaced in Cloudflare Pages Variables without changing the repository.
+  // Official Al-Qalam Institute Google Drive sources.
+  // FSTU Sarf is deliberately pinned to the published 2023 copy because the
+  // official resource page currently lists its newer edition as unpublished.
   nahw: "https://drive.google.com/uc?export=download&id=12G3XxRit9JqYDKB0dw_hAj7z1Ngv2Kg",
-  sarf: "https://drive.google.com/uc?export=download&id=19kCNLtds9ggGQCXoVLkf0AbE444q3OYB"
+  sarf: "https://drive.google.com/uc?export=download&id=1D4Sr_0iz8fywSmPMB1H9iM1a4FOU7tzr"
 };
 
 export async function onRequestGet(context) {
