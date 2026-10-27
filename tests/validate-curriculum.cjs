@@ -7,7 +7,7 @@ vm.runInNewContext(fs.readFileSync("curriculum.js", "utf8"), curriculumContext, 
 const curriculum = curriculumContext.window.Curriculum;
 assert.ok(curriculum, "curriculum.js must expose window.Curriculum");
 assert.equal(curriculum.lessons.length, 31, "canonical curriculum must have 31 weeks");
-assert.equal(curriculum.studentLessons.length, 31, "Student Studio must use the canonical weeks");
+assert.equal(curriculum.studentLessons.length, 31, "student journey must use the canonical weeks");
 assert.deepEqual(Array.from(curriculum.lessons, week => week.n), Array.from({ length: 31 }, (_, i) => i + 1), "week numbers must be continuous");
 const missingTerms = [];
 for (const week of curriculum.lessons) {
@@ -66,16 +66,29 @@ assert.ok(!/var\s+(?:preview|direct)\s*=/i.test(guide), "student lesson renderer
 const pageRenderer = fs.readFileSync("book-pages.js", "utf8");
 assert.ok(pageRenderer.includes('return kind==="sarf"||kind==="nahw"'), "page renderer must only replace assigned FSTU nodes, never the digital Qur'an viewer");
 
-for (const file of ["index.html", "student.html"]) {
-  const html = fs.readFileSync(file, "utf8");
-  assert.ok(html.includes('src="./curriculum.js"'), file + " must use canonical curriculum data");
-  assert.ok(html.includes('src="./book-pages.js"'), file + " must use the assigned-page renderer");
-  assert.ok(html.includes('src="./progress-transfer.js"'), file + " must use shared progress backup format");
-  assert.ok(html.includes("pdf.min.js"), file + " must load PDF.js for local page rendering");
-  assert.ok(html.includes("term-transliteration"), file + " must implement the gradual terminology scaffold");
-}
+const indexHtml = fs.readFileSync("index.html", "utf8");
+assert.ok(indexHtml.includes('src="./curriculum.js"'), "index.html must use canonical curriculum data");
+assert.ok(indexHtml.includes('src="./book-pages.js"'), "index.html must use the assigned-page renderer");
+assert.ok(indexHtml.includes('src="./progress-transfer.js"'), "index.html must use shared progress backup format");
+assert.ok(indexHtml.includes("pdf.min.js"), "index.html must load PDF.js for local page rendering");
+assert.ok(indexHtml.includes("term-transliteration"), "index.html must implement the gradual terminology scaffold");
+
+const studentHtml = fs.readFileSync("student.html", "utf8");
+const studentFocus = fs.readFileSync("student-focus.js", "utf8");
+assert.ok(studentHtml.includes('src="./curriculum.js"'), "student.html must use canonical curriculum data");
+assert.ok(studentHtml.includes('src="./weekly-guide.js"'), "student.html must use the canonical weekly guide data");
+assert.ok(studentHtml.includes('src="./book-pages.js"'), "student.html must use the assigned-page renderer");
+assert.ok(studentHtml.includes('src="./cloud-progress.js"'), "student.html must retain secure class progress sync");
+assert.ok(studentHtml.includes('src="./student-focus.js"'), "student.html must use the simplified weekly journey");
+assert.ok(studentHtml.includes('src="./fstu-auto.js"'), "student.html must use automatic FSTU source loading");
+assert.ok(studentHtml.includes("pdf.min.js"), "student.html must load PDF.js for assigned source pages");
+assert.ok(/hifz-first/i.test(studentFocus), "student journey must make the Hifz-first priority visible");
+assert.ok(studentFocus.includes("3 AMANAHS"), "student journey must retain the three-Amanah self-check space");
+assert.ok(studentFocus.includes("Secure"), "student journey must retain explicit self-assessment");
+assert.ok(studentFocus.includes("solution"), "student journey must retain a solution/recovery path");
+
 const sw = fs.readFileSync("sw.js", "utf8");
 assert.ok(sw.includes('"8020-arabic-v6"'), "offline cache version must invalidate stale app UI and cloud-sync wiring");
 assert.ok(sw.includes('"./curriculum.js"') && sw.includes('"./book-pages.js"') && sw.includes('"./progress-transfer.js"'), "offline cache must include canonical data, source renderer and progress transfer");
 
-console.log("PASS: 31-week canonical curriculum, term coverage, source-page map, page-only FSTU UI, scaffolding and PWA assets.");
+console.log("PASS: 31-week canonical curriculum, source-page map, page-only FSTU UI, simplified Hifz-first student journey and PWA assets.");
