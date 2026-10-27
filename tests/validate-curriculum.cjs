@@ -75,7 +75,7 @@ for (const file of ["index.html", "student.html"]) {
   assert.ok(html.includes("term-transliteration"), file + " must implement the gradual terminology scaffold");
 }
 const sw = fs.readFileSync("sw.js", "utf8");
-assert.ok(sw.includes('"8020-arabic-v5"'), "offline cache version must invalidate stale full-book UI");
+assert.ok(sw.includes('"8020-arabic-v6"'), "offline cache version must invalidate stale app UI and cloud-sync wiring");
 assert.ok(sw.includes('"./curriculum.js"') && sw.includes('"./book-pages.js"') && sw.includes('"./progress-transfer.js"'), "offline cache must include canonical data, source renderer and progress transfer");
 
 console.log("PASS: 31-week canonical curriculum, term coverage, source-page map, page-only FSTU UI, scaffolding and PWA assets.");
