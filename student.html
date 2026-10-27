@@ -1,281 +1,39 @@
 <!doctype html>
 <html lang="en-GB">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#163c36"><meta name="description" content="80/20 Arabic Student Studio — a Qur’an-first 31-week Arabic course for Hifz students.">
-<title>80/20 Arabic — Student Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#163c36">
+<meta name="description" content="80/20 Arabic — a quiet, Hifz-first weekly Arabic journey for Madrassa students.">
+<title>80/20 Arabic — Weekly Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#172b29;--muted:#687772;--green:#163c36;--green2:#245a4d;--mint:#e4efe7;--cream:#f8f4eb;--paper:#fffdf8;--amber:#e5b864;--amberSoft:#f6ead0;--blue:#e8f0f3;--line:#dce3de;--shadow:0 12px 36px #172b2912;--ar:"Amiri","Noto Naskh Arabic","Traditional Arabic",serif;--sans:"DM Sans",system-ui,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f5ef;color:var(--ink);font:15px/1.55 var(--sans)}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e5b864;outline-offset:2px}.ar{font-family:var(--ar);direction:rtl;unicode-bidi:isolate}.top{height:68px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:20;box-shadow:0 3px 18px #0002}.brand{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none}.mark{width:40px;height:40px;border:1px solid #ffffff44;border-radius:13px;display:grid;place-items:center;color:var(--amber);font:700 29px var(--ar)}.brand b{font-size:16px}.brand small{display:block;color:#c9dad2;font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}.topBtns{display:flex;gap:8px}.topBtn{border:1px solid #ffffff44;background:#ffffff12;color:#fff;border-radius:10px;padding:8px 11px;font-size:11px;font-weight:700}.layout{max-width:1450px;margin:auto;display:grid;grid-template-columns:240px minmax(0,1fr);min-height:calc(100vh - 68px)}aside{background:var(--paper);border-right:1px solid var(--line);padding:25px 15px;position:sticky;top:68px;height:calc(100vh - 68px)}.navTitle{font-size:9px;letter-spacing:.16em;color:#87938d;font-weight:700;padding:0 10px 9px}.nav{display:grid;gap:4px}.nav button{border:0;background:none;color:#566661;text-align:left;padding:11px;border-radius:10px;font-size:12px;font-weight:700}.nav button:hover,.nav button.active{background:#e8f0e9;color:var(--green)}.progressBox{margin-top:25px;padding:14px 11px;background:#fbfcf8;border:1px solid var(--line);border-radius:13px}.bar{height:6px;background:#e5eae5;border-radius:20px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--green2);width:0}.sideStats{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.method{position:absolute;left:15px;right:15px;bottom:20px;border-top:1px solid var(--line);padding:16px 10px;color:var(--muted);font-size:10px}.method b{color:var(--green)}main{padding:30px clamp(17px,4vw,50px) 50px;max-width:1180px;width:100%;margin:auto}.hero{background:var(--green);color:#fff;border-radius:22px;padding:35px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 150px;gap:20px;align-items:center}.kicker{font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#9bbbae}.hero h1{font-size:clamp(32px,4vw,48px);line-height:1.04;letter-spacing:-1.8px;margin:12px 0}.hero p{color:#d5e2dc;max-width:680px;font-size:14px}.heroGlyph{font:400 100px var(--ar);color:var(--amber);text-align:center}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:11px 15px;background:var(--green);color:#fff;font-weight:700;font-size:11px}.btn.gold{background:var(--amber);color:#26352c}.btn.light{background:#fff;border:1px solid var(--line);color:var(--green)}.hero .light{background:#ffffff12;border-color:#ffffff44;color:#fff}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.metric,.card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:16px}.metric small{display:block;color:var(--muted);font-size:9px;margin-bottom:7px}.metric strong{font-size:25px}.metric span{display:block;color:var(--muted);font-size:9px;margin-top:5px}.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:15px}.card h2{font-size:18px;margin:0 0 8px}.eyebrow{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#7c8983;font-weight:700}.target{background:var(--blue);border:1px solid #d5e2e7;border-radius:12px;padding:13px;margin:13px 0}.target p{font-size:12px;color:#53676d}.terms{display:flex;flex-wrap:wrap;gap:6px}.term{display:inline-flex;align-items:center;gap:7px;background:#eff4ef;border:1px solid #d9e4db;border-radius:9px;padding:6px 8px;max-width:100%}.term .en{font-size:9px;color:#496159;font-weight:700}.term .ar{font-size:17px;color:var(--green);line-height:1.2;white-space:nowrap}.weekList{display:grid;gap:7px}.week{width:100%;display:grid;grid-template-columns:38px 1fr auto;gap:11px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:10px 12px;color:var(--ink)}.week:hover{border-color:#9db7a6}.num{width:35px;height:35px;border-radius:10px;background:var(--cream);display:grid;place-items:center;font-weight:700;font-size:10px;color:#765f36}.week.done .num{background:#dcebdd;color:#316348}.week small{display:block;color:var(--muted);font-size:9px;margin-top:2px}.phase{font-size:9px;letter-spacing:.14em;color:#718078;font-weight:700;margin:22px 0 8px;text-transform:uppercase}.lessonHead{display:flex;justify-content:space-between;gap:15px;align-items:flex-end}.lessonHead h1{font-size:clamp(27px,4vw,42px);margin:8px 0}.lessonHead p{color:var(--muted);font-size:12px}.lessonGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.words{display:grid;grid-template-columns:1fr 1fr;gap:8px}.word{border:1px solid var(--line);background:#fffefa;border-radius:11px;padding:11px;min-height:95px}.word .ar{font-size:29px;color:var(--green);display:block;text-align:right}.word .meaning{font-size:10px;color:#53635d;margin-top:4px}.word button{border:0;background:var(--cream);color:#705d39;border-radius:7px;padding:5px 7px;font-size:8px;font-weight:700;margin-top:6px}.cue{border:0;border-bottom:1px solid #cbd4cc;width:100%;background:transparent;padding:3px 0;font-size:10px;margin-top:8px}.high{background:#fcf7eb;border:1px solid #ede0c2;border-radius:14px;padding:14px;margin-top:12px}.highWords{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.highWord{background:#fffdf8;border:1px solid #eee2c8;border-radius:8px;padding:5px 7px;display:flex;align-items:center;gap:5px}.highWord .ar{font-size:17px}.highWord small{font-size:8px;color:#7c6a4a}.micro{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.microBox{padding:14px;border-radius:13px;background:#edf4ef;border:1px solid #dce8de}.microBox.sarf{background:#f5f0e4;border-color:#eee0be}.microBox p,.card p{font-size:11px;color:#53635d;line-height:1.7}.tasks{display:grid;gap:8px;margin-top:12px}.task{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fffefa;font-size:10px;color:#52635b}.task input{margin-top:2px}.write{min-height:42px;border-bottom:1px solid #9daea3;margin:8px 0}.retrieval{margin-top:12px;background:#f7f7f1;border:1px solid var(--line);border-radius:12px;padding:13px}.checkpoint{background:var(--green);color:#fff;border-radius:16px;padding:22px}.checkpoint p{color:#d6e2dc}.checkpoint .term{background:#ffffff10;border-color:#ffffff33}.checkpoint .term .en{color:#d2e0d9}.checkpoint .term .ar{color:#f4ce7b}.review{max-width:720px;margin:15px auto}.flash{background:var(--green);color:#fff;border-radius:20px;min-height:310px;padding:30px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.flash .ar{font-size:65px;color:var(--amber);margin:15px 0}.flashTerm{font-size:30px;font-weight:700;margin:15px 0}.answer{font-size:16px;min-height:25px}.rating{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.rating button{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:10px;font-weight:700;font-size:10px}.refGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tracker{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.trackCard{border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:11px;text-align:center}.trackCard b{display:block;font-size:16px}.trackCard small{color:var(--muted);font-size:8px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--green);color:#fff;padding:10px 15px;border-radius:10px;font-size:10px;opacity:0;pointer-events:none;transition:.2s;z-index:40}.toast.show{opacity:1;transform:translate(-50%,0)}footer{margin-top:35px;border-top:1px solid var(--line);padding-top:15px;color:var(--muted);font-size:9px;display:flex;gap:12px;flex-wrap:wrap}footer button{border:0;background:none;color:var(--green2);font-weight:700;font-size:9px}.hidden{display:none!important}
-@media(max-width:950px){aside{display:none}.layout{display:block}.metrics{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
-@media(max-width:650px){.top{height:62px;padding:0 13px}.topBtns .topBtn:nth-child(1){display:none}main{padding:17px 12px}.hero{grid-template-columns:1fr;padding:23px;border-radius:17px}.heroGlyph{display:none}.hero h1{font-size:32px}.metrics{gap:7px}.metric{padding:11px}.metric strong{font-size:21px}.lessonGrid,.micro,.refGrid{grid-template-columns:1fr}.words{grid-template-columns:1fr 1fr}.week{grid-template-columns:34px 1fr}.week .status{display:none}.rating{grid-template-columns:1fr 1fr}.tracker{grid-template-columns:1fr 1fr}.lessonHead{align-items:flex-start}.lessonHead .tag{display:none}}
-@media print{.top,aside,footer,.noPrint{display:none!important}body{background:#fff}.layout{display:block}main{max-width:none;padding:0}.card,.high,.checkpoint{break-inside:avoid;box-shadow:none}.lessonGrid{grid-template-columns:1fr 1fr}.word{break-inside:avoid}.weekList{break-inside:avoid}}
-
-.weekly-guide{margin:14px 0;padding:17px 18px;background:var(--paper);border:1px solid var(--line);border-radius:15px;min-width:0}
-.weekly-guide h2{font-size:17px;line-height:1.25;margin:7px 0 9px;letter-spacing:-.35px}
-.weekly-guide h3{font-size:13px;margin:0 0 7px}
-.weekly-guide p{font-size:12px;line-height:1.7;color:var(--muted);margin:7px 0}
-.weekly-guide a{font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
-.guide-eyebrow{font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--green2)}
-.hifz-priority{border-left:5px solid var(--amber);background:linear-gradient(115deg,#fff8e8,#fffdf8)}
-.hifz-priority h2{color:var(--green)}
-.hifz-priority p{color:#44554e}
-.guide-small{font-size:10px!important;color:var(--muted)!important}
-.guide-check{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:#fffefa;font-size:11px;color:var(--ink);line-height:1.5}
-.guide-check input{accent-color:var(--green);margin-top:3px;flex-shrink:0}
-.guide-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:11px 0}
-.guide-reveal:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
-.mushaf-reference{background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:13px;margin:12px 0}
-.mushaf-reference h3{font-size:16px;margin:6px 0}
-.mushaf-task[hidden]{display:none!important}
-.mushaf-application{font-weight:600;color:var(--ink)!important}
-.guide-tasks{display:grid;gap:7px;margin:12px 0}
-.appreciation-question{background:#f1f5ef;border:1px solid #dce6dc;padding:12px;border-radius:11px;margin-top:13px}
-.appreciation-question b{font-size:11px}
-.appreciation-question p{margin:5px 0 9px}
-.reflection-lines{height:23px;border-bottom:1px solid #cbd8cc}
-.fstu-focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-.fstu-focus{border:1px solid var(--line);border-radius:12px;padding:13px;min-width:0;background:#f1f5ef}
-.sarf-focus{background:#fbf5e8;border-color:#eee0c2}
-.fstu-focus p{font-size:11px}
-.edition-note{border:1px dashed #d0c08f;background:#fffaf0;border-radius:11px;padding:12px;margin:12px 0}
-.edition-note b{font-size:11px}
-.edition-note p{margin:6px 0 0}
-.lesson-note{border:1px solid var(--line);border-radius:10px;padding:9px 11px;margin:10px 0}
-.lesson-note summary{font-size:11px;font-weight:700;cursor:pointer}
-.optional-media{border-top:1px solid var(--line);margin-top:14px;padding-top:13px}
-.optional-media p{margin:6px 0}
-@media(max-width:650px){.weekly-guide{padding:14px}.fstu-focus-grid{grid-template-columns:1fr}.guide-actions{align-items:flex-start;flex-direction:column}}
-@media print{.mushaf-task[hidden]{display:block!important}.guide-reveal{display:none!important}.weekly-guide{break-inside:avoid}}
-
-/* Layered source-page lesson */
-.weekly-sequence{display:grid;gap:16px;margin:18px 0}
-.sequence-overview{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#edf2ec;border:1px solid var(--line);border-radius:14px}
-.sequence-node{display:flex;align-items:center;gap:7px;min-width:0;color:var(--muted);font-size:10px;font-weight:700}
-.sequence-node span{display:grid;place-items:center;flex:0 0 27px;height:27px;border:1px solid #c9d6cc;border-radius:50%;background:#fff;color:var(--green2);font-size:10px}
-.sequence-node.active span{background:var(--green);color:#fff;border-color:var(--green)}
-.sequence-node.active b{color:var(--green)}
-.sequence-line{height:1px;background:#ccd8ce;flex:1;min-width:8px}
-.weekly-step{min-width:0;padding:clamp(15px,2.5vw,23px);background:var(--paper);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow,0 6px 20px #172b2909)}
-.step-topline{display:flex;gap:12px;align-items:center;margin-bottom:9px}
-.step-number{display:grid;place-items:center;flex:0 0 39px;height:39px;background:var(--green);color:#fff;border-radius:12px;font-size:13px;font-weight:800}
-.step-topline h2,.weekly-guide h2{font-size:clamp(18px,2.1vw,22px);line-height:1.22;letter-spacing:-.45px;margin:5px 0}
-.step-intro{font-size:13px;line-height:1.7;color:var(--muted);margin:8px 0 15px}
-.wudhu-confirm{margin:13px 0}
-.mushaf-task[hidden]{display:none!important}
-.mushaf-reference{background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:13px;margin:14px 0}
-.mushaf-reference h3{font-size:18px;line-height:1.35;margin:6px 0}
-.mushaf-reference-meta{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}
-.page-pill,.book-page-count{font-size:10px;font-weight:700;color:var(--green2);background:#e7efe8;border-radius:20px;padding:5px 9px}
-.mushaf-application{font-weight:700;color:var(--ink)!important;line-height:1.65;margin:15px 0 9px!important}
-.mushaf-transfer-note{background:#f0f5ef;border-left:4px solid var(--green2);border-radius:8px;padding:10px 13px;margin:12px 0}
-.mushaf-transfer-note b{font-size:11px}.mushaf-transfer-note p{font-size:12px;margin:4px 0;color:var(--muted)}
-.book-page-frame{width:100%;min-width:0;margin:9px 0 13px;background:#f1f3ee;border:1px solid #d7dfd8;border-radius:11px;overflow:hidden;text-align:center}
-.book-page-placeholder{min-height:120px;display:grid;place-items:center;padding:18px;color:var(--muted);font-size:11px}
-.book-page-figure{margin:0;padding:10px}
-.source-page-image{display:block;width:100%;max-width:1000px;height:auto;max-height:none;margin:0 auto;background:#fff;border:1px solid #d8ded7;border-radius:5px;box-shadow:0 4px 18px #172b2910;cursor:zoom-in}
-.book-page-figure figcaption{display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap;color:var(--muted);font-size:10px;padding:8px 0 2px}
-.page-zoom-text{border:0;background:none;text-decoration:underline;text-underline-offset:3px;color:var(--green2);font-size:10px;font-weight:700;padding:2px}
-.book-page-missing{min-height:180px;padding:20px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:8px}
-.book-page-missing b{font-size:13px}
-.book-page-missing p{max-width:520px;margin:0;color:var(--muted);font-size:11px;line-height:1.6}
-.book-missing-mark{display:grid;place-items:center;border-radius:50%;width:38px;height:38px;color:var(--green);background:#dfeae1;font-size:22px}
-.book-upload-button{position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;gap:7px;border:1px solid #b9c9bd;background:#fffdf8;color:var(--green);border-radius:9px;padding:9px 13px;font-size:11px;font-weight:800;cursor:pointer}
-.book-upload-button:hover{background:#edf4ed}
-.book-upload-button input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
-.book-upload-button input[type=file]:disabled{cursor:progress}
-.book-upload-button.is-busy{opacity:.6;cursor:progress}
-.book-library-setup{border:1px solid #d4dfd5;background:#fffdf8}
-.book-library-setup h2{font-size:19px}
-.book-library-setup>p{font-size:12px;line-height:1.7;color:var(--muted)}
-.book-upload-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
-.book-upload-card{display:flex;gap:10px;align-items:flex-start;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;background:#f7f8f3}
-.book-upload-mark{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:10px;background:#e4eee5;color:var(--green);font:700 21px var(--ar,serif);direction:rtl}
-.book-upload-copy{min-width:0;flex:1}
-.book-upload-copy h3{font-size:12px;margin:0 0 5px;line-height:1.4}
-.book-upload-copy p{font-size:10px;line-height:1.5;color:var(--muted);margin:4px 0 9px}
-.book-upload-copy .book-status{font-weight:600;overflow-wrap:anywhere}
-.textbook-focus-note{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
-.textbook-focus-item{border:1px solid #d7e2d8;border-radius:11px;background:#eff5ef;padding:12px}
-.textbook-focus-item.nahw-focus{background:#fbf4e7;border-color:#eadebf}
-.textbook-focus-item b{font-size:12px;color:var(--green)}
-.textbook-focus-item p{font-size:11px;line-height:1.6;color:var(--muted);margin:5px 0 0}
-.textbook-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.textbook-panel{min-width:0;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fbfcf8}
-.textbook-panel.sarf-panel{background:#fffaf0;border-color:#eadfbe}
-.textbook-panel-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}
-.textbook-panel-head h3{font-size:15px;margin:4px 0}
-.textbook-panel>p{font-size:11px;line-height:1.65;color:var(--muted);margin:7px 0 10px}
-.textbook-pages{display:grid;gap:12px}
-.textbook-page{min-width:0}
-.textbook-page-caption{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:10px;color:var(--muted)}
-.textbook-page-caption b{color:var(--green);font-size:11px}
-.listening-resources{padding:0;overflow:hidden;background:#f4f7f0;border:2px solid #c8d9cb}
-.listen-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#163c36;color:#fff;padding:19px 21px}
-.listen-heading .guide-eyebrow{color:#e6c982}
-.listen-heading h2{font-size:clamp(20px,2.6vw,26px);margin:5px 0 8px;color:#fff}
-.listen-heading p{max-width:800px;color:#dce8df;font-size:12px;line-height:1.65;margin:0}
-.listen-number{flex:0 0 45px;height:45px;border-radius:50%;display:grid;place-items:center;background:#ffffff16;color:#e6c982;font-size:29px}
-.playlist-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:12px;padding:13px}
-.playlist-card{min-width:0;border:1px solid #d6e0d5;border-radius:12px;background:#fff;padding:14px}
-.playlist-card.primary-playlist{border:2px solid #b9cdbd}
-.playlist-label{font-size:9px;letter-spacing:.13em;font-weight:800;color:var(--green2)}
-.playlist-card h3{font-size:16px;line-height:1.35;margin:6px 0}
-.playlist-card p{font-size:11px;line-height:1.65;color:var(--muted);margin:6px 0 10px}
-.playlist-player{position:relative;width:100%;aspect-ratio:16/9;background:#172b29;border-radius:9px;overflow:hidden;margin:10px 0}
-.playlist-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.playlist-link{display:inline-flex;align-items:center;justify-content:center;margin-top:8px;border:1px solid #bbccbf;border-radius:9px;background:#f0f5ef;color:var(--green);padding:10px 12px;font-size:11px;font-weight:800;text-decoration:none}
-.playlist-link:hover{background:#e3eee4}
-.primary-link{background:#163c36;color:#fff;border-color:#163c36}
-.primary-link:hover{background:#245a4d;color:#fff}
-.bonus-icon{height:88px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(135deg,#f8ecd1,#f8f3e9);color:#91733a;font-size:48px;margin:12px 0}
-.assessment-layer{border:2px solid #d5dce8;background:#fff}
-.test-step-label{display:inline-flex;border-radius:20px;background:#e9eff6;color:#334e6a;font-size:9px;letter-spacing:.12em;font-weight:800;padding:6px 10px}
-.assessment-layer h2{font-size:23px;margin:10px 0}
-.test-intro{font-size:12px;line-height:1.7;color:var(--muted);margin:7px 0 15px}
-.quiz-question{border:1px solid #dce4eb;border-radius:12px;background:#f7f9fc;padding:14px}
-.quiz-fieldset{border:0;padding:0;margin:0;min-width:0}
-.quiz-fieldset legend{font-size:14px;line-height:1.6;font-weight:800;margin:0 0 12px}
-.quiz-option{display:flex;align-items:flex-start;gap:9px;border:1px solid #d8e1e9;border-radius:9px;padding:10px 11px;margin:7px 0;background:#fff;font-size:12px;line-height:1.55;cursor:pointer}
-.quiz-option:has(input:checked){border-color:#759481;background:#edf5ee}
-.quiz-option input{margin-top:4px;accent-color:var(--green);flex-shrink:0}
-.quiz-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 0}
-.quiz-feedback,.evidence-feedback{padding:12px 13px;border-radius:10px;background:#edf5ee;border:1px solid #c9ddcc;margin-top:12px;color:#274d37;font-size:12px;line-height:1.65}
-.quiz-feedback p,.evidence-feedback p{margin:4px 0 0}
-.quiz-feedback.quiz-review,.quiz-feedback.needs-answer{background:#fff5e5;border-color:#ead8ad;color:#765a24}
-.quiz-application{margin-top:15px;border-top:1px solid var(--line);padding-top:16px}
-.quiz-application h3{font-size:15px;margin:5px 0}
-.quiz-application>p{font-size:12px;line-height:1.65;color:var(--muted)}
-.evidence-label{display:grid;gap:6px;font-size:11px;font-weight:800;margin:11px 0}
-.evidence-label input,.evidence-label textarea{width:100%;min-width:0;background:#fff;border:1px solid #cfd9d2;border-radius:9px;padding:10px 11px;color:var(--ink);font:inherit;font-size:12px}
-.evidence-label textarea{resize:vertical;line-height:1.5}
-.test-checklist{display:grid;gap:8px;padding:12px;border-radius:10px;background:#f8f7f0;border:1px solid #e2dfcf;margin-top:15px}
-.test-checklist b{font-size:11px}
-.test-checklist label{display:flex;align-items:flex-start;gap:8px;font-size:11px;line-height:1.5}
-.test-checklist input{accent-color:var(--green);margin-top:3px}
-.book-page-zoom{position:fixed;inset:0;z-index:1000;background:#101c1aeF;display:flex;flex-direction:column;padding:12px}
-.book-page-zoom[hidden]{display:none!important}
-.book-page-zoom-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#fff;padding:4px 2px 12px}
-.book-page-zoom-toolbar span{font-size:12px;font-weight:700}
-.book-page-zoom-toolbar button{border:1px solid #ffffff55;border-radius:8px;background:#ffffff16;color:#fff;padding:8px 12px;font-size:11px}
-.book-page-zoom-stage{flex:1;min-height:0;display:grid;place-items:center;overflow:auto}
-.book-page-zoom-stage img{display:block;max-width:96vw;max-height:calc(100vh - 65px);width:auto;height:auto;object-fit:contain;background:#fff;border-radius:5px}
-@media(max-width:900px){.book-upload-grid{grid-template-columns:1fr}.textbook-stack{grid-template-columns:1fr}.playlist-grid{grid-template-columns:1fr}}
-@media(max-width:560px){.sequence-overview{gap:5px;padding:10px 8px}.sequence-node{gap:4px;font-size:9px}.sequence-node span{flex-basis:24px;height:24px}.sequence-line{min-width:3px}.weekly-step{padding:13px}.textbook-focus-note{grid-template-columns:1fr}.listen-heading{padding:15px}.playlist-grid{padding:9px}.playlist-card{padding:11px}.book-page-figure{padding:5px}}
-@media print{.book-library-setup,.book-upload-button,.guide-reveal,.quiz-actions,.page-zoom-text{display:none!important}.mushaf-task[hidden]{display:block!important}.weekly-step,.textbook-panel,.playlist-card,.assessment-layer{break-inside:avoid}.source-page-image{max-width:100%!important;box-shadow:none}.playlist-player{display:none}.weekly-step{margin:0 0 12px}}
-
-/* Structure-first pedagogy and integrated-source interaction */
-.source-method-card{background:#fffdf8}
-.method-rhythm{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:13px 0}
-.method-rhythm>div{border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px;min-width:0}
-.method-rhythm b{font-size:10px;color:var(--green2)}
-.method-rhythm p{font-size:10px!important;margin:6px 0 0!important}
-.digital-mushaf-frame{background:#fff;padding:12px}
-.digital-mushaf-frame quran-madina-html{display:block;width:100%;max-width:100%;margin:0 auto;background:#fff;color:#172b29;overflow:auto}
-.digital-mushaf-frame .quran-madina-html-word-highlight{background:transparent!important;box-shadow:none!important;color:inherit!important}
-.digital-mushaf-frame .quran-madina-html-word,.digital-mushaf-frame .recognition-word{cursor:pointer;border-radius:3px}
-.digital-mushaf-frame .quran-madina-html-word:focus-visible{outline:2px solid #af863d;outline-offset:2px}
-.digital-mushaf-frame .quran-madina-html-word.student-picked-word{background:#f3dfaa!important;box-shadow:0 0 0 2px #8a692b!important;color:#172b29!important}
-.digital-mushaf-frame .page-caption{font-size:10px;text-align:center;color:var(--muted);padding:6px 0 0}
-.digital-reader-fallback{font-size:12px;line-height:1.6;padding:14px;color:var(--muted)}
-.fstu-page-frame iframe{display:block;width:100%;height:440px;border:0;background:#fff}
-.fstu-open-link{padding:6px 10px!important;margin:0!important;text-align:center;background:#f7f8f3;border-top:1px solid var(--line)}
-.source-edition-note{font-size:10px!important;line-height:1.55!important;color:#596960!important;background:#f7f6f0;border-radius:8px;padding:8px 10px}
-.source-return-note{border-left:3px solid var(--amber);padding:8px 12px;background:#fff8e9;border-radius:0 8px 8px 0}
-.recognition-lab{margin-top:15px;padding:16px;background:#f4f7f0;border:1px solid #d5e2d5;border-radius:13px}
-.recognition-lab h3{font-size:17px;margin:5px 0}
-.recognition-stage{font-size:10px!important;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green2)!important}
-.recognition-selected{display:grid;gap:5px;margin:12px 0;padding:12px;border:1px dashed #b8cbbb;border-radius:10px;background:#fff}
-.recognition-selected>b{font-size:10px;color:var(--muted)}
-.selected-arabic{display:block;min-height:27px;font:700 23px "Amiri",serif;text-align:right;unicode-bidi:isolate;color:var(--green)}
-.recognition-selected small{font-size:9px;color:var(--muted)}
-.recognition-actions{margin:7px 0}
-.recognition-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:11px 0 15px}
-.recognition-label{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0;border:1px solid var(--line);border-radius:9px;background:#fff;padding:9px;text-align:left;color:var(--ink)}
-.recognition-label span{font-size:10px;font-weight:700;line-height:1.35}
-.recognition-label b{font:700 18px "Amiri",serif;direction:rtl;white-space:nowrap}
-.recognition-label.selected{border:2px solid var(--green2);background:#e8f1e9;padding:8px}
-.evidence-label{display:grid;gap:5px;font-size:10px;font-weight:700;margin:11px 0}
-.evidence-label textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:9px;padding:10px;font:12px/1.6 var(--font,Arial,sans-serif);color:var(--ink);resize:vertical;background:#fff}
-.recognition-history-wrap{margin-top:12px;border-top:1px solid #dbe4da;padding-top:10px}
-.recognition-history-wrap>b{font-size:10px}
-.recognition-history{display:grid;gap:7px;margin-top:7px}
-.recognition-history-row{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px;display:grid;gap:4px;font-size:10px;line-height:1.5}
-.recognition-history-row>b{color:var(--green2)}
-.recognition-history-row>span{font-weight:700}
-.recognition-history-row>p{margin:0!important;font-size:10px!important}
-.recognition-feedback{padding:10px;border-radius:9px;background:#fff;border:1px solid var(--line);font-size:11px;line-height:1.6;margin-top:9px}
-.recognition-feedback.saved{background:#edf5ed;border-color:#bad2bd}
-.recognition-feedback.needs-work{background:#fff7e7;border-color:#e6d5af}
-.btn.light,.btnlight{background:#fff!important;color:var(--green2)!important;border:1px solid #c9d7ca!important}
-.transfer-page-picker{border-top:1px solid var(--line);padding-top:10px;margin-top:8px;display:grid;gap:6px}
-.transfer-page-picker label{font-weight:700;font-size:10px}
-.transfer-page-picker>div{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.transfer-page-picker input{width:100px;max-width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:12px}
-.transfer-page-picker small{font-size:10px;line-height:1.5;color:var(--muted)}
-@media(max-width:760px){.method-rhythm{grid-template-columns:1fr 1fr}.recognition-labels{grid-template-columns:1fr 1fr}.fstu-page-frame iframe{height:360px}.digital-mushaf-frame{padding:6px}.digital-mushaf-frame quran-madina-html{overflow:auto}}
-@media(max-width:430px){.recognition-labels{grid-template-columns:1fr}.recognition-label{padding:8px 10px}.recognition-label b{font-size:19px}}
-
+:root{--ink:#172b29;--muted:#687772;--green:#163c36;--green2:#245a4d;--paper:#fffdf8;--cream:#f8f4eb;--amber:#e5b864;--amberSoft:#f6ead0;--line:#dce3de;--blue:#edf3f3;--red:#8c4639;--ar:"Amiri","Noto Naskh Arabic","Traditional Arabic",serif;--sans:"DM Sans",system-ui,sans-serif}
+*{box-sizing:border-box}html{background:#f5f6f1}body{margin:0;background:#f5f6f1;color:var(--ink);font:15px/1.55 var(--sans)}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--amber);outline-offset:2px}.ar,[lang=ar]{font-family:var(--ar);direction:rtl;unicode-bidi:isolate}.top{height:64px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(14px,4vw);position:sticky;top:0;z-index:30;box-shadow:0 2px 14px #172b2930}.brand{color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}.mark{width:38px;height:38px;border:1px solid #ffffff44;border-radius:12px;display:grid;place-items:center;color:var(--amber);font:700 27px var(--ar)}.brand b{display:block;font-size:15px}.brand small{display:block;color:#c8d9d1;font-size:8px;letter-spacing:.15em;text-transform:uppercase;margin-top:2px}.topActions{display:flex;gap:7px;align-items:center}.topBtn{border:1px solid #ffffff45;background:#ffffff12;color:#fff;border-radius:9px;padding:7px 10px;font-size:10px;font-weight:700;text-decoration:none}.wrap{max-width:900px;margin:auto;padding:20px 16px 55px}.focus-header{display:flex;justify-content:space-between;gap:15px;align-items:flex-end;margin:10px 0 15px}.eyebrow{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--green2);font-weight:800}.focus-header h1{font-size:clamp(29px,5vw,43px);line-height:1;margin:7px 0 6px;letter-spacing:-1.5px}.focus-header p{margin:0;color:var(--muted);font-size:12px}.teacher-link{font-size:10px;color:var(--green2);font-weight:800;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px;background:var(--paper)}.focus-progress{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:9px 10px;margin-bottom:14px}.focus-stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.focus-step{border:0;background:transparent;border-radius:8px;padding:7px 5px;text-align:center;color:#89948e;min-width:0}.focus-step span{display:grid;place-items:center;margin:auto;width:23px;height:23px;border-radius:50%;font-size:9px;font-weight:800;background:#eef1ec}.focus-step b{display:block;font-size:8px;line-height:1.2;margin-top:4px}.focus-step.active{background:#edf3ed;color:var(--green)}.focus-step.active span,.focus-step.visited span{background:var(--green);color:#fff}.focus-step.visited{color:var(--green2)}.focus-progress-meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:9px;margin-top:8px}.focus-card{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:clamp(18px,4vw,29px);box-shadow:0 8px 28px #172b290b}.focus-card h2{font-size:clamp(23px,4vw,31px);line-height:1.15;letter-spacing:-.7px;margin:7px 0 9px}.focus-card h3{font-size:16px;margin:0 0 8px}.lead{font-size:13px;color:#53635d;line-height:1.75;max-width:700px}.small{font-size:10px;color:var(--muted);line-height:1.6}.hifz-box{margin:18px 0;padding:15px 16px;border-left:4px solid var(--amber);background:#fff8e8;border-radius:10px}.hifz-box b{font-size:12px}.hifz-box p{font-size:11px;color:#526057;margin:5px 0 0;line-height:1.65}.amanah-box{border:1px solid var(--line);background:#f7f8f3;border-radius:12px;padding:15px;margin-top:15px}.amanah-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.amanah-grid label{display:grid;gap:5px;font-size:9px;font-weight:800}.amanah-grid span{color:var(--green2)}select{border:1px solid #ccd7cf;border-radius:8px;background:#fff;padding:8px;font-size:10px;color:var(--ink)}.focus-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:20px}.primary,.secondary{border-radius:9px;padding:10px 13px;font-size:10px;font-weight:800}.primary{border:1px solid var(--green);background:var(--green);color:#fff}.secondary{border:1px solid var(--line);background:#fff;color:var(--green)}.assigned-pages{margin-top:17px}.assigned-head{display:flex;justify-content:space-between;gap:10px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:9px}.assigned-head h3{margin:4px 0 0}.assigned-head>span{font-size:9px;color:var(--muted);text-align:right}.source-book{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:12px;background:#f6f8f3}.source-book.sarf{background:#fbf7ed}.source-book h4{margin:0;font-size:13px}.source-book>p{font-size:10px;color:#5a6962;line-height:1.65;margin:5px 0 10px}.source-pages{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px}.source-pages figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}.source-pages figcaption{padding:6px 8px;font-size:8px;font-weight:800;color:var(--green2);border-bottom:1px solid var(--line)}.source-pages [data-book-page]{min-height:120px}.book-page-figure{margin:0}.book-page-figure img{display:block;width:100%;height:auto}.book-page-figure figcaption{padding:5px 7px;font-size:8px;color:var(--muted)}.book-page-missing{padding:15px 10px;text-align:center;font-size:9px;color:var(--muted)}.book-page-missing b{color:var(--ink)}.book-upload-button{display:inline-block;margin-top:8px;padding:7px 9px;background:var(--green);color:#fff;border-radius:7px;font-weight:800}.book-upload-button input{display:none}.source-check{border-top:1px solid var(--line);margin-top:18px;padding-top:17px}.check{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px;font-size:10px;line-height:1.5;margin:7px 0}.check input{margin-top:3px;accent-color:var(--green)}.evidence{display:grid;gap:5px;margin-top:10px;font-size:10px;font-weight:800}.evidence textarea{width:100%;border:1px solid #cdd8d0;border-radius:9px;padding:9px;resize:vertical;background:#fff;color:var(--ink);font-size:11px;line-height:1.6}.solution{margin-top:11px;padding:11px;background:#f2f5f0;border:1px solid var(--line);border-radius:9px}.solution b{font-size:10px}.solution p{font-size:10px;color:#5b6a63;line-height:1.6;margin:5px 0}.hidden{display:none!important}.vocab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:15px 0}.vocab-card{position:relative;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff;min-height:116px}.vocab-no{position:absolute;top:8px;left:9px;font-size:8px;color:#89948e}.vocab-card>b{display:block;text-align:right;font-size:29px;line-height:1.25;color:var(--green);min-height:42px}.vocab-card .meaning{display:block;font-size:9px;color:var(--muted);margin:4px 0 7px;min-height:14px}.vocab-card.shown{background:#f4f8f2}.vocab-check{margin-top:13px}.quran-target{display:grid;grid-template-columns:auto auto;gap:4px 9px;background:var(--cream);border:1px solid var(--line);border-radius:11px;padding:12px;margin:14px 0}.quran-target b{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--green2)}.quran-target span{font-size:9px;text-align:right;color:var(--muted)}.quran-target strong{grid-column:1/-1;font-size:17px}.quran-target small{grid-column:1/-1;font-size:9px;color:var(--muted)}.quran-page{background:#f7f8f4;border:1px solid var(--line);border-radius:12px;padding:9px;text-align:center}.quran-page [data-book-page]{min-height:220px}.quran-page .small{margin:8px 3px 2px}.prompts{display:grid;gap:9px;margin-top:14px}.prompt-card{display:grid;grid-template-columns:28px 1fr;gap:9px;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff}.prompt-no{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:var(--green);color:#fff;font-size:9px;font-weight:800}.prompt-card b{font-size:11px}.prompt-card p{font-size:9px;color:var(--muted);line-height:1.6;margin:5px 0 8px}.evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.arabic-input{width:100%;border:1px solid #cbd7ce;border-radius:8px;padding:8px;background:#fff;font-family:var(--ar);font-size:17px;text-align:right}.assessment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.assess{border:1px solid var(--line);border-radius:10px;background:#fff;text-align:left;padding:12px;color:var(--ink)}.assess b{display:block;font-size:11px;color:var(--green)}.assess span{display:block;font-size:9px;color:var(--muted);line-height:1.5;margin-top:4px}.assess.selected{border:2px solid var(--green2);background:#edf5ee}.solution-box{margin-top:15px;border:1px solid var(--line);border-radius:11px;padding:14px;background:#f5f7f2}.solution-box h3{font-size:14px}.solution-box p{font-size:10px;color:#596861;margin:6px 0}.finish-box{margin-top:15px;padding:14px;border-radius:10px;background:#163c36;color:#fff}.finish-box b{font-size:11px}.finish-box p{font-size:10px;color:#d5e2dc;margin:5px 0}.book-page-zoom{position:fixed;inset:0;z-index:100;background:#172b29e8;padding:12px;display:grid;grid-template-rows:auto 1fr}.book-page-zoom[hidden]{display:none}.book-page-zoom-toolbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:11px;padding:4px}.book-page-zoom-toolbar button{border:1px solid #ffffff44;background:#ffffff12;color:#fff;border-radius:7px;padding:6px 8px}.book-page-zoom-stage{overflow:auto;text-align:center}.book-page-zoom-stage img{max-width:100%;height:auto;background:#fff}
+@media(max-width:650px){.wrap{padding:14px 11px 40px}.focus-step b{font-size:7px}.focus-progress-meta{font-size:8px}.focus-header{align-items:flex-start}.teacher-link{margin-top:3px}.amanah-grid,.assessment-grid{grid-template-columns:1fr}.vocab-grid{grid-template-columns:1fr 1fr}.source-pages{grid-template-columns:1fr}.evidence-grid{grid-template-columns:1fr}.focus-card{padding:16px}.quran-target strong{font-size:15px}}
+@media(max-width:400px){.vocab-grid{grid-template-columns:1fr}.focus-step b{display:none}.focus-step{padding:6px}.focus-step span{width:25px;height:25px}}
 </style>
 </head>
 <body>
-<header class="top"><a class="brand" href="./student.html"><span class="mark ar">ع</span><span><b>80/20 Arabic</b><small>Student Studio</small></span></a><div class="topBtns"><button class="topBtn" id="print">Print lesson</button><button class="topBtn" id="export">Export progress</button></div></header>
-<div class="layout"><aside><div class="navTitle">LEARN</div><nav class="nav"><button class="active" data-view="home">⌂ Home</button><button data-view="course">▦ 31-week course</button><button data-view="review">↻ 5-minute review</button><button data-view="terms">ع Grammar terms</button><button data-view="progress">↗ My progress</button></nav><div class="progressBox"><div class="navTitle" style="padding-left:0">YOUR PATH</div><div class="bar"><i id="sideBar"></i></div><div class="sideStats"><span id="sideDone">0/31</span><span id="sidePct">0%</span></div></div><div class="method"><b>THE LOOP</b><br>Retrieve → recognise → explain → find it again.</div></aside>
-<main id="main"></main></div><div id="toast" class="toast"></div>
-<script data-font-size="24" src="https://unpkg.com/quran-madina-html@2"></script>
+<header class="top"><a class="brand" href="./student.html"><span class="mark" lang="ar">ع</span><span><b>80/20 Arabic</b><small>Hifz-first weekly journey</small></span></a><div class="topActions"><a class="topBtn" href="./teacher.html">Teacher</a><button class="topBtn" id="classSyncHost" type="button">Class sync</button></div></header>
+<div class="wrap" id="focusMain"></div>
 <script src="./curriculum.js"></script>
 <script src="./weekly-guide.js"></script>
-<script src="./recognition.js"></script>
-<script src="./progress-transfer.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="./book-pages.js"></script>
 <script src="./supabase-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./cloud-progress.js"></script>
+<script src="./fstu-auto.js"></script>
+<script src="./student-focus.js"></script>
 <script>
-'use strict';
-const TERMS=window.Curriculum.terms;
-const t=k=>{
-const x=TERMS[k]||[k,""];
-const reps=(state.cards["term:"+k]||state.cards["t-"+k]||{}).reps||0;
-const first=reps<3&&x[2],shown=first?x[2]:x[1];
-const trans=first&&x[3]?'<small class="term-transliteration" style="display:block;opacity:.62;font-size:.72em;direction:ltr">'+esc(x[3])+'</small>':"";
-const gloss=first&&x[4]?'<small class="term-gloss" style="display:block;opacity:.76;font-size:.75em;line-height:1.3">'+esc(x[4])+'</small>':"";
-return '<span class="term" data-term-key="'+esc(k)+'"><span class="en">'+esc(x[0])+'</span><span class="ar" lang="ar" dir="rtl">'+esc(shown||"")+'</span>'+trans+gloss+'</span>';
-};
-const tr=ks=>`<div class="terms">${ks.map(t).join('')}</div>`;
-const C=window.Curriculum.studentLessons;
-const STORE='8020-student-v2';let state=load(),view='home',selected=1,reviewMode='words',queue=[],pos=0,revealed=false;
-function blank(){return{done:{},cards:{}}}function load(){try{return Object.assign(blank(),JSON.parse(localStorage.getItem(STORE)||'{}'))}catch(e){return blank()}}function save(){localStorage.setItem(STORE,JSON.stringify(state));updateSide()}
-function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function toast(x){let e=document.getElementById('toast');e.textContent=x;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200)}
-function done(){return Object.values(state.done).filter(Boolean).length}function pct(){return Math.round(done()/31*100)}function updateSide(){document.getElementById('sideBar').style.width=pct()+'%';document.getElementById('sideDone').textContent=done()+'/31';document.getElementById('sidePct').textContent=pct()+'%'}
-function wordCards(){return C.flatMap(x=>(x.words||[]).map((w,i)=>({key:`w${x.n}-${i}`,ar:w[0],en:w[1],week:x.n,kind:'word'})))}
-function highCards(){let a=[],seen=new Set();C.forEach(x=>(x.hf||[]).forEach(w=>{if(!seen.has(w[0])){seen.add(w[0]);a.push({key:'h-'+w[0],ar:w[0],en:w[1],kind:'high'})}}));return a}
-function termCards(){return Object.entries(TERMS).map(([k,v])=>{let first=(state.cards['term:'+k]?.reps||state.cards['t-'+k]?.reps||0)<3&&v[2];return {key:'t-'+k,termKey:k,en:v[0],ar:first?v[2]:v[1],transliteration:first?v[3]:'',gloss:first?v[4]:'',kind:'term'}})}
-function cards(){return reviewMode==='terms'?termCards():reviewMode==='high'?highCards():wordCards()}
-function nextWeek(){return C.find(x=>!state.done[x.n])||C[30]}
-function summary(x){return x.checkpoint?'Al-Fātiḥah retrieval checkpoint':x.capstone?'Choose your own memorised page':`Madani 15-line Mushaf · p. ${x.page} · ${x.title}`}
-function weekButton(x){return `<button class="week ${state.done[x.n]?'done':''}" data-week="${x.n}"><span class="num">${state.done[x.n]?'✓':String(x.n).padStart(2,'0')}</span><span><b>Week ${x.n} · ${esc(x.title)}</b><small>${esc(summary(x))}</small></span><span class="status eyebrow">${state.done[x.n]?'DONE':'OPEN →'}</span></button>`}
-function home(){let n=nextWeek(),known=wordCards().filter(x=>(state.cards[x.key]?.reps||0)>=4).length;document.getElementById('main').innerHTML=`<section class="hero"><div><div class="kicker">QUR’AN-FIRST · 80/20 METHOD</div><h1>See the Qur’an.<br>Understand the structure.</h1><p>Start with whole Qur’anic phrases, study only the structural map needed to read them, then return to the same text and retrieve the pattern on another memorised page. Hifz remains the priority.</p><div class="actions"><button class="btn gold" id="continue">Continue Week ${n.n} →</button><button class="btn light" id="reviewBtn">5-minute review</button></div></div><div class="heroGlyph ar">ع</div></section>${WeeklyGuide.renderPriority()+WeeklyGuide.renderLibrarySetup()}<div class="metrics"><div class="metric"><small>COURSE PROGRESS</small><strong>${pct()}%</strong><span>${done()} of 31 weeks</span></div><div class="metric"><small>WORDS ESTABLISHED</small><strong>${known}</strong><span>4+ successful recalls</span></div><div class="metric"><small>REVIEW CARDS</small><strong>${Object.keys(state.cards).length}</strong><span>stored locally</span></div><div class="metric"><small>WEEKLY CLASS</small><strong>45m</strong><span>plus short practice</span></div></div><div class="grid2"><section class="card"><div class="eyebrow">NEXT LESSON</div><h2>Week ${n.n} · ${esc(n.title)}</h2><div class="target"><div class="eyebrow">TARGET</div>${tr(n.focus)}<p>${esc(n.objective)}</p></div><button class="btn" id="open">Open lesson →</button></section><section class="card"><div class="eyebrow">FAST MASTERY LOOP</div><div class="tasks"><div class="task"><b>1</b><span><strong>Retrieve</strong><br>Try before looking.</span></div><div class="task"><b>2</b><span><strong>Recognise</strong><br>Spot the Arabic evidence.</span></div><div class="task"><b>3</b><span><strong>Explain</strong><br>Name the English + Arabic term.</span></div><div class="task"><b>4</b><span><strong>Transfer</strong><br>Find it on another page.</span></div></div></section></div><div class="phase">UP NEXT</div><div class="weekList">${C.filter(x=>x.n>=n.n&&x.n<n.n+3).map(weekButton).join('')}</div>`;document.getElementById('continue').onclick=()=>open(n.n);document.getElementById('open').onclick=()=>open(n.n);document.getElementById('reviewBtn').onclick=()=>startReview('words');bindWeeks();}
-function course(){let groups=[['PHASE 1 · FOUNDATIONS',C.slice(0,7)],['CHECKPOINT 1',C.slice(7,8)],['PHASE 2 · RELATIONSHIPS',C.slice(8,15)],['CHECKPOINT 2',C.slice(15,16)],['PHASE 3 · CONNECTED MEANING',C.slice(16,23)],['CHECKPOINT 3',C.slice(23,24)],['PHASE 4 · INDEPENDENT READING',C.slice(24,31)]];document.getElementById('main').innerHTML=`<div class="kicker">THE FULL PATH</div><h1>31 weeks to independent reading</h1><p class="card" style="color:var(--muted)">The sequence deliberately moves from recognition → relationships → connected meaning → independent analysis. Grammar terms are always stored as English + Arabic pairs.</p>${groups.map(g=>`<div class="phase">${g[0]}</div><div class="weekList">${g[1].map(weekButton).join('')}</div>`).join('')}`;bindWeeks()}
-function bindWeeks(){document.querySelectorAll('[data-week]').forEach(b=>b.onclick=()=>open(+b.dataset.week))}
-function open(n){selected=n;view='lesson';render()}
-function lesson(x){let s=x.checkpoint?checkpoint(x):lessonBody(x);if(x.checkpoint)s+=WeeklyGuide.renderSequence(x.n,{esc:esc});document.getElementById('main').innerHTML=`<div class="lessonHead"><div><button class="btn light noPrint" id="back">← Course</button><div class="kicker">WEEK ${String(x.n).padStart(2,'0')} · ${x.checkpoint?'RETRIEVAL CHECKPOINT':'45-MINUTE CLASS'}</div><h1>${esc(x.title)}</h1><p>${esc(summary(x))}</p></div></div>${WeeklyGuide.renderPriority()}${s}<section class="card noPrint" style="margin-top:13px"><div class="eyebrow">FINISH</div><p>Before you finish, explain the main idea without notes and point to one Arabic clue.</p><label class="task"><input type="checkbox" id="complete" ${state.done[x.n]?'checked':''}> I can recognise this feature and explain one Arabic clue.</label><div class="actions" style="margin-top:10px"><button class="btn" id="saveWeek">${state.done[x.n]?'Update completion':'Mark week complete'}</button><button class="btn light" id="next">Next week →</button><button class="btn light" id="printLesson">Print lesson</button></div></section>`;document.getElementById('back').onclick=()=>{view='course';render()};document.getElementById('saveWeek').onclick=()=>{state.done[x.n]=document.getElementById('complete').checked;save();toast(state.done[x.n]?'Week completed':'Completion removed');lesson(x)};document.getElementById('next').onclick=()=>open(Math.min(31,x.n+1));document.getElementById('printLesson').onclick=()=>window.print();bindReveal();WeeklyGuide.bind(x.n)}
-function lessonBody(x){let words=x.capstone?Array.from({length:7},(_,i)=>`<div class="word"><div class="eyebrow">YOUR WORD ${i+1}</div><input class="cue ar" placeholder="اكتب الكلمة هنا" aria-label="Arabic word ${i+1}"><input class="cue" placeholder="meaning / root / cue"></div>`).join(''):x.words.map((z,i)=>`<div class="word"><span class="ar">${esc(z[0])}</span><div class="meaning hidden" id="m${x.n}-${i}">${esc(z[1])}</div><button data-reveal="${x.n}-${i}">Reveal meaning</button><input class="cue" placeholder="my memory cue" aria-label="memory cue"></div>`).join('');return `<section class="card" style="margin-top:14px"><div class="eyebrow">THIS WEEK’S TARGET · ENGLISH + ARABIC</div>${tr(x.focus)}<p>${esc(x.objective)}</p></section><div class="lessonGrid"><section class="card"><div class="eyebrow">${x.capstone?'CHOOSE SEVEN WORDS':'7 NEW QUR’AN WORDS'}</div><div class="words" style="margin-top:9px">${words}</div></section><section><div class="high"><div class="eyebrow">HIGH-FREQUENCY QUR’AN WORDS</div><p>These recurring function words have their own review set; they do not consume the seven lexical-word slots.</p><div class="highWords">${(x.hf||[]).map(z=>`<span class="highWord"><span class="ar">${esc(z[0])}</span><small>${esc(z[1])}</small></span>`).join('')}</div></div><div class="micro"><div class="microBox"><div class="eyebrow">NAḤW · نحو</div><p>${esc(WeeklyGuide.get(x.n).nahw)}</p>${tr(x.focus.filter(k=>['noun','verb','particle','nominal','verbal','mubtada','khabar','faail','mafool','preposition','genitive','jarMajrur','conjunction','idafah','pronoun','adjective','relativePronoun','relativeClause','inna','emphasis','kana','laysa','negation','jussive','subjunctive','passive','naib','condition','result','exception','question','vocative','oath','zarf','purpose','purposeLam','haal','dual','number','restriction','absolute','particleChoice','tarkib','agreement','manMa'].includes(k)))}</div><div class="microBox sarf"><div class="eyebrow">ṢARF · صرف</div><p>${esc(WeeklyGuide.get(x.n).sarf)}</p>${tr(x.focus.filter(k=>['past','imperfect','imperative','attachedPronoun','derived','activeParticiple','passiveParticiple','pattern','root','conjugation','weak'].includes(k)))}</div></div></section></div>${WeeklyGuide.renderSequence(x.n,{passage:x.passage,apply:x.apply,nahw:x.nahw,sarf:x.sarf,esc:esc})}`}
-function checkpoint(x){return `<section class="checkpoint" style="margin-top:14px"><div class="eyebrow" style="color:#a9c4b6">AL-FĀTIḤAH · NO NOTES FIRST</div><h2>${esc(x.title)}</h2><p>${esc(x.objective)}</p>${tr(x.focus)}<div class="retrieval" style="margin-top:14px;background:#fff;color:var(--ink)"><b>Checkpoint rule:</b> use the Arabic evidence to justify each answer. The weekly source-page sequence and recognition test follow below.</div></section>`}
-function bindReveal(){document.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=()=>{let e=document.getElementById('m'+b.dataset.reveal);e.classList.toggle('hidden');b.textContent=e.classList.contains('hidden')?'Reveal meaning':'Hide meaning'})}
-function review(){let list=cards(),due=list.filter(x=>state.cards[x.key]?.due<=today());if(!due.length)due=list.filter(x=>!(state.cards[x.key]?.reps));if(!due.length)due=list.slice(0,10);queue=due.slice(0,10);pos=0;revealed=false;view='review';render()}
-function startReview(m){reviewMode=m;review();}
-function today(){return new Date().toISOString().slice(0,10)}function addDays(n){let d=new Date(today()+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)}
-function reviewView(){if(!queue.length){review();return}let c=queue[pos];let termMode=c.kind==='term';document.getElementById('main').innerHTML=`<div class="kicker">5-MINUTE RETRIEVAL · ${reviewMode==='terms'?'ENGLISH ↔ ARABIC TERMS':reviewMode==='high'?'HIGH-FREQUENCY':'QUR’AN VOCABULARY'}</div><h1>Make recall automatic</h1><div class="actions noPrint"><button class="btn ${reviewMode==='words'?'':'light'}" id="rw">Qur’an vocabulary</button><button class="btn ${reviewMode==='high'?'':'light'}" id="rh">High-frequency words</button><button class="btn ${reviewMode==='terms'?'':'light'}" id="rt">Grammar terms · مصطلحات</button></div><div class="review"><div class="flash"><div class="eyebrow" style="color:#c7d8d0">CARD ${pos+1} OF ${queue.length}</div>${termMode?`<div class="flashTerm">${esc(c.en)}</div>`:`<span class="ar">${esc(c.ar)}</span>`}<div class="answer">${revealed?(termMode?`<span class="ar">${esc(c.ar)}</span>${c.transliteration?`<small class="term-transliteration" style="display:block;opacity:.62;font-size:.72em;direction:ltr">${esc(c.transliteration)}</small>`:""}`:esc(c.en)):(termMode?'Recall the Arabic term':'Try to recall the meaning')}</div><button class="topBtn" id="reveal" style="margin-top:16px">${revealed?'Answer revealed':'Reveal answer'}</button></div>${revealed?`<div class="rating"><button data-rate="again">Again<br><small>not recalled</small></button><button data-rate="hard">Hard<br><small>needed effort</small></button><button data-rate="good">Good<br><small>recalled</small></button><button data-rate="easy">Easy<br><small>instant</small></button></div>`:''}</div>`;document.getElementById('rw').onclick=()=>startReview('words');document.getElementById('rh').onclick=()=>startReview('high');document.getElementById('rt').onclick=()=>startReview('terms');document.getElementById('reveal').onclick=()=>{revealed=true;reviewView()};document.querySelectorAll('[data-rate]').forEach(b=>b.onclick=()=>rate(c,b.dataset.rate))}
-function rate(c,r){let p=state.cards[c.key]||{reps:0,interval:0,ease:2.4};let iv=1;if(r==='again'){p.reps=0;p.ease=Math.max(1.3,p.ease-.2);iv=0}else if(r==='hard'){p.reps++;p.ease=Math.max(1.3,p.ease-.12);iv=Math.max(1,Math.round((p.interval||1)*1.35))}else if(r==='good'){p.reps++;iv=p.interval?Math.max(2,Math.round(p.interval*p.ease)):2}else{p.reps++;p.ease=Math.min(3.1,p.ease+.15);iv=p.interval?Math.max(4,Math.round(p.interval*(p.ease+.8))):4}p.interval=iv;p.due=iv?addDays(iv):today();state.cards[c.key]=p;save();pos++;revealed=false;if(pos>=queue.length){toast('Review set complete');queue=[]}else render()}
-function terms(){document.getElementById('main').innerHTML=`<div class="kicker">BILINGUAL GRAMMAR MAP</div><h1>English ↔ Arabic terminology</h1><p class="card" style="color:var(--muted)">Every technical grammar label is paired. Say both sides aloud. Cover one side and retrieve the other.</p><div class="refGrid">${Object.keys(TERMS).map(k=>`<div class="card">${t(k)}</div>`).join('')}</div>`}
-function progress(){let known=wordCards().filter(x=>(state.cards[x.key]?.reps||0)>=4).length;document.getElementById('main').innerHTML=`<div class="kicker">YOUR RECORD</div><h1>Progress you can trust</h1><div class="metrics"><div class="metric"><small>WEEKS COMPLETE</small><strong>${done()}/31</strong></div><div class="metric"><small>WORDS ESTABLISHED</small><strong>${known}</strong></div><div class="metric"><small>CARDS REVIEWED</small><strong>${Object.keys(state.cards).length}</strong></div><div class="metric"><small>COURSE</small><strong>${pct()}%</strong></div></div><section class="card"><div class="eyebrow">PHASE PROGRESS</div><div class="tracker" style="margin-top:12px">${[['Foundations',1,7],['Relationships',9,15],['Connected meaning',17,23],['Independent reading',25,31]].map(p=>{let d=0;for(let i=p[1];i<=p[2];i++)d+=state.done[i]?1:0;return `<div class="trackCard"><b>${d}/${p[2]-p[1]+1}</b><small>${p[0]}</small></div>`}).join('')}</div></section><section class="card" style="margin-top:12px"><div class="eyebrow">KEEP IT PORTABLE</div><p>Progress stays in this browser. Export a backup before changing device, then import it on the other student screen or device.</p><div class="actions"><button class="btn" id="export2">Export progress</button><button class="btn light" id="import2Btn">Import progress backup</button><input id="import2" type="file" accept="application/json,.json" hidden></div></section>`;document.getElementById('export2').onclick=exportProgress;document.getElementById('import2Btn').onclick=()=>document.getElementById('import2').click();document.getElementById('import2').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;f.text().then(txt=>{try{state=Object.assign(blank(),ProgressTransfer.toStudent(JSON.parse(txt)));save();render();toast('Progress restored')}catch(err){toast(err&&err.message?err.message:'This was not recognised as a progress backup')}e.target.value=''})})}
-function exportProgress(){ProgressTransfer.download({cards:state.cards,done:state.done},"80-20-arabic-progress.json");toast("Progress backup exported")}
-function render(){updateSide();document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));if(view==='home')home();else if(view==='course')course();else if(view==='lesson')lesson(C.find(x=>x.n===selected));else if(view==='review')reviewView();else if(view==='terms')terms();else progress()}
-document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});document.getElementById('export').onclick=exportProgress;document.getElementById('print').onclick=()=>window.print();render();
+/* Give the existing cloud-progress adapter a stable host in this quieter shell. */
+(function(){
+  var host=document.getElementById('classSyncHost');
+  if(host){host.addEventListener('click',function(){var launch=document.getElementById('cloudProgressLaunch');if(launch)launch.click();});}
+})();
 </script>
-</body></html>
+</body>
+</html>
