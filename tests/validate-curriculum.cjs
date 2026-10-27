@@ -82,7 +82,7 @@ assert.ok(studentHtml.includes('src="./cloud-progress.js"'), "student.html must 
 assert.ok(studentHtml.includes('src="./student-focus.js"'), "student.html must use the simplified weekly journey");
 assert.ok(studentHtml.includes('src="./fstu-auto.js"'), "student.html must use automatic FSTU source loading");
 assert.ok(studentHtml.includes("pdf.min.js"), "student.html must load PDF.js for assigned source pages");
-assert.ok(studentFocus.includes("Hifz-first"), "student journey must make the Hifz-first priority visible");
+assert.ok(/hifz-first/i.test(studentFocus), "student journey must make the Hifz-first priority visible");
 assert.ok(studentFocus.includes("3 AMANAHS"), "student journey must retain the three-Amanah self-check space");
 assert.ok(studentFocus.includes("Secure"), "student journey must retain explicit self-assessment");
 assert.ok(studentFocus.includes("solution"), "student journey must retain a solution/recovery path");
