@@ -1,62 +1,59 @@
-# Supabase setup — 80/20 Arabic Madrassa progress
+# Supabase setup — 80/20 Arabic class sync
 
-The website remains usable without Supabase. Cloud sign-in, shared progress and the teacher dashboard become available only after you configure a Supabase project. No database credentials are embedded in the repository.
+The teaching app remains usable locally. Supabase adds authenticated class membership and optional, class-scoped progress sync. Only the public publishable key belongs in browser code; never use a secret or service-role key.
 
-## 1. Create the project
+## 1. Configure Supabase Auth
 
-Create a Supabase project for the Madrassa. Keep the project URL and database credentials private. In Project Settings → API Keys, copy the project URL and the public publishable key (or legacy anon key). Do not use a service_role key or any secret key in browser code.
-
-## 2. Apply the database migration
-
-Open the Supabase SQL Editor and run the contents of:
-
-supabase/migrations/202610260001_madrassa_progress.sql
-
-Run this migration once against a fresh project. It creates the Madrassa, class, membership, progress, review and invitation tables; Auth profile provisioning; class-invitation RPCs; scoped grants; and row-level security (RLS) policies. Do not run the migration a second time unchanged because PostgreSQL enum types and policies already exist.
-
-The migration assumes the pgcrypto extension can be installed in the extensions schema. If the project has a non-standard extension layout, resolve that migration error before enabling sign-ups.
-
-## 3. Configure the browser client
-
-Edit supabase-config.js. Set its url field to the exact project URL and its publishableKey field to the public publishable/anon key shown by Supabase. For example, the values have this shape: project URL https://YOUR-PROJECT-REF.supabase.co and key sb_publishable_YOUR_PUBLIC_KEY.
-
-The public key is expected to be visible in client-side code; RLS and the signed-in user's Auth token must enforce access. Never paste a secret or service_role key into this file.
-
-Commit the config for GitHub Pages only after checking that it contains the public publishable/anon key, not a secret. A better production setup is to template this file in the deployment workflow from repository environment variables.
-
-## 4. Set Auth URLs and account policy
-
-In Supabase Authentication → URL Configuration, add the deployed URLs used by the class:
+In Supabase Authentication → URL Configuration, add the deployed URLs:
 
 - https://moosa198.github.io/80-20-Arabic/
 - https://moosa198.github.io/80-20-Arabic/student.html
 - https://moosa198.github.io/80-20-Arabic/teacher.html
 
-Keep email confirmation enabled for real student/teacher accounts. Confirm SMTP and password recovery settings before inviting a full class. In a pilot, test account creation and email verification with one test student and one test teacher first.
+For real accounts, keep email confirmation enabled and test that email confirmation and password sign-in work before inviting a class.
 
-## 5. Create the first Madrassa
+## 2. Apply the migrations in order
 
-1. Open teacher.html and create an account for the Madrassa administrator.
-2. Sign in and use Create the first Madrassa and class.
-3. Generate a separate one-use code for each teacher/student; choose the correct role and a short expiry.
-4. Each invitee creates their own account, confirms their email, then enters their code through Class sync in either student app or the teacher dashboard.
-5. The student chooses their class and presses Merge and sync my progress. The first sync merges existing local progress with the class copy before uploading it.
+Open Supabase SQL Editor and apply the following files in this order:
 
-Invitation codes are one-use bearer secrets. Share each code privately with the intended person. If a code is sent to the wrong person, ask an administrator to expire/revoke it before anyone uses it; a dedicated revocation screen is not included in this version.
+1. `supabase/migrations/202610260001_madrassa_progress.sql` — profiles, classes, class memberships, curriculum metadata, lesson assignments, learner progress, recognition attempts, teacher reviews/notes, RLS helpers and policies.
+2. `supabase/migrations/202610270001_student_sync_and_invites.sql` — the class-scoped `student_learning_state` table plus one-use invitation codes and the authenticated `create_class_invite` / `accept_class_invite` RPCs.
 
-## 6. What is stored centrally
+**For the project that already has migration 1 applied, run only migration 2 now.** Run each migration once. Do not rerun migration 1 to try to repair an app error; make future changes as new versioned migrations.
 
-After a student explicitly syncs a class, the database stores the app's progress snapshots (week completion, spaced-repetition cards, source-book reading/example checks, student teach-back explanations, concept-check answers and word-recognition evidence), normalised week statuses, and teacher-review records. Teacher reviews are append-only; earlier judgements remain available as a record.
+## 3. Configure the browser client
 
-The source FSTU PDFs are not sent to Supabase. The app renders the course-assigned page images locally in the student's browser, and only those assigned pages are saved to IndexedDB on that device. The student’s original PDF is not uploaded.
+In `supabase-config.js`, the `url` must be the project's exact URL and `publishableKey` must be its public publishable key (or legacy anon key). These values are expected to be visible in a static website. Security depends on authenticated sessions, database grants and RLS, not on hiding the publishable key.
 
-## 7. Security and pre-launch checks
+Never paste a Supabase secret or service-role key into the config, HTML, GitHub Pages, or student materials.
 
-- Review the migration and test it in a separate development project before using real student records.
-- Verify RLS denies cross-class reads/writes: a student must never read another student's progress; teachers must see only classes where their membership permits access; Madrassa administrators can see only their own Madrassa.
-- Test sign-up, email confirmation, sign-in, forgotten password, class invitation, expired invitation, reused invitation, progress sync, teacher review and sign-out.
-- Confirm that a student account cannot create classes/invitations, read another student's records, or insert teacher reviews.
-- Confirm that source-check / teach-back answers appear in the teacher evidence panel only for the student's enrolled class.
-- Do not enable real student data until the RLS/permission tests pass. The browser uses only the public client key; all sensitive authorization remains at the database layer.
+## 4. Create the first class and invite students
 
-Supabase's official guidance explains [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security) and [publishable vs secret API keys](https://supabase.com/docs/guides/getting-started/api-keys). The repository migration follows the same grants-plus-policies model, but a project owner must still execute and test it in their own Supabase environment.
+1. Create the first teacher account in Supabase Auth and set that account's `public.profiles.role` to `teacher`.
+2. Sign in at `teacher.html` and create a class. The database trigger grants the creator the `class_admin` role for that class only.
+3. In the class workspace, use **Generate one-use code**. Choose Student and an expiry of 1–30 days. Share the code privately with one intended student.
+4. The student opens the main app or `student.html`, selects **Class sync**, creates an account (if needed), confirms email if prompted, and signs in.
+5. The student enters the invitation code, joins the class, then selects the class and chooses to sync progress.
+
+A newly registered user's global profile role defaults to `student`; the invitation controls the class membership. Students cannot promote their own global profile role from the browser. Invitation codes are one-use bearer secrets, so share them privately. There is not yet a teacher-facing invitation-revocation screen; use short expiries during the pilot.
+
+## 5. What sync does
+
+After a student explicitly syncs, the app merges local and server snapshots for spaced-repetition cards, weekly completion, recall and word-recognition activity. Subsequent progress changes are autosaved to the selected class. The teacher dashboard displays synced week-completion and recognition-attempt counts, plus the last sync time.
+
+A completion count is learner-reported activity, **not verified mastery**. The current teacher screen is a basic progress view; it is not yet a full concept-by-concept Secure / Developing / Revisit assessment interface.
+
+The FSTU source PDFs are not uploaded to Supabase. The app keeps the source PDF in the student's browser and renders the mapped lesson pages locally. The app's curriculum page map controls which FSTU pages are presented for each week; class cloud sync does not itself create per-class lesson assignments.
+
+## 6. Pilot security checklist
+
+Before adding real student data, use one teacher and one test student and confirm:
+
+- The teacher can create a class and issue an invitation, but a student cannot.
+- An invitation can be used once, expires as configured, and cannot be redeemed twice.
+- A student can read and update only their own progress in a class where they have student membership.
+- Class staff can read progress only in their own class.
+- Signing out leaves the student's local backup available but stops further cloud writes.
+- The student app displays only curriculum-mapped source pages and does not upload original FSTU PDFs.
+
+See Supabase's official guidance on [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security) and [publishable vs secret API keys](https://supabase.com/docs/guides/getting-started/api-keys). The migrations configure policy and grants, but the project owner should still test the live project before using real student records.
