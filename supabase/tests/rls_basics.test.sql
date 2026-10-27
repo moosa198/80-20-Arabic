@@ -1,6 +1,6 @@
 begin;
 
-select plan(24);
+select plan(26);
 
 select ok((select relrowsecurity from pg_class where oid = 'public.profiles'::regclass), 'profiles has RLS enabled');
 select ok((select relrowsecurity from pg_class where oid = 'public.classes'::regclass), 'classes has RLS enabled');
@@ -28,6 +28,7 @@ select ok(has_table_privilege('authenticated', 'public.teacher_reviews', 'insert
 select ok(has_function_privilege('authenticated', 'public.create_class_invite(uuid,text,integer)', 'execute'), 'authenticated may request scoped invitation creation');
 select ok(has_function_privilege('authenticated', 'public.accept_class_invite(text)', 'execute'), 'authenticated may redeem a one-use invitation');
 select ok(not has_function_privilege('anon', 'public.create_class_invite(uuid,text,integer)', 'execute'), 'anon cannot create invitations');
+select ok(not has_function_privilege('anon', 'public.accept_class_invite(text)', 'execute'), 'anon cannot redeem invitations');
 
 select * from finish();
 rollback;
